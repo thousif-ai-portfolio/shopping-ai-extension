@@ -1,0 +1,2124 @@
+[
+ {
+  "cat": "basic",
+  "site": "flipkart",
+  "q": "black puma jacket under 2000",
+  "expect": [
+   "Color: Black",
+   "Brand: PUMA",
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Color: Black",
+   "Brand: PUMA",
+   "Max price: ₹2000"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 20665
+ },
+ {
+  "cat": "basic",
+  "site": "amazon",
+  "q": "black puma jacket size M",
+  "expect": [
+   "Colour: Black",
+   "Brands: PUMA",
+   "Men's General Size: M"
+  ],
+  "got": [
+   "Colour: Black",
+   "Brands: PUMA",
+   "Men's General Size: M"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 9160
+ },
+ {
+  "cat": "basic",
+  "site": "myntra",
+  "q": "black roadster jacket 40% off",
+  "expect": [
+   "Color: Black",
+   "Brand: Roadster",
+   "Discount Range: 40% and above"
+  ],
+  "got": [
+   "Color: Black",
+   "Brand: Roadster",
+   "Discount Range: 40% and above"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 7562
+ },
+ {
+  "cat": "basic",
+  "site": "amazon",
+  "q": "NIKE JACKET",
+  "expect": [
+   "Brands: Nike"
+  ],
+  "got": [
+   "Brands: Nike"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5206
+ },
+ {
+  "cat": "basic",
+  "site": "flipkart",
+  "q": "blue jacket XL",
+  "expect": [
+   "Color: Blue",
+   "Size: XL"
+  ],
+  "got": [
+   "Color: Blue",
+   "Size: XL"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5061
+ },
+ {
+  "cat": "brand",
+  "site": "amazon",
+  "q": "red tape leather jacket",
+  "expect": [
+   "Brands: Red Tape",
+   "Material: Leather"
+  ],
+  "got": [
+   "Brands: Red Tape",
+   "Material: Leather"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4900
+ },
+ {
+  "cat": "brand",
+  "site": "amazon",
+  "q": "u.s. polo jacket",
+  "expect": [
+   "Brands: U.S. POLO ASSN."
+  ],
+  "got": [
+   "Brands: U.S. POLO ASSN."
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5501
+ },
+ {
+  "cat": "brand",
+  "site": "flipkart",
+  "q": "us polo assn jacket",
+  "expect": [
+   "Brand: U.S. POLO ASSN."
+  ],
+  "got": [
+   "Brand: U.S. POLO ASSN."
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4448
+ },
+ {
+  "cat": "brand",
+  "site": "amazon",
+  "q": "levis jacket",
+  "expect": [
+   "Brands: Levi's"
+  ],
+  "got": [
+   "Brands: Levi's"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4469
+ },
+ {
+  "cat": "brand",
+  "site": "myntra",
+  "q": "hrx jacket",
+  "expect": [
+   "Brand: HRX by Hrithik Roshan"
+  ],
+  "got": [
+   "Brand: HRX by Hrithik Roshan"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5853
+ },
+ {
+  "cat": "brand",
+  "site": "myntra",
+  "q": "mast and harbour jacket",
+  "expect": [
+   "Brand: Mast & Harbour"
+  ],
+  "got": [
+   "Brand: Mast & Harbour"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4537
+ },
+ {
+  "cat": "brand",
+  "site": "amazon",
+  "q": "jack and jones jacket",
+  "expect": [
+   "Brands: JACK & JONES"
+  ],
+  "got": [
+   "Brands: JACK & JONES"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5047
+ },
+ {
+  "cat": "brand",
+  "site": "amazon",
+  "q": "north face jacket",
+  "expect": [
+   "Brands: THE NORTH FACE"
+  ],
+  "got": [
+   "Brands: THE NORTH FACE"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4176
+ },
+ {
+  "cat": "colour",
+  "site": "myntra",
+  "q": "navy blue jacket",
+  "expect": [
+   "Color: Navy Blue"
+  ],
+  "got": [
+   "Color: Navy Blue"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4835
+ },
+ {
+  "cat": "colour",
+  "site": "amazon",
+  "q": "grey jacket",
+  "expect": [
+   "Colour: Greys"
+  ],
+  "got": [
+   "Colour: Greys"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 3700
+ },
+ {
+  "cat": "colour",
+  "site": "flipkart",
+  "q": "gray jacket",
+  "expect": [
+   "Color: Grey"
+  ],
+  "got": [
+   "Color: Grey"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 3638
+ },
+ {
+  "cat": "colour",
+  "site": "amazon",
+  "q": "maroon jacket",
+  "expect": [
+   "Colour: Reds"
+  ],
+  "got": [
+   "Colour: Reds"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4362
+ },
+ {
+  "cat": "colour",
+  "site": "myntra",
+  "q": "olive green jacket",
+  "expect": [
+   "Color: Olive"
+  ],
+  "got": [
+   "Color: Olive"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4340
+ },
+ {
+  "cat": "colour",
+  "site": "flipkart",
+  "q": "multi colour jacket",
+  "expect": [
+   "Color: Multicolor"
+  ],
+  "got": [
+   "Color: Multicolor"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5168
+ },
+ {
+  "cat": "colour",
+  "site": "amazon",
+  "q": "white jacket",
+  "expect": [
+   "Colour: White"
+  ],
+  "got": [
+   "Colour: White"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 3016
+ },
+ {
+  "cat": "gender",
+  "site": "flipkart",
+  "q": "men's black jacket",
+  "expect": [
+   "Gender: Men",
+   "Color: Black"
+  ],
+  "got": [
+   "Gender: Men",
+   "Color: Black"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4681
+ },
+ {
+  "cat": "gender",
+  "site": "amazon",
+  "q": "unisex jacket",
+  "expect": [
+   "Gender: Unisex"
+  ],
+  "got": [
+   "Gender: Unisex"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4488
+ },
+ {
+  "cat": "size",
+  "site": "flipkart",
+  "q": "medium size jacket",
+  "expect": [
+   "Size: M"
+  ],
+  "got": [
+   "Size: M"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4280
+ },
+ {
+  "cat": "size",
+  "site": "myntra",
+  "q": "large jacket",
+  "expect": [
+   "Size: L"
+  ],
+  "got": [
+   "Size: L"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4627
+ },
+ {
+  "cat": "size",
+  "site": "amazon",
+  "q": "xxl jacket",
+  "expect": [
+   "Men's General Size: 2XL"
+  ],
+  "got": [
+   "Men's General Size: 2XL"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 6587
+ },
+ {
+  "cat": "size",
+  "site": "myntra",
+  "q": "jacket size 40",
+  "expect": [
+   "Size: 40"
+  ],
+  "got": [
+   "Size: 40"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 7183
+ },
+ {
+  "cat": "size",
+  "site": "flipkart",
+  "q": "small black jacket",
+  "expect": [
+   "Size: S",
+   "Color: Black"
+  ],
+  "got": [
+   "Color: Black",
+   "Size: S"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 6083
+ },
+ {
+  "cat": "price",
+  "site": "flipkart",
+  "q": "jacket under 1500",
+  "expect": [
+   "Max price: ₹1500"
+  ],
+  "got": [
+   "Max price: ₹1500"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 7143
+ },
+ {
+  "cat": "price",
+  "site": "flipkart",
+  "q": "jacket between 700 and 1500",
+  "expect": [
+   "Min price: ₹700",
+   "Max price: ₹1500"
+  ],
+  "got": [
+   "Max price: ₹1500",
+   "Min price: ₹700"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 11572
+ },
+ {
+  "cat": "price",
+  "site": "flipkart",
+  "q": "jacket above 1000",
+  "expect": [
+   "Min price: ₹1000"
+  ],
+  "got": [
+   "Min price: ₹1000"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 8168
+ },
+ {
+  "cat": "price",
+  "site": "flipkart",
+  "q": "jacket under 2k",
+  "expect": [
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 8554
+ },
+ {
+  "cat": "price",
+  "site": "flipkart",
+  "q": "jacket less than ₹1,000",
+  "expect": [
+   "Max price: ₹1000"
+  ],
+  "got": [
+   "Max price: ₹1000"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5634
+ },
+ {
+  "cat": "price",
+  "site": "amazon",
+  "q": "jacket under 2000",
+  "expect": [
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5809
+ },
+ {
+  "cat": "price",
+  "site": "myntra",
+  "q": "jacket under 1500",
+  "expect": [],
+  "got": [],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5433
+ },
+ {
+  "cat": "discount",
+  "site": "amazon",
+  "q": "jacket with 50% off",
+  "expect": [
+   "Discount: 50% Off or more"
+  ],
+  "got": [
+   "Discount: 50% Off or more"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5645
+ },
+ {
+  "cat": "discount",
+  "site": "flipkart",
+  "q": "at least 45% discount",
+  "expect": [
+   "Discount: 40% or more"
+  ],
+  "got": [
+   "Discount: 40% or more"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4745
+ },
+ {
+  "cat": "rating",
+  "site": "flipkart",
+  "q": "4 star and above jacket",
+  "expect": [
+   "Customer Ratings: 4★ & above"
+  ],
+  "got": [
+   "Customer Ratings: 4★ & above"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 8327
+ },
+ {
+  "cat": "rating",
+  "site": "amazon",
+  "q": "jacket rated 4 stars",
+  "expect": [
+   "Customer Reviews: 4 Stars & Up"
+  ],
+  "got": [
+   "Customer Reviews: 4 Stars & Up"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5413
+ },
+ {
+  "cat": "negation",
+  "site": "flipkart",
+  "q": "jacket without hood",
+  "expect": [
+   "Hooded: Without Hood"
+  ],
+  "got": [
+   "Hooded: Without Hood"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5975
+ },
+ {
+  "cat": "negation",
+  "site": "amazon",
+  "q": "jacket not black",
+  "expect": [],
+  "got": [],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 6199
+ },
+ {
+  "cat": "negation",
+  "site": "myntra",
+  "q": "any colour except black",
+  "expect": [],
+  "got": [],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4379
+ },
+ {
+  "cat": "negation",
+  "site": "flipkart",
+  "q": "no puma, black jacket",
+  "expect": [
+   "Color: Black"
+  ],
+  "got": [
+   "Color: Black"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4614
+ },
+ {
+  "cat": "multi",
+  "site": "flipkart",
+  "q": "black or grey jacket",
+  "expect": [
+   "Color: Black",
+   "Color: Grey"
+  ],
+  "got": [
+   "Color: Black",
+   "Color: Grey"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 3615
+ },
+ {
+  "cat": "multi",
+  "site": "amazon",
+  "q": "nike or adidas jacket",
+  "expect": [
+   "Brands: Nike",
+   "Brands: adidas"
+  ],
+  "got": [
+   "Brands: Nike",
+   "Brands: adidas"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4861
+ },
+ {
+  "cat": "style",
+  "site": "flipkart",
+  "q": "bomber jacket",
+  "expect": [
+   "Type: Bomber Jacket"
+  ],
+  "got": [
+   "Type: Bomber Jacket"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5449
+ },
+ {
+  "cat": "style",
+  "site": "flipkart",
+  "q": "hooded jacket",
+  "expect": [
+   "Hooded: With Hood"
+  ],
+  "got": [
+   "Hooded: With Hood"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 3820
+ },
+ {
+  "cat": "style",
+  "site": "amazon",
+  "q": "slim fit jacket",
+  "expect": [
+   "Fit: Slim"
+  ],
+  "got": [
+   "Fit: Slim"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4712
+ },
+ {
+  "cat": "style",
+  "site": "amazon",
+  "q": "wool jacket",
+  "expect": [
+   "Material: Wool"
+  ],
+  "got": [
+   "Material: Wool"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4421
+ },
+ {
+  "cat": "style",
+  "site": "amazon",
+  "q": "jacket with zipper",
+  "expect": [
+   "Closure: Zipper"
+  ],
+  "got": [
+   "Closure: Zipper"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5697
+ },
+ {
+  "cat": "style",
+  "site": "flipkart",
+  "q": "puffer jacket for party",
+  "expect": [
+   "Type: Puffer Jacket",
+   "Occasion: Party"
+  ],
+  "got": [
+   "Type: Puffer Jacket",
+   "Occasion: Party"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 7841
+ },
+ {
+  "cat": "style",
+  "site": "amazon",
+  "q": "winter jacket for hiking",
+  "expect": [
+   "Seasons: Winter",
+   "Purpose: Hiking"
+  ],
+  "got": [
+   "Seasons: Winter",
+   "Purpose: Hiking"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4237
+ },
+ {
+  "cat": "typo",
+  "site": "flipkart",
+  "q": "pumma jacket",
+  "expect": [
+   "Brand: PUMA"
+  ],
+  "got": [
+   "Brand: PUMA"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4358
+ },
+ {
+  "cat": "typo",
+  "site": "amazon",
+  "q": "adiddas jacket",
+  "expect": [
+   "Brands: adidas"
+  ],
+  "got": [
+   "Brands: adidas"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5240
+ },
+ {
+  "cat": "typo",
+  "site": "myntra",
+  "q": "blak jaket",
+  "expect": [
+   "Color: Black"
+  ],
+  "got": [
+   "Color: Black"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4594
+ },
+ {
+  "cat": "junk",
+  "site": "myntra",
+  "q": "hello",
+  "expect": [],
+  "got": [],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 3216
+ },
+ {
+  "cat": "junk",
+  "site": "flipkart",
+  "q": "show me something nice",
+  "expect": [],
+  "got": [],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4840
+ },
+ {
+  "cat": "hinglish",
+  "site": "myntra",
+  "q": "kala jacket",
+  "expect": [
+   "Color: Black"
+  ],
+  "got": [
+   "Color: Black"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4528
+ },
+ {
+  "cat": "held-out",
+  "site": "amazon",
+  "q": "red jacket",
+  "expect": [
+   "Colour: Reds"
+  ],
+  "got": [
+   "Colour: Reds"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 3669
+ },
+ {
+  "cat": "held-out",
+  "site": "amazon",
+  "q": "get me a nice jacket",
+  "expect": [],
+  "got": [],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4501
+ },
+ {
+  "cat": "held-out",
+  "site": "flipkart",
+  "q": "casual jacket",
+  "expect": [
+   "Type: Casual Jacket"
+  ],
+  "got": [
+   "Type: Casual Jacket"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 3991
+ },
+ {
+  "cat": "held-out",
+  "site": "flipkart",
+  "q": "leather jacket in brown",
+  "expect": [
+   "Type: Leather Jacket",
+   "Color: Brown"
+  ],
+  "got": [
+   "Type: Leather Jacket",
+   "Color: Brown"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 7648
+ },
+ {
+  "cat": "held-out",
+  "site": "myntra",
+  "q": "blue jacket by roadster size L",
+  "expect": [
+   "Color: Blue",
+   "Brand: Roadster",
+   "Size: L"
+  ],
+  "got": [
+   "Color: Blue",
+   "Brand: Roadster",
+   "Size: L"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4940
+ },
+ {
+  "cat": "held-out",
+  "site": "amazon",
+  "q": "tommy jacket",
+  "expect": [
+   "Brands: Tommy Hilfiger"
+  ],
+  "got": [
+   "Brands: Tommy Hilfiger"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5019
+ },
+ {
+  "cat": "held-out",
+  "site": "flipkart",
+  "q": "black jacket, no hood",
+  "expect": [
+   "Color: Black",
+   "Hooded: Without Hood"
+  ],
+  "got": [
+   "Color: Black",
+   "Hooded: Without Hood"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4125
+ },
+ {
+  "cat": "held-out",
+  "site": "amazon",
+  "q": "polyester jacket under 1000 with 4 star",
+  "expect": [
+   "Material: Polyester",
+   "Max price: ₹1000",
+   "Customer Reviews: 4 Stars & Up"
+  ],
+  "got": [
+   "Material: Polyester",
+   "Max price: ₹1000",
+   "Customer Reviews: 4 Stars & Up"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 7433
+ },
+ {
+  "cat": "held-out",
+  "site": "myntra",
+  "q": "green or olive jacket xl",
+  "expect": [
+   "Color: Green",
+   "Color: Olive",
+   "Size: XL"
+  ],
+  "got": [
+   "Color: Green",
+   "Color: Olive",
+   "Size: XL"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4526
+ },
+ {
+  "cat": "held-out",
+  "site": "amazon",
+  "q": "jacket for men",
+  "expect": [
+   "Gender: Men"
+  ],
+  "got": [
+   "Gender: Men"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 7900
+ },
+ {
+  "cat": "shoes",
+  "site": "amazon-shoes",
+  "q": "nike running shoes size 9",
+  "expect": [
+   "Brands: Nike",
+   "Purpose: Running",
+   "Men's Shoe Size (UK/India): 9"
+  ],
+  "got": [
+   "Brands: Nike",
+   "Purpose: Running",
+   "Men's Shoe Size (UK/India): 9"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5336
+ },
+ {
+  "cat": "shoes",
+  "site": "amazon-shoes",
+  "q": "white sneakers under 2000",
+  "expect": [
+   "Colour: White",
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Colour: White",
+   "Max price: ₹2000"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 6076
+ },
+ {
+  "cat": "shoes",
+  "site": "amazon-shoes",
+  "q": "skechers walking shoes uk 8",
+  "expect": [
+   "Brands: Skechers",
+   "Purpose: Walking",
+   "Men's Shoe Size (UK/India): 8"
+  ],
+  "got": [
+   "Brands: Skechers",
+   "Purpose: Walking",
+   "Men's Shoe Size (UK/India): 8"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5768
+ },
+ {
+  "cat": "shoes",
+  "site": "amazon-shoes",
+  "q": "lightweight breathable mesh shoes",
+  "expect": [
+   "Special Features: Lightweight",
+   "Special Features: Breathable",
+   "Material: Mesh"
+  ],
+  "got": [
+   "Special Features: Lightweight",
+   "Special Features: Breathable",
+   "Material: Mesh"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5267
+ },
+ {
+  "cat": "shoes",
+  "site": "amazon-shoes",
+  "q": "new balance shoes size 9.5",
+  "expect": [
+   "Brands: new balance",
+   "Men's Shoe Size (UK/India): 9.5"
+  ],
+  "got": [
+   "Brands: new balance",
+   "Men's Shoe Size (UK/India): 9.5"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 3882
+ },
+ {
+  "cat": "shoes",
+  "site": "amazon-shoes",
+  "q": "waterproof hiking shoes",
+  "expect": [
+   "Special Features: Waterproof",
+   "Purpose: Hiking"
+  ],
+  "got": [
+   "Special Features: Waterproof",
+   "Purpose: Hiking"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4208
+ },
+ {
+  "cat": "shoes",
+  "site": "amazon-shoes",
+  "q": "lace up shoes",
+  "expect": [
+   "Closure Type: Lace-Up"
+  ],
+  "got": [
+   "Closure Type: Lace-Up"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4339
+ },
+ {
+  "cat": "shoes",
+  "site": "amazon-shoes",
+  "q": "puma shoes with 50% off",
+  "expect": [
+   "Brands: PUMA",
+   "Discount: 50% Off or more"
+  ],
+  "got": [
+   "Brands: PUMA",
+   "Discount: 50% Off or more"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5268
+ },
+ {
+  "cat": "shoes",
+  "site": "flipkart-shoes",
+  "q": "asics running shoes under 3000",
+  "expect": [
+   "Brand: Asics",
+   "Type of Shoes: Running Shoes",
+   "Max price: ₹3000"
+  ],
+  "got": [
+   "Brand: Asics",
+   "Type of Shoes: Running Shoes",
+   "Max price: ₹3000"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4406
+ },
+ {
+  "cat": "shoes",
+  "site": "flipkart-shoes",
+  "q": "black campus shoes size 8",
+  "expect": [
+   "Color: Black",
+   "Brand: CAMPUS",
+   "Size: 8"
+  ],
+  "got": [
+   "Color: Black",
+   "Brand: CAMPUS",
+   "Size: 8"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5850
+ },
+ {
+  "cat": "shoes",
+  "site": "flipkart-shoes",
+  "q": "sparx shoes for men",
+  "expect": [
+   "Brand: Sparx",
+   "Gender: Men"
+  ],
+  "got": [
+   "Brand: Sparx",
+   "Gender: Men"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4812
+ },
+ {
+  "cat": "shoes",
+  "site": "flipkart-shoes",
+  "q": "canvas shoes",
+  "expect": [
+   "Outer Material: Canvas"
+  ],
+  "got": [
+   "Outer Material: Canvas"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 8291
+ },
+ {
+  "cat": "shoes",
+  "site": "flipkart-shoes",
+  "q": "red tape shoes between 1500 and 3000",
+  "expect": [
+   "Brand: RED TAPE",
+   "Min price: ₹1500",
+   "Max price: ₹3000"
+  ],
+  "got": [
+   "Brand: RED TAPE",
+   "Max price: ₹3000",
+   "Min price: ₹1500"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4654
+ },
+ {
+  "cat": "shoes",
+  "site": "flipkart-shoes",
+  "q": "shoes for boys",
+  "expect": [
+   "Gender: Boys"
+  ],
+  "got": [
+   "Gender: Boys"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4538
+ },
+ {
+  "cat": "shoes",
+  "site": "flipkart-shoes",
+  "q": "4 star rated mesh shoes",
+  "expect": [
+   "Customer Ratings: 4★ & above",
+   "Outer Material: Mesh"
+  ],
+  "got": [
+   "Outer Material: Mesh",
+   "Customer Ratings: 4★ & above"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4782
+ },
+ {
+  "cat": "shoes",
+  "site": "myntra-shoes",
+  "q": "puma running shoes size 9",
+  "expect": [
+   "Brand: Puma",
+   "Sport: Running",
+   "Size: UK9"
+  ],
+  "got": [
+   "Brand: Puma",
+   "Sport: Running",
+   "Size: UK9"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5890
+ },
+ {
+  "cat": "shoes",
+  "site": "myntra-shoes",
+  "q": "adidas slip on shoes",
+  "expect": [
+   "Brand: ADIDAS",
+   "Fastening: Slip-On"
+  ],
+  "got": [
+   "Brand: ADIDAS",
+   "Fastening: Slip-On"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5319
+ },
+ {
+  "cat": "shoes",
+  "site": "myntra-shoes",
+  "q": "nike shoes 40% off",
+  "expect": [
+   "Brand: Nike",
+   "Discount Range: 40% and above"
+  ],
+  "got": [
+   "Brand: Nike",
+   "Discount Range: 40% and above"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 6803
+ },
+ {
+  "cat": "shoes",
+  "site": "myntra-shoes",
+  "q": "navy blue sports shoes",
+  "expect": [
+   "Color: Navy Blue"
+  ],
+  "got": [
+   "Color: Navy Blue"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5727
+ },
+ {
+  "cat": "shoes",
+  "site": "myntra-shoes",
+  "q": "leather shoes with high cushioning",
+  "expect": [
+   "Materials: Leather",
+   "Cushioning: High"
+  ],
+  "got": [
+   "Materials: Leather",
+   "Cushioning: High"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5170
+ },
+ {
+  "cat": "shoes",
+  "site": "myntra-shoes",
+  "q": "skechers shoes uk 10",
+  "expect": [
+   "Brand: Skechers",
+   "Size: UK10"
+  ],
+  "got": [
+   "Brand: Skechers",
+   "Size: UK10"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4919
+ },
+ {
+  "cat": "phones",
+  "site": "amazon-phones",
+  "q": "samsung phone with 8gb ram and 128gb storage",
+  "expect": [
+   "Brands: Samsung",
+   "RAM Size: 8 to 9.9 GB",
+   "Storage Capacity: 128 GB"
+  ],
+  "got": [
+   "Brands: Samsung",
+   "RAM Size: 8 to 9.9 GB",
+   "Storage Capacity: 128 GB"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 7592
+ },
+ {
+  "cat": "phones",
+  "site": "amazon-phones",
+  "q": "5g phone under 15000",
+  "expect": [
+   "Cellular Technology: 5G",
+   "Max price: ₹15000"
+  ],
+  "got": [
+   "Cellular Technology: 5G",
+   "Max price: ₹15000"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 8403
+ },
+ {
+  "cat": "phones",
+  "site": "amazon-phones",
+  "q": "phone with 6000 mah battery",
+  "expect": [
+   "Battery Capacity: 6,000 mAh & Above"
+  ],
+  "got": [
+   "Battery Capacity: 6,000 mAh & Above"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5610
+ },
+ {
+  "cat": "phones",
+  "site": "amazon-phones",
+  "q": "amoled display phone with 120hz",
+  "expect": [
+   "Display Type: AMOLED",
+   "Display Refresh Rate in Hertz: 120"
+  ],
+  "got": [
+   "Display Type: AMOLED",
+   "Display Refresh Rate in Hertz: 120"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 6277
+ },
+ {
+  "cat": "phones",
+  "site": "amazon-phones",
+  "q": "oneplus phone",
+  "expect": [
+   "Brands: OnePlus"
+  ],
+  "got": [
+   "Brands: OnePlus"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 3682
+ },
+ {
+  "cat": "phones",
+  "site": "amazon-phones",
+  "q": "iphone",
+  "expect": [
+   "Brands: Apple"
+  ],
+  "got": [
+   "Brands: Apple"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 3803
+ },
+ {
+  "cat": "phones",
+  "site": "amazon-phones",
+  "q": "dual sim phone with nfc",
+  "expect": [
+   "SIM Card Slot Count: Dual SIM",
+   "Connectivity: NFC"
+  ],
+  "got": [
+   "SIM Card Slot Count: Dual SIM",
+   "Connectivity: NFC"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4648
+ },
+ {
+  "cat": "phones",
+  "site": "amazon-phones",
+  "q": "realme phone 4 star",
+  "expect": [
+   "Brands: realme",
+   "Customer Reviews: 4 Stars & Up"
+  ],
+  "got": [
+   "Brands: realme",
+   "Customer Reviews: 4 Stars & Up"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5715
+ },
+ {
+  "cat": "phones",
+  "site": "flipkart-phones",
+  "q": "vivo 5g phone 8gb ram",
+  "expect": [
+   "Brand: vivo",
+   "Network Type: 5G",
+   "Ram: 8 GB and Above"
+  ],
+  "got": [
+   "Brand: vivo",
+   "Network Type: 5G",
+   "Ram: 8 GB and Above"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 7346
+ },
+ {
+  "cat": "phones",
+  "site": "flipkart-phones",
+  "q": "samsung phone 256gb",
+  "expect": [
+   "Brand: Samsung",
+   "Internal Storage: 256 GB & Above"
+  ],
+  "got": [
+   "Brand: Samsung",
+   "Internal Storage: 256 GB & Above"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5525
+ },
+ {
+  "cat": "phones",
+  "site": "flipkart-phones",
+  "q": "phone with 5000mah battery under 20000",
+  "expect": [
+   "Battery Capacity: 5000 - 5999 mAh",
+   "Max price: ₹20000"
+  ],
+  "got": [
+   "Battery Capacity: 5000 - 5999 mAh",
+   "Max price: ₹20000"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 7397
+ },
+ {
+  "cat": "phones",
+  "site": "flipkart-phones",
+  "q": "android phone with octa core processor",
+  "expect": [
+   "Operating System: Android",
+   "Number of Cores: Octa Core"
+  ],
+  "got": [
+   "Operating System: Android",
+   "Number of Cores: Octa Core"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4689
+ },
+ {
+  "cat": "phones",
+  "site": "flipkart-phones",
+  "q": "redmi phone between 10000 and 15000",
+  "expect": [
+   "Brand: REDMI",
+   "Min price: ₹10000",
+   "Max price: ₹15000"
+  ],
+  "got": [
+   "Brand: REDMI",
+   "Max price: ₹15000",
+   "Min price: ₹10000"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 8711
+ },
+ {
+  "cat": "phones",
+  "site": "flipkart-phones",
+  "q": "phone with 64mp camera and 16mp selfie camera",
+  "expect": [
+   "Primary Camera: 64 MP & Above",
+   "Secondary Camera: 16 - 20.9 MP",
+   "Speciality: Selfie Camera"
+  ],
+  "got": [
+   "Speciality: Selfie Camera",
+   "Primary Camera: 64 MP & Above",
+   "Secondary Camera: 16 - 20.9 MP"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 7982
+ },
+ {
+  "cat": "phones",
+  "site": "flipkart-phones",
+  "q": "6.5 inch screen phone",
+  "expect": [
+   "Screen Size: 6.4 inch & Above"
+  ],
+  "got": [
+   "Screen Size: 6.4 inch & Above"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4700
+ },
+ {
+  "cat": "phones",
+  "site": "flipkart-phones",
+  "q": "motorola phone not samsung",
+  "expect": [
+   "Brand: MOTOROLA"
+  ],
+  "got": [
+   "Brand: MOTOROLA"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5534
+ },
+ {
+  "cat": "phones",
+  "site": "flipkart-phones",
+  "q": "oneplus 5g",
+  "expect": [
+   "Brand: OnePlus",
+   "Network Type: 5G"
+  ],
+  "got": [
+   "Brand: OnePlus",
+   "Network Type: 5G"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 8288
+ },
+ {
+  "cat": "kurtas",
+  "site": "myntra-kurtas",
+  "q": "pink cotton kurta size M",
+  "expect": [
+   "Color: Pink",
+   "Fabrics: Cotton",
+   "Size: M"
+  ],
+  "got": [
+   "Color: Pink",
+   "Fabrics: Cotton",
+   "Size: M"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5518
+ },
+ {
+  "cat": "kurtas",
+  "site": "myntra-kurtas",
+  "q": "anarkali kurta for diwali",
+  "expect": [
+   "Shape: Anarkali",
+   "Theme: Diwali"
+  ],
+  "got": [
+   "Shape: Anarkali",
+   "Theme: Diwali"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 6577
+ },
+ {
+  "cat": "kurtas",
+  "site": "myntra-kurtas",
+  "q": "chikankari kurta",
+  "expect": [
+   "Ornamentation: Chikankari"
+  ],
+  "got": [
+   "Ornamentation: Chikankari"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4488
+ },
+ {
+  "cat": "kurtas",
+  "site": "myntra-kurtas",
+  "q": "3/4 sleeve kurta",
+  "expect": [
+   "Sleeve Length: Three-Quarter Sleeves"
+  ],
+  "got": [
+   "Sleeve Length: Three-Quarter Sleeves"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4781
+ },
+ {
+  "cat": "kurtas",
+  "site": "myntra-kurtas",
+  "q": "kurta with mirror work",
+  "expect": [
+   "Ornamentation: Mirror Work"
+  ],
+  "got": [
+   "Ornamentation: Mirror Work"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5689
+ },
+ {
+  "cat": "kurtas",
+  "site": "myntra-kurtas",
+  "q": "libas kurta",
+  "expect": [
+   "Brand: Libas"
+  ],
+  "got": [
+   "Brand: Libas"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4837
+ },
+ {
+  "cat": "kurtas",
+  "site": "myntra-kurtas",
+  "q": "stylish kurta for college",
+  "expect": [],
+  "got": [],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4864
+ },
+ {
+  "cat": "kurtas",
+  "site": "myntra-kurtas",
+  "q": "biba kurta 50% off",
+  "expect": [
+   "Brand: Biba",
+   "Discount Range: 50% and above"
+  ],
+  "got": [
+   "Brand: Biba",
+   "Discount Range: 50% and above"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5494
+ },
+ {
+  "cat": "no-false-match",
+  "site": "flipkart",
+  "q": "good quality jacket under 2000",
+  "expect": [
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 6277
+ },
+ {
+  "cat": "no-false-match",
+  "site": "flipkart-phones",
+  "q": "latest phone with long battery life",
+  "expect": [],
+  "got": [],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 7873
+ },
+ {
+  "cat": "no-false-match",
+  "site": "myntra-kurtas",
+  "q": "simple plain kurta for office",
+  "expect": [],
+  "got": [],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5219
+ },
+ {
+  "cat": "no-false-match",
+  "site": "myntra-shoes",
+  "q": "light weight sports shoes",
+  "expect": [],
+  "got": [],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4391
+ },
+ {
+  "cat": "held-out-2",
+  "site": "amazon-shoes",
+  "q": "grey asics shoes for running size 10",
+  "expect": [
+   "Colour: Grey",
+   "Brands: ASICS",
+   "Purpose: Running",
+   "Men's Shoe Size (UK/India): 10"
+  ],
+  "got": [
+   "Colour: Grey",
+   "Brands: ASICS",
+   "Purpose: Running",
+   "Men's Shoe Size (UK/India): 10"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 6100
+ },
+ {
+  "cat": "held-out-2",
+  "site": "amazon-shoes",
+  "q": "formal leather shoes under 3000",
+  "expect": [
+   "Lifestyle: Formal",
+   "Material: Leather",
+   "Max price: ₹3000"
+  ],
+  "got": [
+   "Lifestyle: Formal",
+   "Material: Leather",
+   "Max price: ₹3000"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 6654
+ },
+ {
+  "cat": "held-out-2",
+  "site": "flipkart-shoes",
+  "q": "adidas shoes 4 star above 1500",
+  "expect": [
+   "Brand: ADIDAS",
+   "Customer Ratings: 4★ & above",
+   "Min price: ₹1500"
+  ],
+  "got": [
+   "Brand: ADIDAS",
+   "Min price: ₹1500",
+   "Customer Ratings: 4★ & above"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 6621
+ },
+ {
+  "cat": "held-out-2",
+  "site": "flipkart-shoes",
+  "q": "blue or black shoes not puma",
+  "expect": [
+   "Color: Blue",
+   "Color: Black"
+  ],
+  "got": [
+   "Color: Blue",
+   "Color: Black"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4687
+ },
+ {
+  "cat": "held-out-2",
+  "site": "myntra-shoes",
+  "q": "reebok shoes in white size 8",
+  "expect": [
+   "Brand: Reebok",
+   "Color: White",
+   "Size: UK8"
+  ],
+  "got": [
+   "Brand: Reebok",
+   "Color: White",
+   "Size: UK8"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4787
+ },
+ {
+  "cat": "held-out-2",
+  "site": "myntra-shoes",
+  "q": "velcro shoes 50% off",
+  "expect": [
+   "Fastening: Velcro",
+   "Discount Range: 50% and above"
+  ],
+  "got": [
+   "Fastening: Velcro",
+   "Discount Range: 50% and above"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5635
+ },
+ {
+  "cat": "held-out-2",
+  "site": "amazon-phones",
+  "q": "apple phone with face recognition",
+  "expect": [
+   "Brands: Apple",
+   "Security Feature: Face Recognition"
+  ],
+  "got": [
+   "Brands: Apple",
+   "Security Feature: Face Recognition"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4707
+ },
+ {
+  "cat": "held-out-2",
+  "site": "amazon-phones",
+  "q": "blue samsung 5g phone 256gb",
+  "expect": [
+   "Colour: Blue",
+   "Brands: Samsung",
+   "Cellular Technology: 5G",
+   "Storage Capacity: 256 GB"
+  ],
+  "got": [
+   "Colour: Blue",
+   "Brands: Samsung",
+   "Cellular Technology: 5G",
+   "Storage Capacity: 256 GB"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 6842
+ },
+ {
+  "cat": "held-out-2",
+  "site": "amazon-phones",
+  "q": "motorola phone 6gb ram",
+  "expect": [
+   "Brands: Motorola",
+   "RAM Size: 6 to 7.9 GB"
+  ],
+  "got": [
+   "Brands: Motorola",
+   "RAM Size: 6 to 7.9 GB"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4483
+ },
+ {
+  "cat": "held-out-2",
+  "site": "flipkart-phones",
+  "q": "poco phone with 6gb ram under 15000",
+  "expect": [
+   "Brand: POCO",
+   "Ram: 6 GB",
+   "Max price: ₹15000"
+  ],
+  "got": [
+   "Brand: POCO",
+   "Ram: 6 GB",
+   "Max price: ₹15000"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 7930
+ },
+ {
+  "cat": "held-out-2",
+  "site": "flipkart-phones",
+  "q": "feature phone with dual sim",
+  "expect": [
+   "Type: Feature Phones",
+   "Sim Type: Dual Sim"
+  ],
+  "got": [
+   "Type: Feature Phones",
+   "Sim Type: Dual Sim"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4577
+ },
+ {
+  "cat": "held-out-2",
+  "site": "flipkart-phones",
+  "q": "iphone 128gb",
+  "expect": [
+   "Brand: Apple",
+   "Internal Storage: 128 - 255.9 GB"
+  ],
+  "got": [
+   "Brand: Apple",
+   "Internal Storage: 128 - 255.9 GB"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 4934
+ },
+ {
+  "cat": "held-out-2",
+  "site": "myntra-kurtas",
+  "q": "yellow kurta for haldi",
+  "expect": [
+   "Color: Yellow",
+   "Theme: Haldi"
+  ],
+  "got": [
+   "Color: Yellow",
+   "Theme: Haldi"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 8001
+ },
+ {
+  "cat": "held-out-2",
+  "site": "myntra-kurtas",
+  "q": "block print cotton kurta size xl",
+  "expect": [
+   "Fashion Trends: Block Print",
+   "Fabrics: Cotton",
+   "Size: XL"
+  ],
+  "got": [
+   "Fashion Trends: Block Print",
+   "Fabrics: Cotton",
+   "Size: XL"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 6445
+ },
+ {
+  "cat": "held-out-2",
+  "site": "myntra-kurtas",
+  "q": "sleeveless kurta with round neck",
+  "expect": [
+   "Sleeve Length: Sleeveless",
+   "Neck: Round Neck"
+  ],
+  "got": [
+   "Sleeve Length: Sleeveless",
+   "Neck: Round Neck"
+  ],
+  "missing": [],
+  "extra": [],
+  "pass": true,
+  "ms": 5362
+ }
+]

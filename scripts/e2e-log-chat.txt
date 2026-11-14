@@ -1,0 +1,116 @@
+﻿  [panel] [ai] model (q8) loaded on wasm in 11433 ms (threads: 2)
+On-device AI: Qwen2.5-0.5B via Transformers.js · ready ✓ (13.0s after opening the panel)
+  9:00:46 pm  Reading filters on the page…
+  9:00:56 pm  AI is reading your request…
+  [panel] [ai] answered in 9661 ms
+  [panel] [ai] model {"terms":["black","puma","jacket"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["black","puma","jacket"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":false,"remove":false}
+  9:01:06 pm  Applying…
+  9:01:09 pm  Done ✅
+PASS [Flipkart] "black puma jacket" → Done ✅ in 28.5s
+  chips: Color: Black | Brand: PUMA
+  url  : https://www.flipkart.com/search?q=jacket+men&p[]=facets.color[]=Black&p[]=facets.brand[]=PUMA
+  9:01:15 pm  Reading filters on the page…
+  9:01:21 pm  AI is reading your request…
+  [panel] [ai] answered in 8698 ms
+  [panel] [ai] model {"terms":[],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":[],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null,"sort":"price_asc","clearAll":false,"remove":false}
+  9:01:30 pm  Done ✅
+PASS [Flipkart follow-up] "sort by price low to high" → Done ✅ in 20.4s
+  chips: Sort by: Price: Low to High
+  url  : https://www.flipkart.com/search?q=jacket+men&p[]=facets.color[]=Black&p[]=facets.brand[]=PUMA&sort=price_asc
+  9:01:37 pm  Reading filters on the page…
+  9:01:42 pm  AI is reading your request…
+  [panel] [ai] answered in 4509 ms
+  [panel] [ai] model {"terms":["puma","remove"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["puma","remove"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":false,"remove":true}
+  9:01:47 pm  Done ✅
+PASS [Flipkart follow-up] "remove puma" → Done ✅ in 15.7s
+  chips: -Brand: PUMA
+  url  : https://www.flipkart.com/search?q=jacket+men&sort=price_asc&p[]=facets.color[]=Black
+  9:01:53 pm  Reading filters on the page…
+  9:02:03 pm  AI is reading your request…
+  [panel] [ai] answered in 5486 ms
+  [panel] [ai] model {"terms":[],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":[],"max_price":1500,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":false,"remove":false}
+  9:02:09 pm  Applying…
+  9:02:10 pm  Done ✅
+PASS [Flipkart follow-up] "now under 1500" → Done ✅ in 22.8s
+  chips: Max price: ₹1500
+  url  : https://www.flipkart.com/search?q=jacket+men&sort=price_asc&p[]=facets.color[]=Black&p[]=facets.price_range.from=Min&p[]=facets.price_range.to=1500
+  9:02:17 pm  Reading filters on the page…
+  9:02:27 pm  AI is reading your request…
+  [panel] [ai] answered in 4661 ms
+  [panel] [ai] model {"terms":["clear","all filters"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["clear","all filters"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":true,"remove":false}
+  9:02:32 pm  Done ✅
+PASS [Flipkart follow-up] "clear all filters" → Done ✅ in 20.5s
+  chips: -*: *
+  url  : https://www.flipkart.com/search?q=jacket men
+  9:02:47 pm  Reading filters on the page…
+  9:02:48 pm  AI is reading your request…
+  [panel] [ai] answered in 8682 ms
+  [panel] [ai] model {"terms":["nike","jacket"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["nike","jacket"],"max_price":2000,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":false,"remove":false}
+  9:02:56 pm  Done ✅
+PASS [Amazon] "nike jacket under 2000" → Done ✅ in 15.1s
+  chips: Brands: Nike | Max price: ₹2000
+  url  : https://www.amazon.in/s?k=jacket+men&rh=p_123:234394,p_36:-200000
+  9:03:03 pm  AI is reading your request…
+  [panel] [ai] answered in 5722 ms
+  [panel] [ai] model {"terms":["cheapest"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["cheapest"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null,"sort":"price_asc","clearAll":false,"remove":false}
+  9:03:08 pm  Done ✅
+PASS [Amazon follow-up] "cheapest first" → Done ✅ in 11.0s
+  chips: Sort by: Price: Low to High
+  url  : https://www.amazon.in/s?k=jacket+men&rh=p_123:234394,p_36:-200000&s=price-asc-rank
+  9:03:14 pm  AI is reading your request…
+  [panel] [ai] answered in 6288 ms
+  [panel] [ai] model {"terms":["remove nike"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["remove nike"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":false,"remove":true}
+  9:03:21 pm  Done ✅
+PASS [Amazon follow-up] "remove nike" → Done ✅ in 12.8s
+  chips: -Brands: Nike
+  url  : https://www.amazon.in/s?k=jacket+men&rh=p_36:-200000&s=price-asc-rank
+  9:03:28 pm  AI is reading your request…
+  [panel] [ai] answered in 6440 ms
+  [panel] [ai] model {"terms":[],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":[],"max_price":null,"min_price":1000,"min_discount":null,"min_rating":null,"clearAll":false,"remove":false}
+  9:03:35 pm  Done ✅
+PASS [Amazon follow-up] "above 1000" → Done ✅ in 13.5s
+  chips: Min price: ₹1000
+  url  : https://www.amazon.in/s?k=jacket+men&rh=p_36:100000-200000&s=price-asc-rank
+  9:03:43 pm  AI is reading your request…
+  [panel] [ai] answered in 5879 ms
+  [panel] [ai] model {"terms":["start","over"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["start","over"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":true,"remove":false}
+  9:03:48 pm  Done ✅
+PASS [Amazon follow-up] "start over" → Done ✅ in 15.3s
+  chips: -*: *
+  url  : https://www.amazon.in/s?k=jacket+men
+  9:04:09 pm  Reading filters on the page…
+  9:04:21 pm  AI is reading your request…
+  [panel] [ai] answered in 14682 ms
+  [panel] [ai] model {"terms":["puma"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["puma","9"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":false,"remove":false}
+  9:04:36 pm  Applying…
+  9:04:39 pm  Done ✅
+PASS [Myntra] "puma shoes size 9" → Done ✅ in 35.4s
+  chips: Brand: Puma | Size: UK9
+  url  : https://www.myntra.com/men-sports-shoes?f=Brand:Puma::size_facet:UK9&rawQuery=men sports shoes
+  9:04:45 pm  Reading filters on the page…
+  9:04:54 pm  AI is reading your request…
+  [panel] [ai] answered in 11944 ms
+  [panel] [ai] model {"terms":[],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":[],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null,"sort":"newest","clearAll":false,"remove":false}
+  9:05:06 pm  Done ✅
+PASS [Myntra follow-up] "newest first" → Done ✅ in 27.5s
+  chips: Sort by: Newest First
+  url  : https://www.myntra.com/men-sports-shoes?f=Brand:Puma::size_facet:UK9&rawQuery=men+sports+shoes&sort=new
+  9:05:14 pm  Reading filters on the page…
+  9:05:23 pm  AI is reading your request…
+  [panel] [ai] answered in 6023 ms
+  [panel] [ai] model {"terms":["size"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["size"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":false,"remove":true}
+  9:05:29 pm  Done ✅
+FAIL [Myntra follow-up] "remove size" → Done ✅ in 21.7s
+  chips: -Size: * | -Size: UK9
+  expected: -Size: *
+  url  : https://www.myntra.com/men-sports-shoes?f=Brand:Puma&rawQuery=men+sports+shoes&sort=new
+  9:05:36 pm  Reading filters on the page…
+  9:05:46 pm  AI is reading your request…
+  [panel] [ai] answered in 8696 ms
+  [panel] [ai] model {"terms":[],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":[],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":true,"remove":false}
+  9:05:54 pm  Done ✅
+PASS [Myntra follow-up] "reset" → Done ✅ in 24.5s
+  chips: -*: *
+  url  : https://www.myntra.com/men-sports-shoes?rawQuery=men sports shoes
+
+13/14 live tests passed

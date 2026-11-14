@@ -1,0 +1,153 @@
+// Blind batch 8: written without looking at the implementation, only at the fixtures
+// and the existing cases (to avoid repeating their wordings). Expectations written before any run.
+export const BLIND2 = [
+  // ===== Greetings / thanks / help / small talk
+  { cat: 'blind-8', site: 'flipkart', q: 'hlo', reply: 'greet' },
+  { cat: 'blind-8', site: 'amazon', q: 'hey buddy', reply: 'greet' },
+  { cat: 'blind-8', site: 'myntra', q: 'kaise ho', reply: 'offtopic' },
+  { cat: 'blind-8', site: 'flipkart', q: 'thank u bhai', reply: 'thanks' },
+  { cat: 'blind-8', site: 'myntra', q: 'awesome, that helped', reply: 'thanks' },
+  { cat: 'blind-8', site: 'flipkart-shoes', q: 'ok done', reply: 'thanks' },
+  { cat: 'blind-8', site: 'amazon-phones', q: 'how do i search with this', reply: 'help' },
+  { cat: 'blind-8', site: 'myntra-kurtas', q: 'madad chahiye', reply: 'help' },
+
+  // ===== Asking for options / applied / price
+  { cat: 'blind-8', site: 'myntra-shoes', q: 'shoe size kaun kaun se hai', reply: 'list:Sizes' },
+  { cat: 'blind-8', site: 'amazon', q: 'brand list dikhao', reply: 'list:Brands' },
+  { cat: 'blind-8', site: 'flipkart-phones', q: 'what colours are there', reply: 'nolist' }, // phones page has no colour group
+  { cat: 'blind-8', site: 'myntra-shoes', q: 'what materials do these come in', reply: 'list:Materials' },
+  { cat: 'blind-8', site: 'flipkart', q: 'what discounts are there', reply: 'list:Discounts' },
+  { cat: 'blind-8', site: 'amazon-shoes', q: 'kaun kaun se colour hai', reply: 'list:Colours' },
+  { cat: 'blind-8', site: 'myntra-kurtas', q: 'what kinds of kurtas are there', reply: 'list:Types' },
+  { cat: 'blind-8', site: 'amazon-phones', q: 'show ram options', reply: 'list:RAM' },
+  { cat: 'blind-8', site: 'myntra-shoes', q: 'what have you selected so far', reply: 'applied', applied: ['Brand: Nike'] },
+  { cat: 'blind-8', site: 'amazon-phones', q: 'which filters r on', reply: 'applied', applied: ['Brands: Samsung'] },
+  { cat: 'blind-8', site: 'amazon-shoes', q: 'price range kya hai', reply: 'price' },
+
+  // ===== Off-topic
+  { cat: 'blind-8', site: 'amazon', q: 'how to cancel prime membership', reply: 'offtopic' },
+  { cat: 'blind-8', site: 'flipkart-phones', q: 'exchange my old phone', reply: 'offtopic' },
+  { cat: 'blind-8', site: 'amazon-shoes', q: 'write me a poem', reply: 'offtopic' },
+  { cat: 'blind-8', site: 'flipkart', q: 'what time is it', reply: 'offtopic' },
+
+  // ===== Compare
+  { cat: 'blind-8', site: 'flipkart-phones', q: 'redmi vs poco which one should i buy', reply: 'compare', expect: ['Brand: REDMI', 'Brand: POCO'] },
+  { cat: 'blind-8', site: 'myntra-shoes', q: 'is asics better than nike', reply: 'compare', expect: ['Brand: ASICS', 'Brand: Nike'] },
+  { cat: 'blind-8', site: 'amazon', q: 'is this worth buying', reply: 'compare', expect: [] },
+
+  // ===== Flipkart jackets
+  { cat: 'blind-8', site: 'flipkart', q: 'denim jacket', expect: ['Type: Denim Jacket'] },
+  { cat: 'blind-8', site: 'flipkart', q: 'varsity jacket for men', expect: ['Type: Varsity Jacket', 'Gender: Men'] },
+  { cat: 'blind-8', site: 'flipkart', q: 'biker jacket', expect: ['Type: Biker/Riding Jacket'] },
+  { cat: 'blind-8', site: 'flipkart', q: 'camouflage jacket', expect: ['Pattern: Camouflage'] },
+  { cat: 'blind-8', site: 'flipkart', q: 'light blue jacket', expect: ['Color: Light Blue'] },
+  { cat: 'blind-8', site: 'flipkart', q: 'khaki jacket size S', expect: ['Color: Khaki', 'Size: S'] },
+  { cat: 'blind-8', site: 'flipkart', q: 'corduroy jacket', expect: ['fabric: Corduroy'] },
+  { cat: 'blind-8', site: 'flipkart', q: 'jacket between 700 and 1500', expect: ['Min price: ₹700', 'Max price: ₹1500'] },
+  { cat: 'blind-8', site: 'flipkart', q: 'jacket under 999', expect: ['Max price: ₹700'] },
+  { cat: 'blind-8', site: 'flipkart', q: 'jacket within 1000', expect: ['Max price: ₹1000'] },
+  { cat: 'blind-8', site: 'flipkart', q: '60% discount jackets', expect: ['Discount: 60% or more'] },
+  { cat: 'blind-8', site: 'flipkart', q: '3 star and above', expect: ['Customer Ratings: 3★ & above'] },
+  { cat: 'blind-8', site: 'flipkart', q: 'jacket for casual wear', expect: ['Occasion: Casual'] },
+  { cat: 'blind-8', site: 'flipkart', q: 'puma ki jacket chahiye XXL mein', expect: ['Brand: PUMA', 'Size: 2XL'] },
+  { cat: 'blind-8', site: 'flipkart', q: 'wildcraft or highlander jacket', expect: ['Brand: Wildcraft', 'Brand: HIGHLANDER'] },
+  { cat: 'blind-8', site: 'flipkart', q: 'Roadster jacket in dark green', expect: ['Brand: Roadster', 'Color: Dark Green'] },
+  { cat: 'blind-8', site: 'flipkart', q: 'sasta wala blue jacket', expect: ['Color: Blue', 'Sort by: Price: Low to High'] },
+  { cat: 'blind-8', site: 'flipkart', q: 'nike nhi chahiye, adidas dikhao', expect: ['Brand: ADIDAS'] },
+  { cat: 'blind-8', site: 'flipkart', q: 'puma jacket, black, size m, budget 1500', expect: ['Brand: PUMA', 'Color: Black', 'Size: M', 'Max price: ₹1500'] },
+  { cat: 'blind-8', site: 'flipkart', q: '   puma   ', expect: ['Brand: PUMA'] },
+
+  // ===== Amazon jackets
+  { cat: 'blind-8', site: 'amazon', q: 'oversized jacket', expect: ['Fit: Oversized'] },
+  { cat: 'blind-8', site: 'amazon', q: 'trench coat', expect: ['Coat Silhouette Type: Trench Coat'] },
+  { cat: 'blind-8', site: 'amazon', q: 'fleece lined jacket', expect: ['Lining Description: Fleece'] },
+  { cat: 'blind-8', site: 'amazon', q: 'polyester jacket', expect: ['Material: Polyester'] },
+  { cat: 'blind-8', site: 'amazon', q: 'jacket for hiking', expect: ['Purpose: Hiking'] },
+  { cat: 'blind-8', site: 'amazon', q: 'jacket in 3XL', expect: ["Men's General Size: 3XL"] },
+  { cat: 'blind-8', site: 'amazon', q: 'allen solly jacket under 1200', expect: ['Brands: Allen Solly', 'Max price: ₹1200'] },
+  { cat: 'blind-8', site: 'amazon', q: 'jackets 35% off or more', expect: ['Discount: 35% Off or more'] },
+  { cat: 'blind-8', site: 'amazon', q: 'jacket delivered today', expect: ['Delivery Day: Get It Today'] },
+  { cat: 'blind-8', site: 'amazon', q: 'unisex jacket', expect: ['Gender: Unisex'] },
+  { cat: 'blind-8', site: 'amazon', q: 'jacket above 4000', expect: ['Min price: ₹4000'] },
+  { cat: 'blind-8', site: 'amazon', q: 'peter england or van heusen', expect: ['Brands: Peter England', 'Brands: Van Heusen'] },
+  { cat: 'blind-8', site: 'amazon', q: 'safed jacket', expect: ['Colour: White'] },
+  { cat: 'blind-8', site: 'amazon', q: 'purple jacket', expect: ['Colour: Purples'] },
+  { cat: 'blind-8', site: 'amazon', q: 'max budget is fifteen hundred', expect: ['Max price: ₹1500'] },
+  { cat: 'blind-8', site: 'amazon', q: 'zara jacket', expect: [], reply: 'nomatch' },
+
+  // ===== Myntra jackets
+  { cat: 'blind-8', site: 'myntra', q: 'monte carlo jacket M size', expect: ['Brand: Monte Carlo', 'Size: M'] },
+  { cat: 'blind-8', site: 'myntra', q: 'brown jacket 40% off', expect: ['Color: Brown', 'Discount Range: 40% and above'] },
+  { cat: 'blind-8', site: 'myntra', q: 'jacket size 3xl', expect: ['Size: 3XL'] },
+  { cat: 'blind-8', site: 'myntra', q: 'jackets sorted by newest', expect: ['Sort by: Newest First'] },
+  { cat: 'blind-8', site: 'myntra', q: 'हरी जैकेट', expect: ['Color: Green'] },
+
+  // ===== Shoes
+  { cat: 'blind-8', site: 'myntra-shoes', q: 'navy blue shoes', expect: ['Color: Navy Blue'] },
+  { cat: 'blind-8', site: 'myntra-shoes', q: 'suede shoes', expect: ['Materials: Suede'] },
+  { cat: 'blind-8', site: 'myntra-shoes', q: 'basketball shoes size 11', expect: ['Sport: Basketball', 'Size: UK11'] },
+  { cat: 'blind-8', site: 'myntra-shoes', q: 'trekking shoes', expect: ['Sport: Trekking'] },
+  { cat: 'blind-8', site: 'myntra-shoes', q: 'high cushioning running shoes', expect: ['Cushioning: High', 'Sport: Running'] },
+  { cat: 'blind-8', site: 'myntra-shoes', q: 'new balance shoes 60% off', expect: ['Brand: New Balance', 'Discount Range: 60% and above'] },
+  { cat: 'blind-8', site: 'myntra-shoes', q: 'not white, black shoes', expect: ['Color: Black'] },
+  { cat: 'blind-8', site: 'myntra-shoes', q: 'pink shoes', expect: [], reply: 'nomatch' }, // no Pink on this page
+  { cat: 'blind-8', site: 'flipkart-shoes', q: 'bata shoes for men', expect: ['Brand: Bata', 'Gender: Men'] },
+  { cat: 'blind-8', site: 'flipkart-shoes', q: 'tan colour shoes', expect: ['Color: Tan'] },
+  { cat: 'blind-8', site: 'flipkart-shoes', q: 'leather shoes under 2000', expect: ['Outer Material: Leather', 'Max price: ₹2000'] },
+  { cat: 'blind-8', site: 'flipkart-shoes', q: 'shoes 1500 to 3000', expect: ['Min price: ₹1500', 'Max price: ₹3000'] },
+  { cat: 'blind-8', site: 'flipkart-shoes', q: 'joote 2500 tak', expect: ['Max price: ₹2000'] },
+  { cat: 'blind-8', site: 'flipkart-shoes', q: 'shoes size 9.5', expect: ['Size: 9.5'] },
+  { cat: 'blind-8', site: 'flipkart-shoes', q: 'shoes for women but not pink', expect: ['Gender: Women'] },
+  { cat: 'blind-8', site: 'flipkart-shoes', q: 'काले जूते नाइकी', expect: ['Color: Black', 'Brand: NIKE'] },
+  { cat: 'blind-8', site: 'flipkart-shoes', q: 'crocs', expect: [], reply: 'nomatch' },
+  { cat: 'blind-8', site: 'amazon-shoes', q: 'lightweight shoes', expect: ['Special Features: Lightweight'] },
+  { cat: 'blind-8', site: 'amazon-shoes', q: 'asics running shoes 4 star', expect: ['Brands: ASICS', 'Purpose: Running', 'Customer Reviews: 4 Stars & Up'] },
+  { cat: 'blind-8', site: 'amazon-shoes', q: 'brown oxford shoes', expect: ['Shoe Type: Oxford', 'Colour: Brown'] },
+  { cat: 'blind-8', site: 'amazon-shoes', q: 'shoes for flat feet', expect: ['Purpose: Flat Feet'] },
+  { cat: 'blind-8', site: 'amazon-shoes', q: 'velcro shoes', expect: ['Closure Type: Hook & Loop'] },
+  { cat: 'blind-8', site: 'amazon-shoes', q: 'nike shoes on 50% off', expect: ['Brands: Nike', 'Discount: 50% Off or more'] }, // "on" is not the On brand here
+  { cat: 'blind-8', site: 'amazon-shoes', q: 'shoes less than ₹2500', expect: ['Max price: ₹2500'] },
+
+  // ===== Phones
+  { cat: 'blind-8', site: 'amazon-phones', q: 'oneplus 12gb ram', expect: ['Brands: OnePlus', 'RAM Size: 10 GB & Above'] },
+  { cat: 'blind-8', site: 'amazon-phones', q: 'phone with 90hz display', expect: ['Display Refresh Rate in Hertz: 90'] },
+  { cat: 'blind-8', site: 'amazon-phones', q: 'pixel phone', expect: ['Brands: Google'] },
+  { cat: 'blind-8', site: 'amazon-phones', q: 'phone 15k to 25k', expect: ['Min price: ₹15000', 'Max price: ₹25000'] },
+  { cat: 'blind-8', site: 'amazon-phones', q: 'phone with fingerprint sensor', expect: ['Security Feature: Fingerprint Recognition'] },
+  { cat: 'blind-8', site: 'amazon-phones', q: '4g phone under 5000', expect: ['Cellular Technology: 4G', 'Max price: ₹5000'] },
+  { cat: 'blind-8', site: 'amazon-phones', q: 'purple iphone', expect: ['Colour: Purple', 'Brands: Apple'] },
+  { cat: 'blind-8', site: 'amazon-phones', q: 'phone under 12,500', expect: ['Max price: ₹12500'] },
+  { cat: 'blind-8', site: 'flipkart-phones', q: 'ios phones', expect: ['Operating System: iOS'] },
+  { cat: 'blind-8', site: 'flipkart-phones', q: 'poco phone 128gb under 15k', expect: ['Brand: POCO', 'Internal Storage: 128 - 255.9 GB', 'Max price: ₹15000'] },
+  { cat: 'blind-8', site: 'flipkart-phones', q: 'phone with 3gb ram', expect: ['Ram: 3 GB'] },
+  { cat: 'blind-8', site: 'flipkart-phones', q: 'phone under 25000', expect: ['Max price: ₹20000'] },
+  { cat: 'blind-8', site: 'flipkart-phones', q: 'phone above 30k', expect: ['Min price: ₹30000'] },
+  { cat: 'blind-8', site: 'flipkart-phones', q: 'phone below 15 thousand', expect: ['Max price: ₹15000'] },
+  { cat: 'blind-8', site: 'flipkart-phones', q: 'infinix ya tecno', expect: ['Brand: Infinix', 'Brand: Tecno'] },
+  { cat: 'blind-8', site: 'flipkart-phones', q: 'samsung,8gb,5g', expect: ['Brand: Samsung', 'Ram: 8 GB and Above', 'Network Type: 5G'] },
+  { cat: 'blind-8', site: 'flipkart-phones', q: 'phone with 16gb ram', expect: ['Ram: 8 GB and Above'] },
+
+  // ===== Kurtas
+  { cat: 'blind-8', site: 'myntra-kurtas', q: 'mandarin collar kurta', expect: ['Neck: Mandarin Collar'] },
+  { cat: 'blind-8', site: 'myntra-kurtas', q: 'linen kurta', expect: ['Fabrics: Linen'] },
+  { cat: 'blind-8', site: 'myntra-kurtas', q: 'knee length kurta', expect: ['Length: Knee Length'] },
+  { cat: 'blind-8', site: 'myntra-kurtas', q: 'holi kurta', expect: ['Theme: Holi'] },
+  { cat: 'blind-8', site: 'myntra-kurtas', q: 'party wear kurta', expect: ['Occasions: Party'] },
+  { cat: 'blind-8', site: 'myntra-kurtas', q: 'hand wash kurta', expect: ['Wash Care: Hand Wash'] },
+  { cat: 'blind-8', site: 'myntra-kurtas', q: 'green kurta size L', expect: ['Color: Green', 'Size: L'] },
+  { cat: 'blind-8', site: 'myntra-kurtas', q: 'short sleeve kurta', expect: ['Sleeve Length: Short Sleeves'] },
+  { cat: 'blind-8', site: 'myntra-kurtas', q: 'sangria kurta black', expect: ['Brand: Sangria', 'Color: Black'] },
+  { cat: 'blind-8', site: 'myntra-kurtas', q: 'kurta in orange', expect: [], reply: 'nomatch' }, // no Orange on this page
+
+  // ===== Follow-ups
+  { cat: 'blind-8', site: 'flipkart', q: 'actually make it 2xl', applied: ['Size: XL'], expect: ['Size: 2XL', '-Size: XL'] },
+  { cat: 'blind-8', site: 'amazon', q: 'nike bhi add karo', applied: ['Brands: PUMA'], expect: ['Brands: Nike'] },
+  { cat: 'blind-8', site: 'flipkart-phones', q: 'remove ram filter', applied: ['Ram: 6 GB', 'Brand: Samsung'], expect: ['-Ram: *'] },
+  { cat: 'blind-8', site: 'myntra-shoes', q: 'hata do nike', applied: ['Brand: Nike', 'Size: UK9'], expect: ['-Brand: Nike'] },
+  { cat: 'blind-8', site: 'amazon', q: 'clear all filters pls', applied: ['Brands: Nike', 'Colour: Black'], expect: ['-*: *'] },
+  { cat: 'blind-8', site: 'flipkart', q: 'budget badha ke 2000 karo', applied: ['Max price: ₹1000'], expect: ['Max price: ₹2000'] },
+  { cat: 'blind-8', site: 'myntra-kurtas', q: 'only pink', applied: ['Color: Blue', 'Color: Yellow'], expect: ['Color: Pink', '-Color: Blue', '-Color: Yellow'] },
+  { cat: 'blind-8', site: 'flipkart-shoes', q: 'size 8 nahi 9 chahiye', applied: ['Size: 8'], expect: ['Size: 9', '-Size: 8'] },
+  { cat: 'blind-8', site: 'amazon-shoes', q: 'sort by newest instead', applied: ['Sort by: Popularity'], expect: ['Sort by: Newest First'] },
+  { cat: 'blind-8', site: 'amazon-phones', q: 'also add 5g', applied: ['Brands: Samsung'], expect: ['Cellular Technology: 5G'] },
+]

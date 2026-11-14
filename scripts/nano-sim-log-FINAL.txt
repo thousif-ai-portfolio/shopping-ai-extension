@@ -1,0 +1,11 @@
+  [panel] [ai] Gemini Nano failed, using backup AI: Error: simulated Nano crash
+  [panel] [ai] model (q8) loaded on wasm in 10157 ms (threads: 2)
+  [panel] [ai] answered in 10770 ms
+  [panel] [ai] model {"terms":["black","puma"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["black","puma"],"max_price":2000,"min_price":null,"min_discount":n
+PASS broken Nano — panel says "Private AI on this computer · Gemini Nano (Chrome built-in) · works on Amazon, Flipkart, Myntra" — got: Color: Black | Brand: PUMA | Max price: ₹2000 (21.2s)
+  [panel] [ai] answered in 7444 ms
+  [panel] [ai] model {"terms":["black","puma"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["black","puma"],"max_price":2000,"min_price":null,"min_discount":n
+PASS broken Nano, 2nd request — Nano tried 1 time(s) in total, AI now "Qwen2.5-0.5B (backup: Gemini Nano did not work here)" (7.5s)
+  [panel] [ai] model {"terms":["black","puma"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["black","puma"],"max_price":2000,"min_price":null,"min_discount":n
+PASS working Nano — panel says "Private AI on this computer · Gemini Nano (Chrome built-in) · works on Amazon, Flipkart, Myntra" — got: Color: Black | Brand: PUMA | Max price: ₹2000 (0.1s)
+  options sent to LanguageModel.create: {"initialPrompts":[{"role":"system","content":"List the words in the shopping request that describe brand, colour, material, fit, gender, style or features. Reply with only those words, separated by c

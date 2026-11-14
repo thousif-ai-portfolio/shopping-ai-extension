@@ -1,0 +1,8088 @@
+[
+ {
+  "cat": "greeting",
+  "site": "flipkart",
+  "q": "hi",
+  "reply": "greet",
+  "replyText": "Hi! 👋 Tell me what you're looking for on Flipkart, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "greet",
+  "pass": true
+ },
+ {
+  "cat": "greeting",
+  "site": "amazon",
+  "q": "Hello!",
+  "reply": "greet",
+  "replyText": "Hi! 👋 Tell me what you're looking for on Amazon, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "greet",
+  "pass": true
+ },
+ {
+  "cat": "greeting",
+  "site": "myntra",
+  "q": "hey there",
+  "reply": "greet",
+  "replyText": "Hi! 👋 Tell me what you're looking for on Myntra, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "greet",
+  "pass": true
+ },
+ {
+  "cat": "greeting",
+  "site": "flipkart",
+  "q": "hiii",
+  "reply": "greet",
+  "replyText": "Hi! 👋 Tell me what you're looking for on Flipkart, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "greet",
+  "pass": true
+ },
+ {
+  "cat": "greeting",
+  "site": "amazon",
+  "q": "good morning",
+  "reply": "greet",
+  "replyText": "Hi! 👋 Tell me what you're looking for on Amazon, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "greet",
+  "pass": true
+ },
+ {
+  "cat": "greeting",
+  "site": "myntra",
+  "q": "namaste ji",
+  "reply": "greet",
+  "replyText": "Hi! 👋 Tell me what you're looking for on Myntra, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "greet",
+  "pass": true
+ },
+ {
+  "cat": "greeting",
+  "site": "flipkart",
+  "q": "hello bro",
+  "reply": "greet",
+  "replyText": "Hi! 👋 Tell me what you're looking for on Flipkart, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "greet",
+  "pass": true
+ },
+ {
+  "cat": "greeting",
+  "site": "amazon",
+  "q": "how are you?",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can only help with shopping on Amazon: filtering, sorting and searching. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "greeting",
+  "site": "flipkart",
+  "q": "who are you",
+  "reply": "help",
+  "replyText": "I filter, sort and search Flipkart for you. Type what you want in your own words, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\". Ask \"what brands are there?\" to see the options, or \"what did you apply?\" to see the filters.",
+  "got": [],
+  "kind": "help",
+  "pass": true
+ },
+ {
+  "cat": "greeting",
+  "site": "myntra",
+  "q": "are you a bot?",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can only help with shopping on Myntra: filtering, sorting and searching. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "greeting",
+  "site": "amazon",
+  "q": "tell me a joke",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can only help with shopping on Amazon: filtering, sorting and searching. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "greeting",
+  "site": "flipkart",
+  "q": "hi, black puma jacket please",
+  "expect": [
+   "Color: Black",
+   "Brand: PUMA"
+  ],
+  "got": [
+   "Color: Black",
+   "Brand: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "thanks",
+  "site": "flipkart",
+  "q": "thanks",
+  "reply": "thanks",
+  "replyText": "You're welcome! Tell me if you want to change anything, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "thanks",
+  "pass": true
+ },
+ {
+  "cat": "thanks",
+  "site": "amazon",
+  "q": "thank you so much",
+  "reply": "thanks",
+  "replyText": "You're welcome! Tell me if you want to change anything, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "thanks",
+  "pass": true
+ },
+ {
+  "cat": "thanks",
+  "site": "myntra",
+  "q": "ok",
+  "reply": "thanks",
+  "replyText": "You're welcome! Tell me if you want to change anything, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "thanks",
+  "pass": true
+ },
+ {
+  "cat": "thanks",
+  "site": "flipkart",
+  "q": "okay cool",
+  "reply": "thanks",
+  "replyText": "You're welcome! Tell me if you want to change anything, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "thanks",
+  "pass": true
+ },
+ {
+  "cat": "thanks",
+  "site": "amazon",
+  "q": "perfect 👍",
+  "reply": "thanks",
+  "replyText": "You're welcome! Tell me if you want to change anything, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "thanks",
+  "pass": true
+ },
+ {
+  "cat": "thanks",
+  "site": "myntra",
+  "q": "bye",
+  "reply": "thanks",
+  "replyText": "You're welcome! Tell me if you want to change anything, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "thanks",
+  "pass": true
+ },
+ {
+  "cat": "thanks",
+  "site": "flipkart",
+  "q": "shukriya",
+  "reply": "thanks",
+  "replyText": "You're welcome! Tell me if you want to change anything, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "thanks",
+  "pass": true
+ },
+ {
+  "cat": "thanks",
+  "site": "amazon",
+  "q": "nice, it works",
+  "reply": "thanks",
+  "replyText": "You're welcome! Tell me if you want to change anything, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "thanks",
+  "pass": true
+ },
+ {
+  "cat": "thanks",
+  "site": "flipkart",
+  "q": "no",
+  "reply": "thanks",
+  "replyText": "You're welcome! Tell me if you want to change anything, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "thanks",
+  "pass": true
+ },
+ {
+  "cat": "thanks",
+  "site": "flipkart",
+  "q": "yes",
+  "reply": "thanks",
+  "replyText": "You're welcome! Tell me if you want to change anything, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "thanks",
+  "pass": true
+ },
+ {
+  "cat": "help",
+  "site": "flipkart",
+  "q": "help",
+  "reply": "help",
+  "replyText": "I filter, sort and search Flipkart for you. Type what you want in your own words, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\". Ask \"what brands are there?\" to see the options, or \"what did you apply?\" to see the filters.",
+  "got": [],
+  "kind": "help",
+  "pass": true
+ },
+ {
+  "cat": "help",
+  "site": "amazon",
+  "q": "what can you do?",
+  "reply": "help",
+  "replyText": "I filter, sort and search Amazon for you. Type what you want in your own words, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\". Ask \"what brands are there?\" to see the options, or \"what did you apply?\" to see the filters.",
+  "got": [],
+  "kind": "help",
+  "pass": true
+ },
+ {
+  "cat": "help",
+  "site": "myntra",
+  "q": "how do I use this",
+  "reply": "help",
+  "replyText": "I filter, sort and search Myntra for you. Type what you want in your own words, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\". Ask \"what brands are there?\" to see the options, or \"what did you apply?\" to see the filters.",
+  "got": [],
+  "kind": "help",
+  "pass": true
+ },
+ {
+  "cat": "help",
+  "site": "flipkart",
+  "q": "how does this work",
+  "reply": "help",
+  "replyText": "I filter, sort and search Flipkart for you. Type what you want in your own words, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\". Ask \"what brands are there?\" to see the options, or \"what did you apply?\" to see the filters.",
+  "got": [],
+  "kind": "help",
+  "pass": true
+ },
+ {
+  "cat": "help",
+  "site": "amazon",
+  "q": "what should i type",
+  "reply": "help",
+  "replyText": "I filter, sort and search Amazon for you. Type what you want in your own words, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\". Ask \"what brands are there?\" to see the options, or \"what did you apply?\" to see the filters.",
+  "got": [],
+  "kind": "help",
+  "pass": true
+ },
+ {
+  "cat": "help",
+  "site": "myntra",
+  "q": "what is this",
+  "reply": "help",
+  "replyText": "I filter, sort and search Myntra for you. Type what you want in your own words, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\". Ask \"what brands are there?\" to see the options, or \"what did you apply?\" to see the filters.",
+  "got": [],
+  "kind": "help",
+  "pass": true
+ },
+ {
+  "cat": "list",
+  "site": "flipkart",
+  "q": "what brands are there?",
+  "reply": "list:Brands",
+  "replyText": "Brands on this page: PUMA, ADIDAS, U.S. POLO ASSN., RED TAPE, Allen Solly, MONTE CARLO, PETER ENGLAND, JACK & JONES, HRX by Hrithik Roshan, Roadster, LEVI'S, NIKE and 1976 more. Say one, e.g. \"PUMA\".",
+  "got": [],
+  "kind": "list:Brands",
+  "pass": true
+ },
+ {
+  "cat": "list",
+  "site": "amazon",
+  "q": "which brands do you have",
+  "reply": "list:Brands",
+  "replyText": "Brands on this page: Red Tape, Allen Solly, Van Heusen, PUMA, Monte Carlo, Levi's, JACK & JONES, Nike, adidas, U.S. POLO ASSN., Peter England, Tommy Hilfiger and 28 more. Say one, e.g. \"Red Tape\".",
+  "got": [],
+  "kind": "list:Brands",
+  "pass": true
+ },
+ {
+  "cat": "list",
+  "site": "myntra",
+  "q": "show me all brands",
+  "reply": "list:Brands",
+  "replyText": "Brands on this page: Suo, Roadster, StyleCast x Revolte, HRX by Hrithik Roshan, FUTSE PENO, HERE&NOW, CAHOOT, Mast & Harbour, 7 Alt by Pantaloons, 11Caps, 1FIT, 1989 STUDIO and 896 more. Say one, e.g. \"Suo\".",
+  "got": [],
+  "kind": "list:Brands",
+  "pass": true
+ },
+ {
+  "cat": "list",
+  "site": "flipkart",
+  "q": "what colours are available",
+  "reply": "list:Colours",
+  "replyText": "Colours on this page: Black, Grey, Blue, Brown, Green, Multicolor, White, Maroon, Red, Tan, Navy Blue, Beige and 12 more. Say one, e.g. \"Black\".",
+  "got": [],
+  "kind": "list:Colours",
+  "pass": true
+ },
+ {
+  "cat": "list",
+  "site": "amazon",
+  "q": "which colors",
+  "reply": "list:Colours",
+  "replyText": "Colours on this page: Black, Greys, White, Browns, Beige, Reds, Pinks, Oranges, Yellows, Off-White, Greens, Turquoise and 6 more. Say one, e.g. \"Black\".",
+  "got": [],
+  "kind": "list:Colours",
+  "pass": true
+ },
+ {
+  "cat": "list",
+  "site": "myntra",
+  "q": "what sizes do you have",
+  "reply": "list:Sizes",
+  "replyText": "Sizes on this page: 3XS, XXS, XS, S, M, M/L, L, L/XL, XL, XL/XXL, XXL, 3XL and 39 more. Say one, e.g. \"3XS\".",
+  "got": [],
+  "kind": "list:Sizes",
+  "pass": true
+ },
+ {
+  "cat": "list",
+  "site": "flipkart-shoes",
+  "q": "available sizes?",
+  "reply": "list:Sizes",
+  "replyText": "Sizes on this page: 2, 2.5, 3, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8 and 11 more. Say one, e.g. \"2\".",
+  "got": [],
+  "kind": "list:Sizes",
+  "pass": true
+ },
+ {
+  "cat": "list",
+  "site": "myntra-kurtas",
+  "q": "which fabrics are there",
+  "reply": "list:Materials",
+  "replyText": "Materials on this page: Blended, Pure, Synthetic. Say one, e.g. \"Blended\".",
+  "got": [],
+  "kind": "list:Materials",
+  "pass": true
+ },
+ {
+  "cat": "list",
+  "site": "amazon-phones",
+  "q": "what ram options are there",
+  "reply": "list:RAM",
+  "replyText": "RAM on this page: Up to 1.9 GB, 4 to 5.9 GB, 6 to 7.9 GB, 8 to 9.9 GB, 10 GB & Above. Say one, e.g. \"Up to 1.9 GB\".",
+  "got": [],
+  "kind": "list:RAM",
+  "pass": true
+ },
+ {
+  "cat": "list",
+  "site": "flipkart-phones",
+  "q": "storage options?",
+  "reply": "list:Storage",
+  "replyText": "Storage on this page: 256 GB & Above, 128 - 255.9 GB, 64 - 127.9 GB, 32 - 63.9 GB, 16 - 31.9 GB, 8 - 15.9 GB, 4 - 7.9 GB, 2 GB - 3.9 GB, 1 GB - 1.9 GB, Less than 1 GB. Say one, e.g. \"256 GB & Above\".",
+  "got": [],
+  "kind": "list:Storage",
+  "pass": true
+ },
+ {
+  "cat": "list",
+  "site": "flipkart",
+  "q": "what filters are there",
+  "reply": "filters",
+  "replyText": "Filters on this page: Brand, Size, fabric, Color, Sleeve, Type, Pattern, Occasion, Customer Ratings, Hooded, Reversible, Discount, Pack of, Gender, Country Of Origin and 5 more. Tell me what you want, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "filters",
+  "pass": true
+ },
+ {
+  "cat": "list",
+  "site": "amazon",
+  "q": "which filters can i use",
+  "reply": "filters",
+  "replyText": "Filters on this page: Delivery Day, Eligible for Free Delivery, Gender, Brands, Customer Reviews, Colour, Discount, Amazon Fashion, Material, Seller, Men's General Size, Adult General Size, Price, Deals & Discounts, Pay On Delivery and 17 more. Tell me what you want, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "filters",
+  "pass": true
+ },
+ {
+  "cat": "list",
+  "site": "myntra",
+  "q": "konse brand hai",
+  "reply": "list:Brands",
+  "replyText": "Brands on this page: Suo, Roadster, StyleCast x Revolte, HRX by Hrithik Roshan, FUTSE PENO, HERE&NOW, CAHOOT, Mast & Harbour, 7 Alt by Pantaloons, 11Caps, 1FIT, 1989 STUDIO and 896 more. Say one, e.g. \"Suo\".",
+  "got": [],
+  "kind": "list:Brands",
+  "pass": true
+ },
+ {
+  "cat": "list",
+  "site": "flipkart",
+  "q": "what is the price range",
+  "reply": "price",
+  "replyText": "Tell me your budget, e.g. \"under 2000\", \"between 1000 and 3000\" or \"cheapest first\".",
+  "got": [],
+  "kind": "price",
+  "pass": true
+ },
+ {
+  "cat": "list",
+  "site": "amazon",
+  "q": "how much do these cost",
+  "reply": "price",
+  "replyText": "Tell me your budget, e.g. \"under 2000\", \"between 1000 and 3000\" or \"cheapest first\".",
+  "got": [],
+  "kind": "price",
+  "pass": true
+ },
+ {
+  "cat": "list",
+  "site": "myntra",
+  "q": "what material is it made of",
+  "reply": "nolist",
+  "replyText": "This Myntra page has no materials filter.",
+  "got": [],
+  "kind": "nolist",
+  "pass": true
+ },
+ {
+  "cat": "list",
+  "site": "flipkart",
+  "q": "show me size M",
+  "expect": [
+   "Size: M"
+  ],
+  "got": [
+   "Size: M"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "list",
+  "site": "flipkart",
+  "q": "do you have puma brand?",
+  "expect": [
+   "Brand: PUMA"
+  ],
+  "got": [
+   "Brand: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "list",
+  "site": "flipkart",
+  "q": "which brand jackets are under 2000",
+  "expect": [
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "list",
+  "site": "amazon",
+  "q": "is black colour available",
+  "expect": [
+   "Colour: Black"
+  ],
+  "got": [
+   "Colour: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "applied",
+  "site": "flipkart",
+  "q": "what filters did you apply?",
+  "reply": "applied",
+  "applied": [
+   "Color: Black",
+   "Brand: PUMA"
+  ],
+  "replyText": "Applied in this chat: Color: Black, Brand: PUMA.",
+  "got": [],
+  "kind": "applied",
+  "pass": true
+ },
+ {
+  "cat": "applied",
+  "site": "amazon",
+  "q": "what did you apply",
+  "reply": "applied",
+  "applied": [],
+  "replyText": "No filters from this chat are on the page right now.",
+  "got": [],
+  "kind": "applied",
+  "pass": true
+ },
+ {
+  "cat": "applied",
+  "site": "myntra",
+  "q": "current filters",
+  "reply": "applied",
+  "applied": [
+   "Brand: Roadster"
+  ],
+  "replyText": "Applied in this chat: Brand: Roadster.",
+  "got": [],
+  "kind": "applied",
+  "pass": true
+ },
+ {
+  "cat": "applied",
+  "site": "flipkart",
+  "q": "show applied filters",
+  "reply": "applied",
+  "applied": [
+   "Size: L"
+  ],
+  "replyText": "Applied in this chat: Size: L.",
+  "got": [],
+  "kind": "applied",
+  "pass": true
+ },
+ {
+  "cat": "off-topic",
+  "site": "flipkart",
+  "q": "what is the return policy?",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with returns, refunds or exchanges. I only filter, sort and search products. Please check Flipkart's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "off-topic",
+  "site": "amazon",
+  "q": "can I return this if it doesnt fit",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with returns, refunds or exchanges. I only filter, sort and search products. Please check Amazon's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "off-topic",
+  "site": "myntra",
+  "q": "how do i get a refund",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with returns, refunds or exchanges. I only filter, sort and search products. Please check Myntra's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "off-topic",
+  "site": "flipkart",
+  "q": "where is my order",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with your orders. I only filter, sort and search products. Please check Flipkart's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "off-topic",
+  "site": "amazon",
+  "q": "track my order",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with your orders. I only filter, sort and search products. Please check Amazon's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "off-topic",
+  "site": "amazon",
+  "q": "cancel my order",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with your orders. I only filter, sort and search products. Please check Amazon's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "off-topic",
+  "site": "flipkart",
+  "q": "when will it be delivered",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with delivery times or charges. I only filter, sort and search products. Please check Flipkart's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "off-topic",
+  "site": "myntra",
+  "q": "how many days for delivery",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with delivery times or charges. I only filter, sort and search products. Please check Myntra's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "off-topic",
+  "site": "flipkart-phones",
+  "q": "does this phone have warranty",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with warranty. I only filter, sort and search products. Please check Flipkart's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "off-topic",
+  "site": "amazon-phones",
+  "q": "is no cost emi available",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with payments, EMI or bank offers. I only filter, sort and search products. Please check Amazon's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "off-topic",
+  "site": "flipkart",
+  "q": "customer care number",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with customer support. I only filter, sort and search products. Please check Flipkart's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "off-topic",
+  "site": "myntra",
+  "q": "any coupon code?",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with coupons, vouchers or cashback. I only filter, sort and search products. Please check Myntra's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "off-topic",
+  "site": "amazon",
+  "q": "change my address",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with your account or address. I only filter, sort and search products. Please check Amazon's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "off-topic",
+  "site": "flipkart",
+  "q": "add it to cart",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with buying or adding to the cart. I only filter, sort and search products. Please check Flipkart's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "off-topic",
+  "site": "amazon",
+  "q": "buy this for me",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with buying or adding to the cart. I only filter, sort and search products. Please check Amazon's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "off-topic",
+  "site": "myntra",
+  "q": "exchange policy kya hai",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with returns, refunds or exchanges. I only filter, sort and search products. Please check Myntra's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "off-topic",
+  "site": "flipkart",
+  "q": "kab aayega mera order",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with delivery times or charges. I only filter, sort and search products. Please check Flipkart's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "off-topic",
+  "site": "amazon",
+  "q": "what's the weather today",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can only help with shopping on Amazon: filtering, sorting and searching. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "best",
+  "site": "amazon-phones",
+  "q": "which phone is the best",
+  "expect": [
+   "Sort by: Customer Rating"
+  ],
+  "got": [
+   "Sort by: Customer Rating"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "best",
+  "site": "flipkart-phones",
+  "q": "best phone under 20000",
+  "expect": [
+   "Max price: ₹20000",
+   "Sort by: Popularity"
+  ],
+  "got": [
+   "Max price: ₹20000",
+   "Sort by: Popularity"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "best",
+  "site": "myntra-shoes",
+  "q": "recommend good running shoes",
+  "expect": [
+   "Sport: Running",
+   "Sort by: Customer Rating"
+  ],
+  "got": [
+   "Sport: Running",
+   "Sort by: Customer Rating"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "best",
+  "site": "amazon",
+  "q": "best nike jacket",
+  "expect": [
+   "Brands: Nike",
+   "Sort by: Customer Rating"
+  ],
+  "got": [
+   "Brands: Nike",
+   "Sort by: Customer Rating"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "best",
+  "site": "myntra-kurtas",
+  "q": "sabse accha kurta",
+  "expect": [
+   "Sort by: Customer Rating"
+  ],
+  "got": [
+   "Sort by: Customer Rating"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "best",
+  "site": "flipkart",
+  "q": "best price jacket",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"best price jacket\" on this page. This page has filters for Brand, Size, fabric, Color, Sleeve, Type and 14 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "best",
+  "site": "amazon",
+  "q": "best selling jackets",
+  "expect": [
+   "Sort by: Popularity"
+  ],
+  "got": [
+   "Sort by: Popularity"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "best",
+  "site": "amazon",
+  "q": "top rated jackets",
+  "expect": [
+   "Customer Reviews: 4 Stars & Up",
+   "Sort by: Customer Rating"
+  ],
+  "got": [
+   "Customer Reviews: 4 Stars & Up",
+   "Sort by: Customer Rating"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "compare",
+  "site": "flipkart-phones",
+  "q": "compare iphone and samsung",
+  "reply": "compare",
+  "expect": [
+   "Brand: Apple",
+   "Brand: Samsung"
+  ],
+  "replyText": "I can't compare or review products, but I can show the best rated first (say \"top rated\") or filter by brand, price and more.",
+  "got": [
+   "Brand: Apple",
+   "Brand: Samsung"
+  ],
+  "kind": "compare",
+  "pass": true
+ },
+ {
+  "cat": "compare",
+  "site": "amazon-phones",
+  "q": "is oneplus better than samsung?",
+  "reply": "compare",
+  "expect": [
+   "Brands: OnePlus",
+   "Brands: Samsung"
+  ],
+  "replyText": "I can't compare or review products, but I can show the best rated first (say \"top rated\") or filter by brand, price and more.",
+  "got": [
+   "Brands: OnePlus",
+   "Brands: Samsung"
+  ],
+  "kind": "compare",
+  "pass": true
+ },
+ {
+  "cat": "compare",
+  "site": "flipkart",
+  "q": "is this jacket good?",
+  "reply": "compare",
+  "expect": [],
+  "replyText": "I can't compare or review products, but I can show the best rated first (say \"top rated\") or filter by brand, price and more.",
+  "got": [],
+  "kind": "compare",
+  "pass": true
+ },
+ {
+  "cat": "compare",
+  "site": "myntra-shoes",
+  "q": "should i buy these shoes",
+  "reply": "compare",
+  "expect": [],
+  "replyText": "I can't compare or review products, but I can show the best rated first (say \"top rated\") or filter by brand, price and more.",
+  "got": [],
+  "kind": "compare",
+  "pass": true
+ },
+ {
+  "cat": "compare",
+  "site": "amazon-phones",
+  "q": "what are the specs",
+  "reply": "compare",
+  "expect": [],
+  "replyText": "I can't compare or review products, but I can show the best rated first (say \"top rated\") or filter by brand, price and more.",
+  "got": [],
+  "kind": "compare",
+  "pass": true
+ },
+ {
+  "cat": "question-filter",
+  "site": "flipkart",
+  "q": "do you have black puma jackets?",
+  "expect": [
+   "Color: Black",
+   "Brand: PUMA"
+  ],
+  "got": [
+   "Color: Black",
+   "Brand: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "question-filter",
+  "site": "amazon-shoes",
+  "q": "can i get nike shoes in size 9?",
+  "expect": [
+   "Brands: Nike",
+   "Men's Shoe Size (UK/India): 9"
+  ],
+  "got": [
+   "Brands: Nike",
+   "Men's Shoe Size (UK/India): 9"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "question-filter",
+  "site": "myntra-kurtas",
+  "q": "is there any red kurta",
+  "expect": [
+   "Color: Red"
+  ],
+  "got": [
+   "Color: Red"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "question-filter",
+  "site": "flipkart-phones",
+  "q": "any samsung phone under 15k?",
+  "expect": [
+   "Brand: Samsung",
+   "Max price: ₹15000"
+  ],
+  "got": [
+   "Brand: Samsung",
+   "Max price: ₹15000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "question-filter",
+  "site": "amazon",
+  "q": "got any jackets under 1000 for men",
+  "expect": [
+   "Max price: ₹1000",
+   "Gender: Men"
+  ],
+  "got": [
+   "Gender: Men",
+   "Max price: ₹1000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "question-filter",
+  "site": "flipkart-shoes",
+  "q": "where are the white sneakers",
+  "expect": [
+   "Color: White"
+  ],
+  "got": [
+   "Color: White"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "question-filter",
+  "site": "myntra-shoes",
+  "q": "could you show adidas shoes size 10 please",
+  "expect": [
+   "Brand: ADIDAS",
+   "Size: UK10"
+  ],
+  "got": [
+   "Brand: ADIDAS",
+   "Size: UK10"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "replace",
+  "site": "flipkart",
+  "q": "make it L",
+  "applied": [
+   "Size: M"
+  ],
+  "expect": [
+   "Size: L",
+   "-Size: M"
+  ],
+  "got": [
+   "Size: L",
+   "-Size: M"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "replace",
+  "site": "flipkart",
+  "q": "change size to XL",
+  "applied": [
+   "Size: M",
+   "Color: Black"
+  ],
+  "expect": [
+   "Size: XL",
+   "-Size: M"
+  ],
+  "got": [
+   "Size: XL",
+   "-Size: M"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "replace",
+  "site": "flipkart",
+  "q": "show nike instead of puma",
+  "applied": [
+   "Brand: PUMA"
+  ],
+  "expect": [
+   "Brand: NIKE",
+   "-Brand: PUMA"
+  ],
+  "got": [
+   "Brand: NIKE",
+   "-Brand: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "replace",
+  "site": "flipkart",
+  "q": "instead of puma, adidas",
+  "applied": [
+   "Brand: PUMA"
+  ],
+  "expect": [
+   "Brand: ADIDAS",
+   "-Brand: PUMA"
+  ],
+  "got": [
+   "Brand: ADIDAS",
+   "-Brand: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "replace",
+  "site": "amazon",
+  "q": "replace nike with adidas",
+  "applied": [
+   "Brands: Nike"
+  ],
+  "expect": [
+   "Brands: adidas",
+   "-Brands: Nike"
+  ],
+  "got": [
+   "Brands: adidas",
+   "-Brands: Nike"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "replace",
+  "site": "flipkart",
+  "q": "change black to blue",
+  "applied": [
+   "Color: Black"
+  ],
+  "expect": [
+   "Color: Blue",
+   "-Color: Black"
+  ],
+  "got": [
+   "Color: Blue",
+   "-Color: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "replace",
+  "site": "amazon",
+  "q": "only adidas",
+  "applied": [
+   "Brands: Nike",
+   "Brands: PUMA"
+  ],
+  "expect": [
+   "Brands: adidas",
+   "-Brands: Nike",
+   "-Brands: PUMA"
+  ],
+  "got": [
+   "Brands: adidas",
+   "-Brands: Nike",
+   "-Brands: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "replace",
+  "site": "myntra",
+  "q": "just roadster",
+  "applied": [
+   "Brand: HRX by Hrithik Roshan"
+  ],
+  "expect": [
+   "Brand: Roadster",
+   "-Brand: HRX by Hrithik Roshan"
+  ],
+  "got": [
+   "Brand: Roadster",
+   "-Brand: HRX by Hrithik Roshan"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "replace",
+  "site": "flipkart",
+  "q": "switch to grey",
+  "applied": [
+   "Color: Black"
+  ],
+  "expect": [
+   "Color: Grey",
+   "-Color: Black"
+  ],
+  "got": [
+   "Color: Grey",
+   "-Color: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "replace",
+  "site": "flipkart",
+  "q": "rather than puma show nike",
+  "applied": [
+   "Brand: PUMA"
+  ],
+  "expect": [
+   "Brand: NIKE",
+   "-Brand: PUMA"
+  ],
+  "got": [
+   "Brand: NIKE",
+   "-Brand: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "replace",
+  "site": "flipkart",
+  "q": "make it under 1500",
+  "applied": [
+   "Max price: ₹2000"
+  ],
+  "expect": [
+   "Max price: ₹1500"
+  ],
+  "got": [
+   "Max price: ₹1500"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "replace",
+  "site": "flipkart",
+  "q": "M",
+  "applied": [
+   "Size: L"
+  ],
+  "expect": [
+   "Size: M"
+  ],
+  "got": [
+   "Size: M"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "replace",
+  "site": "myntra",
+  "q": "change to M please",
+  "applied": [
+   "Size: L"
+  ],
+  "expect": [
+   "Size: M",
+   "-Size: L"
+  ],
+  "got": [
+   "Size: M",
+   "-Size: L"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "replace",
+  "site": "flipkart",
+  "q": "also in grey",
+  "applied": [
+   "Color: Black"
+  ],
+  "expect": [
+   "Color: Grey"
+  ],
+  "got": [
+   "Color: Grey"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "replace",
+  "site": "flipkart",
+  "q": "and adidas too",
+  "applied": [
+   "Brand: PUMA"
+  ],
+  "expect": [
+   "Brand: ADIDAS"
+  ],
+  "got": [
+   "Brand: ADIDAS"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "replace",
+  "site": "flipkart",
+  "q": "size L",
+  "applied": [
+   "Size: M"
+  ],
+  "expect": [
+   "Size: L"
+  ],
+  "got": [
+   "Size: L"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "remove",
+  "site": "flipkart",
+  "q": "remove puma",
+  "applied": [
+   "Brand: PUMA"
+  ],
+  "expect": [
+   "-Brand: PUMA"
+  ],
+  "got": [
+   "-Brand: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "remove",
+  "site": "flipkart",
+  "q": "don't want black anymore, remove it",
+  "applied": [
+   "Color: Black"
+  ],
+  "expect": [
+   "-Color: Black"
+  ],
+  "got": [
+   "-Color: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "remove",
+  "site": "amazon",
+  "q": "remove the price filter",
+  "applied": [
+   "Max price: ₹2000"
+  ],
+  "expect": [
+   "-Price: *",
+   "-Min price: *",
+   "-Max price: *"
+  ],
+  "got": [
+   "-Price: *",
+   "-Min price: *",
+   "-Max price: *"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "remove",
+  "site": "flipkart",
+  "q": "remove size",
+  "applied": [
+   "Size: M"
+  ],
+  "expect": [
+   "-Size: *"
+  ],
+  "got": [
+   "-Size: *"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "remove",
+  "site": "flipkart",
+  "q": "remove all",
+  "expect": [
+   "-*: *"
+  ],
+  "got": [
+   "-*: *"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "remove",
+  "site": "flipkart",
+  "q": "remove it",
+  "applied": [
+   "Color: Black",
+   "Brand: PUMA"
+  ],
+  "expect": [
+   "-Brand: PUMA"
+  ],
+  "got": [
+   "-Brand: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "remove",
+  "site": "amazon",
+  "q": "undo",
+  "applied": [
+   "Brands: Nike"
+  ],
+  "expect": [
+   "-Brands: Nike"
+  ],
+  "got": [
+   "-Brands: Nike"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "remove",
+  "site": "amazon",
+  "q": "undo",
+  "applied": [],
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"undo\" on this page. This page has filters for Delivery Day, Eligible for Free Delivery, Gender, Brands, Customer Reviews, Colour and 26 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "remove",
+  "site": "flipkart",
+  "q": "remove gucci",
+  "applied": [
+   "Brand: PUMA"
+  ],
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"remove gucci\" on this page. This page has filters for Brand, Size, fabric, Color, Sleeve, Type and 14 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "remove",
+  "site": "myntra",
+  "q": "clear everything",
+  "expect": [
+   "-*: *"
+  ],
+  "got": [
+   "-*: *"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "remove",
+  "site": "amazon",
+  "q": "reset filters",
+  "expect": [
+   "-*: *"
+  ],
+  "got": [
+   "-*: *"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "remove",
+  "site": "flipkart",
+  "q": "sab hatao",
+  "expect": [
+   "-*: *"
+  ],
+  "got": [
+   "-*: *"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "remove",
+  "site": "flipkart",
+  "q": "puma hatao",
+  "applied": [
+   "Brand: PUMA"
+  ],
+  "expect": [
+   "-Brand: PUMA"
+  ],
+  "got": [
+   "-Brand: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "remove",
+  "site": "flipkart",
+  "q": "remove black and puma",
+  "applied": [
+   "Brand: PUMA",
+   "Color: Black"
+  ],
+  "expect": [
+   "-Color: Black",
+   "-Brand: PUMA"
+  ],
+  "got": [
+   "-Color: Black",
+   "-Brand: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "sort",
+  "site": "flipkart",
+  "q": "sort by price",
+  "expect": [
+   "Sort by: Price: Low to High"
+  ],
+  "got": [
+   "Sort by: Price: Low to High"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "sort",
+  "site": "amazon",
+  "q": "price low to high",
+  "expect": [
+   "Sort by: Price: Low to High"
+  ],
+  "got": [
+   "Sort by: Price: Low to High"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "sort",
+  "site": "myntra",
+  "q": "high to low please",
+  "expect": [
+   "Sort by: Price: High to Low"
+  ],
+  "got": [
+   "Sort by: Price: High to Low"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "sort",
+  "site": "flipkart",
+  "q": "show newest first",
+  "expect": [
+   "Sort by: Newest First"
+  ],
+  "got": [
+   "Sort by: Newest First"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "sort",
+  "site": "amazon",
+  "q": "most popular ones",
+  "expect": [
+   "Sort by: Popularity"
+  ],
+  "got": [
+   "Sort by: Popularity"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "sort",
+  "site": "myntra",
+  "q": "sort by rating",
+  "expect": [
+   "Sort by: Customer Rating"
+  ],
+  "got": [
+   "Sort by: Customer Rating"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "sort",
+  "site": "flipkart",
+  "q": "cheapest black jacket",
+  "expect": [
+   "Color: Black",
+   "Sort by: Price: Low to High"
+  ],
+  "got": [
+   "Color: Black",
+   "Sort by: Price: Low to High"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "sort",
+  "site": "amazon",
+  "q": "show the costliest first",
+  "expect": [
+   "Sort by: Price: High to Low"
+  ],
+  "got": [
+   "Sort by: Price: High to Low"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "price",
+  "site": "flipkart-phones",
+  "q": "phone under 1 lakh",
+  "expect": [
+   "Max price: ₹30000+"
+  ],
+  "got": [
+   "Max price: ₹30000+"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "price",
+  "site": "amazon-phones",
+  "q": "phone under 1.5 lakh",
+  "expect": [
+   "Max price: ₹150000"
+  ],
+  "got": [
+   "Max price: ₹150000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "price",
+  "site": "flipkart",
+  "q": "jacket under 1.5k",
+  "expect": [
+   "Max price: ₹1500"
+  ],
+  "got": [
+   "Max price: ₹1500"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "price",
+  "site": "flipkart",
+  "q": "jacket under rs.1500",
+  "expect": [
+   "Max price: ₹1500"
+  ],
+  "got": [
+   "Max price: ₹1500"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "price",
+  "site": "flipkart",
+  "q": "jacket under 1500 rupees",
+  "expect": [
+   "Max price: ₹1500"
+  ],
+  "got": [
+   "Max price: ₹1500"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "price",
+  "site": "flipkart",
+  "q": "jacket under 50",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"jacket under 50\" on this page. This page has filters for Brand, Size, fabric, Color, Sleeve, Type and 14 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "price",
+  "site": "amazon",
+  "q": "jacket under 1800",
+  "expect": [
+   "Max price: ₹1800"
+  ],
+  "got": [
+   "Max price: ₹1800"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "price",
+  "site": "flipkart",
+  "q": "jacket under 1800",
+  "expect": [
+   "Max price: ₹1500"
+  ],
+  "got": [
+   "Max price: ₹1500"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "price",
+  "site": "flipkart",
+  "q": "jacket under 0",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"jacket under 0\" on this page. This page has filters for Brand, Size, fabric, Color, Sleeve, Type and 14 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "price",
+  "site": "amazon",
+  "q": "under 1000 and above 5000",
+  "expect": [
+   "Max price: ₹1000"
+  ],
+  "got": [
+   "Max price: ₹1000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "price",
+  "site": "amazon",
+  "q": "jacket for less than 2 thousand",
+  "expect": [
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "price",
+  "site": "flipkart",
+  "q": "jacket price 1000 to 2000",
+  "expect": [
+   "Min price: ₹1000",
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000",
+   "Min price: ₹1000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "price",
+  "site": "amazon",
+  "q": "jacket upto rs 2,000/-",
+  "expect": [
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "price",
+  "site": "myntra",
+  "q": "jacket under 1500",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"jacket under 1500\" on this page. This page has filters for Categories, Brand, Color, Discount Range, Bundles, Country of Origin and 1 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "gift",
+  "site": "flipkart-shoes",
+  "q": "shoes for my wife",
+  "expect": [
+   "Gender: Women"
+  ],
+  "got": [
+   "Gender: Women"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gift",
+  "site": "flipkart-shoes",
+  "q": "shoes for my son size 4",
+  "expect": [
+   "Gender: Boys",
+   "Size: 4"
+  ],
+  "got": [
+   "Gender: Boys",
+   "Size: 4"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gift",
+  "site": "amazon",
+  "q": "jacket for my husband",
+  "expect": [
+   "Gender: Men"
+  ],
+  "got": [
+   "Gender: Men"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gift",
+  "site": "flipkart-shoes",
+  "q": "gift for my dad, black shoes",
+  "expect": [
+   "Gender: Men",
+   "Color: Black"
+  ],
+  "got": [
+   "Gender: Men",
+   "Color: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gift",
+  "site": "flipkart",
+  "q": "jacket for him",
+  "expect": [
+   "Gender: Men"
+  ],
+  "got": [
+   "Gender: Men"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gift",
+  "site": "myntra-kurtas",
+  "q": "kurta for my mom",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"kurta for my mom\" on this page. This page has filters for Brand, Color, Discount Range, Bundles, Colour Family, Country of Origin and 30 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "devanagari",
+  "site": "flipkart",
+  "q": "काली जैकेट",
+  "expect": [
+   "Color: Black"
+  ],
+  "got": [
+   "Color: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "devanagari",
+  "site": "flipkart",
+  "q": "लाल जैकेट 2000 से कम",
+  "expect": [
+   "Color: Red",
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Color: Red",
+   "Max price: ₹2000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "devanagari",
+  "site": "flipkart-shoes",
+  "q": "सफेद जूते साइज़ 9",
+  "expect": [
+   "Color: White",
+   "Size: 9"
+  ],
+  "got": [
+   "Color: White",
+   "Size: 9"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "devanagari",
+  "site": "flipkart",
+  "q": "सस्ता जैकेट",
+  "expect": [
+   "Sort by: Price: Low to High"
+  ],
+  "got": [
+   "Sort by: Price: Low to High"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "devanagari",
+  "site": "flipkart",
+  "q": "पुरुष नीली जैकेट",
+  "expect": [
+   "Gender: Men",
+   "Color: Blue"
+  ],
+  "got": [
+   "Gender: Men",
+   "Color: Blue"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "odd",
+  "site": "flipkart",
+  "q": "",
+  "reply": "empty",
+  "replyText": "Tell me what you're looking for, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "empty",
+  "pass": true
+ },
+ {
+  "cat": "odd",
+  "site": "flipkart",
+  "q": "    ",
+  "reply": "empty",
+  "replyText": "Tell me what you're looking for, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "empty",
+  "pass": true
+ },
+ {
+  "cat": "odd",
+  "site": "amazon",
+  "q": "😀😀😀",
+  "reply": "empty",
+  "replyText": "Tell me what you're looking for, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "empty",
+  "pass": true
+ },
+ {
+  "cat": "odd",
+  "site": "myntra",
+  "q": "...",
+  "reply": "empty",
+  "replyText": "Tell me what you're looking for, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "empty",
+  "pass": true
+ },
+ {
+  "cat": "odd",
+  "site": "flipkart",
+  "q": "<script>alert(1)</script>",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"<script>alert(1)</script>\" on this page. This page has filters for Brand, Size, fabric, Color, Sleeve, Type and 14 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "odd",
+  "site": "amazon",
+  "q": "'; DROP TABLE products; --",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"'; DROP TABLE products; --\" on this page. This page has filters for Delivery Day, Eligible for Free Delivery, Gender, Brands, Customer Reviews, Colour and 26 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "odd",
+  "site": "flipkart",
+  "q": "https://www.flipkart.com/some-product/p/itm123",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"https://www.flipkart.com/some-product/p/itm123\" on this page. This page has filters for Brand, Size, fabric, Color, Sleeve, Type and 14 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "odd",
+  "site": "amazon",
+  "q": "jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket ",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket jacket\" on this page. This page has filters for Delivery Day, Eligible for Free Delivery, Gender, Brands, Customer Reviews, Colour and 26 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "odd",
+  "site": "flipkart",
+  "q": "black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black black jacket",
+  "expect": [
+   "Color: Black"
+  ],
+  "got": [
+   "Color: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "odd",
+  "site": "flipkart",
+  "q": "9999999999",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"9999999999\" on this page. This page has filters for Brand, Size, fabric, Color, Sleeve, Type and 14 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "odd",
+  "site": "myntra",
+  "q": "jkjkjkjk",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"jkjkjkjk\" on this page. This page has filters for Categories, Brand, Color, Discount Range, Bundles, Country of Origin and 1 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "odd",
+  "site": "flipkart",
+  "q": "BLACK!!!!! PUMA!!!!!",
+  "expect": [
+   "Color: Black",
+   "Brand: PUMA"
+  ],
+  "got": [
+   "Color: Black",
+   "Brand: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "odd",
+  "site": "flipkart",
+  "q": "black\npuma\njacket",
+  "expect": [
+   "Color: Black",
+   "Brand: PUMA"
+  ],
+  "got": [
+   "Color: Black",
+   "Brand: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "odd",
+  "site": "amazon",
+  "q": "NiKe JaCkEt",
+  "expect": [
+   "Brands: Nike"
+  ],
+  "got": [
+   "Brands: Nike"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "odd",
+  "site": "flipkart",
+  "q": "pumaa jackt blk",
+  "expect": [
+   "Brand: PUMA"
+  ],
+  "got": [
+   "Brand: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "not-on-page",
+  "site": "flipkart",
+  "q": "gucci jacket",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"gucci jacket\" on this page. This page has filters for Brand, Size, fabric, Color, Sleeve, Type and 14 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "not-on-page",
+  "site": "flipkart",
+  "q": "jacket size 50",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"jacket size 50\" on this page. This page has filters for Brand, Size, fabric, Color, Sleeve, Type and 14 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "not-on-page",
+  "site": "myntra",
+  "q": "transparent jacket",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"transparent jacket\" on this page. This page has filters for Categories, Brand, Color, Discount Range, Bundles, Country of Origin and 1 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "not-on-page",
+  "site": "amazon-phones",
+  "q": "phone with 64gb ram",
+  "expect": [
+   "RAM Size: 10 GB & Above"
+  ],
+  "got": [
+   "RAM Size: 10 GB & Above"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "not-on-page",
+  "site": "flipkart",
+  "q": "black gucci jacket",
+  "expect": [
+   "Color: Black"
+  ],
+  "got": [
+   "Color: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "mixed",
+  "site": "flipkart",
+  "q": "hey can u show me some black or navy jackets for men under 2k, size L, sorted cheapest first",
+  "expect": [
+   "Color: Black",
+   "Color: Navy Blue",
+   "Gender: Men",
+   "Max price: ₹2000",
+   "Size: L",
+   "Sort by: Price: Low to High"
+  ],
+  "got": [
+   "Color: Black",
+   "Color: Navy Blue",
+   "Gender: Men",
+   "Size: L",
+   "Max price: ₹2000",
+   "Sort by: Price: Low to High"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "mixed",
+  "site": "amazon-shoes",
+  "q": "need white nike or adidas running shoes uk 9 with good reviews under 5000",
+  "expect": [
+   "Colour: White",
+   "Brands: Nike",
+   "Brands: adidas",
+   "Purpose: Running",
+   "Men's Shoe Size (UK/India): 9",
+   "Customer Reviews: 4 Stars & Up",
+   "Max price: ₹5000"
+  ],
+  "got": [
+   "Colour: White",
+   "Brands: Nike",
+   "Brands: adidas",
+   "Purpose: Running",
+   "Men's Shoe Size (UK/India): 9",
+   "Max price: ₹5000",
+   "Customer Reviews: 4 Stars & Up"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "mixed",
+  "site": "flipkart-phones",
+  "q": "bhai 5g phone chahiye 8gb ram 15000 tak samsung ya redmi",
+  "expect": [
+   "Network Type: 5G",
+   "Ram: 8 GB and Above",
+   "Max price: ₹15000",
+   "Brand: Samsung",
+   "Brand: REDMI"
+  ],
+  "got": [
+   "Network Type: 5G",
+   "Brand: Samsung",
+   "Brand: REDMI",
+   "Ram: 8 GB and Above",
+   "Max price: ₹15000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "mixed",
+  "site": "myntra-kurtas",
+  "q": "cotton kurta for women in yellow, M size, 40% off at least",
+  "expect": [
+   "Fabrics: Cotton",
+   "Color: Yellow",
+   "Size: M",
+   "Discount Range: 40% and above"
+  ],
+  "got": [
+   "Fabrics: Cotton",
+   "Color: Yellow",
+   "Size: M",
+   "Discount Range: 40% and above"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "flipkart",
+  "q": "yo",
+  "reply": "greet",
+  "replyText": "Hi! 👋 Tell me what you're looking for on Flipkart, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "greet",
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "amazon",
+  "q": "Hi! Can you help me?",
+  "reply": "help",
+  "replyText": "I filter, sort and search Amazon for you. Type what you want in your own words, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\". Ask \"what brands are there?\" to see the options, or \"what did you apply?\" to see the filters.",
+  "got": [],
+  "kind": "help",
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "myntra",
+  "q": "thanks a lot!!",
+  "reply": "thanks",
+  "replyText": "You're welcome! Tell me if you want to change anything, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "thanks",
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "flipkart",
+  "q": "ok thanks bye",
+  "reply": "thanks",
+  "replyText": "You're welcome! Tell me if you want to change anything, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "thanks",
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "amazon",
+  "q": "how to use this extension",
+  "reply": "help",
+  "replyText": "I filter, sort and search Amazon for you. Type what you want in your own words, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\". Ask \"what brands are there?\" to see the options, or \"what did you apply?\" to see the filters.",
+  "got": [],
+  "kind": "help",
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "flipkart-shoes",
+  "q": "which brands are available here",
+  "reply": "list:Brands",
+  "replyText": "Brands on this page: ADIDAS, NIKE, PUMA, Asics, REEBOK, Skechers, New Balance, RED TAPE, CAMPUS, asian, UNDER ARMOUR, HRX by Hrithik Roshan and 750 more. Say one, e.g. \"ADIDAS\".",
+  "got": [],
+  "kind": "list:Brands",
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "myntra-kurtas",
+  "q": "what colours do you have?",
+  "reply": "list:Colours",
+  "replyText": "Colours on this page: Multi, Blue, Black, Green, Pink, Yellow, Red. Say one, e.g. \"Multi\".",
+  "got": [],
+  "kind": "list:Colours",
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "amazon-shoes",
+  "q": "list all sizes",
+  "reply": "list:Sizes",
+  "replyText": "Sizes on this page: 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5 and 15 more. Say one, e.g. \"3\".",
+  "got": [],
+  "kind": "list:Sizes",
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "flipkart",
+  "q": "what filters are on now",
+  "reply": "applied",
+  "applied": [
+   "Color: Blue"
+  ],
+  "replyText": "Applied in this chat: Color: Blue.",
+  "got": [],
+  "kind": "applied",
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "amazon",
+  "q": "can I get a refund?",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with returns, refunds or exchanges. I only filter, sort and search products. Please check Amazon's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "flipkart",
+  "q": "is cash on delivery available",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with payments, EMI or bank offers. I only filter, sort and search products. Please check Flipkart's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "myntra",
+  "q": "mera order kab aayega",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with delivery times or charges. I only filter, sort and search products. Please check Myntra's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "amazon-phones",
+  "q": "which mobile is best for gaming",
+  "expect": [
+   "Purpose: Gaming",
+   "Sort by: Customer Rating"
+  ],
+  "got": [
+   "Purpose: Gaming",
+   "Sort by: Customer Rating"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "flipkart",
+  "q": "puma vs adidas jacket",
+  "reply": "compare",
+  "expect": [
+   "Brand: PUMA",
+   "Brand: ADIDAS"
+  ],
+  "replyText": "I can't compare or review products, but I can show the best rated first (say \"top rated\") or filter by brand, price and more.",
+  "got": [
+   "Brand: PUMA",
+   "Brand: ADIDAS"
+  ],
+  "kind": "compare",
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "flipkart",
+  "q": "do u have red jackets in XL?",
+  "expect": [
+   "Color: Red",
+   "Size: XL"
+  ],
+  "got": [
+   "Color: Red",
+   "Size: XL"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "amazon-shoes",
+  "q": "need sports shoes for my brother size 8",
+  "expect": [
+   "Gender: Men",
+   "Men's Shoe Size (UK/India): 8"
+  ],
+  "got": [
+   "Gender: Men",
+   "Men's Shoe Size (UK/India): 8"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "myntra-shoes",
+  "q": "puma ke joote 40% off wale",
+  "expect": [
+   "Brand: Puma",
+   "Discount Range: 40% and above"
+  ],
+  "got": [
+   "Brand: Puma",
+   "Discount Range: 40% and above"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "flipkart-phones",
+  "q": "redmi or realme under 12k",
+  "expect": [
+   "Brand: REDMI",
+   "Brand: realme",
+   "Max price: ₹10000"
+  ],
+  "got": [
+   "Brand: REDMI",
+   "Brand: realme",
+   "Max price: ₹10000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "amazon-phones",
+  "q": "apple phone above 50k",
+  "expect": [
+   "Brands: Apple",
+   "Min price: ₹50000"
+  ],
+  "got": [
+   "Brands: Apple",
+   "Min price: ₹50000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "flipkart",
+  "q": "change colour to green",
+  "applied": [
+   "Color: Black"
+  ],
+  "expect": [
+   "Color: Green",
+   "-Color: Black"
+  ],
+  "got": [
+   "Color: Green",
+   "-Color: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "amazon",
+  "q": "show only puma",
+  "applied": [
+   "Brands: Nike"
+  ],
+  "expect": [
+   "Brands: PUMA",
+   "-Brands: Nike"
+  ],
+  "got": [
+   "Brands: PUMA",
+   "-Brands: Nike"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "flipkart",
+  "q": "remove the colour filter",
+  "applied": [
+   "Color: Black"
+  ],
+  "expect": [
+   "-Color: *"
+  ],
+  "got": [
+   "-Color: *"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "myntra",
+  "q": "start again",
+  "expect": [
+   "-*: *"
+  ],
+  "got": [
+   "-*: *"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "flipkart",
+  "q": "black hatao",
+  "applied": [
+   "Color: Black"
+  ],
+  "expect": [
+   "-Color: Black"
+  ],
+  "got": [
+   "-Color: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "amazon",
+  "q": "sort by lowest price",
+  "expect": [
+   "Sort by: Price: Low to High"
+  ],
+  "got": [
+   "Sort by: Price: Low to High"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "myntra-shoes",
+  "q": "new arrivals in nike",
+  "expect": [
+   "Brand: Nike",
+   "Sort by: Newest First"
+  ],
+  "got": [
+   "Brand: Nike",
+   "Sort by: Newest First"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "flipkart",
+  "q": "jacket under ₹1,999",
+  "expect": [
+   "Max price: ₹1500"
+  ],
+  "got": [
+   "Max price: ₹1500"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "amazon",
+  "q": "jackets between 1500-3000",
+  "expect": [
+   "Min price: ₹1500",
+   "Max price: ₹3000"
+  ],
+  "got": [
+   "Max price: ₹3000",
+   "Min price: ₹1500"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "flipkart-shoes",
+  "q": "shoes for my daughter",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"shoes for my daughter\" on this page. This page has filters for Brand, Color, Size, Type of Shoes, Occasion, Outer Material and 10 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "flipkart",
+  "q": "नीली जैकेट L साइज़",
+  "expect": [
+   "Color: Blue",
+   "Size: L"
+  ],
+  "got": [
+   "Color: Blue",
+   "Size: L"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "amazon",
+  "q": "🤔",
+  "reply": "empty",
+  "replyText": "Tell me what you're looking for, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "empty",
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "flipkart",
+  "q": "asdf puma",
+  "expect": [
+   "Brand: PUMA"
+  ],
+  "got": [
+   "Brand: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "myntra",
+  "q": "zara jacket",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"zara jacket\" on this page. This page has filters for Categories, Brand, Color, Discount Range, Bundles, Country of Origin and 1 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "flipkart",
+  "q": "I want a warm jacket for winter, not too costly, maybe black or brown",
+  "expect": [
+   "Color: Black",
+   "Color: Brown",
+   "Sort by: Price: Low to High"
+  ],
+  "got": [
+   "Color: Black",
+   "Color: Brown",
+   "Sort by: Price: Low to High"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-3",
+  "site": "amazon-phones",
+  "q": "samsung phone 8gb 256gb 5g",
+  "expect": [
+   "Brands: Samsung",
+   "RAM Size: 8 to 9.9 GB",
+   "Storage Capacity: 256 GB",
+   "Cellular Technology: 5G"
+  ],
+  "got": [
+   "Brands: Samsung",
+   "Cellular Technology: 5G",
+   "RAM Size: 8 to 9.9 GB",
+   "Storage Capacity: 256 GB"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "cod",
+  "site": "amazon",
+  "q": "is cash on delivery available",
+  "expect": [
+   "Pay On Delivery: Eligible for Pay On Delivery"
+  ],
+  "got": [
+   "Pay On Delivery: Eligible for Pay On Delivery"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "cod",
+  "site": "amazon",
+  "q": "nike jacket with cod",
+  "expect": [
+   "Brands: Nike",
+   "Pay On Delivery: Eligible for Pay On Delivery"
+  ],
+  "got": [
+   "Brands: Nike",
+   "Pay On Delivery: Eligible for Pay On Delivery"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "cod",
+  "site": "myntra",
+  "q": "cod available?",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with payments, EMI or bank offers. I only filter, sort and search products. Please check Myntra's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "help",
+  "site": "myntra",
+  "q": "hello, i need help",
+  "reply": "help",
+  "replyText": "I filter, sort and search Myntra for you. Type what you want in your own words, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\". Ask \"what brands are there?\" to see the options, or \"what did you apply?\" to see the filters.",
+  "got": [],
+  "kind": "help",
+  "pass": true
+ },
+ {
+  "cat": "cod",
+  "site": "amazon",
+  "q": "free delivery jackets",
+  "expect": [
+   "Eligible for Free Delivery: Free Shipping"
+  ],
+  "got": [
+   "Eligible for Free Delivery: Free Shipping"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "puma jacket except black",
+  "expect": [
+   "Brand: PUMA"
+  ],
+  "got": [
+   "Brand: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "no nike, show puma",
+  "expect": [
+   "Brand: PUMA"
+  ],
+  "got": [
+   "Brand: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "jacket without hood",
+  "expect": [
+   "Hooded: Without Hood"
+  ],
+  "got": [
+   "Hooded: Without Hood"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "hooded jacket",
+  "expect": [
+   "Hooded: With Hood"
+  ],
+  "got": [
+   "Hooded: With Hood"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "4 star and above jackets",
+  "expect": [
+   "Customer Ratings: 4★ & above"
+  ],
+  "got": [
+   "Customer Ratings: 4★ & above"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "amazon",
+  "q": "rated 4+ puma",
+  "expect": [
+   "Customer Reviews: 4 Stars & Up",
+   "Brands: PUMA"
+  ],
+  "got": [
+   "Brands: PUMA",
+   "Customer Reviews: 4 Stars & Up"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "50% off jackets",
+  "expect": [
+   "Discount: 50% or more"
+  ],
+  "got": [
+   "Discount: 50% or more"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "myntra-shoes",
+  "q": "atleast 30 percent discount",
+  "expect": [
+   "Discount Range: 30% and above"
+  ],
+  "got": [
+   "Discount Range: 30% and above"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "jackets above 1500",
+  "expect": [
+   "Min price: ₹1500"
+  ],
+  "got": [
+   "Min price: ₹1500"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "amazon",
+  "q": "minimum 1000 maximum 2000",
+  "expect": [
+   "Min price: ₹1000",
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000",
+   "Min price: ₹1000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "not more than 2000",
+  "expect": [
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "budget 2000",
+  "expect": [
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "2000 se kam jacket",
+  "expect": [
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "jacket under 2K",
+  "expect": [
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "RED JACKET UNDER 1000",
+  "expect": [
+   "Color: Red",
+   "Max price: ₹1000"
+  ],
+  "got": [
+   "Color: Red",
+   "Max price: ₹1000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "M or L size",
+  "expect": [
+   "Size: M",
+   "Size: L"
+  ],
+  "got": [
+   "Size: M",
+   "Size: L"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "xl",
+  "expect": [
+   "Size: XL"
+  ],
+  "got": [
+   "Size: XL"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "xxl jacket",
+  "expect": [
+   "Size: 2XL"
+  ],
+  "got": [
+   "Size: 2XL"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "myntra",
+  "q": "2xl jacket",
+  "expect": [
+   "Size: XXL"
+  ],
+  "got": [
+   "Size: XXL"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "myntra-shoes",
+  "q": "uk 9 shoes",
+  "expect": [
+   "Size: UK9"
+  ],
+  "got": [
+   "Size: UK9"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart-shoes",
+  "q": "size 9 and 10",
+  "expect": [
+   "Size: 9",
+   "Size: 10"
+  ],
+  "got": [
+   "Size: 9",
+   "Size: 10"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart-shoes",
+  "q": "women shoes size 6",
+  "expect": [
+   "Gender: Women",
+   "Size: 6"
+  ],
+  "got": [
+   "Gender: Women",
+   "Size: 6"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "navy jacket",
+  "expect": [
+   "Color: Navy Blue"
+  ],
+  "got": [
+   "Color: Navy Blue"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "dark blue jacket",
+  "expect": [
+   "Color: Dark Blue"
+  ],
+  "got": [
+   "Color: Dark Blue"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "off white jacket",
+  "expect": [
+   "Color: Off White"
+  ],
+  "got": [
+   "Color: Off White"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "amazon",
+  "q": "gray jacket",
+  "expect": [
+   "Colour: Greys"
+  ],
+  "got": [
+   "Colour: Greys"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "kala jacket",
+  "expect": [
+   "Color: Black"
+  ],
+  "got": [
+   "Color: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "myntra-kurtas",
+  "q": "neela kurta",
+  "expect": [
+   "Color: Blue"
+  ],
+  "got": [
+   "Color: Blue"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "myntra-kurtas",
+  "q": "laal kurta",
+  "expect": [
+   "Color: Red"
+  ],
+  "got": [
+   "Color: Red"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "black black black jacket",
+  "expect": [
+   "Color: Black"
+  ],
+  "got": [
+   "Color: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "levis jacket",
+  "expect": [
+   "Brand: LEVI'S"
+  ],
+  "got": [
+   "Brand: LEVI'S"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "us polo jacket",
+  "expect": [
+   "Brand: U.S. POLO ASSN."
+  ],
+  "got": [
+   "Brand: U.S. POLO ASSN."
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "jack and jones jacket",
+  "expect": [
+   "Brand: JACK & JONES"
+  ],
+  "got": [
+   "Brand: JACK & JONES"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart-phones",
+  "q": "iphone",
+  "expect": [
+   "Brand: Apple"
+  ],
+  "got": [
+   "Brand: Apple"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "myntra-shoes",
+  "q": "reebok",
+  "expect": [
+   "Brand: Reebok"
+  ],
+  "got": [
+   "Brand: Reebok"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "bomber jacket",
+  "expect": [
+   "Type: Bomber Jacket"
+  ],
+  "got": [
+   "Type: Bomber Jacket"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "full sleeve jacket",
+  "expect": [
+   "Sleeve: Full Sleeve"
+  ],
+  "got": [
+   "Sleeve: Full Sleeve"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "party wear jacket",
+  "expect": [
+   "Occasion: Party"
+  ],
+  "got": [
+   "Occasion: Party"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "myntra-kurtas",
+  "q": "cotton kurta",
+  "expect": [
+   "Fabrics: Cotton"
+  ],
+  "got": [
+   "Fabrics: Cotton"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart-phones",
+  "q": "phone with 5000mah battery",
+  "expect": [
+   "Battery Capacity: 5000 - 5999 mAh"
+  ],
+  "got": [
+   "Battery Capacity: 5000 - 5999 mAh"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart-phones",
+  "q": "128gb phone",
+  "expect": [
+   "Internal Storage: 128 - 255.9 GB"
+  ],
+  "got": [
+   "Internal Storage: 128 - 255.9 GB"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart-phones",
+  "q": "6gb ram",
+  "expect": [
+   "Ram: 6 GB"
+  ],
+  "got": [
+   "Ram: 6 GB"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart-phones",
+  "q": "48mp camera phone",
+  "expect": [
+   "Primary Camera: 48 - 63.9 MP"
+  ],
+  "got": [
+   "Primary Camera: 48 - 63.9 MP"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "amazon-phones",
+  "q": "amoled display phone",
+  "expect": [
+   "Display Type: AMOLED"
+  ],
+  "got": [
+   "Display Type: AMOLED"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "amazon-phones",
+  "q": "dual sim phone",
+  "expect": [
+   "SIM Card Slot Count: Dual SIM"
+  ],
+  "got": [
+   "SIM Card Slot Count: Dual SIM"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart-phones",
+  "q": "in stock only",
+  "expect": [
+   "Availability: Exclude Out of Stock"
+  ],
+  "got": [
+   "Availability: Exclude Out of Stock"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "myntra-shoes",
+  "q": "running shoes",
+  "expect": [
+   "Sport: Running"
+  ],
+  "got": [
+   "Sport: Running"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "myntra-shoes",
+  "q": "velcro shoes",
+  "expect": [
+   "Fastening: Velcro"
+  ],
+  "got": [
+   "Fastening: Velcro"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "same in red",
+  "applied": [
+   "Color: Black"
+  ],
+  "expect": [
+   "Color: Red",
+   "-Color: Black"
+  ],
+  "got": [
+   "Color: Red",
+   "-Color: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "show cheaper ones",
+  "expect": [
+   "Sort by: Price: Low to High"
+  ],
+  "got": [
+   "Sort by: Price: Low to High"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "amazon",
+  "q": "what's the cheapest",
+  "expect": [
+   "Sort by: Price: Low to High"
+  ],
+  "got": [
+   "Sort by: Price: Low to High"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "clear",
+  "applied": [
+   "Brand: PUMA"
+  ],
+  "expect": [
+   "-*: *"
+  ],
+  "got": [
+   "-*: *"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "filters",
+  "reply": "filters",
+  "replyText": "Filters on this page: Brand, Size, fabric, Color, Sleeve, Type, Pattern, Occasion, Customer Ratings, Hooded, Reversible, Discount, Pack of, Gender, Country Of Origin and 5 more. Tell me what you want, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "filters",
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "price",
+  "reply": "price",
+  "replyText": "Tell me your budget, e.g. \"under 2000\", \"between 1000 and 3000\" or \"cheapest first\".",
+  "got": [],
+  "kind": "price",
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "sizes",
+  "reply": "list:Sizes",
+  "replyText": "Sizes on this page: 3XS, 2XS, XS, S, M, L, XL, 2XL, 3XL, 4XL, 5XL, 6XL and 2 more. Say one, e.g. \"3XS\".",
+  "got": [],
+  "kind": "list:Sizes",
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "2000",
+  "expect": [
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "next page",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't change pages. Scroll down on Flipkart to see more products, or tell me a filter to narrow them down.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "show more",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't change pages. Scroll down on Flipkart to see more products, or tell me a filter to narrow them down.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "amazon",
+  "q": "you are useless",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can only filter, sort and search Amazon, and I may have misread you. Try saying it another way, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "myntra",
+  "q": "stupid bot",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can only filter, sort and search Myntra, and I may have misread you. Try saying it another way, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx puma",
+  "expect": [
+   "Brand: PUMA"
+  ],
+  "got": [
+   "Brand: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "கருப்பு ஜாக்கெட்",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"கருப்பு ஜாக்கெட்\" on this page. This page has filters for Brand, Size, fabric, Color, Sleeve, Type and 14 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "gaps",
+  "site": "flipkart",
+  "q": "jacket under -500",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"jacket under -500\" on this page. This page has filters for Brand, Size, fabric, Color, Sleeve, Type and 14 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "flipkart",
+  "q": "is blue available",
+  "expect": [
+   "Color: Blue"
+  ],
+  "got": [
+   "Color: Blue"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "amazon",
+  "q": "in stock jackets",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"in stock jackets\" on this page. This page has filters for Delivery Day, Eligible for Free Delivery, Gender, Brands, Customer Reviews, Colour and 26 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "flipkart",
+  "q": "blue jacket available in L",
+  "expect": [
+   "Color: Blue",
+   "Size: L"
+  ],
+  "got": [
+   "Color: Blue",
+   "Size: L"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "flipkart-phones",
+  "q": "only in stock samsung",
+  "expect": [
+   "Brand: Samsung",
+   "Availability: Exclude Out of Stock"
+  ],
+  "got": [
+   "Availability: Exclude Out of Stock",
+   "Brand: Samsung"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "flipkart-shoes",
+  "q": "size 7 or 8",
+  "expect": [
+   "Size: 7",
+   "Size: 8"
+  ],
+  "got": [
+   "Size: 7",
+   "Size: 8"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "myntra",
+  "q": "size S, M or L",
+  "expect": [
+   "Size: S",
+   "Size: M",
+   "Size: L"
+  ],
+  "got": [
+   "Size: S",
+   "Size: M",
+   "Size: L"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "amazon-shoes",
+  "q": "uk 8 or 9",
+  "expect": [
+   "Men's Shoe Size (UK/India): 8",
+   "Men's Shoe Size (UK/India): 9"
+  ],
+  "got": [
+   "Men's Shoe Size (UK/India): 9",
+   "Men's Shoe Size (UK/India): 8"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "flipkart",
+  "q": "jacket size L and black",
+  "expect": [
+   "Size: L",
+   "Color: Black"
+  ],
+  "got": [
+   "Color: Black",
+   "Size: L"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "myntra-kurtas",
+  "q": "20 percent off",
+  "expect": [
+   "Discount Range: 20% and above"
+  ],
+  "got": [
+   "Discount Range: 20% and above"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "flipkart",
+  "q": "1500",
+  "expect": [
+   "Max price: ₹1500"
+  ],
+  "got": [
+   "Max price: ₹1500"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "flipkart-shoes",
+  "q": "9",
+  "expect": [
+   "Size: 9"
+  ],
+  "got": [
+   "Size: 9"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "flipkart",
+  "q": "same but in L",
+  "applied": [
+   "Size: M"
+  ],
+  "expect": [
+   "Size: L",
+   "-Size: M"
+  ],
+  "got": [
+   "Size: L",
+   "-Size: M"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "flipkart",
+  "q": "colours",
+  "reply": "list:Colours",
+  "replyText": "Colours on this page: Black, Grey, Blue, Brown, Green, Multicolor, White, Maroon, Red, Tan, Navy Blue, Beige and 12 more. Say one, e.g. \"Black\".",
+  "got": [],
+  "kind": "list:Colours",
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "myntra-shoes",
+  "q": "brands?",
+  "reply": "list:Brands",
+  "replyText": "Brands on this page: ADIDAS, Puma, HRX by Hrithik Roshan, Reebok, FACE, ASIAN, Campus, Red Tape, ASICS, Action, AVANT, Aqualite and 267 more. Say one, e.g. \"ADIDAS\".",
+  "got": [],
+  "kind": "list:Brands",
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "amazon",
+  "q": "budget",
+  "reply": "price",
+  "replyText": "Tell me your budget, e.g. \"under 2000\", \"between 1000 and 3000\" or \"cheapest first\".",
+  "got": [],
+  "kind": "price",
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "myntra",
+  "q": "load more",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't change pages. Scroll down on Myntra to see more products, or tell me a filter to narrow them down.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "amazon",
+  "q": "page 2",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't change pages. Scroll down on Amazon to see more products, or tell me a filter to narrow them down.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "flipkart",
+  "q": "this is not working",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can only filter, sort and search Flipkart, and I may have misread you. Try saying it another way, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "myntra",
+  "q": "worst app",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can only filter, sort and search Myntra, and I may have misread you. Try saying it another way, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "flipkart",
+  "q": "worst rated jackets",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"worst rated jackets\" on this page. This page has filters for Brand, Size, fabric, Color, Sleeve, Type and 14 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "amazon",
+  "q": "show me more black ones",
+  "expect": [
+   "Colour: Black"
+  ],
+  "got": [
+   "Colour: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-4",
+  "site": "flipkart",
+  "q": "puma, size m or l, under 2000",
+  "expect": [
+   "Brand: PUMA",
+   "Size: M",
+   "Size: L",
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Brand: PUMA",
+   "Size: M",
+   "Size: L",
+   "Max price: ₹2000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "flipkart",
+  "q": "addidas jacket",
+  "expect": [
+   "Brand: ADIDAS"
+  ],
+  "got": [
+   "Brand: ADIDAS"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "flipkart",
+  "q": "nikee jacket",
+  "expect": [
+   "Brand: NIKE"
+  ],
+  "got": [
+   "Brand: NIKE"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "flipkart",
+  "q": "blak jackt",
+  "expect": [
+   "Color: Black"
+  ],
+  "got": [
+   "Color: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "myntra-shoes",
+  "q": "whte shoes",
+  "expect": [
+   "Color: White"
+  ],
+  "got": [
+   "Color: White"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "flipkart-phones",
+  "q": "samsng phone",
+  "expect": [
+   "Brand: Samsung"
+  ],
+  "got": [
+   "Brand: Samsung"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "amazon",
+  "q": "jacket for mens",
+  "expect": [
+   "Gender: Men"
+  ],
+  "got": [
+   "Gender: Men"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "flipkart",
+  "q": "jacket under rs2000",
+  "expect": [
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "flipkart",
+  "q": "jacket under 2,000",
+  "expect": [
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "flipkart",
+  "q": "jacket under ₹ 2000",
+  "expect": [
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "flipkart",
+  "q": "jacket under 2000/-",
+  "expect": [
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "flipkart",
+  "q": "jacket under Rs. 1,500.00",
+  "expect": [
+   "Max price: ₹1500"
+  ],
+  "got": [
+   "Max price: ₹1500"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "flipkart",
+  "q": "jacket under2000",
+  "expect": [
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "amazon",
+  "q": "jacket 1000-2000",
+  "expect": [
+   "Min price: ₹1000",
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000",
+   "Min price: ₹1000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "amazon",
+  "q": "from 1000 to 2000",
+  "expect": [
+   "Min price: ₹1000",
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000",
+   "Min price: ₹1000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "flipkart",
+  "q": "kam daam wali jacket",
+  "expect": [
+   "Sort by: Price: Low to High"
+  ],
+  "got": [
+   "Sort by: Price: Low to High"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "flipkart",
+  "q": "also red",
+  "applied": [
+   "Color: Black"
+  ],
+  "expect": [
+   "Color: Red"
+  ],
+  "got": [
+   "Color: Red"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "flipkart",
+  "q": "remove size L",
+  "applied": [
+   "Size: L",
+   "Color: Black"
+  ],
+  "expect": [
+   "-Size: L"
+  ],
+  "got": [
+   "-Size: L"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "flipkart",
+  "q": "remove price",
+  "applied": [
+   "Max price: ₹2000"
+  ],
+  "expect": [
+   "-Min price: *",
+   "-Max price: *"
+  ],
+  "got": [
+   "-Min price: *",
+   "-Max price: *"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "flipkart",
+  "q": "not puma",
+  "applied": [
+   "Brand: PUMA"
+  ],
+  "expect": [
+   "-Brand: PUMA"
+  ],
+  "got": [
+   "-Brand: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "flipkart",
+  "q": "no need of black",
+  "applied": [
+   "Color: Black"
+  ],
+  "expect": [
+   "-Color: Black"
+  ],
+  "got": [
+   "-Color: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "flipkart",
+  "q": "increase budget to 3000",
+  "applied": [
+   "Max price: ₹2000"
+  ],
+  "expect": [
+   "Max price: ₹2000+"
+  ],
+  "got": [
+   "Max price: ₹2000+"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "amazon",
+  "q": "cheapest first",
+  "applied": [
+   "Sort by: Popularity"
+  ],
+  "expect": [
+   "Sort by: Price: Low to High"
+  ],
+  "got": [
+   "Sort by: Price: Low to High"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "myntra-kurtas",
+  "q": "yellow or pink kurta size xl",
+  "expect": [
+   "Color: Yellow",
+   "Color: Pink",
+   "Size: XL"
+  ],
+  "got": [
+   "Color: Yellow",
+   "Color: Pink",
+   "Size: XL"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "amazon-shoes",
+  "q": "nike running shoes size 10 for men",
+  "expect": [
+   "Brands: Nike",
+   "Purpose: Running",
+   "Men's Shoe Size (UK/India): 10",
+   "Gender: Men"
+  ],
+  "got": [
+   "Brands: Nike",
+   "Purpose: Running",
+   "Gender: Men",
+   "Men's Shoe Size (UK/India): 10"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "flipkart",
+  "q": "thanks, now show red ones",
+  "expect": [
+   "Color: Red"
+  ],
+  "got": [
+   "Color: Red"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-5",
+  "site": "flipkart",
+  "q": "hello, what sizes do you have",
+  "reply": "list:Sizes",
+  "replyText": "Sizes on this page: 3XS, 2XS, XS, S, M, L, XL, 2XL, 3XL, 4XL, 5XL, 6XL and 2 more. Say one, e.g. \"3XS\".",
+  "got": [],
+  "kind": "list:Sizes",
+  "pass": true
+ },
+ {
+  "cat": "held-out-6",
+  "site": "flipkart-phones",
+  "q": "6.5 inch screen phone",
+  "expect": [
+   "Screen Size: 6.4 inch & Above"
+  ],
+  "got": [
+   "Screen Size: 6.4 inch & Above"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-6",
+  "site": "amazon-phones",
+  "q": "phone with 4k video",
+  "expect": [
+   "Video Capture Resolution: 4k"
+  ],
+  "got": [
+   "Video Capture Resolution: 4k"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-6",
+  "site": "amazon-phones",
+  "q": "120hz phone",
+  "expect": [
+   "Display Refresh Rate in Hertz: 120"
+  ],
+  "got": [
+   "Display Refresh Rate in Hertz: 120"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-6",
+  "site": "amazon-phones",
+  "q": "5g phone under 20k",
+  "expect": [
+   "Cellular Technology: 5G",
+   "Max price: ₹20000"
+  ],
+  "got": [
+   "Cellular Technology: 5G",
+   "Max price: ₹20000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-6",
+  "site": "flipkart",
+  "q": "under 2000 but above 1000",
+  "expect": [
+   "Min price: ₹1000",
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000",
+   "Min price: ₹1000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-6",
+  "site": "amazon",
+  "q": "max 2k min 1k",
+  "expect": [
+   "Min price: ₹1000",
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000",
+   "Min price: ₹1000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-6",
+  "site": "flipkart",
+  "q": "not too expensive jacket",
+  "expect": [
+   "Sort by: Price: Low to High"
+  ],
+  "got": [
+   "Sort by: Price: Low to High"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-6",
+  "site": "flipkart-shoes",
+  "q": "for women instead",
+  "applied": [
+   "Gender: Men"
+  ],
+  "expect": [
+   "Gender: Women",
+   "-Gender: Men"
+  ],
+  "got": [
+   "Gender: Women",
+   "-Gender: Men"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-6",
+  "site": "flipkart-shoes",
+  "q": "shoes for boys",
+  "expect": [
+   "Gender: Boys"
+  ],
+  "got": [
+   "Gender: Boys"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-6",
+  "site": "flipkart",
+  "q": "black jacket",
+  "page": "empty",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"black jacket\" on this page. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "held-out-6",
+  "site": "flipkart",
+  "q": "what brands are there",
+  "page": "empty",
+  "reply": "nolist",
+  "replyText": "This Flipkart page has no brands filter.",
+  "got": [],
+  "kind": "nolist",
+  "pass": true
+ },
+ {
+  "cat": "held-out-6",
+  "site": "myntra",
+  "q": "puma jacket!!!???",
+  "expect": [
+   "Brand: Puma"
+  ],
+  "got": [
+   "Brand: Puma"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-6",
+  "site": "myntra",
+  "q": "roadster jacket!!!???",
+  "expect": [
+   "Brand: Roadster"
+  ],
+  "got": [
+   "Brand: Roadster"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-6",
+  "site": "amazon",
+  "q": "Black Jacket, Size XL, Under ₹1500, Nike",
+  "expect": [
+   "Colour: Black",
+   "Men's General Size: XL",
+   "Max price: ₹1500",
+   "Brands: Nike"
+  ],
+  "got": [
+   "Colour: Black",
+   "Brands: Nike",
+   "Men's General Size: XL",
+   "Max price: ₹1500"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-6",
+  "site": "flipkart",
+  "q": "jacket for 25 year old man",
+  "expect": [
+   "Gender: Men"
+  ],
+  "got": [
+   "Gender: Men"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-6",
+  "site": "flipkart-phones",
+  "q": "phone for my mom with big battery",
+  "expect": [
+   "Speciality: Long-Lasting Battery"
+  ],
+  "got": [
+   "Speciality: Long-Lasting Battery"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-6",
+  "site": "myntra-kurtas",
+  "q": "kurta for diwali",
+  "expect": [
+   "Theme: Diwali"
+  ],
+  "got": [
+   "Theme: Diwali"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "held-out-6",
+  "site": "myntra-kurtas",
+  "q": "wedding kurta",
+  "expect": [
+   "Theme: Wedding"
+  ],
+  "got": [
+   "Theme: Wedding"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "regress",
+  "site": "amazon",
+  "q": "not nike, show adidas",
+  "expect": [
+   "Brands: adidas"
+  ],
+  "got": [
+   "Brands: adidas"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "regress",
+  "site": "amazon",
+  "q": "not nike, show adidas",
+  "applied": [
+   "Brands: Nike"
+  ],
+  "expect": [
+   "Brands: adidas",
+   "-Brands: Nike"
+  ],
+  "got": [
+   "Brands: adidas",
+   "-Brands: Nike"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "regress",
+  "site": "myntra-kurtas",
+  "q": "pink or yellow cotton anarkali kurta, size M, 3/4 sleeves, for diwali, 50% off",
+  "expect": [
+   "Color: Pink",
+   "Color: Yellow",
+   "Fabrics: Cotton",
+   "Shape: Anarkali",
+   "Size: M",
+   "Sleeve Length: Three-Quarter Sleeves",
+   "Theme: Diwali",
+   "Discount Range: 50% and above"
+  ],
+  "got": [
+   "Color: Pink",
+   "Color: Yellow",
+   "Fabrics: Cotton",
+   "Shape: Anarkali",
+   "Sleeve Length: Three-Quarter Sleeves",
+   "Theme: Diwali",
+   "Size: M",
+   "Discount Range: 50% and above"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "regress",
+  "site": "flipkart",
+  "q": "12345",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"12345\" on this page. This page has filters for Brand, Size, fabric, Color, Sleeve, Type and 14 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "regress",
+  "site": "flipkart",
+  "q": "1999",
+  "expect": [
+   "Max price: ₹1500"
+  ],
+  "got": [
+   "Max price: ₹1500"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "regress",
+  "site": "myntra",
+  "q": "white roadster jacket size is L",
+  "expect": [
+   "Brand: Roadster",
+   "Size: L"
+  ],
+  "reply": "colour-missing",
+  "replyText": "Not on this page: White (colours here: Black, Blue, Grey, Navy Blue, Green, Brown, Olive). Search the site for it to see more colours.",
+  "got": [
+   "Brand: Roadster",
+   "Size: L"
+  ],
+  "kind": "colour-missing",
+  "pass": true
+ },
+ {
+  "cat": "regress",
+  "site": "myntra",
+  "q": "can you compare amazon flipkart and myntra for roadstar jacket size is xl",
+  "expect": [
+   "Brand: Roadster",
+   "Size: XL"
+  ],
+  "reply": "compare",
+  "replyText": "I can't compare across sites: I work on the one site that's open, one at a time, so I used Myntra. To check another, say \"open amazon\" or \"open flipkart\".",
+  "got": [
+   "Brand: Roadster",
+   "Size: XL"
+  ],
+  "kind": "compare",
+  "pass": true
+ },
+ {
+  "cat": "regress",
+  "site": "myntra",
+  "q": "black roadster jacket",
+  "expect": [
+   "Color: Black",
+   "Brand: Roadster"
+  ],
+  "got": [
+   "Color: Black",
+   "Brand: Roadster"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "regress",
+  "site": "myntra",
+  "q": "not white, black jacket",
+  "expect": [
+   "Color: Black"
+  ],
+  "got": [
+   "Color: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "regress",
+  "site": "flipkart",
+  "q": "navy jacket",
+  "expect": [
+   "Color: Navy Blue"
+  ],
+  "got": [
+   "Color: Navy Blue"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "regress",
+  "site": "myntra-shoes",
+  "q": "puma sneakers 50% off",
+  "expect": [
+   "Brand: Puma",
+   "Discount Range: 50% and above"
+  ],
+  "got": [
+   "Brand: Puma",
+   "Discount Range: 50% and above"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "regress",
+  "site": "flipkart-shoes",
+  "q": "nike sneakers 9",
+  "expect": [
+   "Brand: NIKE",
+   "Size: 9"
+  ],
+  "got": [
+   "Brand: NIKE",
+   "Size: 9"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "regress",
+  "site": "flipkart",
+  "q": "jacket rs 1500",
+  "expect": [
+   "Max price: ₹1500"
+  ],
+  "got": [
+   "Max price: ₹1500"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "regress",
+  "site": "myntra-kurtas",
+  "q": "pink cotton kurta size M",
+  "searchTerm": "pink cotton kurta",
+  "expect": [
+   "Color: Pink",
+   "Fabrics: Cotton",
+   "Size: M"
+  ],
+  "got": [
+   "Color: Pink",
+   "Fabrics: Cotton",
+   "Size: M"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "regress",
+  "site": "myntra",
+  "q": "white jacket",
+  "searchTerm": "white jacket",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"white jacket\" on this page. This page has filters for Categories, Brand, Color, Discount Range, Bundles, Country of Origin and 1 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "Hello ji",
+  "reply": "greet",
+  "replyText": "Hi! 👋 Tell me what you're looking for on Flipkart, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "greet",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon",
+  "q": "heyyy",
+  "reply": "greet",
+  "replyText": "Hi! 👋 Tell me what you're looking for on Amazon, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "greet",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra",
+  "q": "good evening",
+  "reply": "greet",
+  "replyText": "Hi! 👋 Tell me what you're looking for on Myntra, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "greet",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-shoes",
+  "q": "namaskar",
+  "reply": "greet",
+  "replyText": "Hi! 👋 Tell me what you're looking for on Flipkart, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "greet",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon",
+  "q": "thx",
+  "reply": "thanks",
+  "replyText": "You're welcome! Tell me if you want to change anything, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "thanks",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra",
+  "q": "dhanyavaad",
+  "reply": "thanks",
+  "replyText": "You're welcome! Tell me if you want to change anything, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "thanks",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "great, thanks!",
+  "reply": "thanks",
+  "replyText": "You're welcome! Tell me if you want to change anything, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "thanks",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon",
+  "q": "got it",
+  "reply": "thanks",
+  "replyText": "You're welcome! Tell me if you want to change anything, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "thanks",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "what can i ask you",
+  "reply": "help",
+  "replyText": "I filter, sort and search Flipkart for you. Type what you want in your own words, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\". Ask \"what brands are there?\" to see the options, or \"what did you apply?\" to see the filters.",
+  "got": [],
+  "kind": "help",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra",
+  "q": "kaise use kare",
+  "reply": "help",
+  "replyText": "I filter, sort and search Myntra for you. Type what you want in your own words, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\". Ask \"what brands are there?\" to see the options, or \"what did you apply?\" to see the filters.",
+  "got": [],
+  "kind": "help",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon-shoes",
+  "q": "what materials are there",
+  "reply": "list:Materials",
+  "replyText": "Materials on this page: Cotton, Cotton Blend, Ethylene Vinyl Acetate, Fabric, Faux Fur, Faux Leather, Leather, Linen, Mesh, Neoprene, Net, Nylon and 11 more. Say one, e.g. \"Cotton\".",
+  "got": [],
+  "kind": "list:Materials",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-phones",
+  "q": "kitne ram options hai",
+  "reply": "list:RAM",
+  "replyText": "RAM on this page: 1 GB and Below, 1GB and Below, 2 GB, 3 GB, 4 GB, 6 GB, 8 GB and Above. Say one, e.g. \"1 GB and Below\".",
+  "got": [],
+  "kind": "list:RAM",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon-phones",
+  "q": "how much storage options do you have",
+  "reply": "list:Storage",
+  "replyText": "Storage on this page: Up to 3.9 GB, 4 GB, 8 GB, 16 GB, 32 GB, 64 GB, 128 GB, 256 GB, 512 GB & above. Say one, e.g. \"Up to 3.9 GB\".",
+  "got": [],
+  "kind": "list:Storage",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-kurtas",
+  "q": "discount options?",
+  "reply": "list:Discounts",
+  "replyText": "Discounts on this page: 10% and above, 20% and above, 30% and above, 40% and above, 50% and above, 60% and above, 70% and above, 80% and above, 90% and above. Say one, e.g. \"10% and above\".",
+  "got": [],
+  "kind": "list:Discounts",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "what types of jackets do you have",
+  "reply": "list:Types",
+  "replyText": "Types on this page: Casual Jacket, Leather Jacket, Bomber Jacket, Biker/Riding Jacket, Sports Jacket, Puffer Jacket, Nehru Jacket, Quilted Jacket, Padded Jacket, Denim Jacket, Ethnic Jacket, Winter Coat and 10 more. Say one, e.g. \"Casual Jacket\".",
+  "got": [],
+  "kind": "list:Types",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra",
+  "q": "colour options pls",
+  "reply": "list:Colours",
+  "replyText": "Colours on this page: Black, Blue, Grey, Navy Blue, Green, Brown, Olive. Say one, e.g. \"Black\".",
+  "got": [],
+  "kind": "list:Colours",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "konsa size available hai",
+  "reply": "list:Sizes",
+  "replyText": "Sizes on this page: 3XS, 2XS, XS, S, M, L, XL, 2XL, 3XL, 4XL, 5XL, 6XL and 2 more. Say one, e.g. \"3XS\".",
+  "got": [],
+  "kind": "list:Sizes",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-phones",
+  "q": "what sizes are there",
+  "reply": "nolist",
+  "replyText": "This Flipkart page has no sizes filter.",
+  "got": [],
+  "kind": "nolist",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon",
+  "q": "which filters are active",
+  "reply": "applied",
+  "applied": [
+   "Brands: Nike"
+  ],
+  "replyText": "Applied in this chat: Brands: Nike.",
+  "got": [],
+  "kind": "applied",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "kya filter laga hai",
+  "reply": "applied",
+  "applied": [
+   "Color: Black"
+  ],
+  "replyText": "Applied in this chat: Color: Black.",
+  "got": [],
+  "kind": "applied",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-shoes",
+  "q": "what is the price of these shoes",
+  "reply": "price",
+  "replyText": "Tell me your budget, e.g. \"under 2000\", \"between 1000 and 3000\" or \"cheapest first\".",
+  "got": [],
+  "kind": "price",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-phones",
+  "q": "how expensive are these phones",
+  "reply": "price",
+  "replyText": "Tell me your budget, e.g. \"under 2000\", \"between 1000 and 3000\" or \"cheapest first\".",
+  "got": [],
+  "kind": "price",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "my payment failed",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with payments, EMI or bank offers. I only filter, sort and search products. Please check Flipkart's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon",
+  "q": "how do i login",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with your account or address. I only filter, sort and search products. Please check Amazon's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "i love you",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can only help with shopping on Flipkart: filtering, sorting and searching. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra",
+  "q": "replacement kaise milega",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with returns, refunds or exchanges. I only filter, sort and search products. Please check Myntra's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "previous page",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't change pages. Scroll down on Flipkart to see more products, or tell me a filter to narrow them down.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon",
+  "q": "gift wrap available?",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with gift wrapping. I only filter, sort and search products. Please check Amazon's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon-shoes",
+  "q": "nike vs puma which is better",
+  "reply": "compare",
+  "expect": [
+   "Brands: Nike",
+   "Brands: PUMA"
+  ],
+  "replyText": "I can't compare or review products, but I can show the best rated first (say \"top rated\") or filter by brand, price and more.",
+  "got": [
+   "Brands: Nike",
+   "Brands: PUMA"
+  ],
+  "kind": "compare",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-kurtas",
+  "q": "is this kurta good quality",
+  "reply": "compare",
+  "expect": [],
+  "replyText": "I can't compare or review products, but I can show the best rated first (say \"top rated\") or filter by brand, price and more.",
+  "got": [],
+  "kind": "compare",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "maroon colour jacket",
+  "expect": [
+   "Color: Maroon"
+  ],
+  "got": [
+   "Color: Maroon"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "puffer jacket",
+  "expect": [
+   "Type: Puffer Jacket"
+  ],
+  "got": [
+   "Type: Puffer Jacket"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "sleeveless jacket",
+  "expect": [
+   "Sleeve: Sleeveless"
+  ],
+  "got": [
+   "Sleeve: Sleeveless"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "pure cotton jacket",
+  "expect": [
+   "fabric: Pure Cotton"
+  ],
+  "got": [
+   "fabric: Pure Cotton"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "reversible jacket",
+  "expect": [
+   "Reversible: Yes"
+  ],
+  "got": [
+   "Reversible: Yes"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "couple jackets",
+  "expect": [
+   "Gender: Couple"
+  ],
+  "got": [
+   "Gender: Couple"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "pack of 2 jackets",
+  "expect": [
+   "Pack of: 2"
+  ],
+  "got": [
+   "Pack of: 2"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "checked jacket",
+  "expect": [
+   "Pattern: Checkered"
+  ],
+  "got": [
+   "Pattern: Checkered"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "formal jacket",
+  "expect": [
+   "Occasion: Formal"
+  ],
+  "got": [
+   "Occasion: Formal"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "jacket 5000 tak",
+  "expect": [
+   "Max price: ₹2000+"
+  ],
+  "got": [
+   "Max price: ₹2000+"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "under two thousand",
+  "expect": [
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "any colour except blue",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"any colour except blue\" on this page. This page has filters for Brand, Size, fabric, Color, Sleeve, Type and 14 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "jacket for my wife",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"jacket for my wife\" on this page. This page has filters for Brand, Size, fabric, Color, Sleeve, Type and 14 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon",
+  "q": "winter jacket",
+  "expect": [
+   "Seasons: Winter"
+  ],
+  "got": [
+   "Seasons: Winter"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon",
+  "q": "slim fit jacket",
+  "expect": [
+   "Fit: Slim"
+  ],
+  "got": [
+   "Fit: Slim"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon",
+  "q": "zipper jacket",
+  "expect": [
+   "Closure: Zipper"
+  ],
+  "got": [
+   "Closure: Zipper"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon",
+  "q": "machine washable jacket",
+  "expect": [
+   "Care Instructions: Machine Wash"
+  ],
+  "got": [
+   "Care Instructions: Machine Wash"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon",
+  "q": "jacket delivered by tomorrow",
+  "expect": [
+   "Delivery Day: Get It by Tomorrow"
+  ],
+  "got": [
+   "Delivery Day: Get It by Tomorrow"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon",
+  "q": "jackets with 70% off",
+  "expect": [
+   "Discount: 70% Off or more"
+  ],
+  "got": [
+   "Discount: 70% Off or more"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon",
+  "q": "today's deals",
+  "expect": [
+   "Deals & Discounts: Today's Deals"
+  ],
+  "got": [
+   "Deals & Discounts: Today's Deals"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon",
+  "q": "brown leather jacket",
+  "expect": [
+   "Colour: Browns",
+   "Material: Leather"
+  ],
+  "got": [
+   "Colour: Browns",
+   "Material: Leather"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon",
+  "q": "tommy hilfiger jacket",
+  "expect": [
+   "Brands: Tommy Hilfiger"
+  ],
+  "got": [
+   "Brands: Tommy Hilfiger"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon",
+  "q": "north face jacket",
+  "expect": [
+   "Brands: THE NORTH FACE"
+  ],
+  "got": [
+   "Brands: THE NORTH FACE"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon",
+  "q": "jacket under 2.5k",
+  "expect": [
+   "Max price: ₹2500"
+  ],
+  "got": [
+   "Max price: ₹2500"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra",
+  "q": "nehru jacket",
+  "expect": [
+   "Categories: Nehru Jackets"
+  ],
+  "got": [
+   "Categories: Nehru Jackets"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra",
+  "q": "olive jacket",
+  "expect": [
+   "Color: Olive"
+  ],
+  "got": [
+   "Color: Olive"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra",
+  "q": "navy blue mast and harbour jacket",
+  "expect": [
+   "Color: Navy Blue",
+   "Brand: Mast & Harbour"
+  ],
+  "got": [
+   "Color: Navy Blue",
+   "Brand: Mast & Harbour"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra",
+  "q": "levis jacket",
+  "expect": [
+   "Brand: Levis"
+  ],
+  "got": [
+   "Brand: Levis"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra",
+  "q": "wrogn jacket size xl",
+  "expect": [
+   "Brand: WROGN",
+   "Size: XL"
+  ],
+  "got": [
+   "Brand: WROGN",
+   "Size: XL"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra",
+  "q": "red jacket",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"red jacket\" on this page. This page has filters for Categories, Brand, Color, Discount Range, Bundles, Country of Origin and 1 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-shoes",
+  "q": "nike shoes 9 number",
+  "expect": [
+   "Brand: Nike",
+   "Size: UK9"
+  ],
+  "got": [
+   "Brand: Nike",
+   "Size: UK9"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-shoes",
+  "q": "slip on shoes",
+  "expect": [
+   "Fastening: Slip-On"
+  ],
+  "got": [
+   "Fastening: Slip-On"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-shoes",
+  "q": "gym shoes",
+  "expect": [
+   "Sport: Training or Gym"
+  ],
+  "got": [
+   "Sport: Training or Gym"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-shoes",
+  "q": "non marking shoes for badminton",
+  "expect": [
+   "Outsole Type: Non-Marking",
+   "Sport: Badminton"
+  ],
+  "got": [
+   "Outsole Type: Non-Marking",
+   "Sport: Badminton"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-shoes",
+  "q": "skechers walking shoes",
+  "expect": [
+   "Brand: Skechers",
+   "Sport: Walking"
+  ],
+  "got": [
+   "Brand: Skechers",
+   "Sport: Walking"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-shoes",
+  "q": "4 star rated",
+  "expect": [
+   "Rating: 4 & above"
+  ],
+  "got": [
+   "Rating: 4 & above"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-shoes",
+  "q": "red chief formal shoes",
+  "expect": [
+   "Brand: RED CHIEF"
+  ],
+  "got": [
+   "Brand: RED CHIEF"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-shoes",
+  "q": "football shoes",
+  "expect": [
+   "Type of Shoes: Football Shoes"
+  ],
+  "got": [
+   "Type of Shoes: Football Shoes"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-shoes",
+  "q": "canvas shoes under 1000",
+  "expect": [
+   "Outer Material: Canvas",
+   "Max price: ₹500"
+  ],
+  "got": [
+   "Outer Material: Canvas",
+   "Max price: ₹500"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-shoes",
+  "q": "unisex sneakers size 8",
+  "expect": [
+   "Gender: Unisex",
+   "Size: 8"
+  ],
+  "got": [
+   "Gender: Unisex",
+   "Size: 8"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-shoes",
+  "q": "sports shoes above 3000",
+  "expect": [
+   "Occasion: Sports",
+   "Min price: ₹3000"
+  ],
+  "got": [
+   "Occasion: Sports",
+   "Min price: ₹3000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-shoes",
+  "q": "shoes under 10k",
+  "expect": [
+   "Max price: ₹3000+"
+  ],
+  "got": [
+   "Max price: ₹3000+"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-shoes",
+  "q": "size nine",
+  "expect": [
+   "Size: 9"
+  ],
+  "got": [
+   "Size: 9"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon-shoes",
+  "q": "hiking shoes woodland",
+  "expect": [
+   "Purpose: Hiking",
+   "Brands: Woodland"
+  ],
+  "got": [
+   "Purpose: Hiking",
+   "Brands: Woodland"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon-shoes",
+  "q": "lace up shoes",
+  "expect": [
+   "Closure Type: Lace-Up"
+  ],
+  "got": [
+   "Closure Type: Lace-Up"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon-shoes",
+  "q": "loafers",
+  "expect": [
+   "Shoe Type: Loafer"
+  ],
+  "got": [
+   "Shoe Type: Loafer"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon-shoes",
+  "q": "shoes size 7.5",
+  "expect": [
+   "Men's Shoe Size (UK/India): 7.5"
+  ],
+  "got": [
+   "Men's Shoe Size (UK/India): 7.5"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon-shoes",
+  "q": "skechers under 3k",
+  "expect": [
+   "Brands: Skechers",
+   "Max price: ₹3000"
+  ],
+  "got": [
+   "Brands: Skechers",
+   "Max price: ₹3000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-phones",
+  "q": "mediatek phone",
+  "expect": [
+   "Processor Brand: Mediatek"
+  ],
+  "got": [
+   "Processor Brand: Mediatek"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-phones",
+  "q": "keypad phone",
+  "expect": [
+   "Type: Feature Phones"
+  ],
+  "got": [
+   "Type: Feature Phones"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-phones",
+  "q": "nfc phone",
+  "expect": [
+   "Features: NFC"
+  ],
+  "got": [
+   "Features: NFC"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-phones",
+  "q": "octa core phone",
+  "expect": [
+   "Number of Cores: Octa Core"
+  ],
+  "got": [
+   "Number of Cores: Octa Core"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-phones",
+  "q": "phone 20 se 30 hazar",
+  "expect": [
+   "Min price: ₹20000",
+   "Max price: ₹30000"
+  ],
+  "got": [
+   "Max price: ₹30000",
+   "Min price: ₹20000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-phones",
+  "q": "moto phone 4gb ram",
+  "expect": [
+   "Brand: MOTOROLA",
+   "Ram: 4 GB"
+  ],
+  "got": [
+   "Brand: MOTOROLA",
+   "Ram: 4 GB"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-phones",
+  "q": "iqoo 5g",
+  "expect": [
+   "Brand: IQOO",
+   "Network Type: 5G"
+  ],
+  "got": [
+   "Brand: IQOO",
+   "Network Type: 5G"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-phones",
+  "q": "phone with 64mp camera",
+  "expect": [
+   "Primary Camera: 64 MP & Above"
+  ],
+  "got": [
+   "Primary Camera: 64 MP & Above"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-phones",
+  "q": "selfie camera phone",
+  "expect": [
+   "Speciality: Selfie Camera"
+  ],
+  "got": [
+   "Speciality: Selfie Camera"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-phones",
+  "q": "सैमसंग फोन",
+  "expect": [
+   "Brand: Samsung"
+  ],
+  "got": [
+   "Brand: Samsung"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon-phones",
+  "q": "phone under 8000",
+  "expect": [
+   "Max price: ₹8000"
+  ],
+  "got": [
+   "Max price: ₹8000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon-phones",
+  "q": "oppo or vivo",
+  "expect": [
+   "Brands: OPPO",
+   "Brands: vivo"
+  ],
+  "got": [
+   "Brands: OPPO",
+   "Brands: vivo"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon-phones",
+  "q": "phone with face unlock",
+  "expect": [
+   "Security Feature: Face Recognition"
+  ],
+  "got": [
+   "Security Feature: Face Recognition"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon-phones",
+  "q": "type c charging phone",
+  "expect": [
+   "Connector Type: USB Type C"
+  ],
+  "got": [
+   "Connector Type: USB Type C"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon-phones",
+  "q": "android 14 phone",
+  "expect": [
+   "Operating System: Android 14"
+  ],
+  "got": [
+   "Operating System: Android 14"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon-phones",
+  "q": "gold colour iphone",
+  "expect": [
+   "Colour: Gold",
+   "Brands: Apple"
+  ],
+  "got": [
+   "Colour: Gold",
+   "Brands: Apple"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon-phones",
+  "q": "6000mah phone",
+  "expect": [
+   "Battery Capacity: 6,000 mAh & Above"
+  ],
+  "got": [
+   "Battery Capacity: 6,000 mAh & Above"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon-phones",
+  "q": "512gb storage",
+  "expect": [
+   "Storage Capacity: 512 GB & above"
+  ],
+  "got": [
+   "Storage Capacity: 512 GB & above"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon-phones",
+  "q": "recommend a phone for photography",
+  "expect": [
+   "Purpose: Photography",
+   "Sort by: Customer Rating"
+  ],
+  "got": [
+   "Purpose: Photography",
+   "Sort by: Customer Rating"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-kurtas",
+  "q": "georgette kurta",
+  "expect": [
+   "Fabrics: Georgette"
+  ],
+  "got": [
+   "Fabrics: Georgette"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-kurtas",
+  "q": "v neck kurta",
+  "expect": [
+   "Neck: V-Neck"
+  ],
+  "got": [
+   "Neck: V-Neck"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-kurtas",
+  "q": "libas kurta in pink",
+  "expect": [
+   "Brand: Libas",
+   "Color: Pink"
+  ],
+  "got": [
+   "Brand: Libas",
+   "Color: Pink"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-kurtas",
+  "q": "navratri kurta",
+  "expect": [
+   "Theme: Navratri"
+  ],
+  "got": [
+   "Theme: Navratri"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-kurtas",
+  "q": "festive kurta",
+  "expect": [
+   "Occasions: Festive"
+  ],
+  "got": [
+   "Occasions: Festive"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-kurtas",
+  "q": "kurta with 3/4 sleeves",
+  "expect": [
+   "Sleeve Length: Three-Quarter Sleeves"
+  ],
+  "got": [
+   "Sleeve Length: Three-Quarter Sleeves"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-kurtas",
+  "q": "ankle length kurta",
+  "expect": [
+   "Length: Ankle Length"
+  ],
+  "got": [
+   "Length: Ankle Length"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-kurtas",
+  "q": "biba kurta 50% off",
+  "expect": [
+   "Brand: Biba",
+   "Discount Range: 50% and above"
+  ],
+  "got": [
+   "Brand: Biba",
+   "Discount Range: 50% and above"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-kurtas",
+  "q": "FabIndia kurta",
+  "expect": [
+   "Brand: Fabindia"
+  ],
+  "got": [
+   "Brand: Fabindia"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-kurtas",
+  "q": "kurta size 2xl",
+  "expect": [
+   "Size: XXL"
+  ],
+  "got": [
+   "Size: XXL"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-kurtas",
+  "q": "पीला कुर्ता",
+  "expect": [
+   "Color: Yellow"
+  ],
+  "got": [
+   "Color: Yellow"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-kurtas",
+  "q": "kurta under 1000",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"kurta under 1000\" on this page. This page has filters for Brand, Color, Discount Range, Bundles, Colour Family, Country of Origin and 30 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-kurtas",
+  "q": "latest kurtas",
+  "expect": [
+   "Sort by: Newest First"
+  ],
+  "got": [
+   "Sort by: Newest First"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-phones",
+  "q": "mehenga wala pehle",
+  "expect": [
+   "Sort by: Price: High to Low"
+  ],
+  "got": [
+   "Sort by: Price: High to Low"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-shoes",
+  "q": "top rated shoes",
+  "expect": [
+   "Customer Ratings: 4★ & above",
+   "Sort by: Popularity"
+  ],
+  "got": [
+   "Customer Ratings: 4★ & above",
+   "Sort by: Popularity"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra",
+  "q": "trending jackets",
+  "expect": [
+   "Sort by: Popularity"
+  ],
+  "got": [
+   "Sort by: Popularity"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon",
+  "q": "change it to white",
+  "applied": [
+   "Colour: Black"
+  ],
+  "expect": [
+   "Colour: White",
+   "-Colour: Black"
+  ],
+  "got": [
+   "Colour: White",
+   "-Colour: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-shoes",
+  "q": "size 10 instead",
+  "applied": [
+   "Size: UK9"
+  ],
+  "expect": [
+   "Size: UK10",
+   "-Size: UK9"
+  ],
+  "got": [
+   "Size: UK10",
+   "-Size: UK9"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart-phones",
+  "q": "make it 8gb",
+  "applied": [
+   "Ram: 6 GB"
+  ],
+  "expect": [
+   "Ram: 8 GB and Above",
+   "-Ram: 6 GB"
+  ],
+  "got": [
+   "Ram: 8 GB and Above",
+   "-Ram: 6 GB"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "amazon-phones",
+  "q": "actually 12 gb ram",
+  "applied": [
+   "RAM Size: 8 to 9.9 GB"
+  ],
+  "expect": [
+   "RAM Size: 10 GB & Above",
+   "-RAM Size: 8 to 9.9 GB"
+  ],
+  "got": [
+   "RAM Size: 10 GB & Above",
+   "-RAM Size: 8 to 9.9 GB"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "not black, navy",
+  "applied": [
+   "Color: Black"
+  ],
+  "expect": [
+   "Color: Navy Blue",
+   "-Color: Black"
+  ],
+  "got": [
+   "Color: Navy Blue",
+   "-Color: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "make it 1000",
+  "applied": [
+   "Max price: ₹2000"
+  ],
+  "expect": [
+   "Max price: ₹1000"
+  ],
+  "got": [
+   "Max price: ₹1000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "also 2XL",
+  "applied": [
+   "Size: XL"
+  ],
+  "expect": [
+   "Size: 2XL"
+  ],
+  "got": [
+   "Size: 2XL"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "min 1000",
+  "applied": [
+   "Max price: ₹2000"
+  ],
+  "expect": [
+   "Min price: ₹1000"
+  ],
+  "got": [
+   "Min price: ₹1000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "remove the brand",
+  "applied": [
+   "Brand: PUMA",
+   "Brand: NIKE",
+   "Color: Black"
+  ],
+  "expect": [
+   "-Brand: *"
+  ],
+  "got": [
+   "-Brand: *"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "myntra-kurtas",
+  "q": "discount hatao",
+  "applied": [
+   "Discount Range: 40% and above"
+  ],
+  "expect": [
+   "-Discount Range: *"
+  ],
+  "got": [
+   "-Discount Range: *"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "saare filters hata do",
+  "applied": [
+   "Brand: PUMA",
+   "Size: M"
+  ],
+  "expect": [
+   "-*: *"
+  ],
+  "got": [
+   "-*: *"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "?",
+  "reply": "empty",
+  "replyText": "Tell me what you're looking for, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "empty",
+  "pass": true
+ },
+ {
+  "cat": "blind-7",
+  "site": "flipkart",
+  "q": "PUMA puma Puma",
+  "expect": [
+   "Brand: PUMA"
+  ],
+  "got": [
+   "Brand: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "hlo",
+  "reply": "greet",
+  "replyText": "Hi! 👋 Tell me what you're looking for on Flipkart, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "greet",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "hey buddy",
+  "reply": "greet",
+  "replyText": "Hi! 👋 Tell me what you're looking for on Amazon, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "greet",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra",
+  "q": "kaise ho",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can only help with shopping on Myntra: filtering, sorting and searching. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "thank u bhai",
+  "reply": "thanks",
+  "replyText": "You're welcome! Tell me if you want to change anything, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "thanks",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra",
+  "q": "awesome, that helped",
+  "reply": "thanks",
+  "replyText": "You're welcome! Tell me if you want to change anything, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "thanks",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-shoes",
+  "q": "ok done",
+  "reply": "thanks",
+  "replyText": "You're welcome! Tell me if you want to change anything, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "thanks",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-phones",
+  "q": "how do i search with this",
+  "reply": "help",
+  "replyText": "I filter, sort and search Amazon for you. Type what you want in your own words, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\". Ask \"what brands are there?\" to see the options, or \"what did you apply?\" to see the filters.",
+  "got": [],
+  "kind": "help",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-kurtas",
+  "q": "madad chahiye",
+  "reply": "help",
+  "replyText": "I filter, sort and search Myntra for you. Type what you want in your own words, e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\". Ask \"what brands are there?\" to see the options, or \"what did you apply?\" to see the filters.",
+  "got": [],
+  "kind": "help",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-shoes",
+  "q": "shoe size kaun kaun se hai",
+  "reply": "list:Sizes",
+  "replyText": "Sizes on this page: UK1, UK2, UK2.5, UK3, UK3.5, UK4, UK4.5, UK5, UK5.5, UK6, UK6.5, UK7 and 16 more. Say one, e.g. \"UK1\".",
+  "got": [],
+  "kind": "list:Sizes",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "brand list dikhao",
+  "reply": "list:Brands",
+  "replyText": "Brands on this page: Red Tape, Allen Solly, Van Heusen, PUMA, Monte Carlo, Levi's, JACK & JONES, Nike, adidas, U.S. POLO ASSN., Peter England, Tommy Hilfiger and 28 more. Say one, e.g. \"Red Tape\".",
+  "got": [],
+  "kind": "list:Brands",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-phones",
+  "q": "what colours are there",
+  "reply": "nolist",
+  "replyText": "This Flipkart page has no colours filter.",
+  "got": [],
+  "kind": "nolist",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-shoes",
+  "q": "what materials do these come in",
+  "reply": "list:Materials",
+  "replyText": "Materials on this page: Canvas, Leather, Mesh, PU, Suede, Synthetic, Textile. Say one, e.g. \"Canvas\".",
+  "got": [],
+  "kind": "list:Materials",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "what discounts are there",
+  "reply": "list:Discounts",
+  "replyText": "Discounts on this page: 30% or more, 40% or more, 50% or more, 60% or more, 70% or more. Say one, e.g. \"30% or more\".",
+  "got": [],
+  "kind": "list:Discounts",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-shoes",
+  "q": "kaun kaun se colour hai",
+  "reply": "list:Colours",
+  "replyText": "Colours on this page: Black, Grey, White, Brown, Beige, Red, Pink, Orange, Yellow, Ivory, Green, Turquoise and 5 more. Say one, e.g. \"Black\".",
+  "got": [],
+  "kind": "list:Colours",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-kurtas",
+  "q": "what kinds of kurtas are there",
+  "reply": "list:Types",
+  "replyText": "Types on this page: A-Line, Anarkali, Fit and Flare, Kaftan, Pathani, Straight. Say one, e.g. \"A-Line\".",
+  "got": [],
+  "kind": "list:Types",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-phones",
+  "q": "show ram options",
+  "reply": "list:RAM",
+  "replyText": "RAM on this page: Up to 1.9 GB, 4 to 5.9 GB, 6 to 7.9 GB, 8 to 9.9 GB, 10 GB & Above. Say one, e.g. \"Up to 1.9 GB\".",
+  "got": [],
+  "kind": "list:RAM",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-shoes",
+  "q": "what have you selected so far",
+  "reply": "applied",
+  "applied": [
+   "Brand: Nike"
+  ],
+  "replyText": "Applied in this chat: Brand: Nike.",
+  "got": [],
+  "kind": "applied",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-phones",
+  "q": "which filters r on",
+  "reply": "applied",
+  "applied": [
+   "Brands: Samsung"
+  ],
+  "replyText": "Applied in this chat: Brands: Samsung.",
+  "got": [],
+  "kind": "applied",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-shoes",
+  "q": "price range kya hai",
+  "reply": "price",
+  "replyText": "Tell me your budget, e.g. \"under 2000\", \"between 1000 and 3000\" or \"cheapest first\".",
+  "got": [],
+  "kind": "price",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "how to cancel prime membership",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with memberships. I only filter, sort and search products. Please check Amazon's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-phones",
+  "q": "exchange my old phone",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can't help with exchange offers. I only filter, sort and search products. Please check Flipkart's Help page for that.",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-shoes",
+  "q": "write me a poem",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can only help with shopping on Amazon: filtering, sorting and searching. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "what time is it",
+  "reply": "offtopic",
+  "replyText": "Sorry, I can only help with shopping on Flipkart: filtering, sorting and searching. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "offtopic",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-phones",
+  "q": "redmi vs poco which one should i buy",
+  "reply": "compare",
+  "expect": [
+   "Brand: REDMI",
+   "Brand: POCO"
+  ],
+  "replyText": "I can't compare or review products, but I can show the best rated first (say \"top rated\") or filter by brand, price and more.",
+  "got": [
+   "Brand: REDMI",
+   "Brand: POCO"
+  ],
+  "kind": "compare",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-shoes",
+  "q": "is asics better than nike",
+  "reply": "compare",
+  "expect": [
+   "Brand: ASICS",
+   "Brand: Nike"
+  ],
+  "replyText": "I can't compare or review products, but I can show the best rated first (say \"top rated\") or filter by brand, price and more.",
+  "got": [
+   "Brand: ASICS",
+   "Brand: Nike"
+  ],
+  "kind": "compare",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "is this worth buying",
+  "reply": "compare",
+  "expect": [],
+  "replyText": "I can't compare or review products, but I can show the best rated first (say \"top rated\") or filter by brand, price and more.",
+  "got": [],
+  "kind": "compare",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "denim jacket",
+  "expect": [
+   "Type: Denim Jacket"
+  ],
+  "got": [
+   "Type: Denim Jacket"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "varsity jacket for men",
+  "expect": [
+   "Type: Varsity Jacket",
+   "Gender: Men"
+  ],
+  "got": [
+   "Type: Varsity Jacket",
+   "Gender: Men"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "biker jacket",
+  "expect": [
+   "Type: Biker/Riding Jacket"
+  ],
+  "got": [
+   "Type: Biker/Riding Jacket"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "camouflage jacket",
+  "expect": [
+   "Pattern: Camouflage"
+  ],
+  "got": [
+   "Pattern: Camouflage"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "light blue jacket",
+  "expect": [
+   "Color: Light Blue"
+  ],
+  "got": [
+   "Color: Light Blue"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "khaki jacket size S",
+  "expect": [
+   "Color: Khaki",
+   "Size: S"
+  ],
+  "got": [
+   "Color: Khaki",
+   "Size: S"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "corduroy jacket",
+  "expect": [
+   "fabric: Corduroy"
+  ],
+  "got": [
+   "fabric: Corduroy"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "jacket between 700 and 1500",
+  "expect": [
+   "Min price: ₹700",
+   "Max price: ₹1500"
+  ],
+  "got": [
+   "Max price: ₹1500",
+   "Min price: ₹700"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "jacket under 999",
+  "expect": [
+   "Max price: ₹700"
+  ],
+  "got": [
+   "Max price: ₹700"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "jacket within 1000",
+  "expect": [
+   "Max price: ₹1000"
+  ],
+  "got": [
+   "Max price: ₹1000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "60% discount jackets",
+  "expect": [
+   "Discount: 60% or more"
+  ],
+  "got": [
+   "Discount: 60% or more"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "3 star and above",
+  "expect": [
+   "Customer Ratings: 3★ & above"
+  ],
+  "got": [
+   "Customer Ratings: 3★ & above"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "jacket for casual wear",
+  "expect": [
+   "Occasion: Casual"
+  ],
+  "got": [
+   "Occasion: Casual"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "puma ki jacket chahiye XXL mein",
+  "expect": [
+   "Brand: PUMA",
+   "Size: 2XL"
+  ],
+  "got": [
+   "Brand: PUMA",
+   "Size: 2XL"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "wildcraft or highlander jacket",
+  "expect": [
+   "Brand: Wildcraft",
+   "Brand: HIGHLANDER"
+  ],
+  "got": [
+   "Brand: Wildcraft",
+   "Brand: HIGHLANDER"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "Roadster jacket in dark green",
+  "expect": [
+   "Brand: Roadster",
+   "Color: Dark Green"
+  ],
+  "got": [
+   "Brand: Roadster",
+   "Color: Dark Green"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "sasta wala blue jacket",
+  "expect": [
+   "Color: Blue",
+   "Sort by: Price: Low to High"
+  ],
+  "got": [
+   "Color: Blue",
+   "Sort by: Price: Low to High"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "nike nhi chahiye, adidas dikhao",
+  "expect": [
+   "Brand: ADIDAS"
+  ],
+  "got": [
+   "Brand: ADIDAS"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "puma jacket, black, size m, budget 1500",
+  "expect": [
+   "Brand: PUMA",
+   "Color: Black",
+   "Size: M",
+   "Max price: ₹1500"
+  ],
+  "got": [
+   "Brand: PUMA",
+   "Color: Black",
+   "Size: M",
+   "Max price: ₹1500"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "   puma   ",
+  "expect": [
+   "Brand: PUMA"
+  ],
+  "got": [
+   "Brand: PUMA"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "oversized jacket",
+  "expect": [
+   "Fit: Oversized"
+  ],
+  "got": [
+   "Fit: Oversized"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "trench coat",
+  "expect": [
+   "Coat Silhouette Type: Trench Coat"
+  ],
+  "got": [
+   "Coat Silhouette Type: Trench Coat"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "fleece lined jacket",
+  "expect": [
+   "Lining Description: Fleece"
+  ],
+  "got": [
+   "Lining Description: Fleece"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "polyester jacket",
+  "expect": [
+   "Material: Polyester"
+  ],
+  "got": [
+   "Material: Polyester"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "jacket for hiking",
+  "expect": [
+   "Purpose: Hiking"
+  ],
+  "got": [
+   "Purpose: Hiking"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "jacket in 3XL",
+  "expect": [
+   "Men's General Size: 3XL"
+  ],
+  "got": [
+   "Men's General Size: 3XL"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "allen solly jacket under 1200",
+  "expect": [
+   "Brands: Allen Solly",
+   "Max price: ₹1200"
+  ],
+  "got": [
+   "Brands: Allen Solly",
+   "Max price: ₹1200"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "jackets 35% off or more",
+  "expect": [
+   "Discount: 35% Off or more"
+  ],
+  "got": [
+   "Discount: 35% Off or more"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "jacket delivered today",
+  "expect": [
+   "Delivery Day: Get It Today"
+  ],
+  "got": [
+   "Delivery Day: Get It Today"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "unisex jacket",
+  "expect": [
+   "Gender: Unisex"
+  ],
+  "got": [
+   "Gender: Unisex"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "jacket above 4000",
+  "expect": [
+   "Min price: ₹4000"
+  ],
+  "got": [
+   "Min price: ₹4000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "peter england or van heusen",
+  "expect": [
+   "Brands: Peter England",
+   "Brands: Van Heusen"
+  ],
+  "got": [
+   "Brands: Peter England",
+   "Brands: Van Heusen"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "safed jacket",
+  "expect": [
+   "Colour: White"
+  ],
+  "got": [
+   "Colour: White"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "purple jacket",
+  "expect": [
+   "Colour: Purples"
+  ],
+  "got": [
+   "Colour: Purples"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "max budget is fifteen hundred",
+  "expect": [
+   "Max price: ₹1500"
+  ],
+  "got": [
+   "Max price: ₹1500"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "zara jacket",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"zara jacket\" on this page. This page has filters for Delivery Day, Eligible for Free Delivery, Gender, Brands, Customer Reviews, Colour and 26 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra",
+  "q": "monte carlo jacket M size",
+  "expect": [
+   "Brand: Monte Carlo",
+   "Size: M"
+  ],
+  "got": [
+   "Brand: Monte Carlo",
+   "Size: M"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra",
+  "q": "brown jacket 40% off",
+  "expect": [
+   "Color: Brown",
+   "Discount Range: 40% and above"
+  ],
+  "got": [
+   "Color: Brown",
+   "Discount Range: 40% and above"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra",
+  "q": "jacket size 3xl",
+  "expect": [
+   "Size: 3XL"
+  ],
+  "got": [
+   "Size: 3XL"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra",
+  "q": "jackets sorted by newest",
+  "expect": [
+   "Sort by: Newest First"
+  ],
+  "got": [
+   "Sort by: Newest First"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra",
+  "q": "हरी जैकेट",
+  "expect": [
+   "Color: Green"
+  ],
+  "got": [
+   "Color: Green"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-shoes",
+  "q": "navy blue shoes",
+  "expect": [
+   "Color: Navy Blue"
+  ],
+  "got": [
+   "Color: Navy Blue"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-shoes",
+  "q": "suede shoes",
+  "expect": [
+   "Materials: Suede"
+  ],
+  "got": [
+   "Materials: Suede"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-shoes",
+  "q": "basketball shoes size 11",
+  "expect": [
+   "Sport: Basketball",
+   "Size: UK11"
+  ],
+  "got": [
+   "Sport: Basketball",
+   "Size: UK11"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-shoes",
+  "q": "trekking shoes",
+  "expect": [
+   "Sport: Trekking"
+  ],
+  "got": [
+   "Sport: Trekking"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-shoes",
+  "q": "high cushioning running shoes",
+  "expect": [
+   "Cushioning: High",
+   "Sport: Running"
+  ],
+  "got": [
+   "Cushioning: High",
+   "Sport: Running"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-shoes",
+  "q": "new balance shoes 60% off",
+  "expect": [
+   "Brand: New Balance",
+   "Discount Range: 60% and above"
+  ],
+  "got": [
+   "Brand: New Balance",
+   "Discount Range: 60% and above"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-shoes",
+  "q": "not white, black shoes",
+  "expect": [
+   "Color: Black"
+  ],
+  "got": [
+   "Color: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-shoes",
+  "q": "pink shoes",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"pink shoes\" on this page. This page has filters for Brand, Color, Discount Range, Arch Type, Bundles, Cleats and 16 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-shoes",
+  "q": "bata shoes for men",
+  "expect": [
+   "Brand: Bata",
+   "Gender: Men"
+  ],
+  "got": [
+   "Brand: Bata",
+   "Gender: Men"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-shoes",
+  "q": "tan colour shoes",
+  "expect": [
+   "Color: Tan"
+  ],
+  "got": [
+   "Color: Tan"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-shoes",
+  "q": "leather shoes under 2000",
+  "expect": [
+   "Outer Material: Leather",
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Outer Material: Leather",
+   "Max price: ₹2000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-shoes",
+  "q": "shoes 1500 to 3000",
+  "expect": [
+   "Min price: ₹1500",
+   "Max price: ₹3000"
+  ],
+  "got": [
+   "Max price: ₹3000",
+   "Min price: ₹1500"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-shoes",
+  "q": "joote 2500 tak",
+  "expect": [
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-shoes",
+  "q": "shoes size 9.5",
+  "expect": [
+   "Size: 9.5"
+  ],
+  "got": [
+   "Size: 9.5"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-shoes",
+  "q": "shoes for women but not pink",
+  "expect": [
+   "Gender: Women"
+  ],
+  "got": [
+   "Gender: Women"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-shoes",
+  "q": "काले जूते नाइकी",
+  "expect": [
+   "Color: Black",
+   "Brand: NIKE"
+  ],
+  "got": [
+   "Color: Black",
+   "Brand: NIKE"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-shoes",
+  "q": "crocs",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"crocs\" on this page. This page has filters for Brand, Color, Size, Type of Shoes, Occasion, Outer Material and 10 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-shoes",
+  "q": "lightweight shoes",
+  "expect": [
+   "Special Features: Lightweight"
+  ],
+  "got": [
+   "Special Features: Lightweight"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-shoes",
+  "q": "asics running shoes 4 star",
+  "expect": [
+   "Brands: ASICS",
+   "Purpose: Running",
+   "Customer Reviews: 4 Stars & Up"
+  ],
+  "got": [
+   "Brands: ASICS",
+   "Purpose: Running",
+   "Customer Reviews: 4 Stars & Up"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-shoes",
+  "q": "brown oxford shoes",
+  "expect": [
+   "Shoe Type: Oxford",
+   "Colour: Brown"
+  ],
+  "got": [
+   "Colour: Brown",
+   "Shoe Type: Oxford"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-shoes",
+  "q": "shoes for flat feet",
+  "expect": [
+   "Purpose: Flat Feet"
+  ],
+  "got": [
+   "Purpose: Flat Feet"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-shoes",
+  "q": "velcro shoes",
+  "expect": [
+   "Closure Type: Hook & Loop"
+  ],
+  "got": [
+   "Closure Type: Hook & Loop"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-shoes",
+  "q": "nike shoes on 50% off",
+  "expect": [
+   "Brands: Nike",
+   "Discount: 50% Off or more"
+  ],
+  "got": [
+   "Brands: Nike",
+   "Discount: 50% Off or more"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-shoes",
+  "q": "shoes less than ₹2500",
+  "expect": [
+   "Max price: ₹2500"
+  ],
+  "got": [
+   "Max price: ₹2500"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-phones",
+  "q": "oneplus 12gb ram",
+  "expect": [
+   "Brands: OnePlus",
+   "RAM Size: 10 GB & Above"
+  ],
+  "got": [
+   "Brands: OnePlus",
+   "RAM Size: 10 GB & Above"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-phones",
+  "q": "phone with 90hz display",
+  "expect": [
+   "Display Refresh Rate in Hertz: 90"
+  ],
+  "got": [
+   "Display Refresh Rate in Hertz: 90"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-phones",
+  "q": "pixel phone",
+  "expect": [
+   "Brands: Google"
+  ],
+  "got": [
+   "Brands: Google"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-phones",
+  "q": "phone 15k to 25k",
+  "expect": [
+   "Min price: ₹15000",
+   "Max price: ₹25000"
+  ],
+  "got": [
+   "Max price: ₹25000",
+   "Min price: ₹15000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-phones",
+  "q": "phone with fingerprint sensor",
+  "expect": [
+   "Security Feature: Fingerprint Recognition"
+  ],
+  "got": [
+   "Security Feature: Fingerprint Recognition"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-phones",
+  "q": "4g phone under 5000",
+  "expect": [
+   "Cellular Technology: 4G",
+   "Max price: ₹5000"
+  ],
+  "got": [
+   "Cellular Technology: 4G",
+   "Max price: ₹5000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-phones",
+  "q": "purple iphone",
+  "expect": [
+   "Colour: Purple",
+   "Brands: Apple"
+  ],
+  "got": [
+   "Colour: Purple",
+   "Brands: Apple"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-phones",
+  "q": "phone under 12,500",
+  "expect": [
+   "Max price: ₹12500"
+  ],
+  "got": [
+   "Max price: ₹12500"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-phones",
+  "q": "ios phones",
+  "expect": [
+   "Operating System: iOS"
+  ],
+  "got": [
+   "Operating System: iOS"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-phones",
+  "q": "poco phone 128gb under 15k",
+  "expect": [
+   "Brand: POCO",
+   "Internal Storage: 128 - 255.9 GB",
+   "Max price: ₹15000"
+  ],
+  "got": [
+   "Brand: POCO",
+   "Internal Storage: 128 - 255.9 GB",
+   "Max price: ₹15000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-phones",
+  "q": "phone with 3gb ram",
+  "expect": [
+   "Ram: 3 GB"
+  ],
+  "got": [
+   "Ram: 3 GB"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-phones",
+  "q": "phone under 25000",
+  "expect": [
+   "Max price: ₹20000"
+  ],
+  "got": [
+   "Max price: ₹20000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-phones",
+  "q": "phone above 30k",
+  "expect": [
+   "Min price: ₹30000"
+  ],
+  "got": [
+   "Min price: ₹30000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-phones",
+  "q": "phone below 15 thousand",
+  "expect": [
+   "Max price: ₹15000"
+  ],
+  "got": [
+   "Max price: ₹15000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-phones",
+  "q": "infinix ya tecno",
+  "expect": [
+   "Brand: Infinix",
+   "Brand: Tecno"
+  ],
+  "got": [
+   "Brand: Infinix",
+   "Brand: Tecno"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-phones",
+  "q": "samsung,8gb,5g",
+  "expect": [
+   "Brand: Samsung",
+   "Ram: 8 GB and Above",
+   "Network Type: 5G"
+  ],
+  "got": [
+   "Brand: Samsung",
+   "Network Type: 5G",
+   "Ram: 8 GB and Above"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-phones",
+  "q": "phone with 16gb ram",
+  "expect": [
+   "Ram: 8 GB and Above"
+  ],
+  "got": [
+   "Ram: 8 GB and Above"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-kurtas",
+  "q": "mandarin collar kurta",
+  "expect": [
+   "Neck: Mandarin Collar"
+  ],
+  "got": [
+   "Neck: Mandarin Collar"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-kurtas",
+  "q": "linen kurta",
+  "expect": [
+   "Fabrics: Linen"
+  ],
+  "got": [
+   "Fabrics: Linen"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-kurtas",
+  "q": "knee length kurta",
+  "expect": [
+   "Length: Knee Length"
+  ],
+  "got": [
+   "Length: Knee Length"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-kurtas",
+  "q": "holi kurta",
+  "expect": [
+   "Theme: Holi"
+  ],
+  "got": [
+   "Theme: Holi"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-kurtas",
+  "q": "party wear kurta",
+  "expect": [
+   "Occasions: Party"
+  ],
+  "got": [
+   "Occasions: Party"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-kurtas",
+  "q": "hand wash kurta",
+  "expect": [
+   "Wash Care: Hand Wash"
+  ],
+  "got": [
+   "Wash Care: Hand Wash"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-kurtas",
+  "q": "green kurta size L",
+  "expect": [
+   "Color: Green",
+   "Size: L"
+  ],
+  "got": [
+   "Color: Green",
+   "Size: L"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-kurtas",
+  "q": "short sleeve kurta",
+  "expect": [
+   "Sleeve Length: Short Sleeves"
+  ],
+  "got": [
+   "Sleeve Length: Short Sleeves"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-kurtas",
+  "q": "sangria kurta black",
+  "expect": [
+   "Brand: Sangria",
+   "Color: Black"
+  ],
+  "got": [
+   "Brand: Sangria",
+   "Color: Black"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-kurtas",
+  "q": "kurta in orange",
+  "expect": [],
+  "reply": "nomatch",
+  "replyText": "No matching filters for \"kurta in orange\" on this page. This page has filters for Brand, Color, Discount Range, Bundles, Colour Family, Country of Origin and 30 more. Try e.g. \"black puma jacket under 2000\", \"size M\", \"cheapest first\" or \"remove puma\".",
+  "got": [],
+  "kind": "nomatch",
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "actually make it 2xl",
+  "applied": [
+   "Size: XL"
+  ],
+  "expect": [
+   "Size: 2XL",
+   "-Size: XL"
+  ],
+  "got": [
+   "Size: 2XL",
+   "-Size: XL"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "nike bhi add karo",
+  "applied": [
+   "Brands: PUMA"
+  ],
+  "expect": [
+   "Brands: Nike"
+  ],
+  "got": [
+   "Brands: Nike"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-phones",
+  "q": "remove ram filter",
+  "applied": [
+   "Ram: 6 GB",
+   "Brand: Samsung"
+  ],
+  "expect": [
+   "-Ram: *"
+  ],
+  "got": [
+   "-Ram: *"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-shoes",
+  "q": "hata do nike",
+  "applied": [
+   "Brand: Nike",
+   "Size: UK9"
+  ],
+  "expect": [
+   "-Brand: Nike"
+  ],
+  "got": [
+   "-Brand: Nike"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon",
+  "q": "clear all filters pls",
+  "applied": [
+   "Brands: Nike",
+   "Colour: Black"
+  ],
+  "expect": [
+   "-*: *"
+  ],
+  "got": [
+   "-*: *"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart",
+  "q": "budget badha ke 2000 karo",
+  "applied": [
+   "Max price: ₹1000"
+  ],
+  "expect": [
+   "Max price: ₹2000"
+  ],
+  "got": [
+   "Max price: ₹2000"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "myntra-kurtas",
+  "q": "only pink",
+  "applied": [
+   "Color: Blue",
+   "Color: Yellow"
+  ],
+  "expect": [
+   "Color: Pink",
+   "-Color: Blue",
+   "-Color: Yellow"
+  ],
+  "got": [
+   "Color: Pink",
+   "-Color: Blue",
+   "-Color: Yellow"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "flipkart-shoes",
+  "q": "size 8 nahi 9 chahiye",
+  "applied": [
+   "Size: 8"
+  ],
+  "expect": [
+   "Size: 9",
+   "-Size: 8"
+  ],
+  "got": [
+   "Size: 9",
+   "-Size: 8"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-shoes",
+  "q": "sort by newest instead",
+  "applied": [
+   "Sort by: Popularity"
+  ],
+  "expect": [
+   "Sort by: Newest First"
+  ],
+  "got": [
+   "Sort by: Newest First"
+  ],
+  "kind": null,
+  "pass": true
+ },
+ {
+  "cat": "blind-8",
+  "site": "amazon-phones",
+  "q": "also add 5g",
+  "applied": [
+   "Brands: Samsung"
+  ],
+  "expect": [
+   "Cellular Technology: 5G"
+  ],
+  "got": [
+   "Cellular Technology: 5G"
+  ],
+  "kind": null,
+  "pass": true
+ }
+]

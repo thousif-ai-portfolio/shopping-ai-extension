@@ -1,0 +1,106 @@
+﻿  [panel] [ai] model (q8) loaded on wasm in 8266 ms (threads: 2)
+On-device AI: Qwen2.5-0.5B via Transformers.js · ready ✓ (9.8s after opening the panel)
+  9:06:24 pm  Reading filters on the page…
+  9:06:24 pm  AI is reading your request…
+  [panel] [ai] answered in 12556 ms
+  [panel] [ai] model {"terms":["puma","black","puma","size","under"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["puma","black","puma","size","under","M"],"max_price":2000,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":false,"remove":fals
+  9:06:37 pm  Done ✅
+PASS [Amazon] "black puma jacket size M under 2000" → Done ✅ in 19.3s
+  chips: Colour: Black | Brands: PUMA | Men's General Size: M | Max price: ₹2000
+  url  : https://www.amazon.in/s?k=jacket+men&rh=p_n_size_two_browse-vebin:1975317031,p_123:256097,p_n_pt_nav_size_men_international_size:1975394031,p_36:-200000
+  9:06:52 pm  AI is reading your request…
+  [panel] [ai] answered in 6806 ms
+  [panel] [ai] model {"terms":["nike","running"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["nike","running","9"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":false,"remove":false}
+  9:06:59 pm  Done ✅
+PASS [Amazon] "nike running shoes size 9" → Done ✅ in 13.1s
+  chips: Brands: Nike | Purpose: Running | Men's Shoe Size (UK/India): 9
+  url  : https://www.amazon.in/s?k=running+shoes+men&rh=p_123:234394,p_n_g-101016756037111:207863621031,p_n_g-1004152217091:2022659031
+  9:07:13 pm  AI is reading your request…
+  [panel] [ai] answered in 18372 ms
+  [panel] [ai] model {"terms":[],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":[],"max_price":15000,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":false,"remove":false}
+  9:07:32 pm  Done ✅
+PASS [Amazon] "samsung 5g phone with 8gb ram under 15000" → Done ✅ in 23.9s
+  chips: Brands: Samsung | Cellular Technology: 5G | RAM Size: 8 to 9.9 GB | Max price: ₹15000
+  url  : https://www.amazon.in/s?k=mobile+phones&rh=p_123:46655,p_n_g-1003469290111:33962382031,p_n_g-1003495121111:44897288031,p_36:-1500000
+  9:07:45 pm  Reading filters on the page…
+  9:07:56 pm  AI is reading your request…
+  [panel] [ai] answered in 16049 ms
+  [panel] [ai] model {"terms":["black","puma"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["black","puma"],"max_price":2000,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":false,"remove":false}
+  9:08:12 pm  Applying…
+  9:08:17 pm  Done ✅
+PASS [Flipkart] "black puma jacket under 2000" → Done ✅ in 37.3s
+  chips: Color: Black | Brand: PUMA | Max price: ₹2000
+  url  : https://www.flipkart.com/search?q=jacket+men&p[]=facets.color[]=Black&p[]=facets.price_range.from=Min&p[]=facets.price_range.to=2000&p[]=facets.brand[]=PUMA
+  9:08:23 pm  Reading filters on the page…
+  9:08:27 pm  AI is reading your request…
+  [panel] [ai] answered in 6000 ms
+  [panel] [ai] model {"terms":["size L"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["size L","L"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":false,"remove":false}
+  9:08:34 pm  Applying…
+  9:08:35 pm  Done ✅
+PASS [Flipkart follow-up] "size L" → Done ✅ in 16.7s
+  chips: Size: L
+  url  : https://www.flipkart.com/search?q=jacket+men&p[]=facets.color[]=Black&p[]=facets.price_range.from=Min&p[]=facets.price_range.to=2000&p[]=facets.brand[]=PUMA&p[]=facets.size[]=L
+  9:08:41 pm  Reading filters on the page…
+  9:08:45 pm  AI is reading your request…
+  [panel] [ai] answered in 6169 ms
+  [panel] [ai] model {"terms":["adidas"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["adidas"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":false,"remove":false}
+  9:08:52 pm  Applying…
+  9:08:53 pm  Done ✅
+PASS [Flipkart follow-up] "adidas too" → Done ✅ in 16.9s
+  chips: Brand: ADIDAS
+  url  : https://www.flipkart.com/search?q=jacket+men&p[]=facets.size[]=L&p[]=facets.color[]=Black&p[]=facets.price_range.from=Min&p[]=facets.price_range.to=2000&p[]=facets.brand[]=PUMA&p[]=facets.brand[]=ADIDAS
+  9:09:05 pm  Reading filters on the page…
+  9:09:14 pm  AI is reading your request…
+  [panel] [ai] answered in 8276 ms
+  [panel] [ai] model {"terms":[],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":[],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":false,"remove":false}
+  9:09:22 pm  Applying…
+  9:09:26 pm  Done ✅
+PASS [Flipkart] "oneplus phone with 256gb storage" → Done ✅ in 25.9s
+  chips: Brand: OnePlus | Internal Storage: 256 GB & Above
+  url  : https://www.flipkart.com/search?q=mobile+phones&p[]=facets.brand[]=OnePlus&p[]=facets.internal_storage[]=256+GB+&+Above
+  9:09:39 pm  Reading filters on the page…
+  9:09:48 pm  AI is reading your request…
+  [panel] [ai] answered in 5918 ms
+  [panel] [ai] model {"terms":["sparx"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["sparx","8"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":false,"remove":false}
+  9:09:54 pm  Applying…
+  9:09:57 pm  Done ✅
+PASS [Flipkart] "sparx shoes size 8" → Done ✅ in 23.5s
+  chips: Brand: Sparx | Size: 8
+  url  : https://www.flipkart.com/search?q=running+shoes+men&p[]=facets.brand[]=Sparx&p[]=facets.size[]=8
+  9:10:13 pm  Reading filters on the page…
+  9:10:17 pm  AI is reading your request…
+  [panel] [ai] answered in 10282 ms
+  [panel] [ai] model {"terms":["black","roadster","jacket"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["black","roadster","jacket"],"max_price":null,"min_price":null,"min_discount":40,"min_rating":null,"clearAll":false,"remove":false}
+  9:10:28 pm  Applying…
+  9:10:41 pm  Done ✅
+PASS [Myntra] "black roadster jacket 40% off" → Done ✅ in 33.0s
+  chips: Color: Black | Brand: Roadster | Discount Range: 40% and above
+  url  : https://www.myntra.com/jackets?f=Brand:Roadster::Color:Black_36454f&rf=Discount Range:40.0_100.0_40.0 TO 100.0&rawQuery=jacket men
+  9:10:55 pm  Reading filters on the page…
+  9:11:04 pm  AI is reading your request…
+  [panel] [ai] answered in 7317 ms
+  [panel] [ai] model {"terms":["skechers","shoes"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["skechers","shoes","9"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":false,"remove":false}
+  9:11:12 pm  Applying…
+  9:11:17 pm  Done ✅
+PASS [Myntra] "skechers shoes size 9" → Done ✅ in 27.9s
+  chips: Brand: Skechers | Size: UK9
+  url  : https://www.myntra.com/men-sports-shoes?f=Brand:Skechers::size_facet:UK9&rawQuery=men sports shoes
+  9:11:36 pm  Reading filters on the page…
+  9:11:52 pm  AI is reading your request…
+  [panel] [ai] answered in 11445 ms
+  [panel] [ai] model {"terms":[],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":["M"],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":false,"remove":false}
+  9:12:04 pm  Applying…
+  9:12:12 pm  Done ✅
+PASS [Myntra] "libas cotton kurta size M" → Done ✅ in 41.9s
+  chips: Brand: Libas | Fabrics: Cotton | Size: M
+  url  : https://www.myntra.com/women-kurtas-kurtis-suits?f=Brand:Libas::Fabrics:Cotton::size_facet:M&rawQuery=women kurtas
+  9:12:26 pm  Reading filters on the page…
+  9:12:30 pm  AI is reading your request…
+  [panel] [ai] answered in 6304 ms
+  [panel] [ai] model {"terms":[],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null} → after rules {"terms":[],"max_price":null,"min_price":null,"min_discount":null,"min_rating":null,"clearAll":false,"remove":false}
+  9:12:36 pm  ⚠️ No matching filters for that request.
+PASS [Myntra] "show me something nice" → ⚠️ No matching filters for that request. in 15.6s
+  chips: (none)
+  url  : https://www.myntra.com/jackets?rawQuery=jacket men
+
+12/12 live tests passed

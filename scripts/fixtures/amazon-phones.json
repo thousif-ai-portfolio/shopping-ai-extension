@@ -1,0 +1,566 @@
+[
+ {
+  "name": "Delivery Day",
+  "options": [
+   "Get It Today",
+   "Get It by Tomorrow",
+   "Get It in 2 Days"
+  ]
+ },
+ {
+  "name": "Eligible for Free Delivery",
+  "options": [
+   "Free Shipping"
+  ]
+ },
+ {
+  "name": "Customer Reviews",
+  "options": [
+   "4 Stars & Up"
+  ]
+ },
+ {
+  "name": "Price",
+  "options": [
+   "Up to ₹1,300",
+   "₹1,300 - ₹18,000",
+   "₹18,000 - ₹25,000",
+   "Over ₹25,000"
+  ]
+ },
+ {
+  "name": "Deals & Discounts",
+  "options": [
+   "All Discounts",
+   "Buy More, Save More",
+   "Coupons",
+   "Today's Deals"
+  ]
+ },
+ {
+  "name": "Brands",
+  "options": [
+   "Samsung",
+   "OnePlus",
+   "Apple",
+   "realme",
+   "OPPO",
+   "Motorola",
+   "Nokia",
+   "iQOO",
+   "vivo",
+   "Google",
+   "Infinix",
+   "POCO",
+   "Nothing",
+   "Redmi",
+   "Itel",
+   "Lava",
+   "Micromax",
+   "KECHAODA",
+   "Snexian",
+   "HMD"
+  ]
+ },
+ {
+  "name": "Discount",
+  "options": [
+   "10% Off or more",
+   "25% Off or more",
+   "35% Off or more",
+   "50% Off or more",
+   "60% Off or more",
+   "70% Off or more"
+  ]
+ },
+ {
+  "name": "Colour",
+  "options": [
+   "Black",
+   "Blue",
+   "Multicoloured",
+   "Grey",
+   "White",
+   "Red",
+   "Pink",
+   "Orange",
+   "Yellow",
+   "Green",
+   "Turquoise",
+   "Purple",
+   "Gold",
+   "Silver",
+   "Transparent"
+  ]
+ },
+ {
+  "name": "Pay On Delivery",
+  "options": [
+   "Eligible for Pay On Delivery"
+  ]
+ },
+ {
+  "name": "Cell Phone Brands",
+  "options": [
+   "Top Brands"
+  ]
+ },
+ {
+  "name": "Seller",
+  "options": [
+   "Clicktech Retail Private Ltd",
+   "AIMS International",
+   "Dawntech Etel!",
+   "Clicktech Business",
+   "Risenet",
+   "The Pop Market",
+   "Whitepine Mobitech Private Limited"
+  ]
+ },
+ {
+  "name": "Item Condition",
+  "options": [
+   "New"
+  ]
+ },
+ {
+  "name": "Availability",
+  "options": [
+   "Include Out of Stock"
+  ]
+ },
+ {
+  "name": "New Arrivals",
+  "options": [
+   "Last 30 days",
+   "Last 90 days"
+  ]
+ },
+ {
+  "name": "Supported Satellite Navigation System",
+  "options": [
+   "GPS",
+   "Galileo",
+   "GLONASS",
+   "BeiDou",
+   "QZSS"
+  ]
+ },
+ {
+  "name": "Aspect Ratio",
+  "options": [
+   "16:9"
+  ]
+ },
+ {
+  "name": "Market Version",
+  "options": [
+   "Indian Version"
+  ]
+ },
+ {
+  "name": "Purpose",
+  "options": [
+   "Photography",
+   "Gaming",
+   "Streaming",
+   "Video Conferencing"
+  ]
+ },
+ {
+  "name": "Front Camera Resolution",
+  "options": [
+   "Up to 6.9 MP",
+   "7.0 to 9.9 MP",
+   "10.0 to 12.9 MP",
+   "13.0 MP & above"
+  ]
+ },
+ {
+  "name": "RAM Size",
+  "options": [
+   "Up to 1.9 GB",
+   "4 to 5.9 GB",
+   "6 to 7.9 GB",
+   "8 to 9.9 GB",
+   "10 GB & Above"
+  ]
+ },
+ {
+  "name": "Flash",
+  "options": [
+   "LED"
+  ]
+ },
+ {
+  "name": "Video Capture Resolution",
+  "options": [
+   "1080p",
+   "4k",
+   "720p",
+   "8k"
+  ]
+ },
+ {
+  "name": "Battery Life",
+  "options": [
+   "Up to 6.9 h",
+   "7 to 12.9 h",
+   "13 to 18.9 h",
+   "19 h & above"
+  ]
+ },
+ {
+  "name": "GPS Navigation",
+  "options": [
+   "False",
+   "True"
+  ]
+ },
+ {
+  "name": "Jack Type",
+  "options": [
+   "3.5 mm"
+  ]
+ },
+ {
+  "name": "Battery Capacity",
+  "options": [
+   "Up to 2,999 mAh",
+   "3,000 to 3,999 mAh",
+   "4,000 to 4,999 mAh",
+   "5,000 to 5,999 mAh",
+   "6,000 mAh & Above"
+  ]
+ },
+ {
+  "name": "Display Refresh Rate in Hertz",
+  "options": [
+   "60",
+   "90",
+   "120",
+   "144",
+   "165"
+  ]
+ },
+ {
+  "name": "Processor Speed",
+  "options": [
+   "Less Than 0.99 GHz",
+   "1 - 1.49 GHz",
+   "1.5 - 1.99 GHz",
+   "2 - 2.4 GHz",
+   "2.5 GHz & Above"
+  ]
+ },
+ {
+  "name": "Rear Camera Photo Sensor Resolution",
+  "options": [
+   "Up to 9.9 MP",
+   "10 to 12.9 MP",
+   "13 to 15.9 MP",
+   "16 MP & Above"
+  ]
+ },
+ {
+  "name": "Wireless Network Technology",
+  "options": [
+   "GSM",
+   "LTE",
+   "Wi-Fi",
+   "CDMA",
+   "UMTS",
+   "Bluetooth",
+   "Infrared"
+  ]
+ },
+ {
+  "name": "Connectivity",
+  "options": [
+   "Bluetooth",
+   "Infrared",
+   "NFC",
+   "USB",
+   "Wi-Fi"
+  ]
+ },
+ {
+  "name": "Screen Size",
+  "options": [
+   "Up to 12.9 cm",
+   "15 to 17.9 cm",
+   "18 cm & above"
+  ]
+ },
+ {
+  "name": "Connector Type",
+  "options": [
+   "3.5mm Jack",
+   "Micro USB",
+   "Mini USB",
+   "USB Type C"
+  ]
+ },
+ {
+  "name": "Weight",
+  "options": [
+   "Up to 141.9 g",
+   "142 to 197.9 g",
+   "198 to 254.9 g",
+   "255 g & Above"
+  ]
+ },
+ {
+  "name": "Security Feature",
+  "options": [
+   "Fingerprint Recognition",
+   "Face Recognition",
+   "Iris Recognition"
+  ]
+ },
+ {
+  "name": "Country of Origin",
+  "options": [
+   "India",
+   "China"
+  ]
+ },
+ {
+  "name": "Included Components",
+  "options": [
+   "USB Cable",
+   "Power Adapter",
+   "SIM Tray Ejector",
+   "Phone Case",
+   "Headset",
+   "Quick Start Guide",
+   "Screen Protector",
+   "USB OTG Adapter"
+  ]
+ },
+ {
+  "name": "Display Type",
+  "options": [
+   "AMOLED",
+   "LCD",
+   "OLED",
+   "TFT"
+  ]
+ },
+ {
+  "name": "Cellular Technology",
+  "options": [
+   "2G",
+   "3G",
+   "4G",
+   "5G"
+  ]
+ },
+ {
+  "name": "Battery Type",
+  "options": [
+   "Lithium-Ion",
+   "Lithium-Polymer"
+  ]
+ },
+ {
+  "name": "SIM Card Slot Count",
+  "options": [
+   "Single SIM",
+   "Dual SIM",
+   "Triple SIM"
+  ]
+ },
+ {
+  "name": "Display Resolution",
+  "options": [
+   "1080 x 2160",
+   "1080 x 2340",
+   "1080 x 2400",
+   "1280 x 720",
+   "1600 x 720",
+   "1920 x 1080",
+   "2340 x 1080",
+   "240 x 320",
+   "2400 x 1080",
+   "2640 x 1080",
+   "3120 x 1440",
+   "720 x 1280",
+   "720 x 1440",
+   "720 x 1560",
+   "720 x 1600"
+  ]
+ },
+ {
+  "name": "Storage Capacity",
+  "options": [
+   "Up to 3.9 GB",
+   "4 GB",
+   "8 GB",
+   "16 GB",
+   "32 GB",
+   "64 GB",
+   "128 GB",
+   "256 GB",
+   "512 GB & above"
+  ]
+ },
+ {
+  "name": "Camera Resolution",
+  "options": [
+   "Up to 2.9 MP",
+   "5 to 7.9 MP",
+   "8 to 12.9 MP",
+   "20 MP & above"
+  ]
+ },
+ {
+  "name": "GenAI Model",
+  "options": [
+   "Galaxy AI",
+   "Gemini AI"
+  ]
+ },
+ {
+  "name": "Input",
+  "options": [
+   "Touchscreen",
+   "Keypad",
+   "Buttons",
+   "Touchscreen with Stylus Support",
+   "Dial",
+   "Keyboard",
+   "Microphone",
+   "Numeric Keypad",
+   "Gesture"
+  ]
+ },
+ {
+  "name": "Camera Feature",
+  "options": [
+   "AI Enhanced HDR",
+   "AI Enhanced Zoom",
+   "Best Shot Selection",
+   "Eye Detection",
+   "Face Detection",
+   "Image Stacking",
+   "Motion Detection",
+   "Object/Subject Tracking",
+   "Optical Zoom",
+   "Portrait Enhancement",
+   "Raw Capture",
+   "Real-time Object Recognition",
+   "Scene Optimization"
+  ]
+ },
+ {
+  "name": "Sim Card Size",
+  "options": [
+   "eSIM",
+   "Micro",
+   "Mini",
+   "Nano",
+   "Standard"
+  ]
+ },
+ {
+  "name": "Mobile Phone Primary Camera Resolution",
+  "options": [
+   "Up to 3.9 MP",
+   "4 - 7.9 MP",
+   "8 - 11.9 MP",
+   "12 - 15.9 MP",
+   "16 - 19.9 MP",
+   "20 - 23.9 MP",
+   "24 - 27.9 MP",
+   "28 - 31.9 MP",
+   "32 MP & Above"
+  ]
+ },
+ {
+  "name": "Camera Modes",
+  "options": [
+   "High Dynamic Range",
+   "Macro",
+   "Portrait",
+   "Aperture Priority",
+   "Automatic",
+   "Manual",
+   "Night Mode",
+   "Panorama",
+   "Underwater"
+  ]
+ },
+ {
+  "name": "Operating System",
+  "options": [
+   "Android 14",
+   "Android 12.0",
+   "Android 13.0",
+   "Android 10.0",
+   "Android 11.0",
+   "Android 9.0",
+   "Android 4.1",
+   "Android 8.1",
+   "Nucleus OS",
+   "Symbian 9.1",
+   "Symbian 9.3"
+  ]
+ },
+ {
+  "name": "Carrier Lock Status",
+  "options": [
+   "Unlocked"
+  ]
+ },
+ {
+  "name": "Min price",
+  "options": [
+   "₹300",
+   "₹500",
+   "₹700",
+   "₹1000",
+   "₹1500",
+   "₹2000",
+   "₹2500",
+   "₹3000",
+   "₹4000",
+   "₹5000",
+   "₹7500",
+   "₹10000",
+   "₹15000",
+   "₹20000",
+   "₹…"
+  ]
+ },
+ {
+  "name": "Max price",
+  "options": [
+   "₹300",
+   "₹500",
+   "₹700",
+   "₹1000",
+   "₹1500",
+   "₹2000",
+   "₹2500",
+   "₹3000",
+   "₹4000",
+   "₹5000",
+   "₹7500",
+   "₹10000",
+   "₹15000",
+   "₹20000",
+   "₹…"
+  ]
+ },
+ {
+  "name": "Sort by",
+  "options": [
+   "Price: Low to High",
+   "Price: High to Low",
+   "Newest First",
+   "Customer Rating",
+   "Popularity"
+  ]
+ }
+]
