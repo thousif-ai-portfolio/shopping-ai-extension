@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { aiStatus, chooseFilters, warmUp } from '../ai/llm'
+import { aiStatus, chooseFilters } from '../ai/llm'
 import { SORT_GROUP, SORT_LABELS, wait, type Product, type FilterChoice, type Message, type Page } from '../adapters/types'
 import { SITES, otherSite, searchFor, searchOnOtherSite, searchWords, wantsCompare } from '../ai/product'
 import { summarize, type SiteResult, type Summary } from '../ai/compare'
@@ -116,18 +116,11 @@ export default function App() {
   const [turns, setTurns] = useState<Turn[]>([])
   const [asked, setAsked] = useState('')
   const [busy, setBusy] = useState(false)
-
-  const [aiState, setAiState] = useState('')
   // Filters this chat has applied, per shopping tab (see remember below).
   const memory = useRef(new Map<number, FilterChoice[]>())
 
   useEffect(() => {
     aiStatus().then(setAi)
-    // Start loading the AI now, so it's ready by the time the user has typed a request.
-    warmUp(setAiState).then(
-      () => setAiState('ready ✓'),
-      (e) => setAiState(`failed to load: ${(e as Error).message}`),
-    )
   }, [])
 
   async function run(fn: () => Promise<void>) {
@@ -262,8 +255,6 @@ export default function App() {
     setStatus(`Compared ${SITES.map((s) => s.name).join(', ')} for "${text}", cheapest first. Done ✅`)
   }
 
-  const failed = /failed/.test(aiState)
-
   function send(text: string) {
     const q = text.trim()
     if (!q || busy) return
@@ -273,7 +264,7 @@ export default function App() {
     setQuery('')
     setStatus('')
     setBusy(true)
-    // Afterwards refresh the AI name: it changes if Gemini Nano failed and the backup took over.
+    // Afterwards refresh the AI name: it changes if Gemini Nano failed and the rules took over.
     apply(q).finally(() => { setBusy(false); aiStatus().then(setAi) })
   }
 
@@ -283,13 +274,9 @@ export default function App() {
         <div className="flex items-center gap-2">
           <span className="grid h-7 w-7 place-items-center rounded-lg bg-black text-xs font-bold text-white">AI</span>
           <h1 className="text-base font-semibold">Shopping Assistant</h1>
-          {/* The AI loads in the background (see offscreen/main.ts); only a failure is shown. A request
-              sent while it is still loading shows the loading progress in its own status line. */}
-          {failed && <span className="ml-auto rounded-full border border-black bg-white px-2 py-0.5 text-xs font-medium text-black">AI failed</span>}
         </div>
-        {/* Not shown; the tests read which AI is in use and its loading state from here. */}
+        {/* Not shown; the tests read which AI is in use from here. */}
         <span id="ai-label" className="hidden">{ai}</span>
-        <span id="ai-state" className="hidden">{aiState}</span>
       </header>
 
       <main className="flex-1 space-y-4 overflow-y-auto px-4 py-4">

@@ -51,7 +51,7 @@ if (useAi) {
   const extId = await browser.installExtension(path.resolve('dist'))
   const panel = await browser.newPage()
   await panel.goto(`chrome-extension://${extId}/src/sidepanel/index.html?test`)
-  await panel.waitForFunction(() => /^ready|failed/.test(document.querySelector('#ai-state')?.textContent ?? ''), { timeout: 0, polling: 1000 })
+  await panel.waitForFunction(() => !/checking/.test(document.querySelector('#ai-label')?.textContent ?? 'checking'), { timeout: 0, polling: 1000 })
   run = (q, page, remembered) => panel.evaluate((q, page, r) => window.__decide(q, page, r), q, page, remembered)
 } else {
   // Bundle the panel's own decide() with a rules-only chooser (no AI words).

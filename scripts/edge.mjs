@@ -25,7 +25,7 @@ const browser = await puppeteer.launch({
 const extId = await browser.installExtension(path.resolve('dist'))
 const panel = await browser.newPage()
 await panel.goto(`chrome-extension://${extId}/src/sidepanel/index.html?test`)
-await panel.waitForFunction(() => /^ready|failed/.test(document.querySelector('#ai-state')?.textContent ?? ''), {
+await panel.waitForFunction(() => !/checking/.test(document.querySelector('#ai-label')?.textContent ?? 'checking'), {
   timeout: 0, polling: 1000,
 })
 

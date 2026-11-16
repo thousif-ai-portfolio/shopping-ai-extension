@@ -1,4 +1,4 @@
-// The instructions given to the on-device AI (Gemini Nano or the Qwen backup).
+// The instructions given to the on-device AI (Gemini Nano).
 // The AI only picks out descriptive words; prices, discounts, ratings, sizes and number+unit
 // values are read by rules.ts and match.ts, which are more reliable for those.
 export const SYSTEM =

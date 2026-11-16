@@ -117,7 +117,7 @@ panel.on('console', (m) => { if (/\[ai\]/.test(m.text())) console.log(`  [panel]
 panel.on('pageerror', (e) => console.log(`  [panel error] ${e.message}`))
 const t0 = Date.now()
 await panel.goto(`chrome-extension://${extId}/src/sidepanel/index.html${params ? `?${params}` : ''}`)
-await panel.waitForFunction(() => /^ready|failed/.test(document.querySelector('#ai-state')?.textContent ?? ''), { timeout: 0, polling: 1000 })
+await panel.waitForFunction(() => !/checking/.test(document.querySelector('#ai-label')?.textContent ?? 'checking'), { timeout: 0, polling: 1000 })
 console.log(await panel.$eval('#ai-label', (p) => p.textContent), `(${secs(t0)} after opening the panel)`)
 
 // Independent check of the live page: is each expected filter really in the site's URL?

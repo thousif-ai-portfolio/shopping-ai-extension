@@ -1,20 +1,17 @@
-// On-device AI. Uses Chrome's built-in Gemini Nano (Prompt API, Chrome 138+) when this PC
-// supports it; otherwise a small model run with Transformers.js (see fallback.ts).
-// Either way the AI only picks out descriptive words; the same tested code (rules.ts, match.ts)
-// turns them into filters, so both AIs behave the same way.
+// On-device AI: Chrome's built-in Gemini Nano (Prompt API, Chrome 138+) when this PC supports it.
+// The AI only picks out descriptive words; the tested rules (rules.ts, match.ts) turn the message
+// into filters. Without Gemini Nano those rules work alone: prices, sizes, sorting and any filter
+// named in the message still apply, only vaguer wording is missed.
 import { escapeRe, type FilterChoice, type FilterGroup } from '../adapters/types'
-import { askBackup, preload } from './fallback'
 import { matchFilters, STOP, type Wanted } from './match'
 import { EXAMPLE_IN, EXAMPLE_OUT, SYSTEM } from './prompt'
 import { applyRules } from './rules'
 
-// Set when Gemini Nano fails once: from then on the backup AI answers straight away (no ~20 s
-// failed try per message) and the panel says so.
+// Set when Gemini Nano fails once: from then on the rules answer straight away.
 let nanoFailed = false
 
 async function nanoUsable() {
-  // ?ai=backup forces the backup AI (used by tests).
-  if (nanoFailed || new URLSearchParams(location.search).get('ai') === 'backup') return false
+  if (nanoFailed) return false
   try {
     return typeof LanguageModel !== 'undefined' && (await LanguageModel.availability()) === 'available'
   } catch {
@@ -23,13 +20,7 @@ async function nanoUsable() {
 }
 
 export async function aiStatus(): Promise<string> {
-  if (nanoFailed) return 'Qwen2.5-0.5B (backup: Gemini Nano did not work here)'
-  return (await nanoUsable()) ? 'Gemini Nano (Chrome built-in)' : 'Qwen2.5-0.5B via Transformers.js'
-}
-
-/** Loads the backup model in the background right away (Gemini Nano needs no warm-up). */
-export async function warmUp(onProgress: (msg: string) => void) {
-  if (!(await nanoUsable())) await preload(onProgress)
+  return (await nanoUsable()) ? 'Gemini Nano (Chrome built-in)' : 'Rules only (Gemini Nano is not available on this PC)'
 }
 
 async function askNano(query: string, onProgress: (msg: string) => void): Promise<string> {
@@ -55,18 +46,15 @@ export async function chooseFilters(
   onProgress: (msg: string) => void = () => {},
 ): Promise<FilterChoice[]> {
   // Gemini Nano could not be tested on the dev laptop, so any failure (API differences, model
-  // still downloading, …) falls back to the backup AI instead of breaking the extension.
-  let reply: string
+  // still downloading, …) falls back to the rules alone instead of breaking the extension.
+  let reply = ''
   if (await nanoUsable()) {
     try {
       reply = await askNano(query, onProgress)
     } catch (e) {
-      console.warn('[ai] Gemini Nano failed, using backup AI:', e)
+      console.warn('[ai] Gemini Nano failed, using the rules alone:', e)
       nanoFailed = true
-      reply = await askBackup(query, onProgress)
     }
-  } else {
-    reply = await askBackup(query, onProgress)
   }
   const fromAi: Wanted = {
     terms: reply.split(/[,\n]/).map((t) => t.trim()).filter(Boolean),
