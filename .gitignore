@@ -2,3 +2,7 @@ node_modules/
 dist/
 *.log
 .env
+# Test run outputs (screenshots, logs, results); the README summarises them.
+scripts/*.png
+scripts/*-log*.txt
+scripts/*-results*.json

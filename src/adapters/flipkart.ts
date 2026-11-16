@@ -1,4 +1,4 @@
-import { SORT_GROUP, SORT_LABELS, firstPrice, type FilterChoice, type FilterGroup, type Product, type SiteAdapter } from './types'
+import { SORT_GROUP, SORT_LABELS, escapeRe, firstPrice, navigateSoon, wait, type FilterChoice, type FilterGroup, type Product, type SiteAdapter } from './types'
 
 // How Flipkart filters work (checked on the live page, Nov 2026):
 // - Each filter group is a <section>; its first child is the heading ("BRAND", "SIZE", ...).
@@ -12,7 +12,6 @@ import { SORT_GROUP, SORT_LABELS, firstPrice, type FilterChoice, type FilterGrou
 const MIN_PRICE = 'Min price'
 const MAX_PRICE = 'Max price'
 
-const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
 // A section with an active filter gets a "Clear" link in its heading ("PriceClear"), so drop it.
 const headingOf = (s: Element) => (s.firstElementChild?.textContent?.trim() ?? '').replace(/\s*clear$/i, '')
 const findSection = (name: string) =>
@@ -20,15 +19,18 @@ const findSection = (name: string) =>
 const isFilterSection = (s: Element) => !!s.firstElementChild?.querySelector('svg') && !!headingOf(s)
 const isOpen = (s: Element) => !!s.querySelector('input[type=checkbox], select')
 
-async function open(s: Element) {
+async function open(s: Element, ms = 300) {
   if (isOpen(s)) return
   ;(s.firstElementChild?.firstElementChild as HTMLElement | null)?.click()
-  await wait(300)
+  await wait(ms)
 }
+// The "126 MORE" link under a long list.
+const moreLink = (s: Element) =>
+  [...s.querySelectorAll<HTMLElement>('span')].find((e) => /^\d+ MORE$/i.test(e.textContent?.trim() ?? ''))
 
 // The "126 MORE" pop-up (an A–Z grid of every brand) has no tick boxes, so options can't be
 // ticked while it is open. It shows the letters "#ABC…XYZ".
-const popupOpen = (s: Element) => /#?ABCDEFGHIJKLMNOPQRSTUVWXYZ/.test((s as HTMLElement).innerText.replace(/\s/g, ''))
+const popupOpen = (s: Element) => /ABCDEFGHIJKLMNOPQRSTUVWXYZ/.test((s as HTMLElement).innerText.replace(/\s/g, ''))
 // It has no close button (its ✕ only clears the search box), so fold the section and open it
 // again, which brings back the normal list with tick boxes.
 // force: also when it isn't recognisable by its letters (the Size "MORE" grid has none).
@@ -65,7 +67,6 @@ async function waitForUpdate(before: string) {
 // Is this filter really applied? Flipkart lists every active filter in the URL
 // (p[]=facets.brand[]=PUMA, p[]=facets.price_range.to=2000), so check there.
 const pageUrl = () => decodeURIComponent(decodeURIComponent(location.href)).replace(/\+/g, ' ')
-const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 // Options found already ticked on the page. Flipkart ticks the brand of a brand search by itself
 // ("nike running shoes" → NIKE) without putting it in the URL, so the URL check alone misses it.
 const tickedOnPage = new Set<string>()
@@ -102,12 +103,7 @@ export const flipkart: SiteAdapter = {
 
   async extractFilters(): Promise<FilterGroup[]> {
     // Open every collapsed section so its options appear in the page.
-    for (const s of document.querySelectorAll('section')) {
-      if (isFilterSection(s) && !isOpen(s)) {
-        ;(s.firstElementChild?.firstElementChild as HTMLElement | null)?.click()
-        await wait(150)
-      }
-    }
+    for (const s of document.querySelectorAll('section')) if (isFilterSection(s)) await open(s, 150)
     await wait(500)
 
     const groups: FilterGroup[] = []
@@ -118,7 +114,7 @@ export const flipkart: SiteAdapter = {
         .map((d) => d.title)
       // Long lists show ~6 options plus "126 MORE", which opens a grid of every option.
       // Read the full list from it, then close it. (Applying uses the section's search box.)
-      const more = [...s.querySelectorAll<HTMLElement>('span')].find((e) => /^\d+ MORE$/i.test(e.textContent?.trim() ?? ''))
+      const more = moreLink(s)
       if (more) {
         more.click()
         await wait(900)
@@ -137,14 +133,10 @@ export const flipkart: SiteAdapter = {
   },
 
   async applyFilters(choices: FilterChoice[]) {
-    if (choices.some((c) => c.group === '*')) {
-      setTimeout(() => location.assign(flipkart.searchUrl(flipkart.searchTerm())), 50) // "clear all filters"
-      return []
-    }
     const adds = choices.filter((c) => !c.remove && c.group !== SORT_GROUP)
     // Min price before max price: changing the minimum resets Flipkart's maximum.
     const rank = (c: FilterChoice) => (c.group === MIN_PRICE ? 0 : c.group === MAX_PRICE ? 1 : 2)
-    const ordered = [...adds].sort((a, b) => rank(a) - rank(b))
+    const ordered = adds.sort((a, b) => rank(a) - rank(b))
     // Apply, then check the page really kept each one; retry the ones it dropped (2 more rounds).
     for (let round = 0; round < 3; round++) {
       const todo = ordered.filter((c) => !isApplied(c))
@@ -168,15 +160,16 @@ export const flipkart: SiteAdapter = {
       const drop = (entry: string) => {
         const e = decodeURIComponent(entry).replace(/\+/g, ' ')
         return removes.some((c) => {
-          if (c.group === MIN_PRICE || (c.group.toLowerCase().includes('price') && c.option === '*')) if (e.startsWith('facets.price_range.from')) return true
-          if (c.group === MAX_PRICE || (c.group.toLowerCase().includes('price') && c.option === '*')) if (e.startsWith('facets.price_range.to')) return true
+          const wholePrice = c.group.toLowerCase().includes('price') && c.option === '*'
+          if ((c.group === MIN_PRICE || wholePrice) && e.startsWith('facets.price_range.from')) return true
+          if ((c.group === MAX_PRICE || wholePrice) && e.startsWith('facets.price_range.to')) return true
           return values(c).some((v) => e.toLowerCase().endsWith(`]=${v.toLowerCase()}`))
         })
       }
       url.searchParams.delete('p[]')
       for (const e of entries) if (!drop(e)) url.searchParams.append('p[]', e)
       if (sort && SORT[sort.option]) url.searchParams.set('sort', SORT[sort.option])
-      if (url.toString() !== location.href) setTimeout(() => location.assign(url.toString()), 50)
+      if (url.toString() !== location.href) navigateSoon(url.toString())
     }
     return missing
   },
@@ -232,7 +225,7 @@ async function applyOne(c: FilterChoice) {
     }
     // No search box (Size): open "12 MORE"; a freshly opened grid has tick boxes.
     if (!box) {
-      const more = [...s.querySelectorAll<HTMLElement>('span')].find((e) => /^\d+ MORE$/i.test(e.textContent?.trim() ?? ''))
+      const more = moreLink(s)
       if (more) { more.click(); await wait(900); box = findBox() }
     }
   }

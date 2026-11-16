@@ -15,7 +15,9 @@ export default defineManifest({
   side_panel: { default_path: 'src/sidepanel/index.html' },
   background: { service_worker: 'src/background.ts', type: 'module' },
   content_scripts: [{ matches: SITES, js: ['src/content/index.ts'] }],
-  permissions: ['sidePanel', 'tabs'],
+  // offscreen: a hidden page keeps the backup AI loaded while Chrome runs (src/offscreen).
+  // favicon: the site logos on the panel's buttons, from Chrome's own icon cache.
+  permissions: ['sidePanel', 'tabs', 'offscreen', 'favicon'],
   // The backup AI (Transformers.js) runs as WebAssembly, which extensions must allow explicitly.
   content_security_policy: { extension_pages: "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'" },
   // Cross-origin isolation lets the AI use several CPU threads instead of one.

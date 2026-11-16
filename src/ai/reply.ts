@@ -2,7 +2,8 @@
 // there?", "what did you apply?", returns/delivery questions. Plain rules, so these answers are
 // instant (no AI call) and never apply a filter by mistake.
 // Returns null when the message should go on to the filter step.
-import { SORT_GROUP, type FilterChoice, type FilterGroup } from '../adapters/types'
+import { SORT_GROUP, type FilterChoice, type Page } from '../adapters/types'
+import { COLOURS } from './product'
 
 const EXAMPLE = 'e.g. "black puma jacket under 2000", "size M", "cheapest first" or "remove puma"'
 
@@ -12,7 +13,7 @@ const clean = (q: string) =>
 // The whole message is only these words (a greeting, a thank-you, …).
 const only = (words: string) => new RegExp(String.raw`^(?:(?:${words})\s*)+$`)
 const GREETING = only(String.raw`hi+|hello+|hey+|heya|hlo|helo|yo|hola|namaste|namaskar|sup|good (?:morning|afternoon|evening|night)|there|bro|buddy|ji|sir|madam|dear|guys|all|everyone|again`)
-const THANKS = only(String.raw`thanks?|thank you|thank u|thanku|thankyou|thx|thnx|thnks|thanx|tq|ty|bhai|bro|yaar|dude|that helped|it helped|helped|helpful|very helpful|that worked|it worked|worked|ok+|okay|okk|k|cool|great|nice|good|awesome|perfect|super|done|fine|got it|bye|goodbye|see you|shukriya|dhanyavaa?d|dhanyawaa?d|dhanyabad|accha|acha|theek hai|thik hai|sahi|so much|very much|a lot|lot|alright|wow|amazing|it works|works|working|yes|yeah|yup|no|nope|nah|great job|well done|good job|right|sure|hmm+|lol`)
+const THANKS = only(String.raw`thanks?|thank you|thank u|thanku|thankyou|thx|thnx|thnks|thanx|tq|ty|bhai|bro|yaar|dude|that helped|it helped|helped|helpful|very helpful|that worked|it worked|worked|ok+|okay|k|cool|great|nice|good|awesome|perfect|super|done|fine|got it|bye|goodbye|see you|shukriya|dhanyavaa?d|dhanyawaa?d|dhanyabad|accha|acha|theek hai|thik hai|sahi|so much|very much|a lot|lot|alright|wow|amazing|it works|works|working|yes|yeah|yup|no|nope|nah|great job|well done|good job|right|sure|hmm+|lol`)
 const HELP = /^(?:help|help me|how (?:do i|to|can i|does (?:this|it)) (?:use|work)\b.*|what (?:can|do|should) (?:you|i) (?:do|type|say|ask|write)\b.*|what (?:is|are) (?:this|you)\b.*|who are you\b.*|how (?:does|do) (?:this|it|you) work\b.*|what all can you do.*|kya kar sakte ho.*|how to use.*|how (?:do i|to|can i|should i) (?:search|filter|find|ask)\b.*|(?:mujhe )?(?:madad|help) (?:chahiye|karo|kijiye|kar do)|madad|(?:ye |yeh |isko |ise )?(?:kaise use (?:kare|karu|karein|karen|karna hai|kar[eu]n?)|use kaise (?:kare|karu|karein|karen|karna hai)|kaise chala(?:ye|un|na hai|te hai))\b.*|instructions|guide|menu|start|commands?)$/
 
 // Shop questions this extension cannot answer (it only filters, sorts and searches).
@@ -33,7 +34,7 @@ const OFF_TOPIC: [RegExp, string][] = [
 ]
 
 // "what brands are there?", "which colours do you have", "list sizes", "konse brand hai"
-const QUESTION = /\b(what|which|list|kaun ?se|konse|kon se|kaun ?sa|konsa|kon sa|kaun ?si|konsi|kon si|kya kya|any other|other)\b/
+const QUESTION = /\b(what|which|list|kaun ?se|konse|kon se|kaun ?sa|konsa|kon sa|kaun ?si|konsi|kon si|kya kya|other)\b/
 const ASK = /\b(show|tell|available|options?|have|there|got)\b/
 // [words in the message, filter group names, label]. The (s) capture marks a plural ("brands").
 const TOPICS: [RegExp, RegExp, string][] = [
@@ -50,12 +51,10 @@ const TOPICS: [RegExp, RegExp, string][] = [
 const listOf = (options: string[], n = 12) =>
   options.slice(0, n).join(', ') + (options.length > n ? ` and ${options.length - n} more` : '')
 
-const label = (c: FilterChoice) => (c.option === '*' ? `${c.group}: all` : `${c.group}: ${c.option}`)
-
-export type PageInfo = { site: string; filters: FilterGroup[]; searchTerm?: string }
+export const label = (c: FilterChoice) => (c.option === '*' ? `${c.group}: all` : `${c.group}: ${c.option}`)
 
 /** An instant answer for a message that isn't a filter request, or null. */
-export function quickReply(query: string, page: PageInfo, applied: FilterChoice[]): string | null {
+export function quickReply(query: string, page: Page, applied: FilterChoice[]): string | null {
   const q = clean(query)
   const site = page.site
 
@@ -124,15 +123,9 @@ export function quickReply(query: string, page: PageInfo, applied: FilterChoice[
 }
 
 /** "compare iphone and samsung", "is this jacket good?": a note that this can't be judged here. */
-export function compareNote(query: string, site = ''): string | null {
+// (Comparing prices across sites never reaches here: the panel runs compareSites for that.)
+export function compareNote(query: string): string | null {
   const q = clean(query)
-  // "compare amazon, flipkart and myntra": several sites at once.
-  const sites = ['amazon', 'flipkart', 'myntra'].filter((s) => q.includes(s))
-  if (sites.length >= 2) {
-    const others = ['amazon', 'flipkart', 'myntra'].filter((s) => s !== site.toLowerCase())
-    return `I can't compare across sites: I work on the one site that's open, one at a time` +
-      (site ? `, so I used ${site}` : '') + `. To check another, say ${others.map((s) => `"open ${s}"`).join(' or ')}.`
-  }
   const asks =
     /\b(compare|comparison|difference|vs|versus|better than|which is better|worth|should i buy|review of|specs?|specifications?)\b/.test(q) ||
     /\b(?:is|are) (?:it|this|that|these|those|the)\b.*\b(good|nice|worth|ok|okay|original|genuine|durable|reliable)\b/.test(q)
@@ -141,18 +134,14 @@ export function compareNote(query: string, site = ''): string | null {
     : null
 }
 
-// Colours people ask for, to say plainly when the page can't filter by one.
-const COLOUR_WORDS = ['black', 'white', 'red', 'blue', 'green', 'yellow', 'pink', 'purple', 'orange', 'brown', 'grey', 'gray',
-  'beige', 'maroon', 'navy', 'olive', 'khaki', 'cream', 'gold', 'silver', 'peach', 'teal', 'mustard', 'lavender']
-
 /** "White isn't a colour filter on this page": colours asked for that no applied filter covers. */
-export function missingColourNote(query: string, choices: FilterChoice[], page: PageInfo): string | null {
+export function missingColourNote(query: string, choices: FilterChoice[], page: Page): string | null {
   const q = ` ${clean(query)} `
   const chosen = choices.map((c) => c.option.toLowerCase()).join(' | ')
   // The real colour list ("Color"), not "Colour Family" (Pastel, Earthy…).
   const colourGroup = page.filters.find((g) => /^colou?rs?$/i.test(g.name)) ?? page.filters.find((g) => /colou?r/i.test(g.name) && !/family/i.test(g.name))
   const searched = ` ${(page.searchTerm ?? '').toLowerCase()} `
-  const missing = COLOUR_WORDS.filter((c) =>
+  const missing = COLOURS.filter((c) =>
     q.includes(` ${c} `) &&
     !searched.includes(` ${c} `) && // the search itself already asked for it ("pink cotton kurta")
     !new RegExp(String.raw`\b(?:not|no|without|except|remove|hatao)\s+(?:\w+\s+)?${c}\b|\b${c}\s+(?:hatao|nahi|nhi)\b`).test(q) &&
@@ -167,7 +156,7 @@ export function missingColourNote(query: string, choices: FilterChoice[], page: 
 }
 
 /** Shown when no filter could be matched, so the user always learns what to do next. */
-export function noMatchReply(query: string, page: PageInfo): string {
+export function noMatchReply(query: string, page: Page): string {
   const note = compareNote(query)
   if (note) return note
   const names = page.filters.filter((g) => g.name !== SORT_GROUP && g.options.length).map((g) => g.name)

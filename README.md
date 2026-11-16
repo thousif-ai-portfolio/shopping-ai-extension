@@ -15,7 +15,9 @@ on the page for you:
 It works like a chat: follow-up messages refine the same page. The panel shows the conversation
 (your messages on the right, answers with ✅ filter chips on the left), example requests to click,
 and while the AI starts a progress bar ("Preparing the AI… 34%", then "Starting the AI…"); Enter
-sends.
+sends. The backup AI runs in a hidden page that starts with Chrome and stays loaded until Chrome
+quits, so opening the panel again shows **Ready** at once instead of restarting the model
+(it keeps roughly 0.5–1 GB of memory in use while Chrome is open).
 
 | You type | What happens |
 |---|---|

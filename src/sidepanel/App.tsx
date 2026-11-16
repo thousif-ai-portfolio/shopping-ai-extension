@@ -1,18 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
 import { aiStatus, chooseFilters, warmUp } from '../ai/llm'
-import { SORT_GROUP, SORT_LABELS, type Product, type FilterChoice, type FilterGroup, type Message } from '../adapters/types'
+import { SORT_GROUP, SORT_LABELS, wait, type Product, type FilterChoice, type Message, type Page } from '../adapters/types'
 import { SITES, otherSite, searchFor, searchOnOtherSite, searchWords, wantsCompare } from '../ai/product'
 import { summarize, type SiteResult, type Summary } from '../ai/compare'
-
-import { decide, type Page } from '../ai/decide'
-import { quickReply } from '../ai/reply'
+import { decide } from '../ai/decide'
+import { label, quickReply } from '../ai/reply'
 
 // ?test exposes the AI step to the test runners (scripts/edge.mjs).
 if (new URLSearchParams(location.search).has('test'))
   Object.assign(window, {
     __chooseFilters: chooseFilters,
     __aiStatus: aiStatus,
-    __decide: (q: string, page: Page, remembered: FilterChoice[]) => decide(q, page, remembered, (x, g) => chooseFilters(x, g)),
+    __decide: (q: string, page: Page, remembered: FilterChoice[]) => decide(q, page, remembered, chooseFilters),
   })
 
 // The shopping tab the panel works on: the active tab of this window.
@@ -37,7 +36,7 @@ async function sendToPage<T>(msg: Message, tabId?: number): Promise<T> {
       break
     } catch {
       if (attempt >= 6) throw new Error('Open Amazon.in, Flipkart or Myntra and reload the page.')
-      await new Promise((r) => setTimeout(r, 1000))
+      await wait(1000)
     }
   }
   if (res?.error) throw new Error(res.error)
@@ -60,19 +59,14 @@ async function waitForNewPage<T>(tabId: number, oldUrl: string, msg: Message): P
       return await sendToPage<T>(msg, tabId)
     } catch (e) {
       if (i >= 10) throw e
-      await new Promise((r) => setTimeout(r, 1000))
+      await wait(1000)
     }
   }
 }
 
-type PageInfo = { site: string; filters: FilterGroup[]; searchTerm: string }
-
 // After filters are applied the page reloads; once it has loaded, ask it whether it shows any products.
 async function noResults(tabId: number): Promise<boolean> {
-  await new Promise((r) => setTimeout(r, 2500))
-  for (let i = 0; i < 20 && (await chrome.tabs.get(tabId)).status !== 'complete'; i++)
-    await new Promise((r) => setTimeout(r, 500))
-  await new Promise((r) => setTimeout(r, 1500)) // the site fills in its results after loading
+  await settled(tabId, 1500)
   try {
     return (await sendToPage<{ empty: boolean }>({ type: 'NO_RESULTS' }, tabId)).empty
   } catch {
@@ -93,13 +87,16 @@ function remember(before: FilterChoice[], done: FilterChoice[]): FilterChoice[] 
   return list
 }
 
-// Waits for a page to settle after filters were applied (it reloads, then fills in its results).
-async function settled(tabId: number) {
-  await new Promise((r) => setTimeout(r, 2500))
+// Waits for a page to settle after filters were applied (it reloads, then fills in its results
+// for `fill` ms more).
+async function settled(tabId: number, fill = 2000) {
+  await wait(2500)
   for (let i = 0; i < 20 && (await chrome.tabs.get(tabId)).status !== 'complete'; i++)
-    await new Promise((r) => setTimeout(r, 500))
-  await new Promise((r) => setTimeout(r, 2000))
+    await wait(500)
+  await wait(fill)
 }
+
+const same = (a: FilterChoice, b: FilterChoice) => a.group === b.group && a.option === b.option
 
 // Remembered filters as words, so "compare on all 3 sites" after "black puma jacket" still means
 // black + PUMA on every site (each site names its groups differently: "Brand" vs "Brands").
@@ -121,7 +118,7 @@ export default function App() {
   const [busy, setBusy] = useState(false)
 
   const [aiState, setAiState] = useState('')
-  // Filters this chat has applied, per shopping tab (see withRemembered / remember below).
+  // Filters this chat has applied, per shopping tab (see remember below).
   const memory = useRef(new Map<number, FilterChoice[]>())
 
   useEffect(() => {
@@ -147,28 +144,29 @@ export default function App() {
       setComparison(null)
       const tabId = await shopTabId()
       setStatus('Reading filters on the page…')
-      let page = await sendToPage<PageInfo>({ type: 'GET_FILTERS' }, tabId)
+      let page = await sendToPage<Page>({ type: 'GET_FILTERS' }, tabId)
 
+      // Questions like "where is my order on amazon" get an answer, never a compare or a site switch.
+      const question = !!quickReply(q, page, [])
       // "compare amazon, flipkart and myntra", "lowest price on all 3 sites"
-      if (wantsCompare(q) && !quickReply(q, page, [])) return compareSites(q, tabId, page)
+      if (wantsCompare(q) && !question) return compareSites(q, tabId, page)
 
       // "open amazon, i need a blue shirt" on Flipkart: go to that site, search there, then filter.
-      // (Not for questions like "where is my order on amazon": those get an answer.)
-      const site = quickReply(q, page, []) ? null : otherSite(q, page.site)
+      const site = question ? null : otherSite(q, page.site)
       let text: string | null = null
       if (site) {
         text = searchOnOtherSite(q, page.searchTerm)
         setStatus(`Opening ${site.name} and searching for "${text}"…`)
         const oldUrl = (await chrome.tabs.get(tabId)).url ?? ''
         await chrome.tabs.update(tabId, { url: site.url(text) })
-        page = await waitForNewPage<PageInfo>(tabId, oldUrl, { type: 'GET_FILTERS' })
+        page = await waitForNewPage<Page>(tabId, oldUrl, { type: 'GET_FILTERS' })
       } else if ((text = searchFor(q, page.searchTerm))) {
         // Asking for a different product than the page shows ("running shoes" on a jackets page)?
         // Search the site for it first, then filter the new results.
         setStatus(`Searching ${page.site} for "${text}"…`)
         const oldUrl = (await chrome.tabs.get(tabId)).url ?? ''
         await sendToPage({ type: 'SEARCH', text }, tabId)
-        page = await waitForNewPage<PageInfo>(tabId, oldUrl, { type: 'GET_FILTERS' })
+        page = await waitForNewPage<Page>(tabId, oldUrl, { type: 'GET_FILTERS' })
       }
       const searched = site ? `Opened ${site.name} and searched for "${text}". ` : text ? `Searched for "${text}". ` : ''
 
@@ -195,7 +193,6 @@ export default function App() {
 
       setStatus('Applying…')
       const { missing } = await sendToPage<{ missing: FilterChoice[] }>({ type: 'APPLY_FILTERS', choices }, tabId)
-      const same = (a: FilterChoice, b: FilterChoice) => a.group === b.group && a.option === b.option
       const done = choices.filter((c) => !missing.some((m) => same(m, c)))
       memory.current.set(tabId, remember(remembered, done))
       setApplied(shown.filter((c) => !missing.some((m) => same(m, c))))
@@ -213,7 +210,7 @@ export default function App() {
   // Same search + same filters on Amazon, Flipkart and Myntra, cheapest first; then open the
   // cheapest site's results and say why it won. One tab, one site after another (the sites only
   // render their filters in a visible tab).
-  async function compareSites(q: string, tabId: number, start: PageInfo) {
+  async function compareSites(q: string, tabId: number, start: Page) {
     const remembered = memory.current.get(tabId) ?? []
     const text = searchWords(q) || start.searchTerm.trim()
     if (!text) return setStatus('💬 Tell me what to compare, e.g. "compare black roadster shirt size 40 on all 3 sites".')
@@ -227,7 +224,7 @@ export default function App() {
         step(`searching "${text}"…`)
         const oldUrl = (await chrome.tabs.get(tabId)).url ?? ''
         await chrome.tabs.update(tabId, { url: site.url(text) })
-        const page = await waitForNewPage<PageInfo>(tabId, oldUrl, { type: 'GET_FILTERS' })
+        const page = await waitForNewPage<Page>(tabId, oldUrl, { type: 'GET_FILTERS' })
         step('choosing filters…')
         const d = await decide(request, page, [], (q, g) => chooseFilters(q, g, () => {}), true)
         // Always cheapest first, whatever else was asked, so the first results are the lowest prices.
@@ -243,9 +240,8 @@ export default function App() {
         let products: Product[] = []
         for (let i = 0; i < 4 && !products.length; i++) {
           products = (await sendToPage<{ products: Product[] }>({ type: 'GET_PRODUCTS' }, tabId)).products
-          if (!products.length) await new Promise((r) => setTimeout(r, 1500))
+          if (!products.length) await wait(1500)
         }
-        const same = (a: FilterChoice, b: FilterChoice) => a.group === b.group && a.option === b.option
         results.push({ site: site.name, applied: choices.filter((c) => !missing.some((m) => same(m, c))), url: (await chrome.tabs.get(tabId)).url ?? '', products })
       } catch (e) {
         results.push({ site: site.name, applied: [], url: '', products: [], error: (e as Error).message })
@@ -258,7 +254,7 @@ export default function App() {
       const oldUrl = (await chrome.tabs.get(tabId)).url ?? ''
       if (summary.winner.url !== oldUrl) {
         await chrome.tabs.update(tabId, { url: summary.winner.url })
-        await waitForNewPage<PageInfo>(tabId, oldUrl, { type: 'GET_FILTERS' }).catch(() => undefined)
+        await waitForNewPage<Page>(tabId, oldUrl, { type: 'GET_FILTERS' }).catch(() => undefined)
       }
       memory.current.set(tabId, summary.winner.applied)
       setApplied(summary.winner.applied)
@@ -266,10 +262,7 @@ export default function App() {
     setStatus(`Compared ${SITES.map((s) => s.name).join(', ')} for "${text}", cheapest first. Done ✅`)
   }
 
-  // One finished question and its answer, kept on screen like a chat.
-  const ready = /^ready/.test(aiState) // the exact "ready ✓" set when warmUp finishes
   const failed = /failed/.test(aiState)
-  const percent = Number(aiState.match(/(\d+)%/)?.[1] ?? NaN)
 
   function send(text: string) {
     const q = text.trim()
@@ -285,53 +278,36 @@ export default function App() {
   }
 
   return (
-    <div className="flex h-screen flex-col bg-slate-50 text-sm text-slate-800">
-      <header className="border-b border-slate-200 bg-white px-4 py-3">
+    <div className="flex h-screen flex-col bg-neutral-50 text-sm text-neutral-800">
+      <header className="border-b border-neutral-200 bg-white px-4 py-3">
         <div className="flex items-center gap-2">
-          <span className="grid h-7 w-7 place-items-center rounded-lg bg-indigo-600 text-xs font-bold text-white">AI</span>
+          <span className="grid h-7 w-7 place-items-center rounded-lg bg-black text-xs font-bold text-white">AI</span>
           <h1 className="text-base font-semibold">Shopping Assistant</h1>
-          <span
-            className={`ml-auto rounded-full px-2 py-0.5 text-xs font-medium ${ready ? 'bg-emerald-100 text-emerald-700' : failed ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-800'}`}
-          >
-            {ready ? '● Ready' : failed ? 'AI failed' : 'Starting…'}
-          </span>
+          {/* The AI loads in the background (see offscreen/main.ts); only a failure is shown. A request
+              sent while it is still loading shows the loading progress in its own status line. */}
+          {failed && <span className="ml-auto rounded-full border border-black bg-white px-2 py-0.5 text-xs font-medium text-black">AI failed</span>}
         </div>
-        <p id="ai-label" className="mt-1 text-xs text-slate-500">
-          Private AI on this computer · {ai} · works on Amazon, Flipkart, Myntra
-        </p>
-        {!ready && (
-          <div className="mt-2">
-            <p id="ai-state" className="text-xs text-slate-600">{aiState || 'Preparing the AI…'}</p>
-            <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-slate-200">
-              <div
-                className={`h-full rounded-full bg-indigo-500 transition-all ${isNaN(percent) ? 'w-1/3 animate-pulse' : ''}`}
-                style={isNaN(percent) ? undefined : { width: `${percent}%` }}
-              />
-            </div>
-            <p className="mt-1 text-[11px] text-slate-400">
-              The very first time, the AI downloads once (~500 MB, a few minutes). You can type already.
-            </p>
-          </div>
-        )}
-        {ready && <span id="ai-state" className="hidden">{aiState}</span>}
+        {/* Not shown; the tests read which AI is in use and its loading state from here. */}
+        <span id="ai-label" className="hidden">{ai}</span>
+        <span id="ai-state" className="hidden">{aiState}</span>
       </header>
 
       <main className="flex-1 space-y-4 overflow-y-auto px-4 py-4">
         {!asked && (
-          <div className="rounded-xl border border-slate-200 bg-white p-4">
+          <div className="rounded-xl border border-neutral-200 bg-white p-4">
             <p className="font-medium">Hi! What are you shopping for?</p>
-            <p className="mt-1 text-slate-500">
+            <p className="mt-1 text-neutral-500">
               Open a search on Amazon, Flipkart or Myntra and tell me in your own words. I'll tick the filters for you.
             </p>
-            <p className="mt-3 text-xs font-medium uppercase tracking-wide text-slate-400">Try</p>
-            <div className="mt-1 flex flex-wrap gap-2">
-              {EXAMPLES.map((e) => (
+            <div className="mt-4 grid grid-cols-3 gap-2">
+              {SITES.map((s) => (
                 <button
-                  key={e}
-                  className="example rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-indigo-700 hover:bg-indigo-100"
-                  onClick={() => send(e)}
+                  key={s.name}
+                  className="site flex flex-col items-center gap-2 rounded-xl border border-neutral-300 bg-white py-3 font-medium text-black transition hover:border-black hover:shadow-sm"
+                  onClick={() => openSite(s.home)}
                 >
-                  {e}
+                  <SiteLogo url={s.home} size={32} />
+                  {s.name}
                 </button>
               ))}
             </div>
@@ -349,10 +325,25 @@ export default function App() {
         <div ref={(el) => el?.scrollIntoView({ block: 'end' })} />
       </main>
 
-      <footer className="border-t border-slate-200 bg-white p-3">
+      <footer className="border-t border-neutral-200 bg-white p-3">
+        {/* After the first message the welcome card is gone, so the sites stay reachable here. */}
+        {asked && (
+          <div className="mb-2 flex gap-1.5">
+            {SITES.map((s) => (
+              <button
+                key={s.name}
+                className="site flex items-center gap-1.5 rounded-full border border-neutral-300 px-2.5 py-0.5 text-xs text-neutral-700 hover:border-black hover:text-black"
+                onClick={() => openSite(s.home)}
+              >
+                <SiteLogo url={s.home} size={14} />
+                {s.name}
+              </button>
+            ))}
+          </div>
+        )}
         <div className="flex items-end gap-2">
           <textarea
-            className="max-h-32 min-h-[44px] flex-1 resize-none rounded-xl border border-slate-300 px-3 py-2 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+            className="max-h-32 min-h-[44px] flex-1 resize-none rounded-xl border border-neutral-300 px-3 py-2 outline-none focus:border-black focus:ring-2 focus:ring-neutral-200"
             rows={2}
             placeholder={busy ? 'Working on it…' : 'e.g. black puma jacket size M under 2000'}
             value={query}
@@ -367,14 +358,14 @@ export default function App() {
           />
           <button
             id="send"
-            className="h-11 rounded-xl bg-indigo-600 px-4 font-medium text-white hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-slate-300"
+            className="h-11 rounded-xl bg-black px-4 font-medium text-white hover:bg-neutral-800 disabled:cursor-not-allowed disabled:bg-neutral-300"
             disabled={!query.trim() || busy}
             onClick={() => send(query)}
           >
             {busy ? '…' : 'Send'}
           </button>
         </div>
-        <p className="mt-1 text-[11px] text-slate-400">Enter to send · "start over" clears all filters · nothing leaves your computer</p>
+        <p className="mt-1 text-[11px] text-neutral-400">Enter to send · "start over" clears all filters · nothing leaves your computer</p>
       </footer>
     </div>
   )
@@ -382,7 +373,15 @@ export default function App() {
 
 type Turn = { q: string; status: string; chips: FilterChoice[]; comparison: Summary | null }
 
-const EXAMPLES = ['black puma jacket under 2000', 'cheapest first', 'what brands are there?', 'compare on all 3 sites', 'start over']
+// Opens a site in the current tab, the one this panel works on.
+const openSite = (url: string) => shopTabId().then((id) => chrome.tabs.update(id, { url }))
+
+// The site's own icon from Chrome's favicon cache (needs the "favicon" permission; served from
+// the extension itself, so no network request), in greyscale to fit the black-and-white panel.
+function SiteLogo({ url, size }: { url: string; size: number }) {
+  const src = chrome.runtime.getURL(`/_favicon/?pageUrl=${encodeURIComponent(url)}&size=${size > 16 ? 64 : 32}`)
+  return <img src={src} width={size} height={size} alt="" className="grayscale" />
+}
 
 // One request and the assistant's answer: what was done, the filters (✅ added, 🗑 removed,
 // ↕ sorted), and for a comparison the price on each site.
@@ -392,15 +391,15 @@ function Exchange({ turn, working = false, live = false }: { turn: Turn; working
   const finished = /Done|💬|⚠️|Could not/.test(turn.status)
   return (
     <div className="space-y-2">
-      <div className="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-sm bg-indigo-600 px-3 py-2 text-white">{turn.q}</div>
-      <div className="w-fit max-w-[95%] space-y-2 rounded-2xl rounded-bl-sm border border-slate-200 bg-white px-3 py-2">
+      <div className="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-sm bg-black px-3 py-2 text-white">{turn.q}</div>
+      <div className="w-fit max-w-[95%] space-y-2 rounded-2xl rounded-bl-sm border border-neutral-200 bg-white px-3 py-2">
         {/* #status holds the whole status text; the live tests read it. */}
         {live && <p id="status" className="hidden">{turn.status}</p>}
-        {working && !turn.status && <p className="text-slate-500">⏳ Thinking…</p>}
+        {working && !turn.status && <p className="text-neutral-500">⏳ Thinking…</p>}
         {lines.map((l, i) => (
           <p
             key={i}
-            className={/^⚠️/.test(l) ? 'rounded-lg bg-amber-50 px-2 py-1 text-amber-800' : /^💬/.test(l) ? 'text-slate-700' : 'text-slate-600'}
+            className={/^⚠️/.test(l) ? 'rounded-lg bg-neutral-100 px-2 py-1 text-black' : /^💬/.test(l) ? 'text-neutral-700' : 'text-neutral-600'}
           >
             {working && !finished && i === lines.length - 1 ? '⏳ ' : ''}
             {l.replace(/^💬\s*/, '')}
@@ -411,34 +410,34 @@ function Exchange({ turn, working = false, live = false }: { turn: Turn; working
             {turn.chips.map((c) => (
               <span
                 key={c.group + c.option}
-                className={`chip rounded-full px-2.5 py-0.5 text-xs font-medium ${c.remove ? 'bg-red-50 text-red-700' : c.group === SORT_GROUP ? 'bg-sky-50 text-sky-700' : 'bg-emerald-50 text-emerald-700'}`}
+                className={`chip rounded-full px-2.5 py-0.5 text-xs font-medium ${c.remove ? 'bg-neutral-100 text-neutral-500 line-through' : c.group === SORT_GROUP ? 'border border-black bg-white text-black' : 'bg-black text-white'}`}
               >
                 {c.remove ? '🗑' : c.group === SORT_GROUP ? '↕' : '✅'}{' '}
-                {c.group === '*' ? 'All filters' : c.option === '*' ? `${c.group}: all` : `${c.group}: ${c.option}`}
+                {c.group === '*' ? 'All filters' : label(c)}
               </span>
             ))}
           </div>
         )}
         {turn.comparison && (
-          <div id={live ? 'comparison' : undefined} className="space-y-1.5 rounded-xl bg-slate-50 p-2">
+          <div id={live ? 'comparison' : undefined} className="space-y-1.5 rounded-xl bg-neutral-50 p-2">
             <p className="font-semibold">{turn.comparison.text.split('\n')[0]}</p>
             <ul className="space-y-1">
               {turn.comparison.rows.map((r) => (
                 <li
                   key={r.site}
-                  className={r === turn.comparison!.winner ? 'font-medium text-emerald-700' : r.counted ? '' : 'text-slate-500'}
+                  className={r === turn.comparison!.winner ? 'font-semibold text-black' : r.counted ? '' : 'text-neutral-500'}
                 >
                   {turn.comparison!.text.split('\n').find((l) => l.startsWith(`• ${r.site}:`))}
                   {r.cheapest?.url && (
                     <>
                       {' · '}
-                      <a className="text-indigo-600 underline" href={r.cheapest.url} target="_blank" rel="noreferrer">view</a>
+                      <a className="text-black underline" href={r.cheapest.url} target="_blank" rel="noreferrer">view</a>
                     </>
                   )}
                 </li>
               ))}
             </ul>
-            <p className="text-[11px] text-slate-500">
+            <p className="text-[11px] text-neutral-500">
               Same search and filters on each site, cheapest first. The sites share no product ids, so this is the
               cheapest matching item on each, not necessarily the identical product.
             </p>

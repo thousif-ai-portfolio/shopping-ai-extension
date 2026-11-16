@@ -43,6 +43,14 @@ export const firstPrice = (text: string): number => {
   return m ? Number(m[1].replace(/,/g, '')) : NaN
 }
 
+// What the content script reports about the page (the reply to GET_FILTERS).
+export type Page = { site: string; filters: FilterGroup[]; searchTerm: string }
+
+export const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
+// Navigate a moment later, so the reply to the side panel is sent first.
+export const navigateSoon = (href: string) => setTimeout(() => location.assign(href), 50)
+export const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
 // Messages between the side panel and the content script.
 export type Message =
   | { type: 'GET_FILTERS' }

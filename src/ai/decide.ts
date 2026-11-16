@@ -1,13 +1,11 @@
 // What to do with one chat message: answer it, or pick filters. The side panel and the tests
 // (scripts/everyday.mjs, scripts/edge.mjs) all call this, so they run exactly the same steps.
-import { SORT_GROUP, type FilterChoice, type FilterGroup } from '../adapters/types'
+import { SORT_GROUP, type FilterChoice, type FilterGroup, type Page } from '../adapters/types'
 import { compareNote, missingColourNote, noMatchReply, quickReply } from './reply'
 import { isRemoveRequest, withReplacements } from './rules'
 
-// searchTerm: what the page was searched for ("pink cotton kurta"), when known.
-export type Page = { site: string; filters: FilterGroup[]; searchTerm?: string }
 // reply alone: answer, apply nothing. reply + choices: apply, and show the reply as a note.
-export type Decision = { reply?: string; choices: FilterChoice[] }
+type Decision = { reply?: string; choices: FilterChoice[] }
 type Choose = (query: string, groups: FilterGroup[]) => Promise<FilterChoice[]>
 
 // The page's filter list plus anything this chat applied that the page no longer shows
@@ -31,11 +29,12 @@ export async function decide(query: string, page: Page, remembered: FilterChoice
   const reply = searched ? null : quickReply(query, page, remembered)
   if (reply) return { reply, choices: [] }
   // Only for removing: never re-apply a remembered filter the page no longer offers.
-  const groups = isRemoveRequest(query) ? withRemembered(page.filters, remembered) : page.filters
+  const removing = isRemoveRequest(query)
+  const groups = removing ? withRemembered(page.filters, remembered) : page.filters
   let choices = groups.length ? await choose(query, groups) : []
   // "remove it", "undo": the last filter this chat added.
   const last = [...remembered].reverse().find((r) => r.group !== SORT_GROUP)
-  if (!choices.length && last && isRemoveRequest(query) && /\b(it|that|this|last|undo|previous)\b/i.test(query))
+  if (!choices.length && last && removing && /\b(it|that|this|last|undo|previous)\b/i.test(query))
     choices = [{ group: last.group, option: last.option, remove: true }]
   if (!choices.length) return searched ? { choices } : { reply: noMatchReply(query, page), choices }
   // "make it L", "nike instead of puma": also take off the earlier choice in that group.
@@ -43,6 +42,6 @@ export async function decide(query: string, page: Page, remembered: FilterChoice
   // Say what couldn't be done too: "compare …", or a colour the page can't filter by.
   const final = withReplacements(query, choices, remembered)
   // (Colours already applied or being removed — "change black to blue" — are not missing.)
-  const notes = [compareNote(query, page.site), missingColourNote(query, [...final, ...remembered], page)].filter(Boolean)
+  const notes = [compareNote(query), missingColourNote(query, [...final, ...remembered], page)].filter(Boolean)
   return { choices: final, reply: notes.join(' ') || undefined }
 }

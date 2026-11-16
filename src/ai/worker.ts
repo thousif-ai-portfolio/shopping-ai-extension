@@ -1,26 +1,32 @@
 // Runs the backup model off the main thread so the side panel never freezes.
-// Messages in:  { id, wasmPaths, device?, query? }   (no query = just preload the model)
-// Messages out: { id, progress } | { id, reply } | { id, error }
+// Messages in:  { id, wasmPaths, device?, dtype?, query? }   (no query = just preload the model)
+// Messages out: { id, progress } | { id, reply } | { id, error } | { loading } (to every panel)
 import { env, pipeline, type TextGenerationPipeline } from '@huggingface/transformers'
-
-const MODEL = 'onnx-community/Qwen2.5-0.5B-Instruct'
-
 // A tiny answer like "black, puma" is much faster than generating JSON (see prompt.ts).
 import { EXAMPLE_IN, EXAMPLE_OUT, SYSTEM } from './prompt'
 
+const MODEL = 'onnx-community/Qwen2.5-0.5B-Instruct'
+
 let generator: Promise<TextGenerationPipeline> | null = null
 
-function load(device: string | undefined, dtype: string | undefined, progress: (msg: string) => void) {
+// Loading progress has no request id: every open panel shows it (see offscreen/main.ts).
+const progress = (msg: string) => self.postMessage({ loading: msg })
+
+let loadedAs = '' // device/dtype of the loaded model; the speed test asks for others
+
+// CPU with the 8-bit model was fastest in tests on a typical laptop (i3, Intel graphics):
+// 18 s per answer vs 20-36 s for other options, and loads in seconds instead of ~90 s on GPU.
+// Stronger PCs usually get Chrome's Gemini Nano instead of this backup.
+function load(device = 'wasm', dtype = 'q8') {
+  const as = `${device}/${dtype}`
+  if (as !== loadedAs) generator = null
+  loadedAs = as
   generator ??= (async () => {
-    // CPU with the 8-bit model was fastest in tests on a typical laptop (i3, Intel graphics):
-    // 18 s per answer vs 20-36 s for other options, and loads in seconds instead of ~90 s on GPU.
-    // Stronger PCs usually get Chrome's Gemini Nano instead of this backup.
-    const use = device ?? 'wasm'
     progress('Preparing the AI…')
     const t0 = performance.now()
     const gen = (await pipeline('text-generation', MODEL, {
-      device: use as 'webgpu' | 'wasm',
-      dtype: (dtype ?? 'q8') as 'q8',
+      device: device as 'webgpu' | 'wasm',
+      dtype: dtype as 'q8',
       // The model file (~500 MB) is downloaded the first time and read from the browser's cache
       // after that; either way it then has to start up, which takes about 15 s on a laptop.
       progress_callback: (p: any) => {
@@ -30,9 +36,9 @@ function load(device: string | undefined, dtype: string | undefined, progress: (
       },
     })) as TextGenerationPipeline
     // A tiny practice run makes the GPU prepare its programs now, not on the first real request.
-    if (use === 'webgpu') await gen('hi', { max_new_tokens: 1 })
+    if (device === 'webgpu') await gen('hi', { max_new_tokens: 1 })
     console.log(
-      `[ai] model (${dtype ?? 'q8'}) loaded on ${use} in ${Math.round(performance.now() - t0)} ms` +
+      `[ai] model (${dtype}) loaded on ${device} in ${Math.round(performance.now() - t0)} ms` +
         ` (threads: ${self.crossOriginIsolated ? env.backends.onnx.wasm!.numThreads ?? 'auto' : 1})`,
     )
     return gen
@@ -43,14 +49,13 @@ function load(device: string | undefined, dtype: string | undefined, progress: (
 
 self.onmessage = async (e: MessageEvent) => {
   const { id, query, wasmPaths, device, dtype } = e.data
-  const progress = (msg: string) => self.postMessage({ id, progress: msg })
   try {
     env.backends.onnx.wasm!.wasmPaths = wasmPaths
     // Otherwise it re-loads the runtime from a blob: URL, which extension security rules block.
     env.useWasmCache = false
-    const gen = await load(device, dtype, progress)
+    const gen = await load(device, dtype)
     if (!query) return self.postMessage({ id, reply: '' })
-    progress('AI is reading your request…')
+    self.postMessage({ id, progress: 'AI is reading your request…' })
     const t0 = performance.now()
     const out = await gen(
       [

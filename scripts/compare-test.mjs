@@ -100,6 +100,8 @@ s = summarize([
 check('"running shoes": court sneakers are skipped, the running shoe is compared', s.rows[0].cheapest?.price === 5995, s.text)
 s = summarize([r('Amazon', [sort], [p(500, 'Formal Shirt')]), r('Flipkart', [sort], [p(400, 'Casual Shirt')]), r('Myntra', [sort], [])], 'casual shirt')
 check('"casual shirt": a formal shirt does not count', s.winner?.site === 'Flipkart' && !s.rows[0].counted, s.text)
+s = summarize([r('Amazon', [sort], [p(999, 'Ray-Ban Men Sunglasses')]), r('Flipkart', [sort], [p(799, 'Fastrack Sunglasses')]), r('Myntra', [sort], [])], 'sunglasses')
+check('"sunglasses": plural "-sses" titles still count', s.winner?.site === 'Flipkart' && s.rows[0].counted, s.text)
 
 // ===== Found in the panel screenshot (Nov 12): a budget must not exclude sites without a price filter
 const max2000 = { group: 'Max price', option: '₹2000' }

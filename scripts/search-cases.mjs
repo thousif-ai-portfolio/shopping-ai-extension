@@ -7,6 +7,7 @@ export const SEARCH = [
   { q: 'can you open amazon i need blue shirt which under 500', now: 'Flipkart', current: 'jacket men', site: 'Amazon', search: 'blue shirt' },
   // ===== Another product on the same site: only the product words are searched
   { q: 'give me running shoes', now: 'Flipkart', current: 'jacket men', site: null, search: 'running shoes' },
+  { q: 'tell me this blue shirt', now: 'Flipkart', current: 'jacket men', site: null, search: 'blue shirt' },
   { q: 'can you show me running shoes', now: 'Flipkart', current: 'jacket men', site: null, search: 'running shoes' },
   { q: 'i need a blue shirt which is under 500', now: 'Flipkart', current: 'jacket men', site: null, search: 'blue shirt' },
   { q: 'do you have any white sneakers in size 9', now: 'Myntra', current: 'jackets', site: null, search: 'white sneakers' },

@@ -1,4 +1,4 @@
-import { ANY_AMOUNT, SORT_GROUP, SORT_LABELS, firstPrice, type FilterChoice, type FilterGroup, type Product, type SiteAdapter } from './types'
+import { ANY_AMOUNT, SORT_GROUP, SORT_LABELS, firstPrice, navigateSoon, type FilterChoice, type FilterGroup, type Product, type SiteAdapter } from './types'
 
 // How Amazon.in filters work (checked on the live page, Nov 2026):
 // - Each filter group is <div id="filter-p_123"> and its heading is <div id="p_123-title">.
@@ -19,13 +19,20 @@ const MIN_PRICE = 'Min price'
 const MAX_PRICE = 'Max price'
 const PRICE_STEPS = [300, 500, 700, 1000, 1500, 2000, 2500, 3000, 4000, 5000, 7500, 10000, 15000, 20000]
 
+const filterBoxes = () => document.querySelectorAll<HTMLElement>('#s-refinements [id^="filter-p_"]')
+const keyOf = (box: HTMLElement) => box.id.slice('filter-'.length)
+// Price (p_36) has a slider instead of a title element.
+const groupName = (key: string) =>
+  document.getElementById(`${key}-title`)?.textContent?.trim() || (key === 'p_36' ? 'Price' : '')
+// Colour swatches have no text, only a title attribute.
+const labelOf = (a: HTMLAnchorElement) =>
+  (a.title || a.querySelector('span.a-size-base')?.textContent || a.textContent || '').replace(/\s+/g, ' ').trim()
+
 function readOptions(): Option[] {
   const out: Option[] = []
-  for (const box of document.querySelectorAll<HTMLElement>('#s-refinements [id^="filter-p_"]')) {
-    const key = box.id.slice('filter-'.length)
-    // Price (p_36) has a slider instead of a title element.
-    const group =
-      document.getElementById(`${key}-title`)?.textContent?.trim() || (key === 'p_36' ? 'Price' : '')
+  for (const box of filterBoxes()) {
+    const key = keyOf(box)
+    const group = groupName(key)
     if (!group) continue
 
     for (const a of box.querySelectorAll<HTMLAnchorElement>('li a[href*="rh="]')) {
@@ -34,13 +41,7 @@ function readOptions(): Option[] {
       // An option that is already active links to the page *without* it, so it may have no part
       // for its group; keep it anyway (with rh ''), so it can be named in "remove nike".
       const part = rh.split(',').find((p) => p.startsWith(`${key}:`)) ?? ''
-      // Colour swatches have no text, only a title attribute.
-      const label = (
-        a.title ||
-        a.querySelector('span.a-size-base')?.textContent ||
-        a.textContent ||
-        ''
-      ).replace(/\s+/g, ' ').trim()
+      const label = labelOf(a)
       if (label) out.push({ group, key, label, rh: part })
     }
   }
@@ -79,13 +80,11 @@ const rememberId = (group: string, label: string, keyAndId: string) => {
 // Which option ids an active option has. An active option's link is the URL *without* it,
 // so the ids it adds are the ones in the current URL but not in its link.
 function activeIds(group: string, label: string, rh: Map<string, Set<string>>): [string, string[]] | null {
-  for (const box of document.querySelectorAll<HTMLElement>('#s-refinements [id^="filter-p_"]')) {
-    const key = box.id.slice('filter-'.length)
-    const name = document.getElementById(`${key}-title`)?.textContent?.trim() || (key === 'p_36' ? 'Price' : '')
-    if (name !== group) continue
-    for (const a of box.querySelectorAll<HTMLAnchorElement>('li a[href*="rh="], li a')) {
-      const text = (a.title || a.querySelector('span.a-size-base')?.textContent || a.textContent || '').replace(/\s+/g, ' ').trim()
-      if (text !== label) continue
+  for (const box of filterBoxes()) {
+    const key = keyOf(box)
+    if (groupName(key) !== group) continue
+    for (const a of box.querySelectorAll<HTMLAnchorElement>('li a')) {
+      if (labelOf(a) !== label) continue
       const linkIds = currentRh(new URL(a.href, location.href)).get(key) ?? new Set()
       return [key, [...(rh.get(key) ?? [])].filter((id) => !linkIds.has(id))]
     }
@@ -128,11 +127,6 @@ export const amazon: SiteAdapter = {
 
   // Everything (adding, removing, price, sort) goes into one new URL, loaded once.
   async applyFilters(choices: FilterChoice[]) {
-    const go = (href: string) => setTimeout(() => location.assign(href), 50) // after the reply is sent
-    if (choices.some((c) => c.group === '*')) {
-      go(amazon.searchUrl(amazon.searchTerm())) // "clear all filters"
-      return []
-    }
     const url = new URL(location.href)
     const rh = currentRh(url)
     const options = readOptions()
@@ -178,7 +172,7 @@ export const amazon: SiteAdapter = {
     if (parts.length) url.searchParams.set('rh', parts.join(','))
     else url.searchParams.delete('rh')
     for (const junk of ['qid', 'rnid', 'ref', 'ds']) url.searchParams.delete(junk)
-    if (url.toString() !== location.href) go(url.toString())
+    if (url.toString() !== location.href) navigateSoon(url.toString())
     return missing
   },
 }

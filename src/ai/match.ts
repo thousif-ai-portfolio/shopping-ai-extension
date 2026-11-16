@@ -20,21 +20,20 @@ export type Wanted = {
   clearAll?: boolean
 }
 
-
 // Same meaning, different words. Applied to both the sentence and the option names.
 const ALIASES: [RegExp, string][] = [
   [/&/g, ' and '],
   [/\bgr[ae]y(s)?\b/g, 'grey$1'],
   [/\bmulti[\s-]?colou?r(ed)?s?\b/g, 'multicolor'],
   [/\bcolou?rs?\b/g, 'color'],
-  [/\b(men|man)'?s\b/g, 'men'],
-  [/\b(women|woman)'?s\b/g, 'women'],
-  [/\b(ladies|lady|female|womens|feminine)\b/g, 'women'],
-  [/\b(gents|gent|male|gentlemen|mens)\b/g, 'men'],
+  // (canon() strips apostrophes first: "men's" arrives as "mens".)
+  [/\b(men|man)s\b/g, 'men'],
+  [/\b(women|woman)s\b/g, 'women'],
+  [/\b(ladies|lady|female|feminine)\b/g, 'women'],
+  [/\b(gents|gent|male|gentlemen)\b/g, 'men'],
   [/\b(?:man|guy|gentleman)\b/g, 'men'], [/\bwoman\b/g, 'women'],
   // "big battery", "long battery life", "good battery backup" → Flipkart's "Long-Lasting Battery"
   [/\b(?:big|long|good|large|huge|best)(?:\s+lasting)?\s+battery(?:\s+(?:life|backup))?\b|\bbattery\s+backup\b/g, 'long lasting battery'],
-  [/\bboy'?s\b/g, 'boys'], [/\bgirl'?s\b/g, 'girls'],
   // Gifts: "for my wife" → women, "for my son" → boys.
   [/\bfor (?:my |your |our )?(wife|girlfriend|gf|mother|mom|mummy|mum|sister|her|aunt|bhabhi|didi)\b/g, 'for women'],
   [/\bfor (?:my |your |our )?(husband|boyfriend|bf|father|dad|papa|brother|him|uncle|bhai)\b/g, 'for men'],
@@ -42,10 +41,9 @@ const ALIASES: [RegExp, string][] = [
   [/\bone\s*plus\b/g, 'oneplus'], [/\bu\s*s\s*polo\b/g, 'us polo'],
   [/\bhood(ed|ie|y)\b/g, 'with hood'],
   [/\b3\/4(th)?\b/g, 'three quarter'],
-  [/\bthree[\s-]quarter\b/g, 'three quarter'],
   [/\biphones?\b/g, 'apple'], [/\bmoto\b/g, 'motorola'], [/\b(?:google )?pixel\b/g, 'google'],
   // "delivered today", "same day delivery" → Amazon's "Get It Today"
-  [/\b(?:deliver(?:ed|y)?|arriv\w*|get it|reach\w*)\s+(?:by\s+)?today\b|\btoday'?s?\s+delivery\b|\bsame[\s-]day delivery\b/g, 'get it today'],
+  [/\b(?:deliver(?:ed|y)?|arriv\w*|get it|reach\w*)\s+(?:by\s+)?today\b|\btodays?\s+delivery\b|\bsame[\s-]day delivery\b/g, 'get it today'],
   // Phone features in everyday words
   [/\bface\s*(?:unlock|lock|id)\b/g, 'face recognition'],
   [/\b(?:usb[\s-]?)?type[\s-]?c\b/g, 'usb type c'],
@@ -59,7 +57,7 @@ const ALIASES: [RegExp, string][] = [
   // "Without …" match. It is still a negation, so "no puma" still excludes PUMA.
   [/\b(no|non)[\s-]+(?=[a-z])/g, 'without '],
   // A few common Hindi colour words.
-  [/\bkaa?l[ai]\b/g, 'black'], [/\bsaf(?:e|ai|ae|ed)d?\b/g, 'white'], [/\blaa?l\b/g, 'red'], [/\bne+la\b|\bnila\b/g, 'blue'],
+  [/\bkaa?l[ai]\b/g, 'black'], [/\bsaf(?:e|ai|ae)d\b/g, 'white'], [/\blaa?l\b/g, 'red'], [/\bne+la\b|\bnila\b/g, 'blue'],
   [/\bhara\b|\bhari\b/g, 'green'], [/\bpe+la\b|\bpili\b/g, 'yellow'], [/\bgulabi\b/g, 'pink'], [/\bbhura\b/g, 'brown'],
   [/\bnarangi\b/g, 'orange'], [/\bbaingani\b/g, 'purple'],
 ]
@@ -73,8 +71,7 @@ const SYNONYMS: Record<string, string[]> = {
   checked: ['checkered'], checkered: ['checked'], check: ['checkered', 'checked'],
   gym: ['training or gym', 'exercising'], tomorrow: ['get it by tomorrow'], velcro: ['hook and loop'],
 }
-// Size words → size codes, and equivalent codes used by different sites.
-const SIZE_WORDS: Record<string, string> = { small: 'S', medium: 'M', large: 'L', 'extra large': 'XL' }
+// Equivalent size codes used by different sites. (Size words like "medium" → M are read by rules.ts.)
 const SIZE_SAME: Record<string, string> = { XXS: '2XS', '2XS': 'XXS', XXL: '2XL', '2XL': 'XXL', XXXL: '3XL', '3XL': 'XXXL' }
 
 // Never matched from free text: too common, or handled by rules (numbers, sizes).
@@ -144,8 +141,8 @@ function optionHolds(option: string, v: number) {
   return false
 }
 
-function unitChoices(query: string, groups: FilterGroup[]): FilterChoice[] {
-  const q = query.toLowerCase()
+// q: the normalized (lowercase) query.
+function unitChoices(q: string, groups: FilterGroup[]): FilterChoice[] {
   const out: FilterChoice[] = []
   for (const m of q.matchAll(/(\d+(?:[.,]\d+)?)\s*(gb|tb|mah|mp|ghz|hz|inch(?:es)?|cm)\b/g)) {
     let v = toNum(m[1])
@@ -310,9 +307,8 @@ export function matchFilters(w: Wanted, groups: FilterGroup[], rawQuery = ''): F
   for (const term of w.terms) {
     const t = words(term)
     if (!t.length || t.every((x) => negatedWords.has(x) || usedWords.has(x))) continue
-    const size = SIZE_WORDS[term.toLowerCase()] ?? term
     // Shoe sizes are "9" on some sites and "UK9" on others (Myntra).
-    const codes = [size.toUpperCase(), SIZE_SAME[size.toUpperCase()], /^\d/.test(size) ? `UK${size}` : ''].filter(Boolean)
+    const codes = [term.toUpperCase(), SIZE_SAME[term.toUpperCase()], /^\d/.test(term) ? `UK${term}` : ''].filter(Boolean)
     // Exact option name ("Black", "M"), else an equivalent size code ("XXL" ↔ "2XL").
     for (const g of textGroups) {
       const o =
@@ -342,17 +338,15 @@ export function matchFilters(w: Wanted, groups: FilterGroup[], rawQuery = ''): F
   }
   const exactMin = exact(/min price/i, min)
   const exactMax = exact(/max price/i, max)
-  if (exactMax || exactMin) {
-    add(exactMax)
-    add(exactMin)
-  }
+  add(exactMax)
+  add(exactMin)
   const minChoice = exactMin ? null : min ? bestNumeric(groups, /min price/i, (n) => (n.length && n[0] <= min ? n[0] : null)) : null
   const minValue = minChoice ? numbers(minChoice.option)[0] : 0
   // A budget above every value in the dropdown ("under 1 lakh", top value ₹30000+) means no upper limit:
   // pick the "₹30000+" option instead of cutting the results at ₹30000.
   const top = groups.find((g) => /max price/i.test(g.name))?.options.filter((o) => !o.includes('+')).map((o) => numbers(o)[0] ?? 0)
   const aboveAll = !!max && !!top?.length && max > Math.max(...top)
-  if (max && !exactMax && aboveAll) add(bestNumeric(groups, /max price/i, (n, o) => (o.includes('+') ? 1 : null)))
+  if (max && !exactMax && aboveAll) add(bestNumeric(groups, /max price/i, (_, o) => (o.includes('+') ? 1 : null)))
   else if (max && !exactMax) {
     // "Max price" dropdown (Flipkart): highest value not above the limit; if that is
     // not above the chosen minimum, the next value up (so the range is never empty).

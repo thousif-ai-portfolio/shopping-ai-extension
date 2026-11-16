@@ -1,4 +1,4 @@
-import { SORT_GROUP, SORT_LABELS, firstPrice, type FilterChoice, type FilterGroup, type Product, type SiteAdapter } from './types'
+import { SORT_GROUP, SORT_LABELS, escapeRe, firstPrice, navigateSoon, wait, type FilterChoice, type FilterGroup, type Product, type SiteAdapter } from './types'
 
 // How Myntra filters work (checked on the live page, Nov 2026):
 // - Left sidebar: each group is .vertical-filters-filters with a .vertical-filters-header
@@ -8,7 +8,6 @@ import { SORT_GROUP, SORT_LABELS, firstPrice, type FilterChoice, type FilterGrou
 //   its options in a single shared .atsa-values dropdown; only one is open at a time.
 // - Ticking an option updates the page in place (no reload) and closes the top dropdown.
 
-const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
 const clean = (t: string) => t.replace(/\(\d+\)\s*$/, '').replace(/\s+/g, ' ').trim()
 const optionLabels = (root: ParentNode) =>
   [...root.querySelectorAll<HTMLLabelElement>('label')].filter((l) => l.querySelector('input'))
@@ -119,10 +118,6 @@ export const myntra: SiteAdapter = {
   },
 
   async applyFilters(all: FilterChoice[]) {
-    if (all.some((c) => c.group === '*')) {
-      setTimeout(() => location.assign(myntra.searchUrl(myntra.searchTerm())), 50) // "clear all filters"
-      return []
-    }
     const choices = all.filter((c) => !c.remove && c.group !== SORT_GROUP)
     const missing = await applyAdds(choices)
     // Removing and sorting: edit the URL and reload once.
@@ -148,7 +143,7 @@ export const myntra: SiteAdapter = {
       if (kept) url.searchParams.set('f', kept)
       else url.searchParams.delete('f')
       if (sort && SORT[sort.option]) url.searchParams.set('sort', SORT[sort.option])
-      if (url.toString() !== location.href) setTimeout(() => location.assign(url.toString()), 50)
+      if (url.toString() !== location.href) navigateSoon(url.toString())
     }
     return missing
   },
@@ -192,7 +187,6 @@ function isApplied(c: FilterChoice) {
     const n = c.option.match(/\d+/)?.[0]
     return !!n && url.includes(`Discount Range:${n}.0_`)
   }
-  const option = c.option.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   // Colours carry a code after the name ("Black_36454f").
-  return new RegExp(String.raw`[:,]${option}(_[0-9a-f]{6})?(::|,|&|$)`, 'i').test(url)
+  return new RegExp(String.raw`[:,]${escapeRe(c.option)}(_[0-9a-f]{6})?(::|,|&|$)`, 'i').test(url)
 }

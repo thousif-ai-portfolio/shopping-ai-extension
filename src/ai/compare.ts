@@ -15,7 +15,7 @@ export type SiteResult = {
   error?: string
 }
 
-export type Row = SiteResult & { cheapest?: Product; lacking: string[]; counted: boolean }
+type Row = SiteResult & { cheapest?: Product; lacking: string[]; counted: boolean }
 export type Summary = { rows: Row[]; winner?: Row; text: string }
 
 // The kind of filter, to see whether every site got the same request.
@@ -28,6 +28,12 @@ const rupees = (n: number) => `₹${n.toLocaleString('en-IN')}`
 const words = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim()
 const mentions = (title: string, name: string) => ` ${words(title)} `.includes(` ${words(name)} `)
 
+// Words naming a kind of product that titles also use, by their stem ("running" → "run").
+const KIND_STEMS: Record<string, string> = {
+  running: 'run', walking: 'walk', formal: 'formal', casual: 'casual', sports: 'sport', sport: 'sport', trekking: 'trek',
+  hiking: 'hik', gym: 'gym', training: 'train', party: 'party', wireless: 'wireless', bluetooth: 'bluetooth', smart: 'smart',
+}
+
 /** search: the words every site was searched for ("black shirt roadster"). */
 export function summarize(results: SiteResult[], search = ''): Summary {
   // What any site managed to apply: a site missing one of these compared something else.
@@ -37,11 +43,6 @@ export function summarize(results: SiteResult[], search = ''): Summary {
   // Brands any site ticked, to recognise them in product titles where the brand filter is missing.
   const brands = [...new Set(results.flatMap((r) => r.applied.filter((c) => !c.remove && /brand/i.test(c.group)).map((c) => c.option)))]
   const product = productIn(search)
-  // Words naming a kind of product that titles also use, by their stem ("running" → "run").
-  const KIND_STEMS: Record<string, string> = {
-    running: 'run', walking: 'walk', formal: 'formal', casual: 'casual', sports: 'sport', sport: 'sport', trekking: 'trek',
-    hiking: 'hik', gym: 'gym', training: 'train', party: 'party', wireless: 'wireless', bluetooth: 'bluetooth', smart: 'smart',
-  }
   const kinds = words(search).split(' ').map((w) => KIND_STEMS[w]).filter(Boolean)
   // The budget any site applied ("Max price: ₹2000"). Every product card shows its price, so a
   // site without a price filter (Myntra) is checked against the budget item by item instead.
@@ -62,7 +63,7 @@ export function summarize(results: SiteResult[], search = ''): Summary {
       if (branded.length) { items = branded; lacking = lacking.filter((k) => k !== 'brand') }
     }
     // The first results are the cheapest (sorted); take the lowest among them in case of a stray card.
-    const cheapest = [...items.slice(0, 10)].sort((a, b) => a.price - b.price)[0]
+    const cheapest = items.slice(0, 10).sort((a, b) => a.price - b.price)[0]
     return { ...r, cheapest, lacking, counted: !r.error && !!cheapest && lacking.length === 0 }
   })
   const pool = rows.filter((r) => r.counted)

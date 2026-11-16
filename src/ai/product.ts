@@ -1,5 +1,8 @@
 // Decides whether a request is for a different product than the page shows
 // ("give me running shoes" on a jackets page), and what to search for then.
+import { amazon } from '../adapters/amazon'
+import { flipkart } from '../adapters/flipkart'
+import { myntra } from '../adapters/myntra'
 
 // Product words (singular). Words in one group mean the same product.
 const PRODUCTS: string[][] = [
@@ -14,7 +17,7 @@ const PRODUCTS: string[][] = [
 
 const norm = (s: string) =>
   s.toLowerCase().replace(/t-shirt/g, 'tshirt').replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(Boolean)
-    .map((w) => (w.length > 3 && w.endsWith('s') && !w.endsWith('ss') ? w.slice(0, -1) : w)).join(' ')
+    .map((w) => (w.endsWith('sses') ? w.slice(0, -2) : w.length > 3 && w.endsWith('s') && !w.endsWith('ss') ? w.slice(0, -1) : w)).join(' ')
 
 const has = (text: string, word: string) => ` ${text} `.includes(` ${word} `)
 
@@ -32,9 +35,10 @@ function oneOff(a: string, b: string) {
   return edits + (a.length - i) + (b.length - j) <= 1
 }
 // Real words that are one letter from a product word but mean something else.
-const NOT_TYPO = new Set(['short', 'shorts', 'sheet', 'shift', 'sport', 'skirt', 'coach', 'boat', 'bat', 'beg', 'cat', 'hate', 'heal', 'jean', 'pent', 'paint', 'walet', 'bell', 'bolt', 'wash'])
+// (Words under 5 letters are never corrected anyway.)
+const NOT_TYPO = new Set(['short', 'shorts', 'sheet', 'shift', 'sport', 'coach', 'paint', 'walet'])
 /** Turns misspelt product words into the real ones: "white shirst" → "white shirt". */
-export function fixProductTypos(text: string): string {
+function fixProductTypos(text: string): string {
   const all = PRODUCTS.flat().filter((w) => w.length >= 4 && !w.includes(' '))
   return text.replace(/[a-z]+/gi, (w) => {
     const lower = w.toLowerCase()
@@ -56,25 +60,29 @@ export function productIn(text: string): string[] | undefined {
   return PRODUCTS.find((group) => group.some((w) => has(t, w)))
 }
 
-// Colours, to notice "white shirt" asked on a "maroon shirt" page (same product, different colour).
-const COLOURS = ['black', 'white', 'red', 'blue', 'green', 'yellow', 'pink', 'purple', 'orange', 'brown', 'grey', 'gray', 'beige',
-  'maroon', 'merun', 'maroun', 'navy', 'olive', 'khaki', 'cream', 'gold', 'silver', 'peach', 'teal', 'mustard', 'lavender', 'wine']
+// Colours people ask for (also used by reply.ts to say when a page can't filter by one).
+export const COLOURS = ['black', 'white', 'red', 'blue', 'green', 'yellow', 'pink', 'purple', 'orange', 'brown', 'grey', 'gray',
+  'beige', 'maroon', 'navy', 'olive', 'khaki', 'cream', 'gold', 'silver', 'peach', 'teal', 'mustard', 'lavender']
+// To notice "white shirt" asked on a "maroon shirt" page (same product, different colour), misspellings included.
 const SAME_COLOUR: Record<string, string> = { merun: 'maroon', maroun: 'maroon', gray: 'grey', wine: 'maroon' }
-const coloursIn = (text: string) => COLOURS.filter((c) => has(norm(text), c)).map((c) => SAME_COLOUR[c] ?? c)
+function coloursIn(text: string) {
+  const t = norm(text)
+  return [...COLOURS, 'merun', 'maroun', 'wine'].filter((c) => has(t, c)).map((c) => SAME_COLOUR[c] ?? c)
+}
 
 // Words that only make the request polite or are read as filters, not search words.
 const FILLER = new Set(
   (
     'give me show find get buy i want need looking look for some a an the please pls plz can could would will you u to see any ' +
     'something with in of and or open go take switch search check on at from which that what is are there do does have has ' +
-    'i\'m im my also just now then hey hi hello bro bhai ji kindly mujhe chahiye dikhao do pe par mein site website app store ' +
-    'rupees rupee rs inr only compare comparison better best all fo fr pls which whichever good nice is it this ' +
+    'i\'m im my also just now then hey hi hello bro bhai ji kindly mujhe chahiye dikhao pe par mein site website app store ' +
+    'rupees rupee rs inr only compare comparison better best all fo fr whichever good nice it this ' +
     'tell suggest recommend ' +
     // price and sort words: they become a sort order or a price filter, never search words
     'lower lowest low price prices cheap cheaper cheapest sasta saste sasti costly expensive high higher highest ' +
     'than across sites websites apps stores platforms every each both three teen teeno tino sab sabhi vs versus ' +
     // Hinglish joining and price words: "dono pe check karo", "sabse sasta", "1000 se kam"
-    'karo kar karna karke dono aur sabse me main ke andar se kam tak wala wali wale hai hain ' +
+    'karo kar karna karke dono aur sabse main ke andar se kam tak wala wali wale hai hain ' +
     'amazon amzon amazone amazn amozon flipkart flipcart flipkrt filpkart flipkat myntra mintra myntr mynta'
   ).split(' '),
 )
@@ -82,12 +90,9 @@ const FILLER = new Set(
 // The three supported sites, by the words people use for them.
 export const SITES = [
   // (with common misspellings: "amzon", "flipkrt", "mintra")
-  { name: 'Amazon', re: /\b(?:amazon|amzon|amazone|amazn|amozon)(?:\.in)?\b/, url: (t: string) => `https://www.amazon.in/s?k=${encodeURIComponent(t)}` },
-  { name: 'Flipkart', re: /\b(?:flipkart|flipcart|flip kart|flipkrt|filpkart|flipkat)(?:\.com)?\b/, url: (t: string) => `https://www.flipkart.com/search?q=${encodeURIComponent(t)}` },
-  {
-    name: 'Myntra', re: /\b(?:myntra|mintra|myntr|mynta)(?:\.com)?\b/,
-    url: (t: string) => `https://www.myntra.com/${t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}?rawQuery=${encodeURIComponent(t)}`,
-  },
+  { name: 'Amazon', home: 'https://www.amazon.in/', re: /\b(?:amazon|amzon|amazone|amazn|amozon)(?:\.in)?\b/, url: amazon.searchUrl },
+  { name: 'Flipkart', home: 'https://www.flipkart.com/', re: /\b(?:flipkart|flipcart|flip kart|flipkrt|filpkart|flipkat)(?:\.com)?\b/, url: flipkart.searchUrl },
+  { name: 'Myntra', home: 'https://www.myntra.com/', re: /\b(?:myntra|mintra|myntr|mynta)(?:\.com)?\b/, url: myntra.searchUrl },
 ]
 
 /**

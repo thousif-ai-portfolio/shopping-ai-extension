@@ -19,14 +19,13 @@ too top trendy try under up upto us use used useful very want warm was water way
 well were what when where which while white who why will wish with within without women work would year
 yes you young your
 phone phones mobile mobiles smartphone shoe shoes sneaker sneakers jacket jackets kurta kurtas kurti shirt
-shirts tshirt dress dresses jeans pant pants trouser trousers top tops saree sarees bag bags watch watches
+shirts tshirt dress dresses jeans pant pants trouser trousers tops saree sarees bag bags watch watches
 case cover screen camera battery charger charging storage memory display power speed model brand brands
 color colour price cost budget value money rated rating star stars review reviews offer offers discount
-latest newest wedding party festival casual formal ethnic summer winter office travel gym running walking
-daily outdoor indoor
-black white grey gray red blue green yellow pink purple orange brown beige navy maroon olive gold silver
+newest wedding party festival casual formal ethnic summer winter travel gym running walking
+outdoor indoor
+black grey gray red blue green yellow pink purple orange brown beige navy maroon olive gold silver
 cream ivory khaki teal violet magenta peach multi multicolor
-sort sorted order filter filters remove clear reset show switch change replace instead rather swap hatao
-compare better worth thousand lakh dikhao chahiye wala wali joota joote jutti kapde
-kurti saree dupatta`.split(/\s+/),
+sort sorted order filter filters remove clear reset switch change replace instead rather swap hatao
+compare worth thousand lakh dikhao chahiye wala wali joota joote jutti kapde dupatta`.split(/\s+/),
 )

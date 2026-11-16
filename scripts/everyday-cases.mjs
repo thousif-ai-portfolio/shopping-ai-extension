@@ -447,4 +447,7 @@ EVERYDAY.push(
   // The page was searched for the colour already ("pink cotton kurta"): no "not on this page" note.
   { cat: 'regress', site: 'myntra-kurtas', q: 'pink cotton kurta size M', searchTerm: 'pink cotton kurta', expect: ['Color: Pink', 'Fabrics: Cotton', 'Size: M'] },
   { cat: 'regress', site: 'myntra', q: 'white jacket', searchTerm: 'white jacket', expect: [], reply: 'nomatch' },
+  // "safed" is Hindi for white; the English word "safe" is not.
+  { cat: 'regress', site: 'flipkart-shoes', q: 'safed sneakers', expect: ['Color: White'] },
+  { cat: 'regress', site: 'flipkart-shoes', q: 'skin safe sneakers', expect: [], reply: 'nomatch' },
 )

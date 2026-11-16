@@ -60,7 +60,7 @@ export function normalizeQuery(query: string): string {
   q = q.replace(new RegExp(String.raw`${MONEY}\s*se\s*${MONEY}`, 'g'), ' between $1 and $2 ')
   // Hinglish negation comes after the word: "size 8 nahi 9 chahiye" → "9 instead of 8",
   // "nike nhi chahiye, adidas dikhao" → "not nike, adidas dikhao" (handled just below)
-  q = q.replace(/(\S+)\s+(?:nahi|nhi|nahin|nai)\s+(\S+)\s+(?:chahiye|chaiye|chahie|chahiye|dikhao|do)\b/g, ' $2 instead of $1 ')
+  q = q.replace(/(\S+)\s+(?:nahi|nhi|nahin|nai)\s+(\S+)\s+(?:chahiye|chaiye|chahie|dikhao|do)\b/g, ' $2 instead of $1 ')
   q = q.replace(/(\S+)\s+(?:nahi|nhi|nahin|nai|mat)\s+(?:chahiye|chaiye|chahie|dikhao|dikhana)\b/g, ' not $1 ')
   q = q.replace(/^\s+/, ' ')
   // "not black, navy" / "not puma but nike" → "navy instead of black" (a replacement, not a removal)
@@ -68,20 +68,20 @@ export function normalizeQuery(query: string): string {
   // "9 number" (Hinglish for shoe size 9), "number 9"
   q = q.replace(/\b(\d{1,2}(?:\.5)?)\s*(?:number|no\.?)(?!\s*size)\b/g, ' size $1 ')
   // "size is 40", "my size is M", "size hai 9"
-  q = q.replace(/\bsize\s+(?:is|hai|of|=)\s+/g, 'size ')
+  q = q.replace(/\bsize\s+(?:is|hai|of)\s+/g, 'size ')
   // "30 percent" → "30%"
   q = q.replace(/(\d{1,2})\s*(?:percent|per cent|pct)\b/g, '$1%')
   // "M or L size" → "size M or L" (before the single-size rewrite below)
   const SZ = String.raw`(?:xxs|xs|s|m|l|xl|xxl|xxxl|[2-5]xl|\d{1,2}(?:\.5)?)`
   q = q.replace(new RegExp(String.raw`\b(${SZ}(?:\s*(?:,|or|and)\s*${SZ})+)\s*size\b`, 'g'), ' size $1 ')
   // "L size", "10 size", "size: M", "size no. 9"
-  q = q.replace(/\b(xxs|xs|s|m|l|xl|xxl|xxxl|[2-5]xl|\d{1,2}(?:\.5)?)\s*(?:no\.?\s*)?size\b/g, ' size $1 ')
+  q = q.replace(new RegExp(String.raw`\b(${SZ})\s*(?:no\.?\s*)?size\b`, 'g'), ' size $1 ')
   q = q.replace(/\bsize\s*(?:[:=-]|no\.?|number)\s*/g, 'size ')
   return q.replace(/\s+/g, ' ').trim()
 }
 
 /** "make it L", "nike instead of puma", "only adidas": the new choice replaces the old one in its group. */
-export function isReplaceRequest(query: string): boolean {
+function isReplaceRequest(query: string): boolean {
   return /\b(instead|replace|change|switch|make it|rather|only|just|same|actually)\b/.test(normalizeQuery(query))
 }
 
@@ -100,14 +100,15 @@ export function withReplacements(query: string, choices: FilterChoice[], remembe
 }
 
 // At the start ("remove puma"), Hindi-style at the end ("puma hatao"), or "… remove it".
-const REMOVE = /^(?:please\s+|pls\s+|now\s+|also\s+)?(remove|delete|clear|unselect|uncheck|drop|undo|take off|take out|get rid of|hatao|hata do|hata|cancel|not(?!\s+(?:more|less|above|below|over|under|too|very|so|much|costly|expensive|cheap|exceeding)\b)|no need (?:of|for)|no more|(?:i )?don'?t (?:want|need)|(?:i )?do not (?:want|need)|nahi chahiye)\b|\b(hatao|hata do|hatado|hata do|nikalo|remove (?:it|them|that|this|those)|remove)$/
+const REMOVE = /^(?:please\s+|pls\s+|now\s+|also\s+)?(remove|delete|clear|unselect|uncheck|drop|undo|take off|take out|get rid of|hatao|hata do|hata|cancel|not(?!\s+(?:more|less|above|below|over|under|too|very|so|much|costly|expensive|cheap|exceeding)\b)|no need (?:of|for)|no more|(?:i )?don'?t (?:want|need)|(?:i )?do not (?:want|need)|nahi chahiye)\b|\b(hatao|hata do|hatado|nikalo|remove (?:it|them|that|this|those)|remove)$/
 
 const CLEAR_ALL =
   /\b(clear|remove|reset|delete|undo)\s+(?:all|every|the)?\s*(?:the\s+)?filters?\b|\b(clear all|reset all|start over|start again|start fresh|sab hatao|saare hatao|sab clear)\b|\b(?:saare|sare|saari|sari|sab|sabhi)\s+(?:filters?\s+)?(?:hata do|hatado|hatao|hata dijiye|hata|nikalo|remove|clear)\b|^(?:please\s+)?(?:reset|clear|clear it|reset it|(?:remove|clear|delete|reset|undo) (?:all|everything|all of them|it all))$/
 
 /** "remove puma", "hatao puma", "clear all filters" — a request to take filters off. */
 export function isRemoveRequest(query: string): boolean {
-  return REMOVE.test(normalizeQuery(query)) || CLEAR_ALL.test(normalizeQuery(query))
+  const q = normalizeQuery(query)
+  return REMOVE.test(q) || CLEAR_ALL.test(q)
 }
 
 export function applyRules(query: string, w: Wanted): Wanted {
@@ -130,7 +131,6 @@ export function applyRules(query: string, w: Wanted): Wanted {
     const MIN = String.raw`(?:above|over|more than|greater than|higher than|min(?:imum)?|at ?least|starting(?: from| at)?|>=?)`
     if ((m = q.match(new RegExp(String.raw`${MAX}\s*${MONEY}${NOT_MONEY}`)))) {
       out.max_price = amount(m[1])
-      if (out.min_price === out.max_price) out.min_price = null // the AI sometimes copies it into min
     }
     if ((m = q.match(new RegExp(String.raw`${MIN}\s*${MONEY}${NOT_MONEY}`)))) out.min_price = amount(m[1])
     if ((m = q.match(/(?:rs\.?|₹)?\s*(\d[\d,]*k?)\s*\+(?!\s*(?:star|rating|★))/)) && amount(m[1]) >= 100 && !out.min_price)
@@ -153,12 +153,12 @@ export function applyRules(query: string, w: Wanted): Wanted {
 
   // ---- Discount: "40% off", "min 30% discount"; "on sale" / "with discount" = any discount
   if ((m = q.match(/(\d{1,2})\s*%/))) out.min_discount = Number(m[1])
-  else if (/\b(on sale|sale|discounted|with discount|any discount|on offer|offers?|deals?)\b/.test(q.replace(/\btoday'?s? deals?\b/g, ''))) out.min_discount = -1 // "today's deals" is its own option
+  else if (/\b(sale|discounted|with discount|any discount|offers?|deals?)\b/.test(q.replace(/\btoday'?s? deals?\b/g, ''))) out.min_discount = -1 // "today's deals" is its own option
 
   // ---- Rating: "4 star", "4+ rating", "rated 4", "good reviews"
   if ((m = q.match(/(\d(?:\.\d)?)\s*\+?\s*(?:stars?|★|rating|rated)/) ?? q.match(/rated\s*(?:above\s*)?(\d(?:\.\d)?)/)))
     out.min_rating = Number(m[1])
-  else if (/\b(good|great|high|best|top|well|highly)\s*(?:rating|ratings|reviews?|rated)\b|\b(highly|top|best|well) rated\b/.test(q))
+  else if (/\b(good|great|high|best|top|well|highly)\s*(?:rating|ratings|reviews?|rated)\b/.test(q))
     out.min_rating = 4
 
   // ---- Sorting
@@ -167,7 +167,7 @@ export function applyRules(query: string, w: Wanted): Wanted {
   else if (/\bsort(?:ed)? by (?:the )?price\b(?!\s*(?:high|desc|from high))|\bnot (?:too |very |so |that )?(?:expensive|costly|pricey|mehenga|mehnga)\b|\b(cheapest|cheaper|cheap|lowest price|low to high|price low|sasta|saste|sasti|budget friendly|affordable|inexpensive|low price|kam (?:daam|price|keemat))\b/.test(q)) out.sort = 'price_asc'
   else if (/\b(most expensive|costliest|expensive|high to low|price high|highest price|mehenga|mehnga)\b/.test(q)) out.sort = 'price_desc'
   else if (/\b(newest|latest|new arrivals?|recently (?:added|launched)|new launch(?:es)?|just launched)\b/.test(q)) out.sort = 'newest'
-  else if (/\b(most popular|popular|best ?sell(?:ing|ers?)|trending|top selling|most bought|most sold)\b/.test(q)) out.sort = 'popularity'
+  else if (/\b(popular|best ?sell(?:ing|ers?)|trending|top selling|most bought|most sold)\b/.test(q)) out.sort = 'popularity'
   else if (/\b(top rated|best rated|highest rated|best reviews?|most rated)\b/.test(q)) out.sort = 'rating'
   // "which phone is best?", "recommend a jacket": best rated first (popularity where a site has no rating order).
   else if (/\b(best|recommend(?:ed|ation)?s?|accha wala|sabse accha|badhiya)\b/.test(q) && !/\bbest (?:price|deals?|offers?|discounts?)\b/.test(q)) out.sort = 'rating'
