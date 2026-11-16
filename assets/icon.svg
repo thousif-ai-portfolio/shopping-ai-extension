@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- 96 px artwork in a 128 px canvas, as the Chrome Web Store asks (16 px clear on each side). -->
+  <rect x="16" y="16" width="96" height="96" rx="22" fill="#111"/>
+  <!-- filter funnel -->
+  <path d="M36 42h50l-19 23v19l-12 7V65z" fill="#fff"/>
+  <!-- AI sparkle -->
+  <path d="M88 64l3.5 8.5L100 76l-8.5 3.5L88 88l-3.5-8.5L76 76l8.5-3.5z" fill="#fff"/>
+</svg>

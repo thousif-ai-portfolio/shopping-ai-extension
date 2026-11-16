@@ -9,9 +9,11 @@ const SITES = [
 export default defineManifest({
   manifest_version: 3,
   name: 'AI Shopping Filters',
-  version: '0.1.0',
+  version: '0.1.1',
   description: 'Type what you want; on-device AI applies the right filters.',
-  action: { default_title: 'Open AI Shopping Filters' },
+  // Drawn from assets/icon.svg.
+  icons: { 16: 'icons/icon-16.png', 32: 'icons/icon-32.png', 48: 'icons/icon-48.png', 128: 'icons/icon-128.png' },
+  action: { default_title: 'Open AI Shopping Filters', default_icon: { 16: 'icons/icon-16.png', 32: 'icons/icon-32.png' } },
   side_panel: { default_path: 'src/sidepanel/index.html' },
   background: { service_worker: 'src/background.ts', type: 'module' },
   content_scripts: [{ matches: SITES, js: ['src/content/index.ts'] }],
