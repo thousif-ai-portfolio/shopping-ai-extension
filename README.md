@@ -13,11 +13,11 @@ on the page for you:
 > ✅ Colour: Black  ✅ Brands: PUMA  ✅ Size: M  ✅ Max price: ₹2000
 
 It works like a chat: follow-up messages refine the same page. The panel shows the conversation
-(your messages on the right, answers with ✅ filter chips on the left), example requests to click,
-and while the AI starts a progress bar ("Preparing the AI… 34%", then "Starting the AI…"); Enter
-sends. The backup AI runs in a hidden page that starts with Chrome and stays loaded until Chrome
-quits, so opening the panel again shows **Ready** at once instead of restarting the model
-(it keeps roughly 0.5–1 GB of memory in use while Chrome is open).
+(your messages on the right, answers with ✅ filter chips on the left); Enter sends.
+
+> **This is the lite build** (branch `nano-only`, ~100 KB). It uses Chrome's built-in Gemini Nano
+> where the PC supports it, and the tested rules alone where it doesn't. The full build on `main`
+> also ships its own backup AI (Qwen2.5-0.5B, 6.6 MB package) for PCs without Gemini Nano.
 
 | You type | What happens |
 |---|---|
@@ -64,7 +64,7 @@ filters. Try 'remove …', a higher budget, or 'start over'."*
 |---|---|
 | Works on at least 3 shopping sites | Amazon.in, Flipkart and Myntra, tested on jackets, shoes, phones and kurtas |
 | Detects filters and applies them from what you type | Each site has an adapter that reads every filter on the page (including the full "+ more" brand lists) and applies the chosen ones |
-| Powered by a client-side LLM | Chrome's built-in **Gemini Nano** where the PC supports it, otherwise **Qwen2.5-0.5B** running in the browser with **Transformers.js** |
+| Powered by a client-side LLM | Chrome's built-in **Gemini Nano** (on-device). Where a PC can't run it, the same tested rules work alone |
 
 ## Install
 
@@ -77,8 +77,8 @@ filters. Try 'remove …', a higher budget, or 'start over'."*
    choose the `dist` folder.
 3. Open a search on Amazon.in, Flipkart or Myntra, then click the extension icon.
 
-The first time, the backup AI downloads once (about 500 MB, roughly 2–3 minutes) and is then
-cached. After that the panel is ready about 13 seconds after it opens.
+Or load the ready-made zip: unzip it and choose that folder in step 2. The panel is ready as soon
+as it opens; there is nothing to download.
 
 ## How it works
 
@@ -109,12 +109,10 @@ when a combination has zero results and the site hides its whole filter list.
 
 - **Gemini Nano** (Chrome's built-in AI) is used when the PC supports it (it needs about 16 GB
   RAM or a graphics card with more than 4 GB).
-- Otherwise **Qwen2.5-0.5B-Instruct** runs in the browser with Transformers.js, in a background
-  worker so the panel never freezes. It is the 8-bit version on the CPU, which was fastest in
-  tests on a typical laptop (i3, 8 GB RAM, Intel graphics).
-- Both AIs get the same short instruction ([`src/ai/prompt.ts`](src/ai/prompt.ts)): *list the
-  descriptive words*. A tiny answer such as `black, puma` takes 8–15 s on that laptop, where a
-  full JSON answer took 30–45 s.
+- Otherwise, or if Nano fails, **the rules work alone**: prices, sizes, sorting and every filter
+  named in the message still apply, instantly. Only vaguer wording, which needs the AI, is missed.
+- Nano gets a short instruction ([`src/ai/prompt.ts`](src/ai/prompt.ts)): *list the descriptive
+  words*. A tiny answer such as `black, puma` is much faster than a full JSON answer.
 - **Small models are unreliable with numbers**, so prices, discounts, ratings, sizes and values
   like "8gb" or "5000 mah" are read by plain rules ([`rules.ts`](src/ai/rules.ts),
   [`match.ts`](src/ai/match.ts)). The AI handles words; the code handles numbers.
@@ -161,8 +159,13 @@ Adding a fourth site means writing one new adapter file; nothing else changes.
 
 ## Test results
 
-All tests ran on a typical laptop (Intel i3-1115G4, 8 GB RAM, Intel UHD graphics, so the backup
-AI was used).
+**Lite build (16 Nov 2026), on a laptop without Gemini Nano, so the rules worked alone:**
+everyday messages 617/617, search 86/86, price comparison 83/83, live on Amazon, Flipkart and
+Myntra 12/12, simulated Gemini Nano 3/3. The zip was also loaded in a fresh Chrome profile.
+
+The detailed results below were measured on the **full build** (with the backup AI), on a typical
+laptop (Intel i3-1115G4, 8 GB RAM, Intel UHD graphics). The rules and site code are the same in
+both builds.
 
 **Final results (Nov 12, 2026), all on the final build:**
 
@@ -340,10 +343,9 @@ of showing a false ✅.
 ### 3. Gemini Nano: simulated only
 
 The test laptop can't run Gemini Nano, so [`scripts/nano-sim.mjs`](scripts/nano-sim.mjs) fakes it:
-- a Nano that **crashes** → the extension falls back to the backup AI and still applies the right filters ✓
-- …and **remembers it**: the next request goes straight to the backup (Nano tried only once,
-  7.5 s instead of 21 s), and the panel names the AI really answering: "Qwen2.5-0.5B (backup:
-  Gemini Nano did not work here)" ✓
+- a Nano that **crashes** → the extension falls back to the rules alone and still applies the right filters ✓
+- …and **remembers it**: the next request goes straight to the rules (Nano tried only once), and
+  the panel says so: "Rules only (Gemini Nano is not available on this PC)" ✓
 - a Nano that **answers normally** → its answer goes through the same tested matching, same result ✓
 
 This proves Nano problems can't break the extension, but **the real Gemini Nano was never run**.
@@ -351,12 +353,13 @@ This proves Nano problems can't break the extension, but **the real Gemini Nano 
 ### Run the tests yourself
 
 ```bash
-node scripts/everyday.mjs      # 615 everyday messages, rules only (seconds)
-node scripts/everyday.mjs --ai # the same 615 through the real AI (~40 min)
-node scripts/search.mjs        # 85 "what to search / which site" messages (seconds)
-node scripts/compare-test.mjs  # 82 comparison checks: when to compare, winner, explanation (seconds)
+node scripts/everyday.mjs      # 617 everyday messages, rules only (seconds)
+node scripts/everyday.mjs --ai # the same 617 inside the built extension (Gemini Nano if the PC has it)
+node scripts/search.mjs        # 86 "what to search / which site" messages (seconds)
+node scripts/compare-test.mjs  # 83 comparison checks: when to compare, winner, explanation (seconds)
 node scripts/e2e.mjs --compare # 4 live comparisons across Amazon, Flipkart and Myntra (~7 min)
-node scripts/edge.mjs          # 284 sentences through the real AI (~20 min)
+node scripts/edge.mjs          # 284 sentences inside the built extension (written for the AI; without
+                               # Gemini Nano, vaguer ones are expected to miss)
 node scripts/e2e.mjs --chat    # 3 live chat conversations, 14 messages (~10 min)
 node scripts/e2e.mjs           # 12 live tests on the real sites (~7 min)
 node scripts/e2e.mjs --extra   # 7 harder live tests (~5 min)
@@ -371,8 +374,9 @@ The tests open a separate Chrome window with its own profile. Leave it alone whi
 
 - **Not tested:** the real Gemini Nano (only simulated, see above). The automated tests open the
   panel page in a tab; the real side panel (from the toolbar icon) was also checked by hand.
-- **Speed on low-end PCs:** with the backup AI a request takes about 15–50 s. Gemini Nano on a
-  stronger PC should be faster.
+- **Without Gemini Nano, only the rules work:** brands, colours, sizes, prices and sorting named in
+  the message apply instantly, but vaguer wording that needs the AI is missed. The full build on
+  `main` covers those PCs with its own backup AI.
 - **Product switching needs a product word:** "give me running shoes" on a jackets page searches
   for shoes, but only for products in the list in [`product.ts`](src/ai/product.ts) (clothes,
   shoes, phones, laptops, watches, bags, …).
@@ -401,14 +405,12 @@ The tests open a separate Chrome window with its own profile. Leave it alone whi
 ## Project structure
 
 ```
-manifest.config.ts        extension settings (side panel, sites, security for the AI runtime)
+manifest.config.ts        extension settings (side panel, sites, icons)
 src/sidepanel/App.tsx     the panel: text box, status, ✅ chips
 src/ai/decide.ts          one message → answer it, or pick filters (the panel and all tests use this)
 src/ai/reply.ts           instant answers: greetings, help, "what brands are there?", off-topic questions
-src/ai/llm.ts             picks Gemini Nano or the backup AI, runs the pipeline
-src/ai/prompt.ts          the instruction both AIs get
-src/ai/worker.ts          backup AI (Qwen2.5-0.5B + Transformers.js) in a background worker
-src/ai/fallback.ts        talks to the worker, preloads the model when the panel opens
+src/ai/llm.ts             asks Gemini Nano (or uses the rules alone), runs the pipeline
+src/ai/prompt.ts          the instruction Gemini Nano gets
 src/ai/rules.ts           prices, discounts, ratings, sizes, sorting, remove/clear from the text
 src/ai/product.ts         spots a different product or site ("open amazon"), a comparison, and what to search for
 src/ai/compare.ts         compares the cheapest matching item per site and explains the pick
@@ -416,6 +418,7 @@ src/ai/match.ts           words and numbers → real filter options
 src/ai/common.ts          everyday words that must never trigger brands or typo fixes
 src/content/index.ts      runs inside the shopping site, picks the right adapter
 src/adapters/*.ts         Amazon, Flipkart, Myntra: read and apply filters
-public/ort/               AI runtime files shipped with the extension (extensions can't load code from the internet)
+public/icons/             extension icons, drawn from assets/icon.svg
+store/                    Chrome Web Store listing text and privacy policy
 scripts/                  edge-case tests, live tests, saved filter lists, results
 ```

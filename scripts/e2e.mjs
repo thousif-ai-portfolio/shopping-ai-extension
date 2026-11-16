@@ -1,7 +1,7 @@
 // End-to-end test on the LIVE sites: opens a separate Chrome with the built extension, opens the
 // panel once (like a real user), waits for the AI, then for each test types a request, clicks
 // Apply and checks which filters were really applied on the page.
-// Usage: node scripts/e2e.mjs [site] [--device=wasm|webgpu] [--dtype=q8|q4] [--q="custom request"]
+// Usage: node scripts/e2e.mjs [site] [--q="custom request"]
 import puppeteer from 'puppeteer-core'
 import path from 'node:path'
 import os from 'node:os'
@@ -97,11 +97,8 @@ if (process.argv.includes('--search')) TESTS.splice(0, TESTS.length, ...SEARCH)
 
 const args = process.argv.slice(2)
 const only = args.find((a) => !a.startsWith('--'))?.toLowerCase()
-const device = args.find((a) => a.startsWith('--device='))?.split('=')[1]
-const dtype = args.find((a) => a.startsWith('--dtype='))?.split('=')[1]
 const customQuery = args.find((a) => a.startsWith('--q='))?.slice(4)
 const customUrl = args.find((a) => a.startsWith('--url='))?.slice(6) // with --q: one try on this page
-const params = new URLSearchParams({ ...(device && { device }), ...(dtype && { dtype }) }).toString()
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 const secs = (t0) => `${((Date.now() - t0) / 1000).toFixed(1)}s`
 
@@ -116,7 +113,7 @@ const panel = await browser.newPage()
 panel.on('console', (m) => { if (/\[ai\]/.test(m.text())) console.log(`  [panel] ${m.text().slice(0, 300)}`) })
 panel.on('pageerror', (e) => console.log(`  [panel error] ${e.message}`))
 const t0 = Date.now()
-await panel.goto(`chrome-extension://${extId}/src/sidepanel/index.html${params ? `?${params}` : ''}`)
+await panel.goto(`chrome-extension://${extId}/src/sidepanel/index.html`)
 await panel.waitForFunction(() => !/checking/.test(document.querySelector('#ai-label')?.textContent ?? 'checking'), { timeout: 0, polling: 1000 })
 console.log(await panel.$eval('#ai-label', (p) => p.textContent), `(${secs(t0)} after opening the panel)`)
 
