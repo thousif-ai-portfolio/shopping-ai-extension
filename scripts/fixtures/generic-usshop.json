@@ -1,0 +1,48 @@
+[
+ {
+  "name": "Brand",
+  "options": [
+   "Nike",
+   "Puma",
+   "ASICS"
+  ]
+ },
+ {
+  "name": "Size",
+  "options": [
+   "UK 9",
+   "UK 10",
+   "UK 11"
+  ]
+ },
+ {
+  "name": "Colour",
+  "options": [
+   "Black",
+   "Red",
+   "Blue"
+  ]
+ },
+ {
+  "name": "Sort by",
+  "options": [
+   "Price: Low to High",
+   "Price: High to Low",
+   "Newest First",
+   "Customer Rating",
+   "Popularity"
+  ]
+ },
+ {
+  "name": "Min price",
+  "options": [
+   "$…"
+  ]
+ },
+ {
+  "name": "Max price",
+  "options": [
+   "$…"
+  ]
+ }
+]

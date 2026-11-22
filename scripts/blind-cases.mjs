@@ -75,7 +75,7 @@ export const BLIND = [
   { cat: 'blind-7', site: 'myntra', q: 'navy blue mast and harbour jacket', expect: ['Color: Navy Blue', 'Brand: Mast & Harbour'] },
   { cat: 'blind-7', site: 'myntra', q: 'levis jacket', expect: ['Brand: Levis'] },
   { cat: 'blind-7', site: 'myntra', q: 'wrogn jacket size xl', expect: ['Brand: WROGN', 'Size: XL'] },
-  { cat: 'blind-7', site: 'myntra', q: 'red jacket', expect: [], reply: 'nomatch' }, // no Red on this page
+  { cat: 'blind-7', site: 'myntra', q: 'red jacket', expect: [], reply: 'colour-missing' }, // no Red on this page
 
   // ===== Shoes
   { cat: 'blind-7', site: 'myntra-shoes', q: 'nike shoes 9 number', expect: ['Brand: Nike', 'Size: UK9'] },
@@ -130,7 +130,7 @@ export const BLIND = [
   { cat: 'blind-7', site: 'myntra-kurtas', q: 'FabIndia kurta', expect: ['Brand: Fabindia'] },
   { cat: 'blind-7', site: 'myntra-kurtas', q: 'kurta size 2xl', expect: ['Size: XXL'] },
   { cat: 'blind-7', site: 'myntra-kurtas', q: 'पीला कुर्ता', expect: ['Color: Yellow'] },
-  { cat: 'blind-7', site: 'myntra-kurtas', q: 'kurta under 1000', expect: [], reply: 'nomatch' }, // no price filter on this page
+  { cat: 'blind-7', site: 'myntra-kurtas', q: 'kurta under 1000', expect: [], reply: 'note' }, // no price filter on this page
 
   // ===== Sorting
   { cat: 'blind-7', site: 'myntra-kurtas', q: 'latest kurtas', expect: ['Sort by: Newest First'] },

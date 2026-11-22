@@ -1,0 +1,5 @@
+[
+  { "name": "Brand", "options": ["T-SHIRT", "PUMA", "NIKE", "ADIDAS", "Roadster"] },
+  { "name": "Color", "options": ["Black", "White", "Blue"] },
+  { "name": "Size", "options": ["S", "M", "L", "XL"] }
+]

@@ -8,28 +8,36 @@ import { pathToFileURL } from 'node:url'
 import { build } from 'esbuild'
 import { SEARCH as MINE } from './search-cases.mjs'
 import { SEARCH_BLIND } from './search-blind-cases.mjs'
-// --blind: only the batch written without looking at the code
-const SEARCH = process.argv.includes('--blind') ? SEARCH_BLIND : [...MINE, ...SEARCH_BLIND]
+import { SEARCH_BLIND2 } from './search-blind-cases-2.mjs'
+// --blind: only the batches written without looking at the code
+const SEARCH = process.argv.includes('--blind') ? [...SEARCH_BLIND, ...SEARCH_BLIND2] : [...MINE, ...SEARCH_BLIND, ...SEARCH_BLIND2]
 
 const out = path.join(os.tmpdir(), 'ai-shopping-filters-product.mjs')
 await build({
   stdin: { contents: `export * from './src/ai/product'; export { quickReply } from './src/ai/reply'`, resolveDir: process.cwd(), loader: 'ts' },
   bundle: true, format: 'esm', outfile: out, logLevel: 'error',
 })
-const { otherSite, searchFor, searchOnOtherSite, quickReply } = await import(pathToFileURL(out).href + `?${Date.now()}`)
+const { otherSite, searchFor, searchOnOtherSite, searchAt, unknownSite, quickReply } = await import(pathToFileURL(out).href + `?${Date.now()}`)
 
-// Exactly the panel's order (App.tsx): questions get an answer, never a site switch.
+const HOST = { Amazon: 'www.amazon.in', Flipkart: 'www.flipkart.com', Myntra: 'www.myntra.com' }
+// Exactly the panel's order (App.tsx): questions get an answer, never a site switch; then a known
+// site; then another shop by name (answer only) or by typed address (open it, search there).
 const step = (q, now, current) => {
-  const site = quickReply(q, { site: now, filters: [] }, []) ? null : otherSite(q, now)
-  return { site: site?.name ?? null, search: site ? searchOnOtherSite(q, current) : searchFor(q, current) }
+  const question = !!quickReply(q, { site: now, filters: [] }, [])
+  const site = question ? null : otherSite(q, now)
+  const other = question || site ? null : unknownSite(q, now, HOST[now] ?? `www.${now}`)
+  if (other && !other.domain) return { site: null, search: null, unknown: other.name, domain: null }
+  if (other) return { site: null, search: searchAt(q, other.domain, other.name), unknown: null, domain: other.domain }
+  return { site: site?.name ?? null, search: site ? searchOnOtherSite(q, current) : searchFor(q, current), unknown: null, domain: null }
 }
 
 let passed = 0
 for (const c of SEARCH) {
   const got = step(c.q, c.now, c.current)
-  const ok = got.site === c.site && got.search === c.search
+  const ok = got.site === c.site && got.search === c.search && got.unknown === (c.unknown ?? null) && got.domain === (c.domain ?? null)
   if (ok) passed++
-  console.log(`${ok ? 'PASS' : 'FAIL'}  [${c.now}] ${JSON.stringify(c.q)}` + (ok ? '' : `\n      got site ${got.site}, search ${JSON.stringify(got.search)}   want site ${c.site}, search ${JSON.stringify(c.search)}`))
+  const show = (x) => `site ${x.site}, search ${JSON.stringify(x.search)}${x.unknown ? `, unknown ${x.unknown}` : ''}${x.domain ? `, domain ${x.domain}` : ''}`
+  console.log(`${ok ? 'PASS' : 'FAIL'}  [${c.now}] ${JSON.stringify(c.q)}` + (ok ? '' : `\n      got ${show(got)}   want ${show(c)}`))
 }
 console.log(`\n${passed}/${SEARCH.length} passed`)
 

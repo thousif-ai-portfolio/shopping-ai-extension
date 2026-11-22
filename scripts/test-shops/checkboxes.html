@@ -1,0 +1,100 @@
+<!doctype html>
+<!-- Test shop 1: classic sidebar of checkboxes in fieldsets, a sort <select>, $ price boxes with
+     an Apply button. Traps: a cookie banner checkbox, a newsletter checkbox in the footer, struck
+     MRP prices, a "Sale" badge. Everything updates in place (no reload); window.state is what the
+     tests read. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Trail Shoes | Test Shop</title>
+<meta property="og:site_name" content="Test Shop">
+<style>
+  body { font-family: sans-serif; display: grid; grid-template-columns: 220px 1fr; gap: 16px; margin: 0; }
+  header, footer { grid-column: 1 / -1; background: #eee; padding: 8px; }
+  .hidden-input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .card { border: 1px solid #ccc; padding: 8px; margin: 4px; display: inline-block; width: 180px; }
+  .card[hidden] { display: none; }
+</style>
+</head>
+<body>
+<header>
+  <form action="/checkboxes.html" method="get"><input type="search" name="q" placeholder="Search products"><button>Go</button></form>
+  <nav><ul><li><label><input type="checkbox"> Dark mode</label></li></ul></nav>
+</header>
+<div class="cookie-banner"><label><input type="checkbox" id="cookie-ok"> Accept analytics cookies</label></div>
+<aside class="sidebar">
+  <fieldset><legend>Brand</legend>
+    <label><input type="checkbox" name="brand" value="nike"> Nike (12)</label><br>
+    <label><input type="checkbox" name="brand" value="puma"> Puma (8)</label><br>
+    <label><input type="checkbox" name="brand" value="asics"> ASICS (3)</label>
+  </fieldset>
+  <fieldset><legend>Size</legend>
+    <label><input type="checkbox" name="size" value="uk9"> UK 9</label><br>
+    <label><input type="checkbox" name="size" value="uk10"> UK 10</label><br>
+    <label><input type="checkbox" name="size" value="uk11"> UK 11</label>
+  </fieldset>
+  <fieldset><legend>Colour</legend>
+    <!-- inputs hidden, styled through their labels -->
+    <input class="hidden-input" type="checkbox" id="c-black" name="colour" value="black"><label for="c-black">Black</label><br>
+    <input class="hidden-input" type="checkbox" id="c-red" name="colour" value="red"><label for="c-red">Red</label><br>
+    <input class="hidden-input" type="checkbox" id="c-blue" name="colour" value="blue"><label for="c-blue">Blue</label>
+  </fieldset>
+  <div class="price-filter">
+    <h3>Price</h3>
+    <input type="number" name="min_price" placeholder="Min" aria-label="Minimum price">
+    <input type="number" name="max_price" placeholder="Max" aria-label="Maximum price">
+    <button type="button" id="price-apply">Apply</button>
+  </div>
+  <label><input type="checkbox" id="terms"> I agree that this shop may contact me about offers and promotions by email</label>
+</aside>
+<main>
+  <label for="sort">Sort by</label>
+  <select id="sort" name="sort">
+    <option value="featured">Featured</option>
+    <option value="title-ascending">Alphabetically, A-Z</option>
+    <option value="title-descending">Alphabetically, Z-A</option>
+    <option value="price-desc">Price: high to low</option>
+    <option value="price-asc">Price: low to high</option>
+    <option value="date-asc">Date, old to new</option>
+    <option value="newest">Newest arrivals</option>
+    <option value="rating">Top rated</option>
+  </select>
+  <div id="grid"></div>
+</main>
+<footer><label><input type="checkbox" id="newsletter"> Subscribe to newsletter</label> © Test Shop</footer>
+<script>
+  const PRODUCTS = [
+    { name: 'Nike Pegasus Trail', brand: 'nike', size: 'uk10', colour: 'black', price: 79.99, mrp: 120 },
+    { name: 'Puma Velocity Nitro', brand: 'puma', size: 'uk9', colour: 'red', price: 65 },
+    { name: 'ASICS Gel Trabuco', brand: 'asics', size: 'uk11', colour: 'blue', price: 110 },
+    { name: 'Nike Wildhorse', brand: 'nike', size: 'uk9', colour: 'red', price: 95.5, sale: true },
+  ]
+  window.state = { brand: [], size: [], colour: [], sort: 'featured', min: '', max: '' }
+  const grid = document.getElementById('grid')
+  grid.innerHTML = PRODUCTS.map((p, i) => `<div class="card" data-i="${i}">
+      ${p.sale ? '<span class="badge">Sale</span>' : ''}
+      <a href="/product/${i}"><img alt="${p.name} photo" width="160" height="100"></a>
+      <h3 class="product-title"><a href="/product/${i}">${p.name}</a></h3>
+      <span class="price">$${p.price.toFixed(2)}</span> ${p.mrp ? `<s>$${p.mrp.toFixed(2)}</s>` : ''}
+    </div>`).join('')
+  function render() {
+    for (const k of ['brand', 'size', 'colour']) state[k] = [...document.querySelectorAll(`aside input[name=${k}]:checked`)].map((i) => i.value)
+    state.sort = document.getElementById('sort').value
+    document.querySelectorAll('.card').forEach((c) => {
+      const p = PRODUCTS[c.dataset.i]
+      const ok = ['brand', 'size', 'colour'].every((k) => !state[k].length || state[k].includes(p[k])) &&
+        (!state.min || p.price >= +state.min) && (!state.max || p.price <= +state.max)
+      c.hidden = !ok
+    })
+  }
+  document.querySelector('aside').addEventListener('change', render)
+  document.getElementById('sort').addEventListener('change', render)
+  document.getElementById('price-apply').addEventListener('click', () => {
+    state.min = document.querySelector('[name=min_price]').value
+    state.max = document.querySelector('[name=max_price]').value
+    render()
+  })
+  render()
+</script>
+</body>
+</html>

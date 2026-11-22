@@ -1,0 +1,68 @@
+<!doctype html>
+<!-- Test shop 4: no filters on the page until the "Filters (0)" button is clicked; they then open in
+     a modal dialog. One filter is a <select> (Size) with a placeholder first option. The search box
+     has no name and no form: JavaScript reads Enter and changes the URL (?query=…). £ prices.
+     window.state is what the tests read.
+     A cookie banner (cookieconsent-style: no "cookie" in its names, "show--consent" on <html>)
+     stays open the whole time: it must not hide the page's filters or be read as one. -->
+<html lang="en" class="show--consent">
+<head>
+<meta charset="utf-8">
+<title>Hoodies | Drawer Shop</title>
+</head>
+<body>
+<input id="search" type="text" placeholder="Search for products" autocomplete="off">
+<button id="open-filters" type="button">Filters (0)</button>
+<!-- A sort button whose list only exists once clicked, rows wrapping the real options (Decathlon). -->
+<div class="relative"><button id="sort" type="button" aria-haspopup="listbox" aria-expanded="false">Most relevant</button><div id="sort-list"></div></div>
+<div id="drawer-root"></div>
+<div class="cm" role="dialog" aria-modal="true"><p>We use cookies to improve your experience.</p><label><input type="checkbox" checked disabled> Necessary</label><label><input type="checkbox"> Analytics</label><button type="button">Accept All</button></div>
+<div id="grid">
+  <article><a href="/p/1"><h2>Grey Hoodie</h2></a><span>£35.00</span></article>
+  <article><a href="/p/2"><h2>Black Zip Hoodie</h2></a><span>£42.50</span></article>
+</div>
+<script>
+  window.state = { Material: [], size: '', sort: 'Most relevant', price: [5, 5005] }
+  const sortButton = document.getElementById('sort')
+  sortButton.addEventListener('click', () => {
+    const open = sortButton.getAttribute('aria-expanded') !== 'true'
+    sortButton.setAttribute('aria-expanded', String(open))
+    document.getElementById('sort-list').innerHTML = open ? `<ul role="listbox">${['Most relevant', 'Price (low → high)', 'Price (high → low)', 'Rating']
+      .map((o) => `<li role="presentation"><button role="option" type="button">${o}</button></li>`).join('')}</ul>` : ''
+  })
+  document.getElementById('sort-list').addEventListener('click', (e) => {
+    const o = e.target.closest('[role=option]')
+    if (!o) return
+    state.sort = sortButton.textContent = o.textContent
+    sortButton.click()
+  })
+  document.getElementById('search').value = new URLSearchParams(location.search).get('query') ?? ''
+  document.getElementById('search').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') location.search = '?query=' + encodeURIComponent(e.target.value)
+  })
+  document.getElementById('open-filters').addEventListener('click', () => {
+    document.getElementById('drawer-root').innerHTML = `
+      <div role="dialog" aria-modal="true" aria-label="Filters">
+        <div><h3>Material</h3>
+          <label><input type="checkbox" value="Cotton"> Cotton</label>
+          <label><input type="checkbox" value="Fleece"> Fleece</label></div>
+        <div><label for="size">Size</label>
+          <select id="size"><option value="">Choose a size</option><option value="s">S</option><option value="m">M</option><option value="l">L</option></select></div>
+        <div><h3>Price</h3><div><input type="range" id="pmin" min="0" max="100" value="0"><input type="range" id="pmax" min="0" max="100" value="100"></div></div>
+      </div>`
+    // Zara-style price: two stacked range inputs, uneven scale (£5 + v²/2), price in aria-valuetext.
+    const price = (v) => 5 + Math.round(Number(v) ** 2 / 2)
+    for (const r of document.querySelectorAll('#pmin, #pmax')) {
+      r.setAttribute('aria-valuetext', `£ ${price(r.value)}.00`)
+      r.addEventListener('input', () => r.setAttribute('aria-valuetext', `£ ${price(r.value)}.00`))
+      r.addEventListener('change', () => { state.price = [price(document.getElementById('pmin').value), price(document.getElementById('pmax').value)] })
+    }
+    const d = document.querySelector('[role=dialog]')
+    d.addEventListener('change', () => {
+      state.Material = [...d.querySelectorAll('input:checked')].map((i) => i.value)
+      state.size = d.querySelector('select').value
+    })
+  })
+</script>
+</body>
+</html>

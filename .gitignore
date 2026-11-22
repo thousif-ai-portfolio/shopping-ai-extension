@@ -6,3 +6,6 @@ dist/
 scripts/*.png
 scripts/*-log*.txt
 scripts/*-results*.json
+# Store packages and demo videos (built or recorded locally, not source)
+*.zip
+demo/

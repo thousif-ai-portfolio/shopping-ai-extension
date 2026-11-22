@@ -90,7 +90,7 @@ export const BLIND2 = [
   { cat: 'blind-8', site: 'myntra-shoes', q: 'high cushioning running shoes', expect: ['Cushioning: High', 'Sport: Running'] },
   { cat: 'blind-8', site: 'myntra-shoes', q: 'new balance shoes 60% off', expect: ['Brand: New Balance', 'Discount Range: 60% and above'] },
   { cat: 'blind-8', site: 'myntra-shoes', q: 'not white, black shoes', expect: ['Color: Black'] },
-  { cat: 'blind-8', site: 'myntra-shoes', q: 'pink shoes', expect: [], reply: 'nomatch' }, // no Pink on this page
+  { cat: 'blind-8', site: 'myntra-shoes', q: 'pink shoes', expect: [], reply: 'colour-missing' }, // no Pink on this page
   { cat: 'blind-8', site: 'flipkart-shoes', q: 'bata shoes for men', expect: ['Brand: Bata', 'Gender: Men'] },
   { cat: 'blind-8', site: 'flipkart-shoes', q: 'tan colour shoes', expect: ['Color: Tan'] },
   { cat: 'blind-8', site: 'flipkart-shoes', q: 'leather shoes under 2000', expect: ['Outer Material: Leather', 'Max price: ₹2000'] },
@@ -137,7 +137,7 @@ export const BLIND2 = [
   { cat: 'blind-8', site: 'myntra-kurtas', q: 'green kurta size L', expect: ['Color: Green', 'Size: L'] },
   { cat: 'blind-8', site: 'myntra-kurtas', q: 'short sleeve kurta', expect: ['Sleeve Length: Short Sleeves'] },
   { cat: 'blind-8', site: 'myntra-kurtas', q: 'sangria kurta black', expect: ['Brand: Sangria', 'Color: Black'] },
-  { cat: 'blind-8', site: 'myntra-kurtas', q: 'kurta in orange', expect: [], reply: 'nomatch' }, // no Orange on this page
+  { cat: 'blind-8', site: 'myntra-kurtas', q: 'kurta in orange', expect: [], reply: 'colour-missing' }, // no Orange on this page
 
   // ===== Follow-ups
   { cat: 'blind-8', site: 'flipkart', q: 'actually make it 2xl', applied: ['Size: XL'], expect: ['Size: 2XL', '-Size: XL'] },

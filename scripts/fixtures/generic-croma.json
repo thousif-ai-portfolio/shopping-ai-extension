@@ -1,0 +1,7 @@
+[
+  { "name": "Device Type", "options": ["Wireless Headphone", "Headphone", "Headset", "Wireless Headset", "Wireless Earphone", "Truly Wireless Earbuds", "Earphone", "Gaming Headset"] },
+  { "name": "Device Orientation", "options": ["In-Ear", "Over-Ear", "On-Ear", "Bone Conduction", "Open Ear"] },
+  { "name": "Price", "options": ["500 & Below", "501 - 1,000", "1,001 - 1,500", "1,501 - 3,000", "3,001 - 5,000", "5,001 - 10,000", "10,001 - 20,000"] },
+  { "name": "Discount", "options": ["Below 20%", "20% To 40%", "40% To 60%", "60% To 80%", "80% And Above"] },
+  { "name": "Brand", "options": ["boAt", "Sony", "JBL", "Noise", "Bose", "Sennheiser", "Apple", "Croma", "Philips", "Realme", "OnePlus", "Nothing", "Beats", "Marshall", "Samsung"] }
+]

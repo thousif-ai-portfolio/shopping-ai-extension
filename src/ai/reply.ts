@@ -3,7 +3,8 @@
 // instant (no AI call) and never apply a filter by mistake.
 // Returns null when the message should go on to the filter step.
 import { SORT_GROUP, type FilterChoice, type Page } from '../adapters/types'
-import { COLOURS } from './product'
+import { COLOURS, productIn } from './product'
+import { applyRules, isRemoveRequest, normalizeQuery } from './rules'
 
 const EXAMPLE = 'e.g. "black puma jacket under 2000", "size M", "cheapest first" or "remove puma"'
 
@@ -93,7 +94,8 @@ export function quickReply(query: string, page: Page, applied: FilterChoice[]): 
       if (!m || !(QUESTION.test(q) || ((m[1] !== undefined || /\boptions?\b/.test(q)) && (ASK.test(q) || q === m[0])))) continue
       const g = page.filters.find((x) => groupRe.test(x.name) && x.options.length)
       if (!g) return `This ${site} page has no ${name.toLowerCase()} filter.`
-      const named = g.options.some((o) => o.length > 1 && ` ${q} `.includes(` ${o.toLowerCase()} `))
+      // (Any option of the page named in full counts: "show only top brands" is Amazon's "Top Brands".)
+      const named = page.filters.some((x) => x.options.some((o) => (x === g ? o.length > 1 : o.length > 4) && ` ${q} `.includes(` ${o.toLowerCase()} `))) || /\bsizes?\s+(?:x{0,3}[sml]|\dxl)\b/.test(q)
       if (named) break
       return `${name} on this page: ${listOf(g.options)}. Say one, e.g. "${g.options[0]}".`
     }
@@ -155,9 +157,56 @@ export function missingColourNote(query: string, choices: FilterChoice[], page: 
     : `Not on this page: ${names} (this page has no colour filter).`
 }
 
+/**
+ * "No size L here", "no price filter here": a size or budget asked for that nothing applied
+ * covers, so it is never dropped silently (the page may not offer it, or set prices by a slider).
+ */
+export function missingSizePriceNote(query: string, choices: FilterChoice[], page: Page): string | null {
+  if (isRemoveRequest(query)) return null
+  const q = normalizeQuery(query)
+  const notes: string[] = []
+  const size = q.match(/\bsize\s+(?:is\s+|of\s+|=\s*)?(uk\s*\d+(?:\.5)?|\d+(?:\.5)?|x{0,3}[sl]|m|\d?x{1,3}l)\b/)
+  if (size && !choices.some((c) => /size/i.test(c.group))) {
+    const g = page.filters.find((g) => /size/i.test(g.name))
+    notes.push(g ? `No size ${size[1].toUpperCase()} on this page (sizes here: ${listOf(g.options, 8)}).` : "I couldn't find a size filter on this page.")
+  }
+  const w = applyRules(query, { terms: [], max_price: null, min_price: null, min_discount: null, min_rating: null })
+  if ((w.max_price || w.min_price) && !choices.some((c) => /price/i.test(c.group)))
+    // (A page with a price list where nothing fits is not "no price filter".)
+    notes.push(page.filters.some((g) => /price/i.test(g.name))
+      ? 'No price option on this page fits that budget, so it was not applied.'
+      : "I couldn't find a price filter I can set on this page, so the budget was not applied.")
+  // Rating, discount and sorting asked for but nothing on the page fits.
+  for (const [n, re, what] of [[w.min_rating, /\b(ratings?|reviews?)\b/i, 'rating'], [w.min_discount, /discount/i, 'discount']] as const)
+    if (n && n > 0 && q.includes(String(n)) && !choices.some((c) => re.test(c.group))) {
+      const g = page.filters.find((g) => re.test(g.name) && g.name !== SORT_GROUP)
+      notes.push(g ? `No ${what} option on this page fits that (options here: ${listOf(g.options, 6)}).` : `I couldn't find a ${what} filter on this page.`)
+    }
+  if (w.sort && !choices.some((c) => c.group === SORT_GROUP))
+    notes.push(page.filters.some((g) => g.name === SORT_GROUP) ? "This page can't be sorted that way." : "I couldn't find a sort option on this page.")
+  return notes.join(' ') || null
+}
+
+/** Things shops rarely offer, said plainly: sorting by discount, an in-stock filter. */
+export function cantNote(query: string, page: Page): string | null {
+  const q = normalizeQuery(query)
+  if (/\b(?:most|highest|biggest|max(?:imum)?) discount(?:ed|s)?\b|\bdiscount (?:high to low|first)|\bsort(?:ed)? by discount/.test(q))
+    return "I can't sort by discount; use a discount filter instead."
+  if (/\b(?:in stock|out of stock)\b/.test(q) && !page.filters.some((g) => g.options.some((o) => /exclude out of stock|in stock|availab/i.test(o))))
+    return page.filters.some((g) => g.options.some((o) => /include out of stock/i.test(o)))
+      ? 'Out-of-stock items are already hidden on this page.'
+      : 'No in-stock filter on this page.'
+  // "remove all adidas products": filters only show things, so an unticked brand can't be hidden.
+  if (isRemoveRequest(query) && /\b(?:products|items)\b/.test(q))
+    return "Shops can't hide just one brand, colour or material from the results; I can only take off a filter that is ticked."
+  return null
+}
+
 /** Shown when no filter could be matched, so the user always learns what to do next. */
 export function noMatchReply(query: string, page: Page): string {
-  const note = compareNote(query)
+  const product = productIn(query)
+  const note = compareNote(query) ?? cantNote(query, page) ?? missingColourNote(query, [], page) ?? missingSizePriceNote(query, [], page) ??
+    (product?.some((w) => ` ${(page.searchTerm ?? '').toLowerCase()} `.includes(` ${w}`)) ? `These results are already "${page.searchTerm}".` : null)
   if (note) return note
   const names = page.filters.filter((g) => g.name !== SORT_GROUP && g.options.length).map((g) => g.name)
   return `No matching filters for "${query.trim()}" on this page. ` +

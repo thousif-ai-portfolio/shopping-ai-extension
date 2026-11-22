@@ -7,22 +7,22 @@ Name:
 AI Shopping Filters
 
 Summary (max 132 characters):
-Type what you want in plain words; on-device AI sets the right filters on Amazon.in, Flipkart and Myntra.
+Type what you want in plain words; on-device AI sets the right filters on any shopping site.
 
 Description:
-Stop clicking through dozens of filter checkboxes. Open a search on Amazon.in, Flipkart or Myntra, click the extension icon and type what you want, for example:
+Stop clicking through dozens of filter checkboxes. Open a search on any shopping site, click the extension icon and type what you want, for example:
 
 - "black puma jacket size M under 2000"
 - "cheapest first"
 - "remove puma"
 - "samsung 5g phone with 8gb ram under 15000"
-- "compare on all 3 sites"
+- "compare running shoes on all sites" or "compare puma jacket on ajio and snapdeal"
 
 The assistant reads your request and ticks the matching filters on the page: brand, colour, size, price, discount, rating, sort order and more. Follow-up messages build on the last one, and "start over" clears everything.
 
 Private by design: the AI runs on your own computer. It uses Chrome's built-in Gemini Nano where your PC supports it, and built-in matching rules everywhere else. Nothing you type is sent to any server.
 
-Works on Amazon.in, Flipkart and Myntra. Hindi and Hinglish words such as "kaala", "sasta" and "2000 ke andar" are understood too.
+Works on any shopping site, with extra-reliable support for Amazon.in, Flipkart and Myntra. Price comparison checks every well-known shop selling the product, or the shops you name. Hindi and Hinglish words such as "kaala", "sasta" and "2000 ke andar" are understood too.
 
 Category:
 Shopping
@@ -37,13 +37,13 @@ Graphic assets (in this kit):
 === Privacy practices tab ===
 
 Single purpose:
-Lets the user set search filters on Amazon.in, Flipkart and Myntra by describing what they want in plain words.
+Lets the user set search filters on any shopping site by describing what they want in plain words.
 
 Permission justifications:
 - sidePanel: the chat where the user types requests is shown in Chrome's side panel.
 - tabs: to find the shopping tab the user is looking at, read its address (which site and search it shows) and open search results on it when the user asks for a different product or site.
 - favicon: to show the Amazon, Flipkart and Myntra logos on the panel's buttons, from Chrome's own icon cache.
-- Host permissions (www.amazon.in, www.flipkart.com, www.myntra.com): to read the filter options shown on those pages and tick the ones the user asked for. The extension runs on no other site.
+- Content script on all http/https sites: to read the filter options on the shopping page the user has open and tick the ones they asked for. It reads or clicks nothing until the user sends a request from the side panel on that tab, and sends nothing anywhere.
 
 Remote code:
 No, I am not using remote code. All code is included in the package.

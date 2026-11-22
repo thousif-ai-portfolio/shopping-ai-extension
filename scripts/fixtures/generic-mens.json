@@ -1,0 +1,35 @@
+[
+ {
+  "name": "Category",
+  "options": [
+   "Men's Running Shoes",
+   "Women's Running Shoes",
+   "Kids' Shoes"
+  ]
+ },
+ {
+  "name": "Gender",
+  "options": [
+   "Men",
+   "Women"
+  ]
+ },
+ {
+  "name": "Size",
+  "options": [
+   "7",
+   "8",
+   "9",
+   "10"
+  ]
+ },
+ {
+  "name": "Price",
+  "options": [
+   "Under ₹999",
+   "₹1,000 - ₹1,999",
+   "₹2,000 - ₹2,999",
+   "Over ₹3,000"
+  ]
+ }
+]

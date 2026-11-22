@@ -1,9 +1,10 @@
-// Comparing prices across Amazon, Flipkart and Myntra: the panel runs the same search and the
+// Comparing prices across shops (the named ones, or every well-known shop selling that kind of
+// product, see compareTargets in product.ts): the panel runs the same search and the
 // same filters on each site, sorted cheapest first, then calls summarize() on what it found.
 // The sites share no product ids, so this compares the cheapest MATCHING item on each site,
 // not the identical product.
 import { SORT_GROUP, type FilterChoice, type Product } from '../adapters/types'
-import { productIn, titleIsProduct } from './product'
+import { COLOURS, productIn, titleIsProduct } from './product'
 
 export type SiteResult = {
   site: string
@@ -44,6 +45,12 @@ export function summarize(results: SiteResult[], search = ''): Summary {
   const brands = [...new Set(results.flatMap((r) => r.applied.filter((c) => !c.remove && /brand/i.test(c.group)).map((c) => c.option)))]
   const product = productIn(search)
   const kinds = words(search).split(' ').map((w) => KIND_STEMS[w]).filter(Boolean)
+  // Search words naming the item (brand, material…): not the product word, a colour (a filter
+  // covers those), a kind word (checked above) or a number. Matched by their start ("roadster"
+  // also in "Roadsters"), so a plural or a different ending still counts.
+  const productWords = new Set((product ?? []).flatMap((w) => [w, `${w}s`, `${w}es`]))
+  const required = words(search).split(' ').filter((w) =>
+    w.length >= 3 && !/^\d/.test(w) && !productWords.has(w) && !COLOURS.includes(w) && !KIND_STEMS[w]).map((w) => w.slice(0, Math.max(3, w.length - 2)))
   // The budget any site applied ("Max price: ₹2000"). Every product card shows its price, so a
   // site without a price filter (Myntra) is checked against the budget item by item instead.
   const amount = (re: RegExp) => results.flatMap((r) => r.applied.filter((c) => !c.remove && re.test(c.group)).map((c) => Number(c.option.replace(/[^\d]/g, '')))).filter((n) => n > 0)
@@ -57,6 +64,9 @@ export function summarize(results: SiteResult[], search = ''): Summary {
     let items = (product ? r.products.filter((p) => titleIsProduct(p.title, product)) : r.products)
       .filter((p) => p.price <= max && p.price >= min)
     if (kinds.length) items = items.filter((p) => kinds.every((k) => ` ${words(p.title)} `.match(new RegExp(`\\b${k}`))))
+    // The other words searched for must be in the title too: shops pad cheap results with other
+    // brands ("puma jacket" sorted cheapest shows a NEONOMAD jacket first).
+    if (required.length) items = items.filter((p) => required.every((w) => ` ${words(p.title)} `.includes(` ${w}`)))
     // No brand filter here: keep the items whose title shows the brand instead.
     if (lacking.includes('brand') && brands.length) {
       const branded = items.filter((p) => brands.some((b) => mentions(p.title, b)))

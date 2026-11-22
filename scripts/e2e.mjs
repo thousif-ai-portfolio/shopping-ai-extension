@@ -80,6 +80,34 @@ const CHAT_TESTS = [
   { site: 'Myntra', followUp: true, query: 'remove size', expect: ['-Size: *'], check: all(hasNot(/size_facet/), has(/Brand:Puma/)) },
   { site: 'Myntra', followUp: true, query: 'reset', expect: ['-*: *'], check: hasNot(/[?&]f=/) },
 ]
+// Everyday multi-turn chats in casual English and Hinglish (--natural), the way people type.
+const AJIO = 'https://www.ajio.com/search/?text=jacket%20men'
+const NATURAL_TESTS = [
+  { site: 'Flipkart', url: JACKETS.flipkart, query: "hey, i'm looking for a jacket for my brother, he likes black", expect: ['Gender: Men', 'Color: Black'], check: has(/\]=Black/) },
+  { site: 'Flipkart', followUp: true, query: 'something not too expensive, maybe under 2k?', expect: ['Max price: ₹2000'], check: all(has(/price_range\.to=2000/), hasNot(/sort=/)) },
+  { site: 'Flipkart', followUp: true, query: 'he wears M', expect: ['Size: M'], check: has(/\]=M(&|$)/) },
+  { site: 'Flipkart', followUp: true, query: 'hmm actually blue looks better', expect: ['Color: Blue', '-Color: Black'], check: all(has(/\]=Blue/), hasNot(/\]=Black/)) },
+  { site: 'Flipkart', followUp: true, query: 'show me the cheap ones first', expect: ['Sort by: Price: Low to High'], check: has(/sort=price_asc/) },
+  { site: 'Flipkart', followUp: true, query: 'can you take off the size', expect: ['-Size: *'], check: all(hasNot(/\]=M(&|$)/), has(/\]=Blue/)) },
+  { site: 'Flipkart', followUp: true, query: 'ok forget everything, start again', expect: ['-*: *'], check: hasNot(/facets\./) },
+  { site: 'Amazon', url: JACKETS.amazon, query: 'bhai mujhe puma ki jacket chahiye', expect: ['Brands: PUMA'], check: has(/p_123:/) },
+  { site: 'Amazon', followUp: true, query: 'puma hatao, nike dikhao', expect: ['Brands: Nike', '-Brands: PUMA'], check: all(has(/p_123:/), hasNot(/256097/)) },
+  { site: 'Amazon', followUp: true, query: 'size L hai', expect: ["Men's General Size: L"], check: has(/p_n_pt_nav_size/) },
+  { site: 'Amazon', followUp: true, query: 'achhe reviews wali', expect: ['Customer Reviews: 4 Stars & Up'], check: has(/p_72:/) },
+  { site: 'Amazon', followUp: true, query: '1500 se kam wali dikhao', expect: ['Max price: ₹1500'], check: has(/p_36:-150000/) },
+  { site: 'Amazon', followUp: true, query: 'sab hatao', expect: ['-*: *'], check: hasNot(/rh=/) },
+  { site: 'Myntra', url: JACKETS.myntra, query: 'i need a jacket for office, nothing flashy, maybe grey or navy', expect: ['Color: Grey', 'Color: Navy Blue'], check: all(has(/Grey/), has(/Navy/)) },
+  { site: 'Myntra', followUp: true, query: 'anything with a good discount?', expect: ['Discount Range: 10% and above'], check: has(/discount/i) },
+  { site: 'Myntra', followUp: true, query: 'newest ones first please', expect: ['Sort by: Newest First'], check: has(/sort=new/) },
+  { site: 'Myntra', followUp: true, query: 'remove the grey', expect: ['-Color: Grey'], check: all(hasNot(/Grey/), has(/Navy/)) },
+  { site: 'Myntra', followUp: true, query: 'L please', expect: ['Size: L'], check: has(/size_facet/) },
+  { site: 'Ajio', url: AJIO, query: 'show me some puma or adidas jackets', expect: ['brands: Puma', 'brands: ADIDAS'], check: all(has(/brand:Puma/), has(/brand:ADIDAS/i)) },
+  { site: 'Ajio', followUp: true, query: 'only the ones rated 4 and above', expect: ['rating: 4 & above'], check: has(/rating/i) },
+  { site: 'Ajio', followUp: true, query: 'under 3000 please', expect: ['Max price: ₹3000'], check: has(/price:/) },
+  { site: 'Ajio', followUp: true, query: 'sort by price high to low', expect: ['Sort by: Price: High to Low'], check: has(/brand:Puma/) },
+  { site: 'Ajio', followUp: true, query: 'remove adidas', expect: ['-brands: ADIDAS'], check: all(hasNot(/brand:ADIDAS/i), has(/brand:Puma/)) },
+  { site: 'Ajio', followUp: true, query: 'clear all', expect: ['-*: *'], check: hasNot(/brand:/) },
+]
 // Price comparison across the three sites (--compare). compare: the sites that must end up with a
 // matching price (others may be "not compared" when a filter doesn't exist there).
 const COMPARE_TESTS = [
@@ -92,6 +120,7 @@ const COMPARE_TESTS = [
 ]
 if (process.argv.includes('--compare')) TESTS.splice(0, TESTS.length, ...COMPARE_TESTS)
 if (process.argv.includes('--chat')) TESTS.splice(0, TESTS.length, ...CHAT_TESTS)
+if (process.argv.includes('--natural')) TESTS.splice(0, TESTS.length, ...NATURAL_TESTS)
 if (process.argv.includes('--extra')) TESTS.splice(0, TESTS.length, ...EXTRA)
 if (process.argv.includes('--search')) TESTS.splice(0, TESTS.length, ...SEARCH)
 
@@ -169,7 +198,8 @@ for (const [n, t] of tests.entries()) {
     await shop.goto(customUrl ?? t.url, { waitUntil: 'domcontentloaded', timeout: 90000 }) // sites can be slow
     await sleep(4000)
   }
-  const tabId = await panel.evaluate(async (u) => (await chrome.tabs.query({})).find((x) => x.url === u)?.id, shop.url())
+  // (By site, not exact address: a shop may redirect its search page after loading, Reliance.)
+  const tabId = await panel.evaluate(async (u) => { const all = await chrome.tabs.query({}); return (all.find((x) => x.url === u) ?? all.find((x) => x.url && new URL(x.url).host === new URL(u).host))?.id }, shop.url())
   // Point the open panel at this tab without reloading it (reloading would unload the AI).
   await panel.evaluate((id) => { const u = new URL(location.href); u.searchParams.set('tab', id); history.replaceState(null, '', u) }, tabId)
   await shop.bringToFront() // sites only render (and open "more" lists) in the visible tab
@@ -197,7 +227,8 @@ for (const [n, t] of tests.entries()) {
   await sleep(2500)
   await shop.waitForFunction(() => document.readyState === 'complete', { timeout: 45000 }).catch(() => {})
   await sleep(2500)
-  const url = decodeURIComponent(decodeURIComponent(shop.url()))
+  const dec = (u) => { try { return decodeURIComponent(u) } catch { return u } }
+  const url = dec(dec(shop.url()))
   let ok, notInUrl = []
   if (customQuery) ok = /Done/.test(status)
   else if (t.expect === null) ok = /No matching filters/.test(status)
@@ -212,14 +243,15 @@ for (const [n, t] of tests.entries()) {
     const box = await panel.$eval('#comparison', (e) => e.innerText).catch(() => '')
     console.log('  comparison:\n    ' + box.replace(/\n/g, '\n    '))
     const priceOf = (site) => Number((box.match(new RegExp(`• ${site}: ₹([\\d,]+)`)) ?? [])[1]?.replace(/,/g, '') ?? NaN)
-    const counted = ['Amazon', 'Flipkart', 'Myntra'].filter((s) => new RegExp(`• ${s}: ₹[\\d,]+, [^\\n]*(cheapest|more\\))`).test(box))
-    const winner = (box.match(/Picked (\w+)/) ?? [])[1]
+    // Every shop compared (not only the first three: "across sites" also checks Tata Cliq, Ajio…).
+    const counted = [...box.matchAll(/• ([^:\n]+): ₹[\d,]+, [^\n]*(?:cheapest|more\))/g)].map((m) => m[1].trim())
+    const winner = (box.match(/Picked ([^:]+):/) ?? [])[1]?.trim()
     const lowest = counted.sort((a, b) => priceOf(a) - priceOf(b))[0]
     const host = new URL(shop.url()).hostname
     if (!/Compared .* for "([^"]+)"/.test(status) || !status.includes(`"${t.search}"`)) notInUrl.push(`search words wrong in status: ${status}`)
     for (const s of t.compare) if (!counted.includes(s)) notInUrl.push(`${s} has no compared price`)
     if (!winner || winner !== lowest) notInUrl.push(`winner ${winner} is not the lowest counted (${lowest})`)
-    if (winner && !host.includes(winner.toLowerCase())) notInUrl.push(`tab is on ${host}, not the winner ${winner}`)
+    if (winner && !host.includes(winner.toLowerCase().replace(/\s+/g, ''))) notInUrl.push(`tab is on ${host}, not the winner ${winner}`)
     ok = /Done/.test(status) && !notInUrl.length
   }
   else if (t.search) {

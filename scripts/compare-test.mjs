@@ -8,10 +8,10 @@ import { build } from 'esbuild'
 
 const out = path.join(os.tmpdir(), 'ai-shopping-filters-compare.mjs')
 await build({
-  stdin: { contents: `export { wantsCompare, searchWords } from './src/ai/product'; export { summarize } from './src/ai/compare'`, resolveDir: process.cwd(), loader: 'ts' },
+  stdin: { contents: `export { wantsCompare, searchWords, compareTargets } from './src/ai/product'; export { summarize } from './src/ai/compare'`, resolveDir: process.cwd(), loader: 'ts' },
   bundle: true, format: 'esm', outfile: out, logLevel: 'error',
 })
-const { wantsCompare, searchWords, summarize } = await import(pathToFileURL(out).href + `?${Date.now()}`)
+const { wantsCompare, searchWords, summarize, compareTargets } = await import(pathToFileURL(out).href + `?${Date.now()}`)
 
 let passed = 0, total = 0
 const check = (name, ok, detail = '') => {
@@ -35,8 +35,37 @@ const COMPARE = [
   ['is amazon better', false],
   ['which is cheapest', false],
   ['puma vs adidas', false],
+  // Any shop (18 Nov): named shops, 'compare all', 'everywhere'
+  ['compare puma jacket on ajio and snapdeal', true],
+  ['compare with ajio', true],
+  ['nykaa vs purplle for perfume', true],
+  ['compare all', true],
+  ['compare puma jacket everywhere', true],
+  ['compare on other sites', true],
+  ['cheapest on ajio or snapdeal', true],
+  ['compare all colours', false],
+  ['is ajio good', false],
+  ['open ajio', false],
+  ['compare nike and puma', false], // brands
 ]
 for (const [q, want] of COMPARE) check(`wantsCompare ${JSON.stringify(q)} = ${want}`, wantsCompare(q) === want, `got ${!want}`)
+
+// ===== Which shops a comparison checks: [message, shop open now, its address, the shops]
+const FASHION = ['Amazon', 'Flipkart', 'Myntra', 'Ajio', 'Snapdeal', 'Tatacliq', 'Shoppers Stop', 'Westside', 'Meesho']
+const TARGETS = [
+  ['compare puma jacket on ajio and snapdeal', 'Amazon', 'www.amazon.in', ['Ajio', 'Snapdeal']],
+  ['compare with ajio', 'Myntra', 'www.myntra.com', ['Ajio', 'Myntra']],
+  ['compare on all 3 sites', 'decathlon.in', 'www.decathlon.in', ['Amazon', 'Flipkart', 'Myntra']],
+  ['compare puma jacket across sites', 'Amazon', 'www.amazon.in', FASHION],
+  ['compare running shoes on all sites', 'decathlon.in', 'www.decathlon.in', [...FASHION, 'decathlon.in']],
+  ['compare headphones everywhere', 'croma.com', 'www.croma.com', ['Amazon', 'Flipkart', 'Myntra', 'Croma', 'Reliance Digital', 'Vijay Sales', 'Tatacliq']],
+  ['compare perfume on all sites', 'Myntra', 'www.myntra.com', ['Amazon', 'Flipkart', 'Myntra', 'Nykaa', 'Purplle']],
+  ['compare black jeans on allbirds.com and ajio', 'Amazon', 'www.amazon.in', ['Ajio', 'allbirds.com']],
+]
+for (const [q, site, host, want] of TARGETS) {
+  const got = compareTargets(q, site, host).map((t) => t.name)
+  check(`compareTargets ${JSON.stringify(q)} on ${site}`, JSON.stringify(got) === JSON.stringify(want), `got ${got.join(', ')}`)
+}
 
 // ===== What is searched on every site
 const WORDS = [
@@ -61,6 +90,10 @@ check('a site without the brand filter is not counted, even if cheaper', s.winne
 
 s = summarize([r('Amazon', [brand, sort], [p(700)]), r('Flipkart', [], [], 'page did not load'), r('Myntra', [brand, sort], [])])
 check('errors and empty sites are reported, the rest still compared', s.winner?.site === 'Amazon' && /Flipkart: couldn't check/.test(s.text) && /Myntra: no matching products/.test(s.text) && /only site/.test(s.text), s.text)
+
+// Searched words must be in the title (18 Nov): cheaper items of another brand don't count.
+s = summarize([r('Ajio', [sort], [p(273, 'NEONOMAD Men Colourblock Hooded Track Jacket'), p(1221, 'Puma Essentials Men Track Jacket')]), r('Snapdeal', [sort], [p(1675, 'IF-INDIAN FORT Bomber Jacket')])], 'puma jacket')
+check('a searched brand must be in the title', s.winner?.site === 'Ajio' && /Ajio: ₹1,221, Puma/.test(s.text) && /Snapdeal: no matching products/.test(s.text), s.text)
 
 s = summarize([r('Amazon', [], [], 'x'), r('Flipkart', [], [], 'y'), r('Myntra', [brand], [])])
 check('nothing to pick: says so, no winner', !s.winner && /nothing was picked/.test(s.text), s.text)

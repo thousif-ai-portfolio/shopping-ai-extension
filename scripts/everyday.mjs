@@ -10,14 +10,17 @@ import { build } from 'esbuild'
 import { EVERYDAY as ALL } from './everyday-cases.mjs'
 import { BLIND } from './blind-cases.mjs'
 import { BLIND2 } from './blind-cases-2.mjs'
-// --blind: only the batch written without looking at the code
-const EVERYDAY = process.argv.includes('--blind') ? BLIND2 : [...ALL, ...BLIND, ...BLIND2]
+import { GENERIC } from './generic-cases.mjs'
+import { GENERIC_BLIND } from './generic-blind-cases.mjs'
+import { FILTER45 } from './filter45-cases.mjs'
+// --blind: only the batch written without looking at the code; --generic: only "any site" pages
+const EVERYDAY = process.argv.includes('--blind') ? BLIND2 : process.argv.includes('--generic') ? [...GENERIC, ...GENERIC_BLIND] : [...ALL, ...BLIND, ...BLIND2, ...GENERIC, ...GENERIC_BLIND, ...FILTER45]
 
 const useAi = process.argv.includes('--ai')
 const fixtures = Object.fromEntries(
   fs.readdirSync('scripts/fixtures').map((f) => [f.replace(/\.json$/, ''), JSON.parse(fs.readFileSync(`scripts/fixtures/${f}`, 'utf8'))]),
 )
-const SITE = { amazon: 'Amazon', flipkart: 'Flipkart', myntra: 'Myntra' }
+const SITE = { amazon: 'Amazon', flipkart: 'Flipkart', myntra: 'Myntra', generic: 'Test Shop' }
 const toChoice = (s) => {
   const remove = s.startsWith('-')
   const [group, option] = s.replace(/^-/, '').split(/: (.*)/)
@@ -32,7 +35,7 @@ function kindOf(reply) {
     [/^Tell me what you're looking for/, 'empty'], [/^Hi!/, 'greet'], [/^You're welcome/, 'thanks'], [/^I filter, sort/, 'help'],
     [/^(Applied in this chat|No filters from this chat)/, 'applied'], [/^Filters on this page/, 'filters'],
     [/^Tell me your budget/, 'price'], [/^Sorry, I can/, 'offtopic'], [/^I can't compare/, 'compare'],
-    [/^No matching filters/, 'nomatch'], [/^Not on this page/, 'colour-missing'], [/^This .* page has no/, 'nolist'],
+    [/^No matching filters/, 'nomatch'], [/^(No size \S+ on this page|I couldn't find a (size|price|rating|discount|sort)|No (price|rating|discount) option on this page|I can't sort by discount|This page can't be sorted|Out-of-stock items are already|No in-stock filter|These results are already|Shops can't hide)/, 'note'], [/^Not on this page/, 'colour-missing'], [/^This .* page has no/, 'nolist'],
   ].find(([re]) => re.test(reply))
   if (k) return k[1]
   const list = reply.match(/^(\w+) on this page:/)
@@ -59,7 +62,7 @@ if (useAi) {
   await build({
     stdin: {
       contents: `import { decide } from './src/ai/decide'; import { matchFilters } from './src/ai/match'; import { applyRules } from './src/ai/rules'
-        export const run = (q, page, r) => decide(q, page, r, async (x, g) => matchFilters(applyRules(x, { terms: [], max_price: null, min_price: null, min_discount: null, min_rating: null }), g, x))`,
+        export const run = (q, page, r, searched) => decide(q, page, r, async (x, g) => matchFilters(applyRules(x, { terms: [], max_price: null, min_price: null, min_discount: null, min_rating: null }), g, x), searched)`,
       resolveDir: process.cwd(), loader: 'ts',
     },
     bundle: true, format: 'esm', outfile: out, logLevel: 'error',
@@ -73,7 +76,7 @@ for (const c of EVERYDAY) {
   const page = { site: SITE[c.site.split('-')[0]], filters: c.page === 'empty' ? [] : fixtures[c.site], searchTerm: c.searchTerm }
   let got = [], kind = null, error
   try {
-    const d = await run(c.q, page, (c.applied ?? []).map(toChoice))
+    const d = await run(c.q, page, (c.applied ?? []).map(toChoice), !!c.searched) // searched: right after a search
     got = d.choices.map(fmt)
     kind = kindOf(d.reply)
     c.replyText = d.reply

@@ -1,0 +1,69 @@
+[
+ {
+  "name": "Size",
+  "options": [
+   "8",
+   "8.5",
+   "9",
+   "9.5",
+   "10",
+   "10.5",
+   "11",
+   "11.5",
+   "12"
+  ]
+ },
+ {
+  "name": "Color",
+  "options": [
+   "black",
+   "grey",
+   "white",
+   "beige",
+   "brown",
+   "red",
+   "pink",
+   "yellow"
+  ]
+ },
+ {
+  "name": "Price",
+  "options": [
+   "Under $75",
+   "$76 - $100",
+   "$101 - $125",
+   "$126 - $150",
+   "Over $150"
+  ]
+ },
+ {
+  "name": "Product Type",
+  "options": [
+   "Everyday Sneakers",
+   "Golf",
+   "High Tops",
+   "Hiking Shoes",
+   "Running Shoes",
+   "Slip Ons",
+   "Slippers"
+  ]
+ },
+ {
+  "name": "Material",
+  "options": [
+   "canvas",
+   "cotton",
+   "tree",
+   "wool"
+  ]
+ },
+ {
+  "name": "Sort by",
+  "options": [
+   "Price: Low to High",
+   "Price: High to Low",
+   "Newest First",
+   "Popularity"
+  ]
+ }
+]

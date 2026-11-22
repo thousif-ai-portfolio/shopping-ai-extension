@@ -1,0 +1,96 @@
+[
+ {
+  "name": "Gender",
+  "options": [
+   "Men",
+   "Women",
+   "Girls",
+   "Boys"
+  ]
+ },
+ {
+  "name": "Category",
+  "options": [
+   "Sport shoes"
+  ]
+ },
+ {
+  "name": "Size",
+  "options": [
+   "6 - eu 39",
+   "7 - eu 40",
+   "8 - eu 42",
+   "9 - eu 43",
+   "10 - eu 44",
+   "11 - eu 45"
+  ]
+ },
+ {
+  "name": "Sport",
+  "options": [
+   "Jogging",
+   "Running",
+   "Trail",
+   "Walking"
+  ]
+ },
+ {
+  "name": "Brand",
+  "options": [
+   "Adidas",
+   "Kiprun",
+   "Decathlon"
+  ]
+ },
+ {
+  "name": "Color",
+  "options": [
+   "Black",
+   "White",
+   "Blue",
+   "Grey",
+   "Green",
+   "Brown",
+   "Purple",
+   "Pink"
+  ]
+ },
+ {
+  "name": "Discount",
+  "options": [
+   "10% and below",
+   "30% and above",
+   "40% and above",
+   "50% and above",
+   "60% and above"
+  ]
+ },
+ {
+  "name": "Rating",
+  "options": [
+   "Above 4★",
+   "Above 3★",
+   "Above 2★",
+   "Above 1★",
+   "No rating"
+  ]
+ },
+ {
+  "name": "Availability",
+  "options": [
+   "Exclude out of stock"
+  ]
+ },
+ {
+  "name": "Min price",
+  "options": [
+   "₹…"
+  ]
+ },
+ {
+  "name": "Max price",
+  "options": [
+   "₹…"
+  ]
+ }
+]

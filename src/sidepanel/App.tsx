@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { aiStatus, chooseFilters } from '../ai/llm'
-import { SORT_GROUP, SORT_LABELS, wait, type Product, type FilterChoice, type Message, type Page } from '../adapters/types'
-import { SITES, otherSite, searchFor, searchOnOtherSite, searchWords, wantsCompare } from '../ai/product'
+import { SORT_GROUP, SORT_LABELS, samePage, wait, type Product, type FilterChoice, type Message, type Page } from '../adapters/types'
+import { SITES, otherSite, searchFor, compareTargets, filterWords, searchAt, searchOnOtherSite, searchWords, unknownSite, wantsCompare, withoutShop, type CompareTarget } from '../ai/product'
 import { summarize, type SiteResult, type Summary } from '../ai/compare'
 import { decide } from '../ai/decide'
+import { normalizeQuery } from '../ai/rules'
 import { label, quickReply } from '../ai/reply'
 
 // ?test exposes the AI step to the test runners (scripts/edge.mjs).
@@ -25,17 +26,27 @@ async function shopTabId(): Promise<number> {
 }
 
 // Send a message to the content script running in that tab.
-async function sendToPage<T>(msg: Message, tabId?: number): Promise<T> {
+async function sendToPage<T>(msg: Message, tabId?: number, tries = 15): Promise<T> {
   const id = tabId ?? (await shopTabId())
-  // A page that is still loading (or just reloaded after a filter) has no listener yet,
-  // so try again for a few seconds before giving up.
+  // A page that is still loading (or just reloaded or redirected after a filter: Reliance) has no
+  // listener yet, so try again for a while before giving up.
   let res
+  // A page that stops answering while its filters are read (seen once on Myntra): give up after
+  // 2 minutes instead of "Reading filters…" forever. (Applying has its own limit.)
+  const slow = new Error('This page took too long to answer. Reload it and try again.')
   for (let attempt = 0; ; attempt++) {
     try {
-      res = await chrome.tabs.sendMessage(id, msg)
+      const ask = chrome.tabs.sendMessage(id, msg)
+      res = msg.type === 'GET_FILTERS' ? await Promise.race([ask, wait(120000).then(() => { throw slow })]) : await ask
       break
-    } catch {
-      if (attempt >= 6) throw new Error('Open Amazon.in, Flipkart or Myntra and reload the page.')
+    } catch (e) {
+      if (e === slow) throw e
+      if (attempt >= tries) {
+        const url = (await chrome.tabs.get(id).catch(() => null))?.url ?? ''
+        throw new Error(/^https?:/.test(url)
+          ? 'This page did not answer (it may still be loading, or it blocks extensions). Reload it and try again.'
+          : 'Open a shopping site and reload the page.')
+      }
       await wait(1000)
     }
   }
@@ -56,7 +67,7 @@ async function waitForNewPage<T>(tabId: number, oldUrl: string, msg: Message): P
   })
   for (let i = 0; ; i++) {
     try {
-      return await sendToPage<T>(msg, tabId)
+      return await sendToPage<T>(msg, tabId, 1) // (this loop does the waiting)
     } catch (e) {
       if (i >= 10) throw e
       await wait(1000)
@@ -72,6 +83,34 @@ async function noResults(tabId: number): Promise<boolean> {
   } catch {
     return false // never block the answer on this check
   }
+}
+
+type Applied = { missing: FilterChoice[]; reloading?: boolean }
+// Applies filters and returns the ones the page did not have. On other sites a click can reload
+// the page half-way; the rest is then applied on the new page, so wait and ask it (up to ~40 s).
+// unsure: the page kept reloading and never said how it ended.
+async function applyOnPage(choices: FilterChoice[], tabId: number): Promise<{ missing: FilterChoice[]; unsure: boolean }> {
+  // (The id lets the page ignore this request if it arrives twice: sendToPage resends after errors.)
+  // Never wait forever on a page that gets stuck (a shop's script in a loop): after the time limit,
+  // stop waiting and ask the user to check the page ("unsure").
+  const limit = 60000 + 30000 * choices.length
+  const first = await Promise.race([
+    sendToPage<Applied>({ type: 'APPLY_FILTERS', choices, id: `${Date.now()}-${Math.random()}` }, tabId),
+    wait(limit).then(() => null),
+  ])
+  if (!first) return { missing: [], unsure: true }
+  let res = first
+  const missing = [...res.missing]
+  for (let i = 0; res.reloading && i < 8; i++) {
+    await settled(tabId, 500)
+    try {
+      res = await sendToPage<Applied>({ type: 'APPLY_RESULT' }, tabId)
+    } catch {
+      continue // between pages: ask again
+    }
+    if (!res.reloading) missing.push(...res.missing.filter((m) => !missing.some((x) => same(x, m))))
+  }
+  return { missing, unsure: !!res.reloading }
 }
 
 // Updates the chat's memory after applying: add new filters, drop removed ones, "clear all" empties it.
@@ -102,8 +141,8 @@ const same = (a: FilterChoice, b: FilterChoice) => a.group === b.group && a.opti
 // black + PUMA on every site (each site names its groups differently: "Brand" vs "Brands").
 const asWords = (list: FilterChoice[]) =>
   list.filter((c) => !c.remove && c.group !== SORT_GROUP).map((c) =>
-    /max price/i.test(c.group) ? `under ${c.option.replace(/[^\d]/g, '')}` :
-    /min price/i.test(c.group) ? `above ${c.option.replace(/[^\d]/g, '')}` :
+    /max price/i.test(c.group) ? `under ${c.option.replace(/[^\d.]/g, '')}` :
+    /min price/i.test(c.group) ? `above ${c.option.replace(/[^\d.]/g, '')}` :
     /size/i.test(c.group) ? `size ${c.option}` : c.option).join(' ')
 
 export default function App() {
@@ -137,42 +176,113 @@ export default function App() {
       setComparison(null)
       const tabId = await shopTabId()
       setStatus('Reading filters on the page…')
-      let page = await sendToPage<Page>({ type: 'GET_FILTERS' }, tabId)
+      // A page the extension can't read (an error page like "Access denied", a browser page, a tab
+      // opened before installing) still lets you go somewhere else: "open nike", "open nykaa.com".
+      let page: Page
+      let unreadable: unknown = null
+      try {
+        page = await sendToPage<Page>({ type: 'GET_FILTERS' }, tabId)
+      } catch (e) {
+        unreadable = e
+        const url = (await chrome.tabs.get(tabId)).url ?? ''
+        page = { site: /^https?:/.test(url) ? new URL(url).hostname.replace(/^www\./, '') : '', filters: [], searchTerm: '' }
+      }
+      // A page just opened or searched that can't be read: say so, instead of waiting and failing.
+      const readNew = async (oldUrl: string, what: string): Promise<Page | null> => {
+        try {
+          const p = await waitForNewPage<Page>(tabId, oldUrl, { type: 'GET_FILTERS' })
+          if (!p.blocked) return p
+          setStatus(`⚠️ ${what}, but the site is blocking this browser (it shows "Access denied" instead of the shop), so there is nothing to filter. Reload it later, or try with VPNs, ad blockers or automation tools turned off.`)
+        } catch {
+          setStatus(`⚠️ ${what}, but I can't read that page: it didn't load, or the site is blocking this browser (for example "Access denied"). If it shows products in this tab, ask me again.`)
+        }
+        return null
+      }
 
       // Questions like "where is my order on amazon" get an answer, never a compare or a site switch.
       const question = !!quickReply(q, page, [])
-      // "compare amazon, flipkart and myntra", "lowest price on all 3 sites"
+      // "compare amazon, flipkart and myntra", "compare puma shoes on ajio and snapdeal", "compare all"
       if (wantsCompare(q) && !question) return compareSites(q, tabId, page)
 
       // "open amazon, i need a blue shirt" on Flipkart: go to that site, search there, then filter.
       const site = question ? null : otherSite(q, page.site)
       let text: string | null = null
-      if (site) {
+      let asked = q // what to pick filters from (without a shop's name)
+      // Another shop by name or address ("open vastardo website", "go to nykaa.com"): never search
+      // this shop for its name. An address typed by the user is opened; a bare name is not guessed.
+      const elsewhere = question || site ? null : unknownSite(q, page.site, new URL((await chrome.tabs.get(tabId)).url ?? 'about:blank').hostname, page.filters.flatMap((g) => g.options))
+      if (elsewhere && !elsewhere.domain)
+        return setStatus(`💬 I can't open "${elsewhere.name}" by name: it isn't one of the shops I know, and a guessed address could open a wrong or fake site. Open it in this tab and ask again (I work on any shop), or type its exact web address, e.g. "open shopname.com, brown shirt size L".`)
+      // Anything else needs this page's filters.
+      if (unreadable && !site && !elsewhere?.domain) throw unreadable
+      if (page.blocked && !site && !elsewhere?.domain)
+        return setStatus('⚠️ This site is blocking this browser (it shows "Access denied" instead of the shop), so there is nothing to filter. Reload it later, or try with VPNs, ad blockers or automation tools turned off.')
+      if (elsewhere?.domain) {
+        setStatus(`Opening ${elsewhere.domain}…`)
+        const oldUrl = (await chrome.tabs.get(tabId)).url ?? ''
+        await chrome.tabs.update(tabId, { url: `https://${elsewhere.domain}/` })
+        const opened = await readNew(oldUrl, `Opened ${elsewhere.domain}`)
+        if (!opened) return
+        page = opened
+        // Then search it for the product asked for, if any ("brown shirt"), and filter those results.
+        const wanted = searchAt(q, elsewhere.domain, elsewhere.name)
+        if (wanted) {
+          text = wanted
+          setStatus(`Searching ${elsewhere.domain} for "${text}"…`)
+          const shopUrl = (await chrome.tabs.get(tabId)).url ?? ''
+          await sendToPage({ type: 'SEARCH', text }, tabId)
+          const results = await readNew(shopUrl, `Searched ${elsewhere.domain} for "${text}"`)
+          if (!results) return
+          page = results
+          // Some search boxes ignore everything a script can do: say so instead of filtering the home page.
+          // (Only a "#" or an empty "?" added to the address is not a search.)
+          if (samePage((await chrome.tabs.get(tabId)).url ?? '', shopUrl))
+            return setStatus(`Opened ${elsewhere.domain}, but its search box didn't respond to "${text}". Search there yourself, then ask me to filter (e.g. "size L under 2000").`)
+        }
+        // The shop's name is not a filter: filter by the rest of the request only.
+        asked = withoutShop(q, elsewhere.domain, elsewhere.name)
+      } else if (site) {
         text = searchOnOtherSite(q, page.searchTerm)
         setStatus(`Opening ${site.name} and searching for "${text}"…`)
         const oldUrl = (await chrome.tabs.get(tabId)).url ?? ''
         await chrome.tabs.update(tabId, { url: site.url(text) })
-        page = await waitForNewPage<Page>(tabId, oldUrl, { type: 'GET_FILTERS' })
+        const opened = await readNew(oldUrl, `Opened ${site.name} and searched for "${text}"`)
+        if (!opened) return
+        page = opened
       } else if ((text = searchFor(q, page.searchTerm))) {
         // Asking for a different product than the page shows ("running shoes" on a jackets page)?
         // Search the site for it first, then filter the new results.
         setStatus(`Searching ${page.site} for "${text}"…`)
         const oldUrl = (await chrome.tabs.get(tabId)).url ?? ''
         await sendToPage({ type: 'SEARCH', text }, tabId)
-        page = await waitForNewPage<Page>(tabId, oldUrl, { type: 'GET_FILTERS' })
+        const results = await readNew(oldUrl, `Searched ${page.site} for "${text}"`)
+        if (!results) return
+        page = results
       }
-      const searched = site ? `Opened ${site.name} and searched for "${text}". ` : text ? `Searched for "${text}". ` : ''
+      const searched = site ? `Opened ${site.name} and searched for "${text}". `
+        : elsewhere?.domain ? `Opened ${elsewhere.domain}${text ? ` and searched for "${text}"` : ''}. `
+        : text ? `Searched for "${text}". ` : ''
 
       // What this chat already applied on this tab. A page with zero results can hide its whole
       // filter list, so "remove nike" must still be able to find Nike.
-      if (text) memory.current.set(tabId, []) // new search, new page
+      if (text || elsewhere?.domain) memory.current.set(tabId, []) // new search or another shop: new page
       const remembered = memory.current.get(tabId) ?? []
       // Answer (greetings, questions, nothing matched) or pick filters: see decide.ts.
       setStatus('AI is choosing filters…')
-      const decision = await decide(q, page, remembered, (q, g) => chooseFilters(q, g, setStatus), !!text)
+      // (After opening another shop the request counts as searched: no "no matching filters" for its name.)
+      const fresh = !!text || !!elsewhere?.domain
+      let decision = await decide(asked, page, remembered, (q, g) => chooseFilters(q, g, setStatus), fresh)
+      // A page just opened may draw its filters late (heavy shops): read it once more before
+      // saying a filter isn't there.
+      if (fresh && !decision.choices.length && filterWords(asked)) {
+        setStatus('Waiting for the filters to appear…')
+        await wait(4000)
+        page = await sendToPage<Page>({ type: 'GET_FILTERS' }, tabId)
+        decision = await decide(asked, page, remembered, (q, g) => chooseFilters(q, g, setStatus), fresh)
+      }
       let choices = decision.choices
-      if (decision.reply && !choices.length) return setStatus(`💬 ${decision.reply}`)
-      const note = decision.reply ? ` 💬 ${decision.reply}` : ''
+      if (decision.reply && !choices.length) return setStatus(`${searched}💬 ${decision.reply}`)
+      let note = decision.reply ? ` 💬 ${decision.reply}` : ''
       if (!choices.length) return setStatus(`${searched}Done ✅`) // the search itself was the answer
       // "remove the brand filter" → also name each remembered brand, for pages that hide the list.
       // (Sent to the page, but the chips show just "Brand: all".)
@@ -181,53 +291,93 @@ export default function App() {
         ...choices,
         ...choices
           .filter((c) => c.remove && c.option === '*')
-          .flatMap((c) => remembered.filter((r) => r.group === c.group).map((r) => ({ ...r, remove: true }))),
+          .flatMap((c) => remembered.filter((r) => r.group === c.group || (c.group === '*' && r.group !== SORT_GROUP)).map((r) => ({ ...r, remove: true }))),
       ]
 
       setStatus('Applying…')
-      const { missing } = await sendToPage<{ missing: FilterChoice[] }>({ type: 'APPLY_FILTERS', choices }, tabId)
+      const { missing, unsure } = await applyOnPage(choices, tabId)
       const done = choices.filter((c) => !missing.some((m) => same(m, c)))
       memory.current.set(tabId, remember(remembered, done))
       setApplied(shown.filter((c) => !missing.some((m) => same(m, c))))
+      // "nike instead of puma" where only Puma could come off (a page filtered by Puma may list no
+      // other brands): read the page again, now without Puma, and add Nike.
+      if (done.length && done.every((c) => c.remove) && /\binstead of\b/.test(normalizeQuery(asked))) {
+        // (The page may still be reloading after the removal: try twice.)
+        let add: FilterChoice[] = []
+        for (let i = 0; i < 2 && !add.length; i++) {
+          await settled(tabId)
+          if (i) await wait(3000)
+          const again = await sendToPage<Page>({ type: 'GET_FILTERS' }, tabId).catch(() => null)
+          if (!again) continue
+          const second = await decide(asked, again, memory.current.get(tabId) ?? [], (q, g) => chooseFilters(q, g, setStatus), false)
+          add = second.choices.filter((c) => !c.remove)
+        }
+        if (add.length) {
+          const r = await applyOnPage(add, tabId)
+          const ok = add.filter((c) => !r.missing.some((m) => same(m, c)))
+          done.push(...ok)
+          memory.current.set(tabId, remember(memory.current.get(tabId) ?? [], ok))
+          setApplied([...shown.filter((c) => !missing.some((m) => same(m, c))), ...ok])
+        }
+        // Only the old one came off: say why the new one wasn't added (e.g. no Nike among the brands
+        // left once size L, under ₹1,500 and 4★ are applied).
+        else {
+          const wanted = normalizeQuery(asked).match(/(.+?)\s+instead of/)?.[1]?.trim()
+          if (wanted) note += ` 💬 Took that off, but "${wanted}" is not among this page's options with your other filters. Try removing one of them first.`
+        }
+      }
       // Filters can combine into zero products ("nike jacket under 500"): say so, with a way out.
       const empty = done.length && !done.every((c) => c.remove) ? await noResults(tabId) : false
-      const notOnPage = missing.length
-        ? `Could not apply ${missing.map((m) => (m.option === '*' ? m.group : m.option)).join(', ')} (not on this page). `
+      // (Removals sent along with "clear all" may already be off: not worth a warning.)
+      const unmet = missing.filter((m) => !(m.remove && choices.some((c) => c.group === '*')))
+      const notOnPage = unmet.length
+        ? `Could not apply ${unmet.map((m) => (m.option === '*' ? m.group : m.option)).join(', ')} (not on this page). `
         : ''
       setStatus(
         searched + notOnPage + (done.length ? 'Done ✅' : '') +
+          (unsure ? ' ⚠️ The page took a long time (or kept reloading), so check that every filter is ticked.' : '') +
           (empty ? ' ⚠️ No products match all these filters. Try "remove …", a higher budget, or "start over".' : '') + note,
       )
     })
 
-  // Same search + same filters on Amazon, Flipkart and Myntra, cheapest first; then open the
-  // cheapest site's results and say why it won. One tab, one site after another (the sites only
-  // render their filters in a visible tab).
+  // Same search + same filters on every shop to compare (see compareTargets: the shops named, or
+  // all well-known shops selling that kind of product), cheapest first; then open the cheapest
+  // shop's results and say why it won. One tab, one shop after another (shops only draw their
+  // filters in a visible tab).
   async function compareSites(q: string, tabId: number, start: Page) {
     const remembered = memory.current.get(tabId) ?? []
-    const text = searchWords(q) || start.searchTerm.trim()
-    if (!text) return setStatus('💬 Tell me what to compare, e.g. "compare black roadster shirt size 40 on all 3 sites".')
+    const host = new URL((await chrome.tabs.get(tabId)).url ?? 'about:blank').hostname
+    const targets = compareTargets(q, start.site, host)
+    // (Shop names and addresses removed: Amazon even has a brand called "Amazon Brand - Symbol".)
+    const withoutShops = targets.reduce((s, t) => withoutShop(s, t.domain ?? t.name, t.name), q)
+    const text = searchWords(SITES.reduce((s, x) => s.replace(new RegExp(x.re.source, 'gi'), ' '), withoutShops)) || start.searchTerm.trim()
+    if (!text) return setStatus('💬 Tell me what to compare, e.g. "compare black roadster shirt size 40 on all sites" or "compare puma shoes on ajio and snapdeal".')
     // The request plus what this chat already applied here, as plain words.
-    // (Site names removed: Amazon even has a brand called "Amazon Brand - Symbol".)
-    const request = SITES.reduce((q, s) => q.replace(new RegExp(s.re.source, 'gi'), ' '), `${q} ${asWords(remembered)}`).replace(/\s+/g, ' ').trim()
+    const request = SITES.reduce((s, x) => s.replace(new RegExp(x.re.source, 'gi'), ' '), `${withoutShops} ${asWords(remembered)}`).replace(/\s+/g, ' ').trim()
     const results: SiteResult[] = []
-    for (const site of SITES) {
-      const step = (s: string) => setStatus(`Comparing (${results.length + 1}/3) ${site.name}: ${s}`)
+    for (const [n, site] of targets.entries()) {
+      const step = (s: string) => setStatus(`Comparing (${n + 1}/${targets.length}) ${site.name}: ${s} (about ${Math.ceil((targets.length - n) * 0.75)} min left)`)
       try {
         step(`searching "${text}"…`)
-        const oldUrl = (await chrome.tabs.get(tabId)).url ?? ''
-        await chrome.tabs.update(tabId, { url: site.url(text) })
-        const page = await waitForNewPage<Page>(tabId, oldUrl, { type: 'GET_FILTERS' })
+        // One shop may not hold up the rest: 2 minutes each at most.
+        const page = await Promise.race([
+          openAndSearch(site, text, tabId),
+          wait(120000).then(() => { throw new Error('it took too long to load') }),
+        ])
         step('choosing filters…')
+        // As "just searched" (each shop was searched for the product): a sub-type filter such as
+        // "Perfumed Cream & Solid Perfume" would narrow it wrongly. Other kinds of items (socks for
+        // "running shoes") are left out by the title check in summarize().
         const d = await decide(request, page, [], (q, g) => chooseFilters(q, g, () => {}), true)
+        // The results as found, before sorting: a shop may pad the cheapest-first list with other
+        // things (Ajio: socks for "running shoes"), so these still count if the sorted ones don't match.
+        const unsorted = await sendToPage<{ products: Product[] }>({ type: 'GET_PRODUCTS' }, tabId).then((r) => r.products, () => [] as Product[])
         // Always cheapest first, whatever else was asked, so the first results are the lowest prices.
         const sort = page.filters.some((g) => g.name === SORT_GROUP && g.options.includes(SORT_LABELS.price_asc))
           ? [{ group: SORT_GROUP, option: SORT_LABELS.price_asc }] : []
         const choices = [...d.choices.filter((c) => c.group !== SORT_GROUP && !c.remove), ...sort]
         step('applying filters…')
-        const { missing } = choices.length
-          ? await sendToPage<{ missing: FilterChoice[] }>({ type: 'APPLY_FILTERS', choices }, tabId)
-          : { missing: [] as FilterChoice[] }
+        const { missing } = choices.length ? await applyOnPage(choices, tabId) : { missing: [] as FilterChoice[] }
         await settled(tabId)
         step('reading prices…')
         let products: Product[] = []
@@ -235,6 +385,9 @@ export default function App() {
           products = (await sendToPage<{ products: Product[] }>({ type: 'GET_PRODUCTS' }, tabId)).products
           if (!products.length) await wait(1500)
         }
+        // Sorted first (cheapest), then the unsorted ones not already there; summarize() keeps only
+        // matching items and checks the budget on each.
+        products = [...products, ...unsorted.filter((u) => !products.some((p) => p.url === u.url))]
         results.push({ site: site.name, applied: choices.filter((c) => !missing.some((m) => same(m, c))), url: (await chrome.tabs.get(tabId)).url ?? '', products })
       } catch (e) {
         results.push({ site: site.name, applied: [], url: '', products: [], error: (e as Error).message })
@@ -252,7 +405,24 @@ export default function App() {
       memory.current.set(tabId, summary.winner.applied)
       setApplied(summary.winner.applied)
     }
-    setStatus(`Compared ${SITES.map((s) => s.name).join(', ')} for "${text}", cheapest first. Done ✅`)
+    setStatus(`Compared ${targets.map((s) => s.name).join(', ')} for "${text}", cheapest first. Done ✅`)
+  }
+
+  // Opens one shop's results for the text: the three by their search address, any other shop by
+  // opening it and using its own search. Throws when the shop can't be read or searched.
+  async function openAndSearch(site: CompareTarget, text: string, tabId: number): Promise<Page> {
+    const oldUrl = (await chrome.tabs.get(tabId)).url ?? ''
+    if (site.url) {
+      await chrome.tabs.update(tabId, { url: site.url(text) })
+      return waitForNewPage<Page>(tabId, oldUrl, { type: 'GET_FILTERS' })
+    }
+    await chrome.tabs.update(tabId, { url: `https://${site.domain}/` })
+    await waitForNewPage<Page>(tabId, oldUrl, { type: 'GET_FILTERS' })
+    const home = (await chrome.tabs.get(tabId)).url ?? ''
+    await sendToPage({ type: 'SEARCH', text }, tabId)
+    const page = await waitForNewPage<Page>(tabId, home, { type: 'GET_FILTERS' })
+    if (samePage((await chrome.tabs.get(tabId)).url ?? '', home)) throw new Error("its search box didn't respond")
+    return page
   }
 
   function send(text: string) {
@@ -284,7 +454,7 @@ export default function App() {
           <div className="rounded-xl border border-neutral-200 bg-white p-4">
             <p className="font-medium">Hi! What are you shopping for?</p>
             <p className="mt-1 text-neutral-500">
-              Open a search on Amazon, Flipkart or Myntra and tell me in your own words. I'll tick the filters for you.
+              Open a search on any shopping site (or one of these) and tell me in your own words. I'll tick the filters for you.
             </p>
             <div className="mt-4 grid grid-cols-3 gap-2">
               {SITES.map((s) => (

@@ -1,0 +1,22 @@
+[
+ {
+  "name": "Marke",
+  "options": [
+   "Nike",
+   "Puma",
+   "Adidas"
+  ]
+ },
+ {
+  "name": "Min price",
+  "options": [
+   "€…"
+  ]
+ },
+ {
+  "name": "Max price",
+  "options": [
+   "€…"
+  ]
+ }
+]

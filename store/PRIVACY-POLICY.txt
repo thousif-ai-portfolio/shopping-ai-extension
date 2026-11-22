@@ -1,7 +1,7 @@
 AI Shopping Filters - Privacy Policy
-Last updated: 16 November 2026
+Last updated: 17 November 2026
 
-AI Shopping Filters is a Chrome extension that sets search filters on Amazon.in, Flipkart and Myntra from a request the user types in plain words.
+AI Shopping Filters is a Chrome extension that sets search filters on shopping sites from a request the user types in plain words.
 
 What the extension does not do
 - It does not collect, store or send any personal information.
@@ -10,12 +10,13 @@ What the extension does not do
 - It does not sell or share any data with anyone.
 
 What it reads, and only on your computer
-- The filter options on the Amazon.in, Flipkart or Myntra page you have open, so it can tick the ones you asked for.
+- The filter options on the shopping page you have open, so it can tick the ones you asked for.
 - The address of that tab, to know which site and search you are on.
 - While a tab is open, it remembers which filters it applied there, so a request like "remove nike" still works. This stays in that tab and is cleared when the tab is closed.
+- On sites where ticking a filter reloads the page, the filters still to apply (e.g. "Brand: Nike") are kept for up to 30 seconds in that site's own session storage, so they can be applied after the reload. That site can see them, as it sees the filters you click yourself.
 
 Permissions
-The extension only runs on www.amazon.in, www.flipkart.com and www.myntra.com. It uses Chrome's side panel to show the chat, and Chrome's icon cache for the site logos.
+The extension's page script is present on every website, so it can work on any shop, but it only reads or clicks anything on the tab where you send a request from its panel. It uses Chrome's side panel to show the chat, and Chrome's icon cache for the site logos.
 
 Changes
 If this policy changes, the new version will be published at this address with a new date.
