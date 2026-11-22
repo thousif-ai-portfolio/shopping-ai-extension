@@ -174,6 +174,10 @@ export default function App() {
     run(async () => {
       setApplied([]) // don't keep showing the previous request's chips
       setComparison(null)
+      // A pasted list of requests (a test plan, a chat) read as one would search for all its words.
+      // (The longest real request in the tests is 25 words.)
+      if (q.trim().split(/\s+/).length > 45 || q.split('\n').filter((l) => l.trim()).length >= 4)
+        return setStatus('💬 That looks like several requests at once. Send them one at a time (e.g. "size 9", then "under 5000") and I\'ll do each in turn.')
       const tabId = await shopTabId()
       setStatus('Reading filters on the page…')
       // A page the extension can't read (an error page like "Access denied", a browser page, a tab
