@@ -1,7 +1,9 @@
 # AI Shopping Filters
 
-A Chrome extension that applies shopping filters from plain English, using an AI model that runs
-**entirely on your computer**: no server, no API key, no cost.
+A general-purpose AI shopping assistant for Chrome: it applies shopping filters on **any shopping
+site** from plain English, using an AI model that runs **entirely on your computer**: no server,
+no API key, no cost. It is not tied to particular shops: a generic reader handles every site, and
+Amazon, Flipkart and Myntra additionally get dedicated adapters for extra reliability.
 
 Open a search on **any shopping site**, open the side panel and type, for example:
 
@@ -77,8 +79,8 @@ filters. Try 'remove …', a higher budget, or 'start over'."*
 
 | Requirement | How it is met |
 |---|---|
-| Works on at least 3 shopping sites | Amazon.in, Flipkart and Myntra, tested on jackets, shoes, phones and kurtas |
-| Detects filters and applies them from what you type | Each site has an adapter that reads every filter on the page (including the full "+ more" brand lists) and applies the chosen ones |
+| Works on at least 3 shopping sites | Works on **any** shopping site: the generic adapter, tested live on 27+ shops (Ajio, Decathlon, Snapdeal, Tata CLiQ, Croma, IKEA, …), plus dedicated adapters for Amazon.in, Flipkart and Myntra |
+| Detects filters and applies them from what you type | The adapter reads every filter on the page (including the full "+ more" brand lists) and applies the chosen ones |
 | Powered by a client-side LLM | Chrome's built-in **Gemini Nano** (on-device). Where a PC can't run it, the same tested rules work alone |
 
 ## Install
@@ -588,7 +590,7 @@ The tests open a separate Chrome window with its own profile. Leave it alone whi
 - **Shops by name:** about 40 well-known shops open by name ("open ajio", "open blinkit", with
   small typos). Any other shop opens only by its address ("open shopname.com"); a name is never
   turned into a guessed address.
-- **Permission:** to work on any site, the content script now runs on all http/https pages, so
+- **Permission:** to work on any site, the content script and host permission cover all http/https pages, so
   Chrome shows "Read and change all your data on all websites" when installing or updating.
   It only reads or clicks anything when you send a message from the panel on that tab. On
   update, Chrome turns the extension off for existing users until they accept the new permission.
@@ -600,7 +602,7 @@ The tests open a separate Chrome window with its own profile. Leave it alone whi
 ## Project structure
 
 ```
-manifest.config.ts        extension settings (side panel, sites, icons)
+manifest.config.ts        extension settings (side panel, permissions, icons)
 src/sidepanel/App.tsx     the panel: text box, status, ✅ chips
 src/ai/decide.ts          one message → answer it, or pick filters (the panel and all tests use this)
 src/ai/reply.ts           instant answers: greetings, help, "what brands are there?", off-topic questions

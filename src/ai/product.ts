@@ -104,7 +104,7 @@ const FILLER = new Set(
   ).split(' '),
 )
 
-// The three supported sites, by the words people use for them.
+// The shops with their own adapter (every other shop uses the generic one), by the words people use for them.
 export const SITES = [
   // (with common misspellings: "amzon", "flipkrt", "mintra")
   { name: 'Amazon', home: 'https://www.amazon.in/', re: /\b(?:amazon|amzon|amazone|amazn|amozon)(?:\.in)?\b/, url: amazon.searchUrl },

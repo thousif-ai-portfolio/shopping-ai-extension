@@ -1,4 +1,4 @@
-CHROME WEB STORE LISTING - AI Shopping Filters 0.1.1
+CHROME WEB STORE LISTING - AI Shopping Filters 0.1.3
 Copy each part into the matching field of the Chrome Web Store developer dashboard.
 
 === Store listing tab ===
@@ -22,7 +22,7 @@ The assistant reads your request and ticks the matching filters on the page: bra
 
 Private by design: the AI runs on your own computer. It uses Chrome's built-in Gemini Nano where your PC supports it, and built-in matching rules everywhere else. Nothing you type is sent to any server.
 
-Works on any shopping site, with extra-reliable support for Amazon.in, Flipkart and Myntra. Price comparison checks every well-known shop selling the product, or the shops you name. Hindi and Hinglish words such as "kaala", "sasta" and "2000 ke andar" are understood too.
+A general-purpose shopping assistant, not tied to any one store: it works on any shopping site (Ajio, Decathlon, Snapdeal, Tata CLiQ, Croma, IKEA and many more), with extra-reliable support for Amazon.in, Flipkart and Myntra. Price comparison checks every well-known shop selling the product, or the shops you name. Hindi and Hinglish words such as "kaala", "sasta" and "2000 ke andar" are understood too.
 
 Category:
 Shopping
@@ -42,8 +42,8 @@ Lets the user set search filters on any shopping site by describing what they wa
 Permission justifications:
 - sidePanel: the chat where the user types requests is shown in Chrome's side panel.
 - tabs: to find the shopping tab the user is looking at, read its address (which site and search it shows) and open search results on it when the user asks for a different product or site.
-- favicon: to show the Amazon, Flipkart and Myntra logos on the panel's buttons, from Chrome's own icon cache.
-- Content script on all http/https sites: to read the filter options on the shopping page the user has open and tick the ones they asked for. It reads or clicks nothing until the user sends a request from the side panel on that tab, and sends nothing anywhere.
+- favicon: to show shop logos on the panel's quick-open buttons, from Chrome's own icon cache.
+- Host permission and content script on all http/https sites (it is a general-purpose assistant for any shopping site, not a fixed list of shops): to read the filter options on the shopping page the user has open and tick the ones they asked for. It reads or clicks nothing until the user sends a request from the side panel on that tab, and sends nothing anywhere.
 
 Remote code:
 No, I am not using remote code. All code is included in the package.
