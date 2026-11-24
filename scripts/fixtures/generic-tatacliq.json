@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Brand",
+    "options": ["Puma", "Adidas", "Skechers", "Campus"]
+  },
+  {
+    "name": "Size",
+    "options": ["UK/IND-6", "UK/IND-7", "UK/IND-8", "UK/IND-8.5", "UK/IND-9", "UK/IND-9.5", "UK/IND-10", "18-24 M", "2-3 Y"]
+  },
+  {
+    "name": "Shoe/Boot Types",
+    "options": ["-9", "Ballerina", "Biker Boot", "Mary Jane", "Slip-On", "Sneaker"]
+  },
+  {
+    "name": "Colour",
+    "options": ["Black", "White", "Blue"]
+  }
+]

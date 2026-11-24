@@ -314,12 +314,16 @@ export function matchFilters(w: Wanted, groups: FilterGroup[], rawQuery = ''): F
     if (!t.length || t.every((x) => negatedWords.has(x) || usedWords.has(x))) continue
     // Shoe sizes are "9" on some sites and "UK9" on others (Myntra).
     const codes = [term.toUpperCase(), SIZE_SAME[term.toUpperCase()], /^\d/.test(term) ? `UK${term}` : ''].filter(Boolean)
+    // A size ("9", "M") on a page with a size filter is looked for there only, never in another
+    // group that happens to have an option read as "9" (Tata Cliq) or "M".
+    const sizeShaped = /^(?:\d+(?:\.\d+)?|x{0,3}[sl]|m|\d?x{1,3}l)$/i.test(term)
+    const sizeGroups = sizeShaped ? textGroups.filter((g) => /size/i.test(g.name)) : []
     // Exact option name ("Black", "M"), else an equivalent size code ("XXL" ↔ "2XL").
-    for (const g of textGroups) {
+    for (const g of sizeGroups.length ? sizeGroups : textGroups) {
       const o =
         g.options.find((o) => words(o).join(' ') === t.join(' ')) ??
-        // ("UK 10" with a space on some shops = "UK10")
-        g.options.find((o) => codes.includes(o.toUpperCase()) || codes.includes(o.toUpperCase().replace(/\s+/g, ''))) ??
+        // ("UK 10" with a space on some shops = "UK10"; Tata Cliq's "UK/IND-9" = "UK9")
+        g.options.find((o) => [o.toUpperCase(), o.toUpperCase().replace(/\s+/g, ''), o.toUpperCase().replace(/^(?:UK|IND)(?:\s*\/\s*(?:UK|IND))?\s*[-:]?\s*/, 'UK')].some((x) => codes.includes(x))) ??
         // Sizes in two systems ("8 - eu 42", "9 (EU 43)", Zara "M (UK M)"): the first one is the size asked for.
         (/^(?:\d+(?:\.\d+)?|x{0,3}[sl]|m|\d?x{1,3}l)$/i.test(term) && /size/i.test(g.name)
           ? g.options.find((o) => o.match(/^(\d+(?:\.\d+)?|x{0,3}[sl]|m|\d?x{1,3}l)\s*[-–(/]\s*[a-z]/i)?.[1]?.toUpperCase() === term.toUpperCase())

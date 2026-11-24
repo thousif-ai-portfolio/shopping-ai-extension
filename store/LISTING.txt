@@ -1,4 +1,4 @@
-CHROME WEB STORE LISTING - AI Shopping Filters 0.1.3
+CHROME WEB STORE LISTING - AI Shopping Filters 0.1.4
 Copy each part into the matching field of the Chrome Web Store developer dashboard.
 
 === Store listing tab ===

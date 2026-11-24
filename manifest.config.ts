@@ -3,7 +3,7 @@ import { defineManifest } from '@crxjs/vite-plugin'
 export default defineManifest({
   manifest_version: 3,
   name: 'AI Shopping Filters',
-  version: '0.1.3',
+  version: '0.1.4',
   description: 'Type what you want on any shopping site; on-device AI applies the right filters.',
   // Drawn from assets/icon.svg.
   icons: { 16: 'icons/icon-16.png', 32: 'icons/icon-32.png', 48: 'icons/icon-48.png', 128: 'icons/icon-128.png' },

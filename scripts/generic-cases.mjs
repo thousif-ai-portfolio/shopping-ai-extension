@@ -48,6 +48,12 @@ export const GENERIC = [
   { cat: 'generic', site: 'generic-allbirds', q: 'wool under $50', expect: ['Material: wool'], reply: 'note' },
   // Amazon takes whole rupees: "₹499.50" is not 49950.
   { cat: 'generic', site: 'amazon', q: 'jacket under ₹499.50', expect: ['Max price: ₹499'] },
+  // ===== Tata Cliq (found live 24 Nov 2026): sizes are "UK/IND-9", and another group once held a
+  // stray "-9" (a blank option with 9 products), which "size 9" must never pick.
+  { cat: 'generic', site: 'generic-tatacliq', q: 'puma shoes size 9', expect: ['Brand: Puma', 'Size: UK/IND-9'] },
+  { cat: 'generic', site: 'generic-tatacliq', q: 'black sneaker size 8', expect: ['Colour: Black', 'Shoe/Boot Types: Sneaker', 'Size: UK/IND-8'] },
+  { cat: 'generic', site: 'generic-tatacliq', q: 'size 9.5', expect: ['Size: UK/IND-9.5'] },
+  { cat: 'generic', site: 'generic-tatacliq', q: 'size 12', expect: [], reply: 'note' },
   // ===== A page with no filters at all (blog, home page)
   { cat: 'generic', site: 'generic-usshop', page: 'empty', q: 'nike under $100', expect: [], reply: 'note' },
   { cat: 'generic', site: 'generic-usshop', page: 'empty', q: 'what brands are there', reply: 'nolist' },

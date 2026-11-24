@@ -87,8 +87,9 @@ function optionText(e: Element | null | undefined): string {
   }
   const last = [...copy.querySelectorAll('*')].filter((x) => !x.children.length && text(x)).pop()
   const before = () => copy.textContent!.trim().slice(0, -last!.textContent!.trim().length).trim()
+  // (A name that is only a dash is a blank option with a count, Tata Cliq's "- 9": not "8 - 9".)
   if (last && /^\(?\d[\d,]*\)?$/.test(text(last)) && copy.textContent!.trim().endsWith(last.textContent!.trim()) &&
-    !NUMBER_IS_NAME.test(before())) last.remove()
+    (!NUMBER_IS_NAME.test(before()) || /^[-–—]+$/.test(before()))) last.remove()
   return text(copy) || text(e)
 }
 
@@ -256,6 +257,8 @@ function checkControls(): Control[] {
           el.closest('[aria-expanded], [aria-haspopup], [aria-controls], [role="tab"]') || el.closest(SCREEN_READER_ONLY) ||
           el.closest('[class*="slider" i], [role="slider"]') || // a slider's scale marks ("0", "70")
           NOT_AN_OPTION.test(t) || GENERIC_HEADING.test(t) || el.matches(HEADING) || getComputedStyle(el).cursor !== 'pointer') continue
+        // (Nor the text of a checkbox's own <label for=…> beside it: that box is the option, The Souled Store.)
+        if (el.closest('label')?.control?.matches(CHECKS)) continue
         // (Nor a section's title above its body of options: Nike's "Size" over its sizes.)
         if ([el, el.parentElement].some((p) => {
           const sec = p?.parentElement
