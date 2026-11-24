@@ -1,0 +1,20 @@
+<!doctype html>
+<!-- Test page 5: not a shop. An article, a comment form with an "I agree" checkbox and a "notify
+     me" checkbox, a language <select> in the footer. Nothing here is a filter. -->
+<html lang="en">
+<head><meta charset="utf-8"><title>How to choose running shoes</title></head>
+<body>
+<article>
+  <h1>How to choose running shoes</h1>
+  <p>Comfort matters more than price. A good pair costs around $100.</p>
+  <h2>Leave a comment</h2>
+  <form method="post" action="/comment">
+    <textarea name="comment"></textarea>
+    <label><input type="checkbox" name="agree"> I have read and agree to the privacy policy of this website</label>
+    <label><input type="checkbox" name="notify"> Notify me</label>
+    <button>Post</button>
+  </form>
+</article>
+<footer><label>Language <select name="lang"><option>English</option><option>Deutsch</option></select></label></footer>
+</body>
+</html>

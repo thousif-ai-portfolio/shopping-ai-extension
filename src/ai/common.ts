@@ -3,7 +3,7 @@
 // These words are never typo-corrected, never used as a short form of a longer name, and never
 // matched to a one-word brand. Exact attribute values ("Winter", "Slim", "Party") still match.
 export const COMMON = new Set(
-  `a about above after again all also always am an and any are around as at away back bad be because been
+  `a product item delivery stock material least atleast last almost about above after again all also always am an and any are around as at away back bad be because been
 before below best better between big bit both but buy by can cheap cheaper cheapest classic clean college
 come comfort comfortable comfy cool could daily dark day dad deal decent different do does done dont down
 each easy else even every everyday extra fancy fashion fashionable fast few find fine first fit for free
@@ -27,5 +27,7 @@ outdoor indoor
 black grey gray red blue green yellow pink purple orange brown beige navy maroon olive gold silver
 cream ivory khaki teal violet magenta peach multi multicolor
 sort sorted order filter filters remove clear reset switch change replace instead rather swap hatao
-compare worth thousand lakh dikhao chahiye wala wali joota joote jutti kapde dupatta`.split(/\s+/),
+compare worth thousand lakh dikhao chahiye wala wali joota joote jutti kapde dupatta
+grown whine write whole crown drown brows blank slack block greet dream peace reach beach teach alive
+flack creak leach olives sliver greek greed fellow mellow bellow hollow frown oliver pinky creamy peachy`.split(/\s+/),
 )

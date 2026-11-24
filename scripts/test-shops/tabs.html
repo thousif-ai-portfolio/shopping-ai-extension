@@ -1,0 +1,69 @@
+<!doctype html>
+<!-- Test shop 6 (like Westside): a "Filter" button opens a dialog with category tabs on the left. The
+     first tab, "Sort By", is already open (radio buttons); "Price" holds two ARIA slider handles moved
+     by keyboard (Home/End/arrows/PageUp/PageDown, step ₹50); "Colour" holds checkboxes. Nothing
+     counts until "Apply". window.state is what the tests read (applied state only). -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Shirts | Tabs Shop</title>
+<style>
+  body { font-family: sans-serif; }
+  [role=dialog] { display: flex; gap: 16px; border: 1px solid #999; padding: 8px; }
+  [role=tab][aria-selected=true] { font-weight: bold; }
+  .track { position: relative; width: 200px; height: 10px; background: #ddd; margin: 12px 0; }
+  [role=slider] { position: absolute; top: -3px; width: 16px; height: 16px; margin-left: -8px; background: navy; border-radius: 50%; }
+</style>
+</head>
+<body>
+<button id="filter" type="button">Filter</button>
+<div id="root"></div>
+<div id="grid">
+  <article><a href="/p/1"><h2>White Linen Shirt</h2></a><span>₹1,299</span></article>
+  <article><a href="/p/2"><h2>Blue Oxford Shirt</h2></a><span>₹2,199</span></article>
+</div>
+<script>
+  const MIN = 199, MAX = 4999, STEP = 50
+  window.state = { sort: 'relevance', colour: [], price: [MIN, MAX] }
+  let draft = null
+  let tab = 'Sort By'
+  const SORTS = [['relevance', 'Relevance'], ['price-asc', 'Price (Lowest to Highest)'], ['price-desc', 'Price (Highest to Lowest)'], ['new', 'New Arrivals']]
+  const COLOURS = ['White', 'Blue', 'Black']
+  function panel() {
+    if (tab === 'Sort By') return SORTS.map(([v, l]) => `<label><button type="button" role="radio" aria-checked="${draft.sort === v}" data-sort="${v}"></button><span>${l}</span></label>`).join('<br>')
+    if (tab === 'Colour') return COLOURS.map((c) => `<label><input type="checkbox" value="${c}" ${draft.colour.includes(c) ? 'checked' : ''}> ${c}</label>`).join('<br>')
+    const pos = (v) => ((v - MIN) / (MAX - MIN)) * 200
+    return `<div class="track">${draft.price.map((v, i) => `<span role="slider" tabindex="0" data-i="${i}" aria-label="${i ? 'Maximum' : 'Minimum'} price" aria-valuemin="${MIN}" aria-valuemax="${MAX}" aria-valuenow="${v}" style="left:${pos(v)}px"></span>`).join('')}</div><span>₹${draft.price[0]} - ₹${draft.price[1]}</span>`
+  }
+  function draw() {
+    document.getElementById('root').innerHTML = draft ? `<div role="dialog" aria-modal="true" aria-label="Filter">
+      <nav aria-label="Filter categories" role="tablist">${['Sort By', 'Price', 'Colour'].map((t) => `<button type="button" role="tab" aria-selected="${t === tab}">${t}</button>`).join('<br>')}</nav>
+      <div role="tabpanel">${panel()}</div>
+      <div><button type="button" id="apply">Apply</button></div></div>` : ''
+  }
+  document.getElementById('filter').addEventListener('click', () => { draft = JSON.parse(JSON.stringify(state)); tab = 'Sort By'; draw() })
+  document.getElementById('root').addEventListener('click', (e) => {
+    const t = e.target.closest('[role=tab], [data-sort], #apply')
+    if (!t) return
+    if (t.matches('[role=tab]')) tab = t.textContent
+    else if (t.dataset.sort) draft.sort = t.dataset.sort
+    else { window.state = draft; draft = null }
+    setTimeout(draw, 30)
+  })
+  document.getElementById('root').addEventListener('change', (e) => {
+    if (e.target.type === 'checkbox') draft.colour = [...document.querySelectorAll('[role=tabpanel] input:checked')].map((i) => i.value)
+  })
+  document.getElementById('root').addEventListener('keydown', (e) => {
+    const h = e.target.closest('[role=slider]')
+    if (!h) return
+    const i = Number(h.dataset.i), d = { ArrowRight: STEP, ArrowUp: STEP, ArrowLeft: -STEP, ArrowDown: -STEP, PageUp: STEP * 10, PageDown: -STEP * 10 }[e.key]
+    let v = e.key === 'Home' ? MIN : e.key === 'End' ? MAX : d === undefined ? null : draft.price[i] + d
+    if (v === null) return
+    v = Math.min(i ? MAX : draft.price[1], Math.max(i ? draft.price[0] : MIN, v))
+    draft.price[i] = v
+    h.setAttribute('aria-valuenow', v) // same element stays (keeps focus), like a real slider
+    h.style.left = ((v - MIN) / (MAX - MIN)) * 200 + 'px'
+  })
+</script>
+</body>
+</html>

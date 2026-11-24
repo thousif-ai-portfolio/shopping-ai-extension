@@ -1,0 +1,82 @@
+<!doctype html>
+<!-- Test shop 2: custom ARIA controls (div role=checkbox / role=radio, no <input>), accordion
+     sections whose options only exist after the section is opened, counts with no brackets
+     ("Men 143"), a radio group with an "All" option, sort as radio buttons, a "Show more" button,
+     and a Tailwind-style CSS class "filter" on an unrelated menu. ₹ prices. window.state is what
+     the tests read. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kurtas | Aria Shop</title>
+<style>
+  body { font-family: sans-serif; }
+  [role=checkbox], [role=radio] { cursor: pointer; padding: 2px; }
+  [aria-checked=true] { font-weight: bold; }
+  .panel { padding-left: 8px; }
+</style>
+</head>
+<body>
+<div class="filter backdrop-filter menu"><ul><li><a href="/about">About us</a></li><li><a href="/stores">Our stores</a></li></ul></div>
+<div class="plp-filters" id="filters"></div>
+<div class="results"><span class="count"></span><div id="grid"></div></div>
+<script>
+  const GROUPS = {
+    Gender: { type: 'radio', options: [['All', 0], ['Men', 143], ['Women', 58]] },
+    Brand: { type: 'checkbox', options: [['Libas', 40], ['Biba', 31], ['W', 12]], more: [['Aurelia', 9]] },
+    Fabric: { type: 'checkbox', options: [['Cotton', 77], ['Silk', 20]] },
+    // "L <span>15</span>": size L with 15 items (not 15 litres)
+    Size: { type: 'checkbox', options: [['S', 4], ['M', 9], ['L', 15], ['XL', 2]] },
+    'Sort by': { type: 'radio', options: [['Relevance', 0], ['Price - Low to High', 0], ['Price - High to Low', 0], ['Newest', 0]] },
+  }
+  window.state = { Gender: 'All', Brand: [], Fabric: [], Size: [], 'Sort by': 'Relevance' }
+  const root = document.getElementById('filters')
+  const open = {}
+  const showMore = {}
+  function option(group, [name, count]) {
+    const g = GROUPS[group]
+    const on = g.type === 'radio' ? state[group] === name : state[group].includes(name)
+    return `<div role="${g.type}" aria-checked="${on}" tabindex="0" data-g="${group}" data-o="${name}"><span class="label">${name}</span>${count ? ` <span class="n">${count}</span>` : ''}</div>`
+  }
+  function draw() {
+    root.innerHTML = Object.entries(GROUPS).map(([group, g]) => `
+      <section class="facet">
+        <button class="facet-header" aria-expanded="${!!open[group]}" data-toggle="${group}">${group}</button>
+        ${open[group] ? `<div class="panel">${[...g.options, ...(showMore[group] ? g.more ?? [] : [])].map((o) => option(group, o)).join('')}
+          ${g.more && !showMore[group] ? `<button data-more="${group}">Show more</button>` : ''}</div>` : ''}
+      </section>`).join('')
+  }
+  root.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-toggle],[data-more],[role]')
+    if (!t) return
+    if (t.dataset.toggle) open[t.dataset.toggle] = !open[t.dataset.toggle]
+    else if (t.dataset.more) showMore[t.dataset.more] = true
+    else {
+      const { g, o } = t.dataset
+      if (GROUPS[g].type === 'radio') state[g] = o
+      else state[g] = state[g].includes(o) ? state[g].filter((x) => x !== o) : [...state[g], o]
+    }
+    // Re-render like a framework would (new elements every time).
+    setTimeout(draw, 50)
+  })
+  draw()
+  // A price slider like Decathlon's: two div handles on a bar, no boxes, ₹500-₹5,500 in even steps.
+  const slider = document.createElement('div')
+  slider.innerHTML = '<span>Price</span><div class="price-range">From ₹500 to ₹5,500</div><div class="price-slider" style="position:relative;width:200px;height:20px;background:#ddd"><div class="thumb" data-end="0" style="position:absolute;left:0;top:0;width:12px;height:20px;margin-left:-6px;background:blue"></div><div class="thumb" data-end="1" style="position:absolute;left:200px;top:0;width:12px;height:20px;margin-left:-6px;background:blue"></div></div>'
+  root.after(slider)
+  window.state.price = [500, 5500]
+  let held = null
+  const bar = slider.querySelector('.price-slider')
+  bar.addEventListener('pointerdown', (e) => (held = e.target.closest('.thumb')))
+  document.addEventListener('pointermove', (e) => {
+    if (!held) return
+    const r = bar.getBoundingClientRect(), f = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width))
+    held.style.left = f * r.width + 'px'
+    state.price[held.dataset.end] = Math.round(500 + f * 5000)
+  })
+  document.addEventListener('pointerup', () => { held = null; slider.querySelector('.price-range').textContent = 'From ₹' + state.price[0].toLocaleString('en-IN') + ' to ₹' + state.price[1].toLocaleString('en-IN') })
+  document.getElementById('grid').innerHTML = `
+    <div class="product-card"><a href="/p/1"><img alt="Product image of Libas kurta"><div class="product-name">Libas Women Cotton Kurta</div><div class="price"><span>₹</span><span>1,299</span></div></a></div>
+    <div class="product-card"><a href="/p/2"><img alt="Product image of Biba kurta"><div class="product-name">Biba Silk Anarkali</div><div class="price">₹2,499 <del>₹4,999</del></div></a></div>`
+</script>
+</body>
+</html>

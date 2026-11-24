@@ -1,0 +1,87 @@
+[
+  {
+    "name": "Price",
+    "options": [
+      "₹0 - 9,999",
+      "₹10,000 - 19,999",
+      "₹20,000 - 29,999",
+      "₹30,000 - 39,999",
+      "₹40,000+",
+      "2,5-seat mod sofa w chaise longue"
+    ]
+  },
+  {
+    "name": "Colour",
+    "options": [
+      "grey",
+      "beige",
+      "black",
+      "white",
+      "brown",
+      "blue",
+      "green",
+      "red"
+    ]
+  },
+  {
+    "name": "Customer rating",
+    "options": [
+      "5",
+      "4",
+      "3",
+      "2",
+      "1"
+    ]
+  },
+  {
+    "name": "Offers",
+    "options": [
+      "Suitable for business",
+      "Last chance",
+      "IKEA Family price"
+    ]
+  },
+  {
+    "name": "Firmness",
+    "options": [
+      "Medium firm",
+      "Soft",
+      "Extra soft",
+      "Firm",
+      "Extra firm"
+    ]
+  },
+  {
+    "name": "Front",
+    "options": [
+      "Slab",
+      "Integrated handle",
+      "With frame"
+    ]
+  },
+  {
+    "name": "Relevance",
+    "options": [
+      "Products"
+    ]
+  },
+  {
+    "name": "Sort by",
+    "options": [
+      "Price: Low to High",
+      "Price: High to Low",
+      "Newest First",
+      "Customer Rating",
+      "Popularity"
+    ]
+  },
+  {
+    "name": "Categories",
+    "options": [
+      "Tables & chairs",
+      "Sofas",
+      "2,5-seat mod sofa w chaise longue",
+      "Armchairs"
+    ]
+  }
+]

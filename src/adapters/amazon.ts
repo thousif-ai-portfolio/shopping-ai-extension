@@ -135,7 +135,10 @@ export const amazon: SiteAdapter = {
     const [min0 = '', max0 = ''] = [...(rh.get('p_36') ?? [])][0]?.split('-') ?? []
     const price = { min: min0, max: max0 }
 
-    for (const c of choices) {
+    // Removals first, and ids removed here are never added back: on a page filtered by Puma, the link
+    // for Nike carries both ids ("256097|219979"), so "nike instead of puma" must not keep Puma.
+    const removed = new Set<string>()
+    for (const c of [...choices].sort((a, b) => Number(!!b.remove) - Number(!!a.remove))) {
       if (c.group === SORT_GROUP) {
         if (SORT[c.option]) url.searchParams.set('s', SORT[c.option])
       } else if (c.group === MIN_PRICE || c.group === MAX_PRICE || (c.group === 'Price' && c.remove)) {
@@ -149,20 +152,22 @@ export const amazon: SiteAdapter = {
         if (key) rh.delete(key)
       } else if (c.remove) {
         const found = activeIds(c.group, c.option, rh)
-        if (found?.[1].length) for (const id of found[1]) rh.get(found[0])?.delete(id)
+        if (found?.[1].length) for (const id of found[1]) { rh.get(found[0])?.delete(id); removed.add(`${found[0]}:${id}`) }
         else {
           // The list is hidden (zero results): use the id remembered when it was applied.
           const [key, id] = memory()[`${c.group}|${c.option}`]?.split(':') ?? []
-          if (key && id) rh.get(key)?.delete(id)
+          if (key && id) { rh.get(key)?.delete(id); removed.add(`${key}:${id}`) }
         }
       } else {
         const o = options.find((o) => o.group === c.group && o.label === c.option)
         if (!o) { missing.push(c); continue }
         if (!o.rh || activeIds(c.group, c.option, rh)?.[1].length) continue // already applied
-        const id = o.rh.slice(o.key.length + 1)
+        // (Links may write the separator encoded: "234394%7C256097".)
+        const id = decodeURIComponent(o.rh.slice(o.key.length + 1))
         for (const one of id.split('|')) rememberId(c.group, c.option, `${o.key}:${one}`)
-        if (SINGLE_CHOICE.has(o.key) || !rh.has(o.key)) rh.set(o.key, new Set([id]))
-        else rh.get(o.key)!.add(id)
+        const ids = id.split('|').filter((one) => !removed.has(`${o.key}:${one}`))
+        if (SINGLE_CHOICE.has(o.key) || !rh.has(o.key)) rh.set(o.key, new Set(ids))
+        else for (const one of ids) rh.get(o.key)!.add(one)
       }
     }
     if (price.min || price.max) rh.set('p_36', new Set([`${price.min}-${price.max}`]))

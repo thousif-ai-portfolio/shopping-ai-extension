@@ -1,0 +1,38 @@
+<!doctype html>
+<!-- Test shop 3: filters are plain links in a "refinements" box; every click is a full page load
+     with the filters in the URL (?brand=nike&colour=red&sort=price_asc). Active links have the
+     class "active" and aria-current="true"; inactive ones aria-current="false". € prices with comma
+     decimals. The URL is what the tests read. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Jackets | Link Shop</title>
+</head>
+<body>
+<header><form action="links.html" method="get"><input name="q" placeholder="Search"></form></header>
+<div id="refinements" class="refinements"></div>
+<div id="grid"></div>
+<script>
+  const params = new URLSearchParams(location.search)
+  const GROUPS = { Brand: ['Nike', 'Puma', 'Adidas'], Colour: ['Black', 'Red'], 'Sort by': ['Best match', 'Lowest price', 'Highest price'] }
+  const key = (g) => g === 'Sort by' ? 'sort' : g.toLowerCase()
+  const values = (g) => params.getAll(key(g))
+  function href(g, o) {
+    const p = new URLSearchParams(location.search)
+    const k = key(g)
+    const list = p.getAll(k)
+    p.delete(k)
+    if (g === 'Sort by') p.set(k, o)
+    else for (const v of list.includes(o) ? list.filter((x) => x !== o) : [...list, o]) p.append(k, v)
+    return '?' + p.toString()
+  }
+  document.getElementById('refinements').innerHTML = Object.entries(GROUPS).map(([g, opts]) => `
+    <div class="refinement"><h4 class="refinement-title">${g}</h4><ul>
+      ${opts.map((o) => { const on = values(g).includes(o); return `<li><a href="${href(g, o)}" class="${on ? 'active' : ''}" aria-current="${on}">${o}</a></li>` }).join('')}
+    </ul></div>`).join('')
+  document.getElementById('grid').innerHTML = `
+    <div class="tile"><a href="/p/a"><img alt=""><p class="tile-name">Nike Storm Jacket</p><p>89,99 €</p></a></div>
+    <div class="tile"><a href="/p/b"><img alt=""><p class="tile-name">Puma Rain Jacket</p><p>1.299 €</p></a></div>`
+</script>
+</body>
+</html>

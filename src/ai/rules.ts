@@ -8,7 +8,8 @@ export type SortKey = 'price_asc' | 'price_desc' | 'newest' | 'popularity' | 'ra
 const amount = (s: string) => {
   const k = /k$/i.test(s)
   const n = Number(s.replace(/,/g, '').replace(/k$/i, ''))
-  return Math.round(k ? n * 1000 : n)
+  // Cents are kept ("$49.99"); whole amounts stay whole.
+  return Math.round((k ? n * 1000 : n) * 100) / 100
 }
 
 // Hindi written in Devanagari → the English the rest of the code reads.
@@ -22,9 +23,10 @@ const DEVANAGARI: [RegExp, string][] = [
   [/कुर्त[ाी]/g, 'kurta'], [/फ़?ोन|मोबाइल/g, 'phone'], [/साइज़?/g, 'size'], [/पुरुष|आदमी|मर्द/g, 'men'], [/महिला|औरत/g, 'women'],
   [/से कम|के अंदर|तक|से नीचे/g, ' tak '], [/से ज़?्?यादा|से ऊपर/g, ' se upar '], [/सस्त[ाीे]/g, 'sasta'], [/रुपये|रु\.?/g, ' rs '],
 ]
-const CUR = String.raw`(?:rs\.?|₹|inr)?\s*`
+// Rupees, and the currencies of shops elsewhere ("under $80", "€50 - €100").
+const CUR = String.raw`(?:rs\.?|₹|inr|\$|usd|€|eur|£|gbp)?\s*`
 const NUM = String.raw`(\d[\d,]*(?:\.\d+)?k?)`
-const MONEY = CUR + NUM + String.raw`\s*(?:rs\.?|rupees|₹|inr)?`
+const MONEY = CUR + NUM + String.raw`\s*(?:rs\.?|rupees|₹|inr|dollars?|euros?|usd|eur)?`
 // A number followed by one of these is not a price ("above 5000 mah", "4 star", "40%", "size 9").
 const NOT_MONEY = String.raw`(?!\s*(?:%|star|★|gb|tb|mah|mp|ghz|hz|inch|cm|mm|uk|size|rating|\+\s*(?:star|rating))|\d|[,.]\d)` // "2k," is a price; "2,5" is not the end of one
 
@@ -62,13 +64,19 @@ export function normalizeQuery(query: string): string {
   // "nike nhi chahiye, adidas dikhao" → "not nike, adidas dikhao" (handled just below)
   q = q.replace(/(\S+)\s+(?:nahi|nhi|nahin|nai)\s+(\S+)\s+(?:chahiye|chaiye|chahie|dikhao|do)\b/g, ' $2 instead of $1 ')
   q = q.replace(/(\S+)\s+(?:nahi|nhi|nahin|nai|mat)\s+(?:chahiye|chaiye|chahie|dikhao|dikhana)\b/g, ' not $1 ')
+  q = q.replace(/^\s*(.+?)\s+(?:hatao|hata do|hatado|nikalo)\s*,?\s*(?:aur\s+)?(.+?)\s+(?:dikhao|dikha do|lagao|chahiye)\s*$/, ' not $1, $2 ')
+  q = q.replace(/^\s*(?:remove|drop)\s+([^,]+?)\s*(?:,|\band\b)\s*(?:show|add|get|give)\s+(?:me\s+)?(.+)$/, ' not $1, $2 ')
   q = q.replace(/^\s+/, ' ')
+  // "he wears M", "she wears a size 8": a size
+  q = q.replace(/\b(?:wears?|wearing)\s+(?:a\s+|an\s+|size\s+)*(xxs|xs|s|m|l|xl|xxl|xxxl|[2-5]xl|\d{1,2}(?:\.5)?)\b/g, ' size $1 ')
   // "not black, navy" / "not puma but nike" → "navy instead of black" (a replacement, not a removal)
   q = q.replace(/^ ?not (?!(?:more|less|above|below|over|under|too|very|so|much|costly|expensive|cheap|exceeding)\b)([^,]+?)\s*(?:,|\bbut\b)\s*(?:but |rather |instead |show |give )?(.+?) ?$/, ' $2 instead of $1 ')
   // "9 number" (Hinglish for shoe size 9), "number 9"
   q = q.replace(/\b(\d{1,2}(?:\.5)?)\s*(?:number|no\.?)(?!\s*size)\b/g, ' size $1 ')
   // "size is 40", "my size is M", "size hai 9"
   q = q.replace(/\bsize\s+(?:is|hai|of)\s+/g, 'size ')
+  // "5-star", "highest-rated", "out-of-stock", "sizes M and L"
+  q = q.replace(/\b(\d)-star/g, '$1 star').replace(/\b(highest|best|top|most)-rated\b/g, '$1 rated').replace(/\b(in|out-of)-stock\b/g, (s) => s.replace(/-/g, ' ')).replace(/\bsizes\b/g, 'size')
   // "30 percent" → "30%"
   q = q.replace(/(\d{1,2})\s*(?:percent|per cent|pct)\b/g, '$1%')
   // "M or L size" → "size M or L" (before the single-size rewrite below)
@@ -100,7 +108,10 @@ export function withReplacements(query: string, choices: FilterChoice[], remembe
 }
 
 // At the start ("remove puma"), Hindi-style at the end ("puma hatao"), or "… remove it".
-const REMOVE = /^(?:please\s+|pls\s+|now\s+|also\s+)?(remove|delete|clear|unselect|uncheck|drop|undo|take off|take out|get rid of|hatao|hata do|hata|cancel|not(?!\s+(?:more|less|above|below|over|under|too|very|so|much|costly|expensive|cheap|exceeding)\b)|no need (?:of|for)|no more|(?:i )?don'?t (?:want|need)|(?:i )?do not (?:want|need)|nahi chahiye)\b|\b(hatao|hata do|hatado|nikalo|remove (?:it|them|that|this|those)|remove)$/
+export const REMOVE = /^(?:(?:please|pls|now|also|kindly|can you|could you|would you)\s+)*(remove|delete|clear|unselect|uncheck|drop|undo|take off|take out|get rid of|hatao|hata do|hata|cancel|not(?!\s+(?:more|less|above|below|over|under|too|very|so|much|costly|expensive|cheap|exceeding)\b)|no need (?:of|for)|no more|(?:i )?don'?t (?:want|need)|(?:i )?do not (?:want|need)|nahi chahiye)\b|\b(hatao|hata do|hatado|nikalo|remove (?:it|them|that|this|those)|remove)$/
+
+// "remove products rated below 3 stars" = 3 stars and up; "remove out of stock" = in stock only.
+const NOT_REMOVE = /\b(?:below|under|less than|lower than)\s*\d(?:\.\d)?\s*(?:stars?|★)|\bout of stock\b(?!.*\bfilter)/
 
 const CLEAR_ALL =
   /\b(clear|remove|reset|delete|undo)\s+(?:all|every|the)?\s*(?:the\s+)?filters?\b|\b(clear all|reset all|start over|start again|start fresh|sab hatao|saare hatao|sab clear)\b|\b(?:saare|sare|saari|sari|sab|sabhi)\s+(?:filters?\s+)?(?:hata do|hatado|hatao|hata dijiye|hata|nikalo|remove|clear)\b|^(?:please\s+)?(?:reset|clear|clear it|reset it|(?:remove|clear|delete|reset|undo) (?:all|everything|all of them|it all))$/
@@ -108,7 +119,7 @@ const CLEAR_ALL =
 /** "remove puma", "hatao puma", "clear all filters" — a request to take filters off. */
 export function isRemoveRequest(query: string): boolean {
   const q = normalizeQuery(query)
-  return REMOVE.test(q) || CLEAR_ALL.test(q)
+  return (REMOVE.test(q) && !NOT_REMOVE.test(q)) || CLEAR_ALL.test(q)
 }
 
 export function applyRules(query: string, w: Wanted): Wanted {
@@ -120,10 +131,12 @@ export function applyRules(query: string, w: Wanted): Wanted {
   const range =
     q.match(new RegExp(String.raw`(?:between|from)\s+${MONEY}\s+(?:and|to|-)\s+${MONEY}${NOT_MONEY}`)) ??
     q.match(new RegExp(String.raw`${CUR}(\d[\d,]*k?)\s*(?:-|–|to)\s*${CUR}(\d[\d,]*k?)${NOT_MONEY}`))
-  if (range && amount(range[1]) >= 100 && amount(range[2]) > amount(range[1])) {
+  // Small amounts only with a currency written ("$20 - $50"): "9 to 10" is a shoe size.
+  const priced = (m: RegExpMatchArray, v: number) => v >= 100 || /[$€£]|usd|eur|gbp|dollar|euro/.test(m[0])
+  if (range && priced(range, amount(range[1])) && amount(range[2]) > amount(range[1])) {
     out.min_price = amount(range[1])
     out.max_price = amount(range[2])
-  } else if ((m = q.match(new RegExp(String.raw`(?:around|approx(?:imately)?|about|roughly|near|~)\s*${MONEY}${NOT_MONEY}`))) && amount(m[1]) >= 100) {
+  } else if ((m = q.match(new RegExp(String.raw`(?:around|approx(?:imately)?|about|roughly|near|~)\s*${MONEY}${NOT_MONEY}`))) && priced(m, amount(m[1]))) {
     out.min_price = Math.round(amount(m[1]) * 0.75)
     out.max_price = Math.round(amount(m[1]) * 1.25)
   } else {
@@ -137,7 +150,7 @@ export function applyRules(query: string, w: Wanted): Wanted {
       out.min_price = amount(m[1]) // "1000+"
     // A bare amount with a currency ("shoes ₹2000", "2000 rs") is a budget.
     // ("\brs": the "rs" at the end of "sneakers 50" is not rupees.)
-    if (!out.max_price && !out.min_price && (m = q.match(/(?:\b(?:rs\.?|inr)|₹)\s*(\d[\d,]*k?)|(\d[\d,]*k?)\s*(?:rs\b|rupees|₹)/)))
+    if (!out.max_price && !out.min_price && (m = q.match(/(?:\b(?:rs\.?|inr|usd|eur|gbp)|[₹$€£])\s*(\d[\d,]*(?:\.\d+)?k?)|(\d[\d,]*(?:\.\d+)?k?)\s*(?:rs\b|rupees|dollars?\b|euros?\b|₹|€)/)))
       out.max_price = amount(m[1] ?? m[2])
     // The whole message is just a budget-like amount ("2000", "1999", "2k"). Small numbers are
     // sizes ("9"); odd numbers like "12345" are junk, not a budget.
@@ -153,19 +166,21 @@ export function applyRules(query: string, w: Wanted): Wanted {
 
   // ---- Discount: "40% off", "min 30% discount"; "on sale" / "with discount" = any discount
   if ((m = q.match(/(\d{1,2})\s*%/))) out.min_discount = Number(m[1])
-  else if (/\b(sale|discounted|with discount|any discount|offers?|deals?)\b/.test(q.replace(/\btoday'?s? deals?\b/g, ''))) out.min_discount = -1 // "today's deals" is its own option
+  else if (/\b(sale|discounted|with discount|any discount|(?:good|great|big|best|nice|some|a) discounts?|offers?|deals?)\b/.test(q.replace(/\btoday'?s? deals?\b/g, ''))) out.min_discount = -1 // "today's deals" is its own option
 
   // ---- Rating: "4 star", "4+ rating", "rated 4", "good reviews"
   if ((m = q.match(/(\d(?:\.\d)?)\s*\+?\s*(?:stars?|★|rating|rated)/) ?? q.match(/rated\s*(?:above\s*)?(\d(?:\.\d)?)/)))
     out.min_rating = Number(m[1])
-  else if (/\b(good|great|high|best|top|well|highly)\s*(?:rating|ratings|reviews?|rated)\b/.test(q))
+  else if (/\b(good|great|high|best|top|well|highly|achhe|acche|achhi|acchi|achha|accha|badhiya)\s*(?:rating|ratings|reviews?|rated)\b/.test(q))
     out.min_rating = 4
 
   // ---- Sorting
   if (/\bsort(?:ed)? by (?:the )?(?:customer )?(?:rating|ratings|reviews?|stars?)\b/.test(q)) out.sort = 'rating'
   else if (/\bsort(?:ed)? by (?:the )?popular(?:ity)?\b/.test(q)) out.sort = 'popularity'
-  else if (/\bsort(?:ed)? by (?:the )?price\b(?!\s*(?:high|desc|from high))|\bnot (?:too |very |so |that )?(?:expensive|costly|pricey|mehenga|mehnga)\b|\b(cheapest|cheaper|cheap|lowest price|low to high|price low|sasta|saste|sasti|budget friendly|affordable|inexpensive|low price|kam (?:daam|price|keemat))\b/.test(q)) out.sort = 'price_asc'
-  else if (/\b(most expensive|costliest|expensive|high to low|price high|highest price|mehenga|mehnga)\b/.test(q)) out.sort = 'price_desc'
+  else if (/\b(most expensive|costliest|high to low|highest price|expensive to cheap\w*)\b/.test(q) && !/\bcheap\w*\b.*\bexpensive\b/.test(q)) out.sort = 'price_desc'
+  else if (/\bsort(?:ed)? by (?:the )?price\b(?!\s*(?:high|desc|from high))|\b(cheapest|cheaper|cheap|lowest price|low to high|price low|sasta|saste|sasti|budget friendly|affordable|inexpensive|low price|kam (?:daam|price|keemat))\b/.test(q)) out.sort = 'price_asc'
+  else if (/\b(most expensive|costliest|expensive|high to low|price high|highest price|mehenga|mehnga)\b/.test(q) && !/\bnot (?:too |very |so |that )?(?:expensive|costly|pricey|mehenga|mehnga)\b/.test(q)) out.sort = 'price_desc'
+  else if (!out.max_price && /\bnot (?:too |very |so |that )?(?:expensive|costly|pricey|mehenga|mehnga)\b/.test(q)) out.sort = 'price_asc'
   else if (/\b(newest|latest|new arrivals?|recently (?:added|launched)|new launch(?:es)?|just launched)\b/.test(q)) out.sort = 'newest'
   else if (/\b(popular|best ?sell(?:ing|ers?)|trending|top selling|most bought|most sold)\b/.test(q)) out.sort = 'popularity'
   else if (/\b(top rated|best rated|highest rated|best reviews?|most rated)\b/.test(q)) out.sort = 'rating'
@@ -174,7 +189,7 @@ export function applyRules(query: string, w: Wanted): Wanted {
 
   // ---- Remove / clear (chat follow-ups)
   out.clearAll = CLEAR_ALL.test(q)
-  out.remove = !out.clearAll && REMOVE.test(q)
+  out.remove = !out.clearAll && REMOVE.test(q) && !NOT_REMOVE.test(q)
 
   // ---- Sizes: "size M", "size 9.5", "uk 9", "9 uk", or unambiguous ones like XL / XXL / 3XL anywhere.
   const sizes = [

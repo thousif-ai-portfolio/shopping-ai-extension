@@ -1,5 +1,5 @@
-// Opens a Chrome window with the built extension installed (and the AI model already cached from
-// the tests) on a shopping page, for trying it by hand. Close the window to stop.
+// Opens a Chrome window with the built extension installed on a shopping page, for trying it by
+// hand. Close the window to stop.
 import puppeteer from 'puppeteer-core'
 import path from 'node:path'
 import os from 'node:os'

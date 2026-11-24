@@ -1,0 +1,15 @@
+[
+  { "name": "Shop For", "options": ["Men", "Women", "Boys", "Girls", "Infants"] },
+  { "name": "category", "options": ["Jackets & Coats", "Jackets & Shrugs", "Blazers & Waistcoats", "3 Piece Ethnic Suit", "Suit Sets"] },
+  { "name": "price", "options": ["Below Rs.500", "Rs.500-1000", "Rs.1001-1500", "Rs.1501-2000", "Rs.2001-2500"] },
+  { "name": "brands", "options": ["1101-eleven.o.one", "3pin", "4400BC", "612 League", "ADIDAS", "Adidas Kids", "Nike", "Produkt By Jack & Jones", "Puma", "Roadster", "Jack & Jones", "Synthetic Pro"] },
+  { "name": "occasion", "options": ["Casual", "Active", "Work", "Universal"] },
+  { "name": "discount ranges", "options": ["<10%", "10% and above", "20% and above", "30% and above", "40% and above", "50% and above"] },
+  { "name": "colors", "options": ["Beige", "Cream", "Khaki", "White", "Grey", "Black", "Navy", "Blue", "Red", "Green", "Olive"] },
+  { "name": "size & fit", "options": ["28", "30", "32", "XS", "S", "M", "L", "XL", "XXL"] },
+  { "name": "highlights", "options": ["NEW", "BESTSELLER", "SELLINGFAST"] },
+  { "name": "rating", "options": ["1 & above", "2 & above", "3 & above", "4 & above"] },
+  { "name": "Sort by", "options": ["Price: Low to High", "Price: High to Low", "Newest First", "Customer Rating", "Popularity"] },
+  { "name": "Min price", "options": ["₹…"] },
+  { "name": "Max price", "options": ["₹…"] }
+]

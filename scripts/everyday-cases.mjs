@@ -165,7 +165,7 @@ export const EVERYDAY = [
   { cat: 'price', site: 'flipkart', q: 'jacket under 1.5k', expect: ['Max price: ₹1500'] },
   { cat: 'price', site: 'flipkart', q: 'jacket under rs.1500', expect: ['Max price: ₹1500'] },
   { cat: 'price', site: 'flipkart', q: 'jacket under 1500 rupees', expect: ['Max price: ₹1500'] },
-  { cat: 'price', site: 'flipkart', q: 'jacket under 50', expect: [], reply: 'nomatch' }, // lowest Flipkart limit is ₹500
+  { cat: 'price', site: 'flipkart', q: 'jacket under 50', expect: [], reply: 'note' }, // lowest Flipkart limit is ₹500
   { cat: 'price', site: 'amazon', q: 'jacket under 1800', expect: ['Max price: ₹1800'] }, // exact on Amazon
   { cat: 'price', site: 'flipkart', q: 'jacket under 1800', expect: ['Max price: ₹1500'] }, // Flipkart dropdown: nearest value below
   { cat: 'price', site: 'flipkart', q: 'jacket under 0', expect: [], reply: 'nomatch' },
@@ -173,7 +173,7 @@ export const EVERYDAY = [
   { cat: 'price', site: 'amazon', q: 'jacket for less than 2 thousand', expect: ['Max price: ₹2000'] },
   { cat: 'price', site: 'flipkart', q: 'jacket price 1000 to 2000', expect: ['Min price: ₹1000', 'Max price: ₹2000'] },
   { cat: 'price', site: 'amazon', q: 'jacket upto rs 2,000/-', expect: ['Max price: ₹2000'] },
-  { cat: 'price', site: 'myntra', q: 'jacket under 1500', expect: [], reply: 'nomatch' }, // Myntra jackets page has no price filter
+  { cat: 'price', site: 'myntra', q: 'jacket under 1500', expect: [], reply: 'note' }, // Myntra jackets page has no price filter
 
   // ===== Gifts: who it's for
   { cat: 'gift', site: 'flipkart-shoes', q: 'shoes for my wife', expect: ['Gender: Women'] },
@@ -209,7 +209,7 @@ export const EVERYDAY = [
 
   // ===== Things that don't exist on the page
   { cat: 'not-on-page', site: 'flipkart', q: 'gucci jacket', expect: [], reply: 'nomatch' },
-  { cat: 'not-on-page', site: 'flipkart', q: 'jacket size 50', expect: [], reply: 'nomatch' },
+  { cat: 'not-on-page', site: 'flipkart', q: 'jacket size 50', expect: [], reply: 'note' },
   { cat: 'not-on-page', site: 'myntra', q: 'transparent jacket', expect: [], reply: 'nomatch' },
   { cat: 'not-on-page', site: 'amazon-phones', q: 'phone with 64gb ram', expect: ['RAM Size: 10 GB & Above'] },
   { cat: 'not-on-page', site: 'flipkart', q: 'black gucci jacket', expect: ['Color: Black'] },
@@ -347,7 +347,7 @@ EVERYDAY.push(
 EVERYDAY.push(
   // ===== Held-out 4: written after the gap fixes, never tuned on. Includes traps for those fixes.
   { cat: 'held-out-4', site: 'flipkart', q: 'is blue available', expect: ['Color: Blue'] },
-  { cat: 'held-out-4', site: 'amazon', q: 'in stock jackets', expect: [], reply: 'nomatch' },
+  { cat: 'held-out-4', site: 'amazon', q: 'in stock jackets', expect: [], reply: 'note' },
   { cat: 'held-out-4', site: 'flipkart', q: 'blue jacket available in L', expect: ['Color: Blue', 'Size: L'] },
   { cat: 'held-out-4', site: 'flipkart-phones', q: 'only in stock samsung', expect: ['Brand: Samsung', 'Availability: Exclude Out of Stock'] },
   { cat: 'held-out-4', site: 'flipkart-shoes', q: 'size 7 or 8', expect: ['Size: 7', 'Size: 8'] },
@@ -413,7 +413,7 @@ EVERYDAY.push(
   { cat: 'held-out-6', site: 'flipkart', q: 'not too expensive jacket', expect: ['Sort by: Price: Low to High'] },
   { cat: 'held-out-6', site: 'flipkart-shoes', q: 'for women instead', applied: ['Gender: Men'], expect: ['Gender: Women', '-Gender: Men'] },
   { cat: 'held-out-6', site: 'flipkart-shoes', q: 'shoes for boys', expect: ['Gender: Boys'] },
-  { cat: 'held-out-6', site: 'flipkart', q: 'black jacket', page: 'empty', expect: [], reply: 'nomatch' },
+  { cat: 'held-out-6', site: 'flipkart', q: 'black jacket', page: 'empty', expect: [], reply: 'colour-missing' },
   { cat: 'held-out-6', site: 'flipkart', q: 'what brands are there', page: 'empty', reply: 'nolist' },
   { cat: 'held-out-6', site: 'myntra', q: 'puma jacket!!!???', expect: ['Brand: Puma'] }, // first written as "no Puma": wrong, the page has Puma
   { cat: 'held-out-6', site: 'myntra', q: 'roadster jacket!!!???', expect: ['Brand: Roadster'] },
@@ -446,7 +446,7 @@ EVERYDAY.push(
 EVERYDAY.push(
   // The page was searched for the colour already ("pink cotton kurta"): no "not on this page" note.
   { cat: 'regress', site: 'myntra-kurtas', q: 'pink cotton kurta size M', searchTerm: 'pink cotton kurta', expect: ['Color: Pink', 'Fabrics: Cotton', 'Size: M'] },
-  { cat: 'regress', site: 'myntra', q: 'white jacket', searchTerm: 'white jacket', expect: [], reply: 'nomatch' },
+  { cat: 'regress', site: 'myntra', q: 'white jacket', searchTerm: 'white jacket', expect: [], reply: 'note' },
   // "safed" is Hindi for white; the English word "safe" is not.
   { cat: 'regress', site: 'flipkart-shoes', q: 'safed sneakers', expect: ['Color: White'] },
   { cat: 'regress', site: 'flipkart-shoes', q: 'skin safe sneakers', expect: [], reply: 'nomatch' },

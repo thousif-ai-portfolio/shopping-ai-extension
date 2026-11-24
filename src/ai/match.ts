@@ -3,9 +3,9 @@
 //  1. Every option name on the page is looked for directly in the sentence ("red tape", "navy blue").
 //  2. The words the AI picked out, plus sizes and numbers read by rules.ts.
 // Only options that exist on the page can ever be chosen.
-import { ANY_AMOUNT, SORT_GROUP, SORT_LABELS, type FilterChoice, type FilterGroup } from '../adapters/types'
+import { anyAmountCurrency, SORT_GROUP, SORT_LABELS, type FilterChoice, type FilterGroup } from '../adapters/types'
 import { COMMON } from './common'
-import { normalizeQuery, type SortKey } from './rules'
+import { normalizeQuery, REMOVE, type SortKey } from './rules'
 
 export type Wanted = {
   terms: string[]
@@ -43,7 +43,8 @@ const ALIASES: [RegExp, string][] = [
   [/\b3\/4(th)?\b/g, 'three quarter'],
   [/\biphones?\b/g, 'apple'], [/\bmoto\b/g, 'motorola'], [/\b(?:google )?pixel\b/g, 'google'],
   // "delivered today", "same day delivery" → Amazon's "Get It Today"
-  [/\b(?:deliver(?:ed|y)?|arriv\w*|get it|reach\w*)\s+(?:by\s+)?today\b|\btodays?\s+delivery\b|\bsame[\s-]day delivery\b/g, 'get it today'],
+  [/\b(?:deliver(?:ed|y)?|arriv\w*|get it|reach\w*)\s+(?:by\s+)?today\b|\btodays?\s+delivery\b|\bsame[\s-]day delivery\b|\b(?:available for )?(?:immediate|instant|express|quick|fast)\s+delivery\b/g, 'get it today'],
+  [/\b(?:remove|hide|exclude|without|no|skip)\s+(?:the\s+|all\s+)?out[\s-]of[\s-]stock\b/g, 'exclude out of stock'],
   // Phone features in everyday words
   [/\bface\s*(?:unlock|lock|id)\b/g, 'face recognition'],
   [/\b(?:usb[\s-]?)?type[\s-]?c\b/g, 'usb type c'],
@@ -52,7 +53,7 @@ const ALIASES: [RegExp, string][] = [
   [/\b(cash on delivery|cod)\b/g, 'pay on delivery'],
   [/\bfree (delivery|shipping)\b/g, 'free shipping'],
   // "in stock only" = Flipkart's "Exclude Out of Stock" (Amazon hides out-of-stock items already).
-  [/\b(?:in[\s-]?stock|available)(?: only| items| products)?\b|\bonly (?:in[\s-]?stock|available)\b/g, 'exclude out of stock'],
+  [/\b(?:in[\s-]?stock|available(?! in\b| for\b))(?: only| items| products)?\b|\bonly (?:in[\s-]?stock|available)\b/g, 'exclude out of stock'],
   // "no hood" / "non-hooded" mean the same as "without hood", so options named
   // "Without …" match. It is still a negation, so "no puma" still excludes PUMA.
   [/\b(no|non)[\s-]+(?=[a-z])/g, 'without '],
@@ -194,7 +195,7 @@ export function matchFilters(w: Wanted, groups: FilterGroup[], rawQuery = ''): F
     for (const o of g.options) {
       const seq = words(o)
       const own = seq.filter((x) => !COMMON.has(x) && !STOP.has(x))
-      if (own.length) all.push({ group: g.name, option: o, seq }, ...(seq.length > 1 && own[0] === seq[0] ? [{ group: g.name, option: o, seq: [seq[0]] }] : []))
+      if (own.length) all.push({ group: g.name, option: o, seq }, ...(seq.length > 1 && own[0] === seq[0] && /^[a-z]{3,}/.test(seq[0]) ? [{ group: g.name, option: o, seq: [seq[0]] }] : []))
     }
   for (const g of textGroups)
     for (const o of g.options) {
@@ -208,6 +209,8 @@ export function matchFilters(w: Wanted, groups: FilterGroup[], rawQuery = ''): F
       // Plain numbers and ranges (sizes, pack sizes) are handled by rules.ts, and number+unit
       // values ("8 GB", "5000 - 5999 mAh") by unitChoices below.
       if (/\d/.test(o) && (!/[a-z]/i.test(o) || RANGE.test(o) || UNIT.test(o))) continue
+      // ("Products", "Items" alone: page junk, and every request says "show products".)
+      if (/^(?:all )?(?:products?|items?|results?)$/i.test(o)) continue
       const seq = words(o)
       if (!seq.length || (seq.length === 1 && (seq[0].length < (/\d/.test(seq[0]) ? 2 : 3) || STOP.has(seq[0])))) continue
       // Brands made only of everyday words ("Classic", "Good One", "Stylish Kurta") are too risky.
@@ -225,7 +228,9 @@ export function matchFilters(w: Wanted, groups: FilterGroup[], rawQuery = ''): F
     all.some((x) => x.option !== c.option && x.seq.includes(c.seq[0]))
   for (const c of [...all]) {
     // (Not when both words are everyday words: "The White Pole" must not match "the white sneakers".)
-    if (c.seq.length >= 3 && !c.seq.slice(0, 2).every((w) => COMMON.has(w) || STOP.has(w))) all.push({ ...c, seq: c.seq.slice(0, 2) })
+    // (Not two bare numbers: "2,5-seat mod sofa" is not "2 5", which a price "₹2,500" also says.)
+    if (c.seq.length >= 3 && !c.seq.slice(0, 2).every((w) => COMMON.has(w) || STOP.has(w)) && c.seq.slice(0, 2).some((w) => /[a-z]/.test(w)))
+      all.push({ ...c, seq: c.seq.slice(0, 2) })
     if (c.seq.length >= 2 && c.seq[0].length >= 3 && !STOP.has(c.seq[0]) && !COMMON.has(c.seq[0]) && !firstWordUsedElsewhere(c))
       all.push({ ...c, seq: [c.seq[0]] })
   }
@@ -313,7 +318,12 @@ export function matchFilters(w: Wanted, groups: FilterGroup[], rawQuery = ''): F
     for (const g of textGroups) {
       const o =
         g.options.find((o) => words(o).join(' ') === t.join(' ')) ??
-        g.options.find((o) => codes.includes(o.toUpperCase()))
+        // ("UK 10" with a space on some shops = "UK10")
+        g.options.find((o) => codes.includes(o.toUpperCase()) || codes.includes(o.toUpperCase().replace(/\s+/g, ''))) ??
+        // Sizes in two systems ("8 - eu 42", "9 (EU 43)", Zara "M (UK M)"): the first one is the size asked for.
+        (/^(?:\d+(?:\.\d+)?|x{0,3}[sl]|m|\d?x{1,3}l)$/i.test(term) && /size/i.test(g.name)
+          ? g.options.find((o) => o.match(/^(\d+(?:\.\d+)?|x{0,3}[sl]|m|\d?x{1,3}l)\s*[-–(/]\s*[a-z]/i)?.[1]?.toUpperCase() === term.toUpperCase())
+          : undefined)
       if (o) { add({ group: g.name, option: o }); break }
     }
   }
@@ -331,11 +341,19 @@ export function matchFilters(w: Wanted, groups: FilterGroup[], rawQuery = ''): F
 
   const max = w.max_price
   const min = w.min_price
-  // Sites whose price takes any amount (Amazon): use exactly what was asked.
+  // Sites whose price takes any amount (Amazon, price boxes on other shops): use exactly what was
+  // asked, in the page's currency ("₹1800", "$80").
   const exact = (re: RegExp, v: number | null) => {
-    const g = v ? groups.find((g) => re.test(g.name) && g.options.includes(ANY_AMOUNT)) : undefined
-    return g ? { group: g.name, option: `₹${v}` } : null
+    const g = v ? groups.find((g) => re.test(g.name) && g.options.some((o) => anyAmountCurrency(o) !== null)) : undefined
+    const currency = g?.options.map(anyAmountCurrency).find((c) => c !== null)
+    // Rupee amounts are whole (Amazon reads "₹499.50" as 49950): down for a maximum, up for a minimum.
+    const amount = v && currency === '₹' ? (re.source.includes('max') ? Math.floor(v) : Math.ceil(v)) : v
+    return g ? { group: g.name, option: `${currency}${amount}` } : null
   }
+  // A price range option has only amounts and range words ("₹500 - ₹999", "Under Rs.500"): not a
+  // product name with numbers that slipped into the list (IKEA: "2,5-seat mod sofa").
+  const priceLike = (o: string) =>
+    !/[a-z]{2,}/i.test(o.replace(/\b(?:and above|and below|or more|or less|under|below|above|over|up ?to|upto|rs|inr|less|more|than|and|between|to|k)\b/gi, ''))
   const exactMin = exact(/min price/i, min)
   const exactMax = exact(/max price/i, max)
   add(exactMax)
@@ -352,24 +370,53 @@ export function matchFilters(w: Wanted, groups: FilterGroup[], rawQuery = ''): F
     // not above the chosen minimum, the next value up (so the range is never empty).
     const c =
       bestNumeric(groups, /max price/i, (n, o) => (n.length && !o.includes('+') && n[0] <= max && n[0] > minValue ? n[0] : null)) ??
-      (minChoice ? bestNumeric(groups, /max price/i, (n, o) => (n.length && !o.includes('+') && n[0] > minValue ? -n[0] : null)) : null) ??
-      // Price ranges ("₹1,000 - ₹1,800", "Up to ₹500"): range with the highest top that fits.
-      bestNumeric(groups, /^price$/i, (n, o) => (n.length && !/over|\+/i.test(o) && n[n.length - 1] <= max ? n[n.length - 1] : null))
-    add(c)
+      (minChoice ? bestNumeric(groups, /max price/i, (n, o) => (n.length && !o.includes('+') && n[0] > minValue ? -n[0] : null)) : null)
+    if (c) add(c)
+    // A list of price ranges ("500 & Below", "₹1,000 - ₹1,800", "Up to ₹500"): every range that fits
+    // the budget (and the minimum, if one was asked). Ticking only the top one would hide everything
+    // cheaper.
+    else
+      for (const g of groups.filter((g) => /^price$/i.test(g.name)))
+        for (const o of g.options) {
+          const n = numbers(o)
+          if (n.length && priceLike(o) && !/over|above|\+/i.test(o) && n[n.length - 1] <= max && (!min || n[0] >= min - 1)) add({ group: g.name, option: o })
+        }
   }
   add(minChoice)
+  // Only a minimum ("above 3000", "over $150") and a list of ranges: every range from there up.
+  if (min && !max && !exactMin && !minChoice && !groups.some((g) => /min price/i.test(g.name)))
+    for (const g of groups.filter((g) => /^price$/i.test(g.name)))
+      for (const o of g.options) {
+        const n = numbers(o)
+        if (n.length && priceLike(o) && n[0] >= min - 1 && !/below|under|up ?to|less/i.test(o)) add({ group: g.name, option: o })
+      }
   const disc = w.min_discount
+  const below = /below|under|up ?to|less|</i
+  // A list of discount ranges ("0 - 10", "30 - 40": Snapdeal; "20% To 40%": Croma): every range
+  // starting at the asked minimum or higher (any range above 0 for "on sale"), so nothing shown
+  // has less discount than asked.
+  const rangeList = (g: FilterGroup) => /discount/i.test(g.name) && g.options.filter((o) => /\d\s*%?\s*(?:[-–]|to)\s*\d/i.test(o)).length >= 2
+  if (disc && groups.some(rangeList)) {
+    for (const g of groups.filter(rangeList))
+      for (const o of g.options) {
+        const n = numbers(o)
+        if (n.length && !below.test(o) && (disc === -1 ? n[0] > 0 : n[0] >= disc)) add({ group: g.name, option: o })
+      }
+  }
   // "40% and above" / "40% Off or more": highest threshold not above what was asked.
   // -1 ("on sale"): the smallest discount the site offers.
-  if (disc === -1) add(bestNumeric(groups, /discount/i, (n, o) => (o.includes('%') && n.length ? -n[0] : null)))
-  else if (disc) add(bestNumeric(groups, /discount/i, (n, o) => (o.includes('%') && n.length && n[0] <= disc ? n[0] : null)))
+  else if (disc === -1) add(bestNumeric(groups, /discount/i, (n, o) => (o.includes('%') && n.length && !below.test(o) ? -n[0] : null)))
+  else if (disc) add(bestNumeric(groups, /discount/i, (n, o) => (o.includes('%') && n.length && n[0] <= disc && !below.test(o) ? n[0] : null)))
   const rating = w.min_rating
   if (rating) add(bestNumeric(groups, /\b(ratings?|reviews?)\b/i, (n) => (n.length && n[0] <= rating ? n[0] : null)))
 
   if (w.remove) {
     // "remove the brand filter", "remove price": a whole group, when no single option was named.
     const named = new Set(q.filter((x) => x.length >= 3 && !['the', 'all', 'filter'].includes(x)))
-    for (const g of groups) {
+    // "remove synthetic material": a word besides the group's name means one option, not the group.
+    const other = [...named].some((x) => !/^(?:products?|items?|filters?|please|pls|price|them|that|this|those|also|now|chahiye|need|want|dont|rid|take|out|can|you|could|would|kindly|off)$/.test(x) &&
+      !REMOVE.test(x) && !STOP.has(x) && !NEGATORS.has(x) && !groups.some((g) => words(g.name).includes(x)))
+    for (const g of other ? [] : groups) {
       if (g.name === SORT_GROUP || out.some((c) => c.group === g.name)) continue
       const isPrice = /price/i.test(g.name) && named.has('price')
       if (isPrice || words(g.name).some((x) => named.has(x))) add({ group: g.name, option: '*' })
